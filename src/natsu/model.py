@@ -42,7 +42,10 @@ class NatsuConfig:
     window: int = 256
     loop_lora_rank: int = 0
     reinject: bool = False
+    reinject_mode: str = "concat"    # concat (Huginn, identity-init) | lti (Parcae-style stable: x <- a*x + b*norm(e), a=exp(-dt*exp(logA)) in (0,1))
     depth_gate: bool = False
+    gate_mode: str = "soft"          # soft (FLOP-penalty, E4d) | lookahead (TaH2-style: gate is a classifier of
+                                     # "does loop r improve this token?", trained on measured CE deltas; forward = no gating in training)
     pkm_keys: int = 0                # 0 disables; n_keys per sub-key set (memory = n_keys^2 slots)
     pkm_topk: int = 8
     max_seq: int = 2048
@@ -381,8 +384,14 @@ class Natsu(nn.Module):
                                          pkm=(c.pkm_keys > 0 and i == c.n_coda - 1)) for i in range(c.n_coda)])
         if c.n_loops > 1:
             self.loop_emb = nn.Parameter(torch.zeros(c.n_loops, c.d_model))
-            if c.reinject:
+            if c.reinject and c.reinject_mode == "concat":
                 self.inj = nn.Linear(2 * c.d_model, c.d_model, bias=False)
+            if c.reinject and c.reinject_mode == "lti":
+                # Parcae (arXiv:2604.12946): A = Diag(-exp(logA)), ZOH: Abar = exp(dt*A) in (0,1) -> spectral radius < 1
+                self.lti_logA = nn.Parameter(torch.zeros(c.d_model))
+                self.lti_dt = nn.Parameter(torch.full((c.d_model,), -2.0))   # softplus(-2)≈0.13 -> Abar≈0.88 at init
+                self.lti_B = nn.Parameter(torch.zeros(c.d_model))           # injection starts at 0 -> pure residual
+                self.lti_norm = RMSNorm(c.d_model)
             if c.depth_gate:
                 self.gate = nn.Linear(c.d_model, 1)
                 nn.init.zeros_(self.gate.weight)
@@ -392,7 +401,7 @@ class Natsu(nn.Module):
         self.mtp = nn.ModuleList([nn.Sequential(RMSNorm(c.d_model), nn.Linear(c.d_model, c.d_model, bias=False))
                                   for _ in range(c.mtp)])
         self.apply(self._init)
-        if c.n_loops > 1 and c.reinject:
+        if c.n_loops > 1 and c.reinject and c.reinject_mode == "concat":
             # identity-preserving init: inj([x,e]) = x at step 0 (F005: random init destroyed the residual stream, cos≈0)
             with torch.no_grad():
                 self.inj.weight.zero_()
@@ -415,7 +424,7 @@ class Natsu(nn.Module):
         h = self.norm(h)
         return F.linear(h, self.embed.weight) if self.head is None else self.head(h)
 
-    def forward(self, idx, n_loops=None, cache=None, pos0=0, gate_threshold=None, return_hidden=False):
+    def forward(self, idx, n_loops=None, cache=None, pos0=0, gate_threshold=None, return_hidden=False, return_inter=False):
         """cache: dict layer_name -> state (mutated/returned). n_loops overrides the loop count
         (any 1..c.n_loops is valid: smaller = cheaper draft)."""
         c = self.c
@@ -424,7 +433,8 @@ class Natsu(nn.Module):
         pos = torch.arange(pos0, pos0 + L, device=idx.device)
         x = self.embed(idx)
         new_cache = {} if cache is not None else None
-        gates, skipped = [], []
+        gates, skipped, gate_logits, inter = [], [], [], []
+        want_inter = return_inter
 
         shared = {}
 
@@ -456,7 +466,11 @@ class Natsu(nn.Module):
         for r in range(R):
             loop_idx[0] = r
             if r > 0 and c.reinject:
-                x = self.inj(torch.cat([x, e], -1))
+                if c.reinject_mode == "lti":
+                    dt = F.softplus(self.lti_dt)
+                    x = torch.exp(-dt * torch.exp(self.lti_logA)) * x + dt * self.lti_B * self.lti_norm(e)
+                else:
+                    x = self.inj(torch.cat([x, e], -1))
             rr = min(r, c.n_loops - 1)                         # extrapolation: reuse last loop's params
             if c.n_loops > 1:
                 x = x + self.loop_emb[rr]
@@ -464,6 +478,12 @@ class Natsu(nn.Module):
             if r > 0 and c.depth_gate and c.n_loops > 1:
                 gval = torch.sigmoid(self.gate(x))          # (B,L,1) prob. of executing loop r
                 gates.append(gval)
+                if c.gate_mode == "lookahead":
+                    gate_logits.append(self.gate(x.detach())[..., 0])   # classifier only; no gradient into the trunk
+                    if self.training and want_inter:
+                        inter.append(x)                                  # state BEFORE loop r -> CE if we stopped here
+                    if gate_threshold is None:
+                        gval = None                                       # no soft gating in lookahead mode
                 if gate_threshold is not None:
                     skip = gval[..., 0] < gate_threshold
                     skipped.append(skip.float().mean())
@@ -482,6 +502,16 @@ class Natsu(nn.Module):
             out["gate_mean"] = torch.stack([g.mean() for g in gates]).mean()
         if skipped:
             out["skip_frac"] = torch.stack(skipped).mean()
+        if gate_logits:
+            out["gate_logits"] = gate_logits
+        if inter:
+            # logits from stopping before loop r (r=1..R-1): run coda on the intermediate state (no cache)
+            outs = []
+            for h in inter:
+                for i, b in enumerate(self.coda):
+                    h = b(h, pos, None, 0, None)[0]
+                outs.append(self.logits(h))
+            out["inter_logits"] = outs
         if self.mtp:
             out["mtp_logits"] = [self.logits(m(x)) for m in self.mtp]
         if return_hidden:

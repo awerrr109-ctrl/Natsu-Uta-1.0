@@ -57,7 +57,7 @@ def build_optim(model, kind="adamw", lr=3e-3, wd=0.1, betas=(0.9, 0.95)):
     for n, p in model.named_parameters():
         if not p.requires_grad:
             continue
-        if p.ndim >= 2 and "embed" not in n and "values" not in n and "engram.table" not in n and "loop_emb" not in n and "loop_bias" not in n and n != "inj.weight":
+        if p.ndim >= 2 and "embed" not in n and "values" not in n and "engram.table" not in n and "loop_emb" not in n and "loop_bias" not in n and n != "inj.weight" and "lti_" not in n:
             matrix.append(p)
         else:
             other.append(p)

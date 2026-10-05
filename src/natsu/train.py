@@ -58,6 +58,9 @@ def make_loader(dc, seq, batch, seed, split="train"):
     raise ValueError(dc)
 
 
+BYTES_PER_TOKEN = [1.0]   # set from data config; bpb = loss/ln2/bytes_per_token (tokenizer-independent)
+
+
 @torch.no_grad()
 def evaluate(model, batches, n_loops=None, gate_threshold=None):
     model.eval()
@@ -76,7 +79,7 @@ def evaluate(model, batches, n_loops=None, gate_threshold=None):
     model.train()
     r = {"loss": tot / max(n, 1)}
     r["ppl"] = math.exp(min(r["loss"], 20))
-    r["bpb"] = r["loss"] / math.log(2)  # byte tokenizer -> bits per byte
+    r["bpb"] = r["loss"] / math.log(2) / BYTES_PER_TOKEN[0]
     if n_seq:
         r["acc"] = correct_seq / n_seq
     if skip:
@@ -84,7 +87,14 @@ def evaluate(model, batches, n_loops=None, gate_threshold=None):
     return r
 
 
-def sample_loops(R, mode, step_rng):
+def sample_loops(R, mode, step_rng, frac=0.0):
+    """frac = training progress in [0,1]. Modes:
+       fixed | uniform | poisson (Huginn, mean R/2+.5) | poisson_R (Parcae-like, mean R, clip [1, 2R]) |
+       fixed_then_uniform (H13.1 curriculum: fixed R for 80% of steps, then U{1..R} to buy the anytime property)"""
+    if mode == "fixed_then_uniform":
+        mode = "fixed" if frac < 0.8 else "uniform"
+    if mode == "poisson_R":
+        return int(min(2 * R, max(1, step_rng.poisson(R))))
     if R == 1 or mode == "fixed":
         return R
     if mode == "uniform":
@@ -99,6 +109,7 @@ def train(cfg):
     tc, dc = cfg["train"], cfg["data"]
     torch.manual_seed(tc.get("seed", 0))
     torch.set_num_threads(tc.get("threads", os.cpu_count()))
+    BYTES_PER_TOKEN[0] = dc.get("bytes_per_token", 1.0)
     mc = NatsuConfig(**cfg["model"])
     model = Natsu(mc)
     seq, batch = tc["seq"], tc["batch"]
@@ -133,8 +144,9 @@ def train(cfg):
                 g["lr"] = b * f
         for _ in range(accum):
             x, y, m = tr.get()
-            r = sample_loops(R, tc.get("loop_sampling", "fixed"), rng)
-            out = model(x, n_loops=r)
+            r = sample_loops(R, tc.get("loop_sampling", "fixed"), rng, step / max(1, steps))
+            la = mc.depth_gate and mc.gate_mode == "lookahead" and r > 1
+            out = model(x, n_loops=r, return_inter=la)
             loss, _, valid = masked_ce(out["logits"], y, m)
             total = loss
             if mc.mtp and "mtp_logits" in out:
@@ -142,8 +154,21 @@ def train(cfg):
                     yy = torch.cat([y[:, j:], torch.full_like(y[:, :j], D.PAD)], 1)
                     mm = None if m is None else torch.cat([m[:, j:], torch.zeros_like(m[:, :j])], 1)
                     total = total + tc.get("mtp_w", 0.3) * masked_ce(lg, yy, mm)[0]
-            if mc.depth_gate and "gate_mean" in out:
+            if mc.depth_gate and mc.gate_mode == "soft" and "gate_mean" in out:
                 total = total + tc.get("gate_penalty", 0.0) * out["gate_mean"]
+            if la and "inter_logits" in out:
+                # lookahead depth supervision: label_r = 1[CE(after loops>=r) < CE(stop before r) - margin]
+                with torch.no_grad():
+                    ces = [masked_ce(lg, y, m)[1] for lg in out["inter_logits"]] + [masked_ce(out["logits"], y, m)[1]]
+                gl = 0.0
+                for j, g in enumerate(out["gate_logits"]):
+                    lab = (ces[j + 1] < ces[j] - tc.get("gate_margin", 0.02)).float()
+                    gl = gl + (F.binary_cross_entropy_with_logits(g.float(), lab, reduction="none") * valid).sum() / valid.sum().clamp(min=1)
+                    # deep supervision of the intermediate exits keeps early stops usable (anytime) — cheap: coda only
+                total = total + tc.get("gate_w", 0.1) * gl
+                if tc.get("exit_w", 0.0) > 0:
+                    for lg in out["inter_logits"]:
+                        total = total + tc["exit_w"] * masked_ce(lg, y, m)[0] / len(out["inter_logits"])
             sd = tc.get("self_distill", 0.0)
             if sd > 0 and R > 1:
                 rs = int(rng.integers(1, R))

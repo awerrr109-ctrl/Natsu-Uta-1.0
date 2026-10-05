@@ -70,3 +70,10 @@ def test_engram_cache():
 
 if __name__ == "__main__":
     test_engram_cache(); print("ok engram")
+
+def test_lti_reinject_cache():
+    _check_cache(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", n_loops=3, chunk=8,
+                             reinject=True, reinject_mode="lti"))
+
+if __name__ == "__main__":
+    test_lti_reinject_cache(); print("ok lti")

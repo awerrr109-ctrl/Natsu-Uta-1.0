@@ -40,3 +40,14 @@
   - E4i fixed R=3, identity-init re-injection
   - if all are still worse than E4c → accept that **at toy scale, loops do not pay for LM bpb**, keep C4 (MoE + Engram, no loop) as
     the main line, and test loops only on reasoning probes at the GPU stage. Decision rule written down **before** seeing the results.
+
+## UPDATE (session 2) — the "loops hurt" conclusion was WRONG in its generality
+- **E4g** (loop-MoE, **fixed R=3 training, no re-injection**, same 0.82M params, same data): val bpb by eval-R =
+  R1 1.694 / R2 1.485 / **R3 1.457** / R4 1.474 / R6 1.552. **At R=3 it beats the non-looped E4c (1.487) by 0.030 bpb.**
+- Therefore the F005 deficit came from the training recipe (uniform R ~ U{1..3} and/or random-init concat re-injection), not from
+  looping per se. E4h (uniform R + identity-init re-injection) and E4i (fixed R + identity re-injection) separate the two causes.
+- New observations: (a) a fixed-R model is useless at R=1 (1.694): there is **no anytime property**; (b) it is mildly robust at R=4, not at R=6;
+  (c) the loop costs 1.72× inference FLOPs for −0.030 bpb, while Engram (E4j) gave −0.059 at 1.06× FLOPs → **Engram still dominates on the Pareto front.**
+- **Lesson**: one failed recipe ≠ a refuted mechanism. Pre-registered ablations caught this. Without them the loop line would have been wrongly dropped.
+- **New hypothesis H13.1**: uniform-R training imposes an "anytime tax", since the shared weights must be good at every depth. The tax shrinks with
+  scale or with a curriculum (train at fixed R, then fine-tune with sampled R). This is testable.

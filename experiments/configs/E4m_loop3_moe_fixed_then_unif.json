@@ -1,0 +1,44 @@
+{
+ "name": "E4m_loop3_moe_fixed_then_unif",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1,
+  "pattern": "ga",
+  "n_loops": 3,
+  "reinject": false,
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_shared": 1,
+  "moe_expert_mult": 0.296
+ },
+ "train": {
+  "seq": 128,
+  "batch": 16,
+  "steps": 800,
+  "lr": 0.003,
+  "warmup": 60,
+  "eval_every": 400,
+  "log_every": 100,
+  "threads": 2,
+  "eval_batches": 12,
+  "save": true,
+  "loop_sampling": "fixed_then_uniform",
+  "eval_loops": [
+   2,
+   4,
+   6
+  ]
+ },
+ "data": {
+  "kind": "memmap",
+  "train": "data_cache/ts_train.bin",
+  "valid": "data_cache/ts_valid.bin"
+ },
+ "extra_eval": {}
+}

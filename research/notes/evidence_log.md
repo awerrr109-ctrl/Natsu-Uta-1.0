@@ -78,3 +78,24 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **[R19] Yue et al., "Does RL Really Incentivize Reasoning Capacity…", NeurIPS 2025, arXiv:2504.13837** — L2 (abstract-level).
   [E] RLVR models beat their base at small k but **base models surpass RL models at large pass@k**: RL narrows the reasoning boundary rather than expanding it. A 2026 follow-up ("Curriculum RL can incentivize…", arXiv:2606.22317, L1) claims curriculum RL does expand it → **contested**.
   → [I] RL is not the lever for *new* capability at 9B. Distillation and pretraining data are. RL is kept for elicitation and calibration, and is evaluated with pass@1 and pass@k.
+
+## Session 2
+
+### Looping recipe (triggered by E4g reversal of F005)
+- **[R20] Parcae, Prairie et al. arXiv:2604.12946 (UCSD/Together)** — L3-partial.
+  [E] Prior looped models suffer residual-state explosion and loss spikes. Fix: the residual stream as a discretised LTI system,
+  h_{t+1} = Ā h_t + B̄ e + R̄(h_t, e), with A = Diag(−exp(logA)) and ZOH Ā = exp(ΔA) → spectral radius < 1. Prelude output normalised.
+  T ~ Poisson(μ_rec), sampled per sequence. **770M Parcae ≈ 1.3B Transformer (CORE)**; at 1.3B, +2.99 CORE. Limitation: latency grows with μ_rec.
+  → implemented as `reinject_mode="lti"` (tested cache-exact) → E4o. Parcae samples depth (Poisson) and still beats parameter-matched
+  Transformers, so our uniform-R failure (F005) is more likely due to toy scale and the uniform distribution plus a bad injection than to sampling per se → E4n tests Poisson(R).
+- **[R21] TaH2 "Improving Test-Time Scaling with Adaptive Looped Transformers" arXiv:2609.35748** — L2.
+  [E] **Existing looped transformers have steeper accuracy/compute slopes but underperform non-looped baselines at matched compute**,
+  because many tokens do not benefit from extra iterations. An iteration decider trained by lookahead depth supervision (online labels: "does
+  one more iteration improve this token?") gives slope 2.74 vs 1.79, +3.4 points over the baseline peak at matched compute, and a gain growing with max depth
+  (+2.8 at depth 2 → +3.9 at depth 8).
+  → [I] This is the missing piece of our depth-gate design (E4d gate skipped only 5%). **Replace the FLOP-penalty gate with lookahead
+  supervision**: target_t = 1[CE_t(r+1) < CE_t(r) − margin]. Implementable cheaply because R loops are already computed in training.
+  This is also the fix for R16's halting collapse: targets come from measured benefit, not a cost penalty.
+- **[R22] "Stability and Generalization in Looped Transformers" arXiv:2604.15259; Fixed-Point Reasoners arXiv:2606.18206; "Stabilizing
+  Extrapolation…" arXiv:2606.29983** — L1 (titles/snippets). Extrapolation beyond trained depth needs fixed-point-style training. Our E4g
+  degrades at R=6, which is consistent. Queued for L2.
