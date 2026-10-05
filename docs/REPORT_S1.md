@@ -95,3 +95,16 @@ this scale. Analytic 9B: C4 needs 4.9 GFLOP/token vs 16.1 for the dense C0 (3.3�
 2. Test-time compute through search/verification with C4 rather than through loops, unless E4g–i reverse F005.
 3. Hyperconnections + identity-init re-injection if loops survive.
 4. Retrieval/tools as the knowledge channel (closed-book parity with frontier models is not claimed).
+
+## 9. Late result (added at end of session 1) — Engram at toy scale
+| run | design | stored params | bpb | train FLOPs | inf MFLOP/tok |
+|---|---|---|---|---|---|
+| **E4j** | hybrid + MoE + **Engram** (no loop) | 0.825M | **1.4278** | 7.8e12 | 1.58 |
+| E4z | hybrid dense, **2× params, 2.3× FLOPs** (8 layers) | 1.616M | 1.4394 | 1.8e13 | 3.61 |
+| E4c | hybrid + MoE (no Engram) | 0.821M | 1.4870 | 7.3e12 | 1.49 |
+
+- [E, toy, single seed] At iso-param with E4c, adding Engram (paid for by shrinking the experts) gives **−0.059 bpb**, the largest single effect of the session.
+  E4j also **beats a model with 2× the params and 2.3× the inference FLOPs (E4z)**.
+- [I] Strongly consistent with R17. At byte level, local n-gram statistics are a large part of the loss, so the size of this effect may shrink with a
+  BPE tokenizer. **This must be replicated (3 seeds, BPE tokenizer, 10M stage) before it is believed.**
+- Decision update: **C4 (hybrid + MoE + Engram) is the main line going into session 2.**

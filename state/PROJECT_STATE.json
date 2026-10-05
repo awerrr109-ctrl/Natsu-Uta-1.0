@@ -3,8 +3,8 @@
  "updated": "2026-10-05",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
-  "id": "C4_moe_engram_noloop (co-main, promoted) / C3 (pending E4g-i, E4f)",
-  "status": "toy-validated direction only: E4c Pareto-best at iso-param (bpb 1.4870)",
+  "id": "C4_hybrid_moe_engram (MAIN)",
+  "status": "toy: E4j Pareto-best (bpb 1.4278 @0.825M)",
   "summary": "3:1 GDN:attention hybrid + fine-grained MoE + Engram n-gram memory (20-25% of sparse budget), 8.9B stored, ~2.4B active, 4.9 GFLOP/token",
   "alternatives": [
    "C3 looped variant",
@@ -41,6 +41,10 @@
   "H11.4_self_spec_exactness": {
    "result": "implementation verified",
    "evidence": "tests/test_generate.py"
+  },
+  "H1.4_engram_toy": {
+   "result": "supported (toy, single seed, large effect)",
+   "evidence": "E4j 1.4278 vs E4c 1.4870 iso-param; beats E4z (2x params) 1.4394"
   }
  },
  "rejected_hypotheses": [
@@ -79,6 +83,7 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
+  "replicate E4j vs E4c (3 seeds) + BPE tokenizer variant; Engram slot/share sweep (U-curve) at toy scale",
   "queue s1e: E4g/E4h/E4i (loop init/sampling ablations), E4f (loop+Engram), E4e (shared KV), E2a-c (MQAR recall)",
   "E4j: Engram on NON-looped C4 toy (iso-param) - most important next test",
   "seed replication (3 seeds) of E4c vs E3b vs best loop variant",

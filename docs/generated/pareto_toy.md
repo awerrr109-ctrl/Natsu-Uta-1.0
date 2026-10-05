@@ -1,5 +1,7 @@
 | run | loops@eval | val bpb | stored params | train FLOPs | inf MFLOP/tok | train tokens | peak RSS MB | wall s | Pareto |
 |---|---|---|---|---|---|---|---|---|---|
+| E4j_moe_engram_noloop | 1 | 1.4278 | 825,480 | 7.78e+12 | 1.58 | 1,638,400 | 634 | 501 | **yes** |
+| E4z_ts_hyb8_isoflop | 1 | 1.4394 | 1,616,272 | 1.77e+13 | 3.61 | 1,638,400 | 792 | 949 |  |
 | E4c_ts_hyb_moe_noloop | 1 | 1.4870 | 820,744 | 7.33e+12 | 1.49 | 1,638,400 | 697 | 484 | **yes** |
 | E3b_ts_hyb4 | 1 | 1.4917 | 824,840 | 9.03e+12 | 1.84 | 1,638,400 | 657 | 483 |  |
 | E3a_ts_attn4 | 1 | 1.5588 | 755,328 | 8.05e+12 | 1.64 | 1,638,400 | 655 | 285 | **yes** |
