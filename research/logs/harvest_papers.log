@@ -1,0 +1,117 @@
+[paper] H1.1_recurrent_depth_sharing support 'universal transformer recurrent depth': arxiv=11 openalex=100
+[paper] H1.1_recurrent_depth_sharing support 'looped transformer reasoning': arxiv=100 openalex=100
+[paper] H1.1_recurrent_depth_sharing support 'recurrent depth latent reasoning test-time compute': arxiv=8 openalex=100
+[paper] H1.1_recurrent_depth_sharing support 'parameter sharing transformer layers': arxiv=100 openalex=100
+[paper] H1.1_recurrent_depth_sharing support 'relaxed recursive transformers layer-wise LoRA': arxiv=1 openalex=100
+[paper] H1.1_recurrent_depth_sharing support 'ALBERT cross-layer parameter sharing': arxiv=0 openalex=100
+[paper] H1.1_recurrent_depth_sharing support 'mixture of recursions adaptive token depth': arxiv=3 openalex=100
+[paper] H1.1_recurrent_depth_sharing refute  'parameter sharing transformer performance degradation': arxiv=50 openalex=100
+[paper] H1.1_recurrent_depth_sharing refute  'looped transformer length generalization failure': arxiv=1 openalex=100
+[paper] H1.1_recurrent_depth_sharing refute  'weight tying layers scaling law limitations': arxiv=0 openalex=100
+[paper] H1.2_low_rank_tensor support 'low-rank pretraining language model': arxiv=100 openalex=100
+[paper] H1.2_low_rank_tensor support 'tensor train decomposition transformer': arxiv=84 openalex=100
+  ! HTTP Error 504: Gateway Timeout -> retry in 10s
+[paper] H1.2_low_rank_tensor support 'GaLore gradient low-rank projection': arxiv=18 openalex=100
+[paper] H1.2_low_rank_tensor support 'monarch matrices structured': arxiv=12 openalex=100
+[paper] H1.2_low_rank_tensor support 'kronecker factorized layers language model': arxiv=11 openalex=100
+[paper] H1.2_low_rank_tensor refute  'low-rank pretraining fails to match full rank': arxiv=3 openalex=100
+[paper] H1.2_low_rank_tensor refute  'structured matrices language model quality gap': arxiv=5 openalex=100
+[paper] H1.3_sparse_moe support 'fine-grained mixture of experts scaling law': arxiv=6 openalex=100
+[paper] H1.3_sparse_moe support 'shared experts DeepSeekMoE': arxiv=7 openalex=100
+[paper] H1.3_sparse_moe support 'mixture of experts parameter efficient upcycling': arxiv=18 openalex=100
+[paper] H1.3_sparse_moe support 'expert merging compression MoE': arxiv=17 openalex=100
+[paper] H1.3_sparse_moe support 'mixture of a million experts product key': arxiv=1 openalex=100
+[paper] H1.3_sparse_moe refute  'mixture of experts dense comparison same total parameters': arxiv=1 openalex=100
+[paper] H1.3_sparse_moe refute  'MoE training instability router collapse': arxiv=3 openalex=100
+[paper] H1.3_sparse_moe refute  'MoE reasoning underperforms dense': arxiv=0 openalex=100
+[paper] H1.4_memory_layers support 'product key memory layers scale': arxiv=28 openalex=100
+[paper] H1.4_memory_layers support 'memory layers at scale': arxiv=100 openalex=100
+[paper] H1.4_memory_layers support 'large memory layers language model knowledge': arxiv=100 openalex=100
+[paper] H1.4_memory_layers support 'ultra sparse memory network': arxiv=18 openalex=100
+[paper] H1.4_memory_layers refute  'product key memory underutilization': arxiv=2 openalex=100
+[paper] H1.4_memory_layers refute  'memory layer training difficulty': arxiv=48 openalex=100
+[paper] H2.1_mixture_of_depths support 'mixture of depths dynamically allocating compute': arxiv=5 openalex=100
+[paper] H2.1_mixture_of_depths support 'early exit language model': arxiv=100 openalex=100
+[paper] H2.1_mixture_of_depths support 'adaptive computation time transformer': arxiv=100 openalex=100
+[paper] H2.1_mixture_of_depths support 'token skipping layer skip LLM': arxiv=59 openalex=100
+[paper] H2.1_mixture_of_depths support 'CALM confident adaptive language modeling': arxiv=1 openalex=100
+[paper] H2.1_mixture_of_depths refute  'mixture of depths autoregressive causality problem': arxiv=0 openalex=100
+[paper] H2.1_mixture_of_depths refute  'early exit degrades quality calibration': arxiv=1 openalex=100
+[paper] H2.1_mixture_of_depths refute  'dynamic depth hardware inefficiency batching': arxiv=0 openalex=100
+[paper] H2.2_learned_budget support 'learned halting ponder net': arxiv=0 openalex=100
+[paper] H2.2_learned_budget support 'adaptive compute budget reasoning LLM': arxiv=97 openalex=100
+[paper] H2.2_learned_budget support 'difficulty-aware compute allocation reasoning': arxiv=25 openalex=100
+[paper] H2.2_learned_budget refute  'ponder cost instability halting collapse': arxiv=0 openalex=98
+[paper] H2.2_learned_budget refute  'overthinking reasoning models': arxiv=100 openalex=100
+[paper] H2.3_activation_sparsity support 'activation sparsity LLM relu': arxiv=21 openalex=100
+[paper] H2.3_activation_sparsity support 'deja vu contextual sparsity': arxiv=1 openalex=100
+[paper] H2.3_activation_sparsity support 'powerinfer sparse activation': arxiv=4 openalex=100
+[paper] H2.3_activation_sparsity support 'squared relu primer': arxiv=1 openalex=100
+[paper] H2.3_activation_sparsity refute  'activation sparsity quality loss swiglu': arxiv=1 openalex=100
+[paper] H2.3_activation_sparsity refute  'contextual sparsity predictor overhead': arxiv=1 openalex=100
+[paper] H3.1_hybrid_ssm_attention support 'hybrid mamba attention language model': arxiv=78 openalex=100
+[paper] H3.1_hybrid_ssm_attention support 'jamba hybrid': arxiv=13 openalex=100
+[paper] H3.1_hybrid_ssm_attention support 'samba hybrid state space': arxiv=2 openalex=100
+[paper] H3.1_hybrid_ssm_attention support 'zamba shared attention': arxiv=1 openalex=99
+[paper] H3.1_hybrid_ssm_attention support 'griffin gated linear recurrence local attention': arxiv=1 openalex=100
+[paper] H3.1_hybrid_ssm_attention support 'hymba hybrid heads': arxiv=3 openalex=100
+[paper] H3.1_hybrid_ssm_attention support 'mamba-2 state space duality': arxiv=9 openalex=100
+[paper] H3.1_hybrid_ssm_attention refute  'state space models recall limitation': arxiv=89 openalex=100
+[paper] H3.1_hybrid_ssm_attention refute  'repeat after me transformers better than state space copying': arxiv=1 openalex=100
+[paper] H3.1_hybrid_ssm_attention refute  'mamba in-context learning weakness': arxiv=4 openalex=100
+[paper] H3.1_hybrid_ssm_attention refute  'linear attention associative recall gap': arxiv=7 openalex=100
+[paper] H3.2_gated_delta_linear support 'gated delta networks': arxiv=36 openalex=100
+[paper] H3.2_gated_delta_linear support 'DeltaNet parallelizing linear transformers delta rule': arxiv=4 openalex=100
+[paper] H3.2_gated_delta_linear support 'gated linear attention hardware efficient': arxiv=34 openalex=100
+[paper] H3.2_gated_delta_linear support 'RWKV-7 goose': arxiv=1 openalex=100
+[paper] H3.2_gated_delta_linear support 'RWKV eagle finch': arxiv=1 openalex=100
+[paper] H3.2_gated_delta_linear support 'retentive network': arxiv=100 openalex=100
+[paper] H3.2_gated_delta_linear support 'HGRN2 hierarchically gated': arxiv=1 openalex=76
+[paper] H3.2_gated_delta_linear support 'xLSTM': arxiv=85 openalex=100
+[paper] H3.2_gated_delta_linear support 'longhorn state space online learning': arxiv=1 openalex=100
+[paper] H3.2_gated_delta_linear refute  'linear attention fails long context retrieval': arxiv=4 openalex=100
+[paper] H3.2_gated_delta_linear refute  'linear RNN state size capacity limit': arxiv=4 openalex=100
+[paper] H3.3_sparse_attention support 'native sparse attention': arxiv=89 openalex=100
+[paper] H3.3_sparse_attention support 'mixture of block attention': arxiv=100 openalex=100
+[paper] H3.3_sparse_attention support 'sliding window attention global tokens': arxiv=39 openalex=100
+[paper] H3.3_sparse_attention support 'multi-head latent attention': arxiv=100 openalex=100
+[paper] H3.3_sparse_attention support 'differential transformer': arxiv=100 openalex=100
+[paper] H3.3_sparse_attention support 'landmark attention': arxiv=100 openalex=100
+[paper] H3.3_sparse_attention support 'quest query aware sparsity kv': arxiv=3 openalex=100
+[paper] H3.3_sparse_attention refute  'sparse attention long context quality degradation': arxiv=20 openalex=100
+[paper] H3.3_sparse_attention refute  'sliding window attention fails needle': arxiv=0 openalex=100
+[paper] H3.4_test_time_training_layers support 'learning to learn at test time RNN expressive hidden states': arxiv=3 openalex=100
+[paper] H3.4_test_time_training_layers support 'titans learning to memorize at test time': arxiv=4 openalex=100
+[paper] H3.4_test_time_training_layers support 'test-time training long context': arxiv=100 openalex=100
+[paper] H3.4_test_time_training_layers support 'fast weight programmers linear transformers': arxiv=8 openalex=100
+[paper] H3.4_test_time_training_layers support 'atlas memory test time': arxiv=10 openalex=100
+[paper] H3.4_test_time_training_layers support 'lattice memory': arxiv=100 openalex=100
+[paper] H3.4_test_time_training_layers refute  'test-time training layer throughput overhead': arxiv=2 openalex=100
+[paper] H3.4_test_time_training_layers refute  'fast weights instability': arxiv=49 openalex=100
+[paper] H4.1_latent_reasoning support 'coconut chain of continuous thought': arxiv=8 openalex=100
+[paper] H4.1_latent_reasoning support 'latent reasoning language model': arxiv=100 openalex=100
+[paper] H4.1_latent_reasoning support 'pause tokens': arxiv=57 openalex=100
+[paper] H4.1_latent_reasoning support 'implicit chain of thought': arxiv=100 openalex=100
+[paper] H4.1_latent_reasoning support 'hierarchical reasoning model': arxiv=100 openalex=100
+[paper] H4.1_latent_reasoning support 'tiny recursive model reasoning': arxiv=26 openalex=100
+[paper] H4.1_latent_reasoning refute  'continuous thought fails scaling': arxiv=13 openalex=100
+[paper] H4.1_latent_reasoning refute  'pause tokens no improvement': arxiv=31 openalex=100
+[paper] H4.1_latent_reasoning refute  'latent reasoning interpretability failure': arxiv=26 openalex=100
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+[paper] H4.2_verifier_search support 'scaling test-time compute optimally': arxiv=100 openalex=0
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+[paper] H4.2_verifier_search support 'process reward model step verification': arxiv=100 openalex=0
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+[paper] H4.2_verifier_search support 'best-of-n verifier small model': arxiv=21 openalex=0
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+  ! HTTP Error 429: Too Many Requests -> retry in 65s

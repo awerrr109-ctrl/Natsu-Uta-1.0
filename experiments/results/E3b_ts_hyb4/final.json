@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E3b_ts_hyb4",
+  "params": 824840,
+  "params_nonembed": 791560,
+  "flops_per_token_fwd": 1837056.0
+ },
+ "train_flops": 9029497651200.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 482.9109034538269,
+ "peak_rss_mb": 657.07421875,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 1.0339958518743515,
+    "ppl": 2.8122808707538844,
+    "bpb": 1.4917406877988861
+   },
+   "fwd_flops_per_token": 1837056.0
+  }
+ }
+}

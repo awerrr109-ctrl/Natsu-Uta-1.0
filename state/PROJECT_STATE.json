@@ -1,0 +1,100 @@
+{
+ "session": 1,
+ "updated": "2026-10-05",
+ "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
+ "current_best_architecture": {
+  "id": "C4_moe_engram_noloop (co-main, promoted) / C3 (pending E4g-i, E4f)",
+  "status": "toy-validated direction only: E4c Pareto-best at iso-param (bpb 1.4870)",
+  "summary": "3:1 GDN:attention hybrid + fine-grained MoE + Engram n-gram memory (20-25% of sparse budget), 8.9B stored, ~2.4B active, 4.9 GFLOP/token",
+  "alternatives": [
+   "C3 looped variant",
+   "C5 resident 9B + SSD Engram table",
+   "C0 dense baseline"
+  ]
+ },
+ "current_best_training_method": "NTP + MTP + uniform loop sampling + shallow->deep KL self-distillation; Muon+AdamW; WSD 1-sqrt; aux-loss-free MoE balancing; no truncated BPTT",
+ "evaluated_hypotheses": {
+  "H_mem_toy_alloc": {
+   "result": "supported",
+   "evidence": "padding trim + MALLOC_ARENA_MAX=1: RSS 807->326MB, step 3s->0.3s"
+  },
+  "H_grad_ckpt_toy": {
+   "result": "rejected at d=128",
+   "evidence": "+250% time, no RSS gain; allocator dominated"
+  },
+  "H3.1_hybrid_vs_attn_toy": {
+   "result": "supported (toy)",
+   "evidence": "E3b 1.4917 vs E3a 1.5588 bpb"
+  },
+  "H1.3_moe_toy": {
+   "result": "supported (toy, small effect)",
+   "evidence": "E4c 1.4870 vs E3b 1.4917; E4b vs E4a -0.012"
+  },
+  "H1.1_loops_iso_param_toy": {
+   "result": "REFUTED at toy scale (pending init-fix ablations)",
+   "evidence": "E4a/b/d +0.08-0.10 bpb vs no-loop; R>2 worse (F005)"
+  },
+  "H2.2_learned_gate_toy": {
+   "result": "not working",
+   "evidence": "E4d skip 5% at th=0.5"
+  },
+  "H11.4_self_spec_exactness": {
+   "result": "implementation verified",
+   "evidence": "tests/test_generate.py"
+  }
+ },
+ "rejected_hypotheses": [
+  {
+   "id": "forward-only pretraining (MeZO/forward-gradient)",
+   "reason": "variance scales with dim (literature, L1); not tested by us",
+   "evidence_quality": "low"
+  },
+  {
+   "id": "C1 dense looped",
+   "reason": "R2 phi=0.46, R4 dense loops scale worse, E4a worst",
+   "evidence_quality": "medium"
+  }
+ ],
+ "untested_hypotheses": [
+  "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",
+  "H3.2 GDN vs attention vs hybrid recall on MQAR (E2 queued)",
+  "E3: hybrid + looping on TinyStories bpb at iso-param (queued)",
+  "H11.1 per-loop router bias increases routing divergence and phi",
+  "H11.4 shallow->deep self-distillation raises loop-speculation acceptance",
+  "H11.6 shared KV across loops costs little quality",
+  "H12.1 large SSD-resident PKM table + 9B resident model",
+  "H2.2 soft depth gate does not collapse when trained with random-R (R16 counter-evidence)"
+ ],
+ "open_questions": [
+  "Does R4's looped-MoE advantage survive at >1B and with GDN hybrids?",
+  "Block-loop (Huginn) vs layer-loop (Loopie): which gives better phi per KV byte?",
+  "Is the looped-MoE + memory-layer combination truly unexplored? (L3 related-work check of R4/MELT/MoEUT pending)",
+  "How much of Ouro's gain is from 7.7T tokens vs looping?"
+ ],
+ "next_search_directions": [
+  "L3 read: R2 (phi fit details), R4 (iso-param dense-loop result), MELT (shared KV quality), MoEUT",
+  "Engram conditional memory (Cheng et al. 2026) vs PKM: prefetchable n-gram rows (from R15 related work)",
+  "DeepLoop residual scaling; hyperconnections for loops",
+  "knowledge distillation scaling laws (capacity gap) for 9B student",
+  "RLVR negative results at small scale"
+ ],
+ "next_experiments": [
+  "queue s1e: E4g/E4h/E4i (loop init/sampling ablations), E4f (loop+Engram), E4e (shared KV), E2a-c (MQAR recall)",
+  "E4j: Engram on NON-looped C4 toy (iso-param) - most important next test",
+  "seed replication (3 seeds) of E4c vs E3b vs best loop variant",
+  "dense-supervision reasoning probe (F003 next) to test loops where they should help",
+  "10M stage of C4 vs C0 vs best-loop"
+ ],
+ "evidence_quality": "toy-scale only; literature L2 (abstract/summary), no L3 yet",
+ "known_limitations": [
+  "compute: 2 vCPU, ~1GB RAM -> only toy (<=1.5M params) experiments here; 10M feasible but slow",
+  "OpenAlex daily free budget exhausted on day 1; arXiv API throttled (429); Crossref used as fallback",
+  "no GPU: 50M+ stages are specified but not run",
+  "pure-PyTorch GDN kernel: correct but slow; no Triton",
+  "all toy results single-seed, 1.6M tokens, 0.8M params"
+ ],
+ "corpus": {
+  "see": "research/notes/corpus_stats.md",
+  "reads_table": "research/db/research.sqlite:reads"
+ }
+}

@@ -1,0 +1,219 @@
+"""
+Memory-aware trainer. Usage:
+    python -m natsu.train --config experiments/configs/X.json
+Config JSON: {"name":..., "model":{NatsuConfig fields}, "train":{...}, "data":{...}}
+
+Train-time features specific to this project:
+  * loop_sampling: "fixed" | "uniform" | "poisson"  -> random loop count per step
+    (Huginn-style, arXiv:2502.05171) so ANY loop count is a valid model at inference.
+  * self_distill: weight of KL(p_r || stopgrad p_R) between a sampled shallow loop count r
+    and full depth R (our addition: makes shallow loops good *drafts* of deep loops
+    -> self-speculative decoding with zero extra parameters).
+  * gate_penalty: compute penalty on the soft depth gate (learned budget).
+  * mtp: multi-token-prediction auxiliary loss (weight mtp_w).
+Logging: JSONL with loss, lr, tokens, tok/s, RSS MB (principle #18).
+"""
+import argparse, json, math, os, resource, sys, time
+import torch
+import torch.nn.functional as F
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from natsu.model import Natsu, NatsuConfig
+from natsu.optim import build_optim, wsd, cosine
+from natsu import data as D
+
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+def rss_mb():
+    with open("/proc/self/status") as f:
+        for l in f:
+            if l.startswith("VmRSS"):
+                return int(l.split()[1]) / 1024
+    return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
+
+
+def peak_rss_mb():
+    return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
+
+
+def masked_ce(logits, y, mask):
+    l = F.cross_entropy(logits.reshape(-1, logits.shape[-1]).float(), y.reshape(-1), reduction="none",
+                        ignore_index=D.PAD).view_as(y)
+    valid = (y != D.PAD)
+    if mask is not None:
+        valid = valid & mask
+    return (l * valid).sum() / valid.sum().clamp(min=1), l, valid
+
+
+def make_loader(dc, seq, batch, seed, split="train"):
+    if dc["kind"] == "memmap":
+        return D.MemmapLoader(os.path.join(ROOT, dc[split]), seq, batch, seed)
+    if dc["kind"] == "synthetic":
+        kw = dict(dc.get("kw", {}))
+        return D.SyntheticLoader(dc["task"], seq, batch, seed, **kw)
+    if dc["kind"] == "mix":
+        ls = [make_loader(x, seq, batch, seed + i, split) for i, x in enumerate(dc["parts"])]
+        return D.MixLoader(ls, dc["weights"], seed)
+    raise ValueError(dc)
+
+
+@torch.no_grad()
+def evaluate(model, batches, n_loops=None, gate_threshold=None):
+    model.eval()
+    tot, n, correct_seq, n_seq = 0.0, 0, 0, 0
+    skip = []
+    for x, y, m in batches:
+        out = model(x, n_loops=n_loops, gate_threshold=gate_threshold)
+        loss, l, valid = masked_ce(out["logits"], y, m)
+        tot += (l * valid).sum().item(); n += valid.sum().item()
+        if m is not None:  # exact-match accuracy over answer spans
+            pred = out["logits"].argmax(-1)
+            ok = ((pred == y) | ~valid).all(-1)
+            correct_seq += ok.sum().item(); n_seq += len(ok)
+        if "skip_frac" in out:
+            skip.append(out["skip_frac"].item())
+    model.train()
+    r = {"loss": tot / max(n, 1)}
+    r["ppl"] = math.exp(min(r["loss"], 20))
+    r["bpb"] = r["loss"] / math.log(2)  # byte tokenizer -> bits per byte
+    if n_seq:
+        r["acc"] = correct_seq / n_seq
+    if skip:
+        r["skip_frac"] = sum(skip) / len(skip)
+    return r
+
+
+def sample_loops(R, mode, step_rng):
+    if R == 1 or mode == "fixed":
+        return R
+    if mode == "uniform":
+        return int(step_rng.integers(1, R + 1))
+    if mode == "poisson":  # Huginn: heavy-ish tail around mean R/2+1, clipped
+        return int(min(R, max(1, step_rng.poisson(R / 2 + 0.5))))
+    raise ValueError(mode)
+
+
+def train(cfg):
+    import numpy as np
+    tc, dc = cfg["train"], cfg["data"]
+    torch.manual_seed(tc.get("seed", 0))
+    torch.set_num_threads(tc.get("threads", os.cpu_count()))
+    mc = NatsuConfig(**cfg["model"])
+    model = Natsu(mc)
+    seq, batch = tc["seq"], tc["batch"]
+    opts = build_optim(model, tc.get("optim", "adamw"), tc["lr"], tc.get("wd", 0.1))
+    base_lrs = [[g["lr"] for g in o.param_groups] for o in opts]
+    if tc.get("optim") == "muon":  # AdamW part (embeddings/norms) uses adam_lr
+        for g in opts[1].param_groups:
+            g["lr"] = tc.get("adam_lr", 3e-3)
+        base_lrs[1] = [tc.get("adam_lr", 3e-3)]
+    tr = make_loader(dc, seq, batch, tc.get("seed", 0), "train")
+    ev = make_loader(dc, seq, tc.get("eval_batch", batch), 777, "valid" if dc["kind"] == "memmap" else "train")
+    ev_batches = ev.fixed_eval(tc.get("eval_batches", 8))
+    extra_eval = {}
+    for name, over in cfg.get("extra_eval", {}).items():  # e.g. OOD hop counts
+        extra_eval[name] = ev.fixed_eval(tc.get("eval_batches", 8), seed=4242, **over)
+    out_dir = os.path.join(ROOT, "experiments", "results", cfg["name"])
+    os.makedirs(out_dir, exist_ok=True)
+    logf = open(os.path.join(out_dir, "log.jsonl"), "w")
+    info = {"name": cfg["name"], "params": model.param_count(), "params_nonembed": model.param_count(True),
+            "flops_per_token_fwd": model.flops_per_token(seq=seq), "config": cfg}
+    print(json.dumps({k: v for k, v in info.items() if k != "config"}), flush=True)
+    steps, warm = tc["steps"], tc.get("warmup", 50)
+    sched = wsd if tc.get("sched", "wsd") == "wsd" else cosine
+    rng = np.random.default_rng(tc.get("seed", 0))
+    R = mc.n_loops
+    tok_seen, ans_seen, t0, flops = 0, 0, time.time(), 0.0
+    accum = tc.get("accum", 1)
+    for step in range(steps):
+        f = sched(step, steps, warm)
+        for o, bl in zip(opts, base_lrs):
+            for g, b in zip(o.param_groups, bl):
+                g["lr"] = b * f
+        for _ in range(accum):
+            x, y, m = tr.get()
+            r = sample_loops(R, tc.get("loop_sampling", "fixed"), rng)
+            out = model(x, n_loops=r)
+            loss, _, valid = masked_ce(out["logits"], y, m)
+            total = loss
+            if mc.mtp and "mtp_logits" in out:
+                for j, lg in enumerate(out["mtp_logits"], start=1):
+                    yy = torch.cat([y[:, j:], torch.full_like(y[:, :j], D.PAD)], 1)
+                    mm = None if m is None else torch.cat([m[:, j:], torch.zeros_like(m[:, :j])], 1)
+                    total = total + tc.get("mtp_w", 0.3) * masked_ce(lg, yy, mm)[0]
+            if mc.depth_gate and "gate_mean" in out:
+                total = total + tc.get("gate_penalty", 0.0) * out["gate_mean"]
+            sd = tc.get("self_distill", 0.0)
+            if sd > 0 and R > 1:
+                rs = int(rng.integers(1, R))
+                with torch.no_grad():
+                    tgt = out["logits"].detach() if r == R else model(x, n_loops=R)["logits"]
+                lo = model(x, n_loops=rs)["logits"]
+                kl = F.kl_div(F.log_softmax(lo.float(), -1), F.log_softmax(tgt.float(), -1),
+                              log_target=True, reduction="none").sum(-1)
+                total = total + sd * (kl * valid).sum() / valid.sum().clamp(min=1)
+            (total / accum).backward()
+            tok_seen += (x != D.PAD).sum().item(); ans_seen += valid.sum().item()
+            flops += 3 * model.flops_per_token(n_loops=r, seq=seq) * x.numel()
+        gn = torch.nn.utils.clip_grad_norm_(model.parameters(), tc.get("clip", 1.0)).item()
+        for o in opts:
+            o.step(); o.zero_grad(set_to_none=True)
+        for mod in model.modules():
+            if hasattr(mod, "update_balance"):
+                mod.update_balance(tc.get("moe_bias_rate", 1e-3))
+        if step % tc.get("log_every", 25) == 0 or step == steps - 1:
+            el = time.time() - t0
+            rec = {"step": step, "loss": loss.item(), "lr_f": f, "gnorm": gn, "tokens": tok_seen, "scored": ans_seen, "scored_tokens": ans_seen,
+                   "tok_s": tok_seen / el, "rss_mb": rss_mb(), "peak_rss_mb": peak_rss_mb(), "train_flops": flops,
+                   "loops": r}
+            if step % tc.get("eval_every", 200) == 0 or step == steps - 1:
+                rec["eval"] = evaluate(model, ev_batches)
+                for name, b in extra_eval.items():
+                    rec[f"eval_{name}"] = evaluate(model, b)
+            if not math.isfinite(rec["loss"]):
+                rec["diverged"] = True
+            logf.write(json.dumps(rec) + "\n"); logf.flush()
+            print(json.dumps(rec), flush=True)
+            if rec.get("diverged"):
+                break
+    # final multi-depth evaluation (test-time compute scaling curve)
+    final = {"info": {k: v for k, v in info.items() if k != "config"}, "train_flops": flops, "tokens": tok_seen, "scored_tokens": ans_seen,
+             "wall_s": time.time() - t0, "peak_rss_mb": peak_rss_mb()}
+    loops_eval = sorted(set([1, R] + list(tc.get("eval_loops", []))))
+    final["by_loops"] = {}
+    for rr in loops_eval:
+        e = {"main": evaluate(model, ev_batches, n_loops=rr)}
+        for name, b in extra_eval.items():
+            e[name] = evaluate(model, b, n_loops=rr)
+        e["fwd_flops_per_token"] = model.flops_per_token(n_loops=rr, seq=seq)
+        final["by_loops"][rr] = e
+    if mc.depth_gate:
+        final["gated"] = {th: evaluate(model, ev_batches, gate_threshold=th) for th in (0.3, 0.5, 0.7)}
+    json.dump(final, open(os.path.join(out_dir, "final.json"), "w"), indent=1)
+    if tc.get("save", True):
+        ck = os.path.join(ROOT, "checkpoints"); os.makedirs(ck, exist_ok=True)
+        torch.save({"config": mc.to_dict(), "state_dict": model.state_dict(), "run": cfg["name"]},
+                   os.path.join(ck, cfg["name"] + ".pt"))
+    print("FINAL", json.dumps(final["by_loops"]), flush=True)
+    return final
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--config", required=True)
+    ap.add_argument("--set", nargs="*", default=[], help="override e.g. train.steps=100 model.n_loops=2")
+    a = ap.parse_args()
+    cfg = json.load(open(a.config))
+    for kv in a.set:
+        k, v = kv.split("=", 1)
+        if k == "name":
+            cfg["name"] = v
+            continue
+        sec, key = k.split(".", 1)
+        try:
+            v = json.loads(v)
+        except json.JSONDecodeError:
+            pass
+        cfg[sec][key] = v
+    train(cfg)

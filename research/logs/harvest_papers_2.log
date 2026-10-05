@@ -1,0 +1,99 @@
+[paper] H1.1_recurrent_depth_sharing support 'universal transformer recurrent depth': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing support 'looped transformer reasoning': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing support 'recurrent depth latent reasoning test-time compute': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing support 'parameter sharing transformer layers': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing support 'relaxed recursive transformers layer-wise LoRA': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing support 'ALBERT cross-layer parameter sharing': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing support 'mixture of recursions adaptive token depth': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing refute  'parameter sharing transformer performance degradation': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing refute  'looped transformer length generalization failure': arxiv=0 openalex=0
+[paper] H1.1_recurrent_depth_sharing refute  'weight tying layers scaling law limitations': arxiv=0 openalex=0
+[paper] H1.2_low_rank_tensor support 'low-rank pretraining language model': arxiv=0 openalex=0
+[paper] H1.2_low_rank_tensor support 'tensor train decomposition transformer': arxiv=0 openalex=0
+[paper] H1.2_low_rank_tensor support 'GaLore gradient low-rank projection': arxiv=0 openalex=0
+[paper] H1.2_low_rank_tensor support 'monarch matrices structured': arxiv=0 openalex=0
+[paper] H1.2_low_rank_tensor support 'kronecker factorized layers language model': arxiv=0 openalex=0
+[paper] H1.2_low_rank_tensor refute  'low-rank pretraining fails to match full rank': arxiv=0 openalex=0
+[paper] H1.2_low_rank_tensor refute  'structured matrices language model quality gap': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe support 'fine-grained mixture of experts scaling law': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe support 'shared experts DeepSeekMoE': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe support 'mixture of experts parameter efficient upcycling': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe support 'expert merging compression MoE': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe support 'mixture of a million experts product key': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe refute  'mixture of experts dense comparison same total parameters': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe refute  'MoE training instability router collapse': arxiv=0 openalex=0
+[paper] H1.3_sparse_moe refute  'MoE reasoning underperforms dense': arxiv=0 openalex=0
+[paper] H1.4_memory_layers support 'product key memory layers scale': arxiv=0 openalex=0
+[paper] H1.4_memory_layers support 'memory layers at scale': arxiv=0 openalex=0
+[paper] H1.4_memory_layers support 'large memory layers language model knowledge': arxiv=0 openalex=0
+[paper] H1.4_memory_layers support 'ultra sparse memory network': arxiv=0 openalex=0
+[paper] H1.4_memory_layers refute  'product key memory underutilization': arxiv=0 openalex=0
+[paper] H1.4_memory_layers refute  'memory layer training difficulty': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths support 'mixture of depths dynamically allocating compute': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths support 'early exit language model': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths support 'adaptive computation time transformer': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths support 'token skipping layer skip LLM': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths support 'CALM confident adaptive language modeling': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths refute  'mixture of depths autoregressive causality problem': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths refute  'early exit degrades quality calibration': arxiv=0 openalex=0
+[paper] H2.1_mixture_of_depths refute  'dynamic depth hardware inefficiency batching': arxiv=0 openalex=0
+[paper] H2.2_learned_budget support 'learned halting ponder net': arxiv=0 openalex=0
+[paper] H2.2_learned_budget support 'adaptive compute budget reasoning LLM': arxiv=0 openalex=0
+[paper] H2.2_learned_budget support 'difficulty-aware compute allocation reasoning': arxiv=0 openalex=0
+[paper] H2.2_learned_budget refute  'ponder cost instability halting collapse': arxiv=0 openalex=0
+[paper] H2.2_learned_budget refute  'overthinking reasoning models': arxiv=0 openalex=0
+[paper] H2.3_activation_sparsity support 'activation sparsity LLM relu': arxiv=0 openalex=0
+[paper] H2.3_activation_sparsity support 'deja vu contextual sparsity': arxiv=0 openalex=0
+[paper] H2.3_activation_sparsity support 'powerinfer sparse activation': arxiv=0 openalex=0
+[paper] H2.3_activation_sparsity support 'squared relu primer': arxiv=0 openalex=0
+[paper] H2.3_activation_sparsity refute  'activation sparsity quality loss swiglu': arxiv=0 openalex=0
+[paper] H2.3_activation_sparsity refute  'contextual sparsity predictor overhead': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention support 'hybrid mamba attention language model': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention support 'jamba hybrid': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention support 'samba hybrid state space': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention support 'zamba shared attention': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention support 'griffin gated linear recurrence local attention': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention support 'hymba hybrid heads': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention support 'mamba-2 state space duality': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention refute  'state space models recall limitation': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention refute  'repeat after me transformers better than state space copying': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention refute  'mamba in-context learning weakness': arxiv=0 openalex=0
+[paper] H3.1_hybrid_ssm_attention refute  'linear attention associative recall gap': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'gated delta networks': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'DeltaNet parallelizing linear transformers delta rule': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'gated linear attention hardware efficient': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'RWKV-7 goose': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'RWKV eagle finch': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'retentive network': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'HGRN2 hierarchically gated': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'xLSTM': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear support 'longhorn state space online learning': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear refute  'linear attention fails long context retrieval': arxiv=0 openalex=0
+[paper] H3.2_gated_delta_linear refute  'linear RNN state size capacity limit': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention support 'native sparse attention': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention support 'mixture of block attention': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention support 'sliding window attention global tokens': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention support 'multi-head latent attention': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention support 'differential transformer': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention support 'landmark attention': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention support 'quest query aware sparsity kv': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention refute  'sparse attention long context quality degradation': arxiv=0 openalex=0
+[paper] H3.3_sparse_attention refute  'sliding window attention fails needle': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers support 'learning to learn at test time RNN expressive hidden states': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers support 'titans learning to memorize at test time': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers support 'test-time training long context': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers support 'fast weight programmers linear transformers': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers support 'atlas memory test time': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers support 'lattice memory': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers refute  'test-time training layer throughput overhead': arxiv=0 openalex=0
+[paper] H3.4_test_time_training_layers refute  'fast weights instability': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning support 'coconut chain of continuous thought': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning support 'latent reasoning language model': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning support 'pause tokens': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning support 'implicit chain of thought': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning support 'hierarchical reasoning model': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning support 'tiny recursive model reasoning': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning refute  'continuous thought fails scaling': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning refute  'pause tokens no improvement': arxiv=0 openalex=0
+[paper] H4.1_latent_reasoning refute  'latent reasoning interpretability failure': arxiv=0 openalex=0
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
