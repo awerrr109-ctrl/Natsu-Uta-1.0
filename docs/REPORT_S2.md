@@ -1,67 +1,66 @@
-# Session 2 Report (draft, updated as the queue finishes)
+# Session 2 Report (consolidated; queue still running, pending items marked)
 
-Scope: ~0.8M-param toy models on CPU (2 cores, 985 MB RAM). One seed unless stated; seed replicates are queued.
-Evidence tags: [E] measured or cited, [I] inference, [H] hypothesis. Read IDs refer to `research/notes/evidence_log.md`.
+Scope: CPU sandbox (2 cores, 985 MB RAM). Toy models of ~0.8M parameters on TinyStories bytes, plus synthetic probes (addition, variable chains).
+Evidence tags: [E] measured or cited, [I] inferred, [H] hypothesis. Read IDs refer to `research/notes/evidence_log.md`, failure IDs to `experiments/failures/`.
 
-## 1. Search accounting
-- Harvested (L0): ≈40.0k papers, ≈15.4k repos (arXiv, OpenAlex, Crossref, GitHub; low-star buckets included).
-- L1 scorer v2 (domain-aware): the on-topic paper estimate fell from 9,505 to 8,303. The v1 scorer gave rel=1.0 to vision/speech "transformer" papers.
-- Read at L2 / L3-partial: **35 sources** (R1–R35). This is far below the 10k target for reading depth; harvest breadth meets the target, reading depth does not.
+## 1. Search accounting (principle #28)
+- Harvested (L0): **42,045 papers, 15,597 repos**, 1,339 query×source pairs. A Step-H expansion (P14) was derived from this session's anomalies.
+- Read at L2 / L3-partial: **50 sources** (R1–R50), including GitHub *issues* for the first time (R40 Engram#20, R41 parcae#8/#10) and a 51★ repo (R39).
+- Honest gap: harvesting breadth meets the 10k target; reading depth (50) does not. Four directly relevant 2026 papers (R43–R46) sat unread in the corpus until a targeted check. That check is now a rule before any novelty claim.
 
-## 2. Main results (val bpb, TinyStories bytes, 1.64M training tokens)
-| run | change | bpb | inf. FLOP/tok | note |
-|---|---|---|---|---|
-| E4c | hybrid GDN+attn + MoE | 1.4870 | 1.49e6 | baseline |
-| E4j | + Engram | 1.4278 | 1.58e6 | |
-| E4z | dense, 2× params | 1.4394 | 3.61e6 | KD teacher |
-| **E5a** | E4c + DPT KD from E4z | **1.4522** | 1.49e6 | closes 73% of the gap to the 2× teacher |
-| **E5b** | E4j + DPT KD from E4z | **1.4063** | 1.58e6 | **toy Pareto best**; below teacher, but E4j alone already was |
-| E4g | loop R=3 fixed | 1.4574 | 2.57e6 | R6 1.552 |
-| E4p | loop + lookahead gate + exit training | 1.4607 | 2.57e6 | anytime: R1 1.513 … R6 1.507 |
-| E4m | fixed→uniform curriculum | 1.4701 | | fails pre-registered check |
-| E4n | Poisson R | 1.5029 | | depth-flat, but worse |
-| E4k | loop + Engram | 1.4327 | 2.51e6 | F007: substitutes |
+## 2. What is established (3 seeds or effect ≥ 3 sd)
+| claim | evidence |
+|---|---|
+| Engram vs iso-param MoE: −0.053 bpb (t ≈ 12.8), 4.4× lower seed variance | E4c/E4j ×3 seeds |
+| Seed spread at toy scale is 0.003–0.014 bpb; single-seed deltas < 0.02 are not claims | F008 |
+| Unique depth ≫ looped depth on addition at iso-FLOP (0.484 vs 0.285 acc) | E8e vs E8b (1 seed, effect ≫ noise) |
+| Abacus digit positions help non-looped addition (+0.13 acc) | E8g vs E8a |
 
-BPE check (B1–B3): Engram −0.014 and loop −0.006 survive BPE. Both shrink about 4–5× relative to byte level, and the ranking is preserved.
+## 3. What is suggestive (1 seed, effect 1–3 sd)
+- KD: E5a −0.035 / E5b −0.022 (on top of Engram). A born-again same-size teacher (E5c) gives ~79% of the gain, so at toy scale KD acts as regularisation, not capacity transfer.
+- Loop: 3-seed −0.013 (t ≈ 2) at 1.73× FLOPs. LTI reinjection E4o has the best single-seed R3 (1.4535) but fails its pre-registered R6 test.
 
-## 3. What changed in the design
-1. **Distillation and Engram are partly additive**, unlike loop and Engram. At toy scale, the C4 main line becomes C4 + KD.
-   R35 (distillation scaling laws) predicts the KD gain fades at 9B token budgets (~500 tokens/param), so at 9B KD is used only with an existing teacher and mainly in post-training.
-   Control E5c (born-again, same-size teacher) is queued.
-2. **Loops**:
-   - Exit training (E4p) is the only loop recipe that is both anytime and near-best.
-   - Gate AUC 0.66 is weak; skipping 33% of tokens costs +0.011 bpb.
-   - Loops are still dominated by Engram on gain per FLOP.
-   - On the addition probe (E8), loops did **not** help at iso-param: answer accuracy 0.285 vs 0.297. This contradicts R33. Iso-FLOP control E8e and the H13.7 regulariser runs (E8f, E4t) are queued.
-   - Status: loops stay an optional inference-time feature of C4, not a core component.
-3. **Data (TRAINING_SPEC v0.2)**:
-   - Keep ~25–30% of the web at 9B compute (R32: F_opt ∝ C^0.25).
-   - Ensemble classifiers and rephrase the lower buckets (R30, R26).
-   - Freeze a held-out evaluation suite before selection (R31/R32 Goodhart).
+## 4. Refuted or not supported (pre-registered tests)
+| hypothesis | result | file |
+|---|---|---|
+| N1 memory-before-loop complementarity (bpb) | sub-additive; substitutes | F007 |
+| N2 Engram signal as depth-router feature | no effect | F010 |
+| N3 fixed→uniform loop curriculum | failed | F005 upd. 3 |
+| LTI improves depth extrapolation (R28) | failed (R6 worse) | F005 upd. 5 |
+| R36 "with positions fixed, loops help" | failed at our budget (E8h 0.066) | F012 |
+| H13.7 block-cosine "loop bias without loops" | no LM effect, −0.066 acc on addition | evidence log |
 
-## 3b. Added this turn
-- E6a (varchain, no loop): answer loss 0.542, full-sequence exact match 0.016 (long20: 0.047). Sequence EM is too strict to separate architectures. Per-step accuracy by dependency depth is needed (analysis pending, once E6b–d finish).
-- R36 (Abacus) suggests E8's "no loop gain" comes from a positional bottleneck. Implemented `digit_pos` (cache-exact test). E8g/E8h are queued behind the test gate.
+## 5. Corrections I made to my own earlier claims
+- Session-1 loop gain −0.030 → 3-seed −0.013 (F008).
+- "C4 ≈ 4–6B dense" was unsupported. R42 (joint MoE laws) supports iso-total MoE ≥ dense given more tokens.
+- E5a "beats teacher" was false. Only E5b does, and only because Engram alone already does.
+- Expected Engram gain at 9B is ~0.004 bpb (R17 allocation law), not the 0.053 toy number.
+- "Loops don't pay" is scoped to "toy scale, our recipe, fixed short budgets". R47/R48 report iso-FLOP gains at 0.7–1.7B with per-loop routers and residual scaling. F012 shows that looped models enter algorithmic phase transitions later at fixed steps.
 
-## 3c. Seed noise (F008) — changes the reading of section 2
-Seed spread is 0.003–0.014 bpb. 2-seed means: E4c 1.4803, E4j 1.4262 (Engram −0.054, robust), E4g 1.4633 (loop −0.017, weak).
-Loop-recipe rankings below 0.02 are withdrawn. E4e2 (shared-first KV) matches E4g within noise at 3× less core KV, so it is adopted.
-E4i shows that concat reinjection explodes off the trained depth. E6 varchain (Engram and loop both worse than plain) is weak evidence (phase-transition timing); retest E6L is queued.
+## 6. Bugs found and fixed (all with regression tests)
+- **F009**: the distributed sampler sampled with replacement (~63% coverage) and resume re-seeded the data order. Found by reading parcae#10.
+- **F011**: the Engram v2 VIP key builder used the opposite n-gram order from the model, which invalidated E4s. The rerun E4s2 is queued.
+- **F006 ×2**: my own foreground jobs OOM-killed queue runs. Now prevented by a mechanism (`scripts/fg_guard.sh`), not a written rule.
 
-## 3d. Strongest counter-evidence so far (R40) and a self-found bug (F009)
-- deepseek-ai/Engram issue #20: on a 1.3B **dense** model with 1T tokens, iso-param Engram gives no loss or eval gain. With extra params, loss gains but eval gains only on HellaSwag.
-  Our toy wins are iso-param vs **MoE** (R17's setting) and measured in bpb only. So C4's Engram commitment is now conditional on:
-  (a) the 10M 2×2 {MoE,dense}×{Engram,none} (s2i);
-  (b) a downstream eval at ≥50M.
-- Reading parcae issue #10 (sharding coverage bug) exposed the same bug class in our `train_dist.ShardedTokens` (F009). Fixed with an epoch-exact permutation and exact resume; the unit test gates queue s2j.
-- New probe E9: memory editing (ENGRAFT, R39, a 51★ repo). Can facts be written into the Engram table alone, and what does it cost in collateral bpb and held-out phrasing?
+## 7. Design state (ARCHITECTURE §7, NEXT_GEN)
+- **Main line C4**: 3:1 GDN:attention hybrid + fine-grained MoE + Engram (ρ = 77%, inside R17's optimum), MTP, no trained loop.
+- **Engram stays conditionally.** R40 (an independent 1.3B dense report) found no iso-param gain. R17's win is defined against MoE. Decision rules are in `runbooks/LADDER_50M_GPU.md`.
+- **Loops**: not in the main line. The decisive test is moved to the 50M ladder with the R47 recipe (implemented: `moe_loop_router`, `loop_res_scale`).
+- **Test-time compute**: sampling plus executable verifiers (G2) preferred over loops at present. TTS curves pending.
+- **New candidates from this session**:
+  - H14.7: a factorised Engram table (R44/R45) to free table params for experts. Implemented; E4v/E4w/E4x queued.
+  - N5: delayed memory schedule. E6L/E4u queued.
+  - G1: an editable memory store (E9 queued).
 
-## 4. Pending (queue s2c → s2d → s2e → s2f → post_s2)
-- E6a–c (varchain); seed replicates (E4c/E4j/E4g ×2); E4i, E4e2, E4l.
-- E4q/E4r (N2: Engram gate as depth-router feature); E4s (Engram v2 VIP).
-- E4o (LTI, rerun); E6d, E8c, E8d (2×2 memory × loop on reasoning probes); E8e/E8f/E4t (H13.7).
-- E5c (KD control).
-- post_s2: gate_eval for E4q/E4r; tts_eval (greedy vs maj@N vs oracle@N) for E8a–d.
+## 8. Efficiency, honestly (TARGET_ANALYSIS §5–6)
+- Measured at toy scale: ≈ 2× parameter efficiency and ≈ 2.3× inference- and training-FLOP efficiency vs a 2× dense baseline, all from Engram + MoE, on bpb.
+- Analytic at 9B, C4 vs a Qwen3.5-9B-like layout: 3.1× fewer FLOP/token, 2.7× less KV, 3.2× fewer decode bytes. Quality parity is plausible (R42) but unproven.
+- The "10,000×" framing holds only as a ratio against frontier-model size. No blended multiplier is claimed.
 
-## 5. Failures this session
-F005 updates 2–3 (loop recipe decomposition), F006 recurrence (my smoke test caused an OOM kill of E4o; binding rule added), F007 (N1 refuted on bpb).
+## 9. Pending (in queue order)
+1. s2h: E4l, E5a seed 1, E6L ×4 + E6Lc ×2 (H14.1/N5), E4u.
+2. post_s2: gate AUC (N2), TTS curves (E8a–d), downstream MC evals (ds_eval), route_diag (R47 expert collapse), L1 triage.
+3. s2l: tests, E4v/E4w/E4x (H14.7), E4s2 (F011 rerun), E8i (Engram interference control), E4y/E4y2 (R47 recipe).
+4. s2i: 10M 2×2 {MoE, dense} × {Engram, none} (R40 test at 10M).
+5. s2j: tests incl. torchrun CPU smoke, E9 memory editing + collateral damage.
+6. GPU required: the 50M ladder per runbook (~27 GPU-hours), then 100M → 1B → 9B.
