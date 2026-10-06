@@ -1,4 +1,5 @@
-"""Build a held-out TinyStories cloze MC set (downstream check beyond bpb; R31/R40 motivated).
+"""NOTE: after building, items whose context prefix (80 chars) occurs in ts_train.txt are removed (13% contaminated; TinyStories openings repeat).
+Build a held-out TinyStories cloze MC set (downstream check beyond bpb; R31/R40 motivated).
 Item: context = first k sentences of a validation story; choices = the true next sentence + 3 sentences from other stories (same length band).
 Uses only the validation split (never trained on). Also emits a 'name-consistency' subset where the true continuation reuses a character
 name from the context and distractors use a different name, which needs in-context retrieval (cf. E6/H14.1)."""
