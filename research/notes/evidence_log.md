@@ -315,3 +315,14 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   and ~3× smaller than our BPE-4k toy gain (0.014 bpb)**. The gain shrinks with tokenizer granularity and scale, as R23 predicts (log-linear in effective input vocab).
   Toy numbers must not be extrapolated. A ~0.004 bpb gain at 9B is only worth 1.6B params because R17 shows it converts to +3–5 points on MMLU/BBH. (3) R40 (dense 1.3B, no iso-param gain) is consistent with R17: Engram's iso-param win is defined
   against MoE, and R17 never claims an iso-param win against dense. The 10M 2×2 tests exactly this.
+
+### MoE vs dense at iso-STORED params (refutation check on TARGET_ANALYSIS §6 "C4 ≈ 4–6B dense")
+- **[R42] Ludziejewski et al., "Joint MoE Scaling Laws: MoE Can Be Memory Efficient" (ICML 2025, arXiv:2502.05172)** — L3-partial (§4).
+  [E] 280+ runs up to 2.7B active / 5B total. **Total-parameter-matched MoE beats dense at the same training compute** (validated at 1.1B total, E=2,4),
+  even when the dense model is over-trained. Rule of thumb: at fixed total params, an MoE with **E ≤ 8** beats compute-optimal dense if trained on E× more tokens.
+  More experts mean a higher optimal tokens/param ratio and a lower LR (Finding 4: LR ∝ E^−0.25). Diminishing returns at very large E.
+  → [I] **My §6 projection was too pessimistic in one direction and unsupported in another.** R42 supports MoE ≥ dense at iso-total for small E (≤8)
+  *given more tokens*. C4 uses 48 fine-grained experts, outside R42's validated E range (their E counts full-size experts; fine-grained granularity is
+  Krajewski et al. 2402.07871, which finds the MoE–dense gap widens with scale). So "C4 ≥ C0 at iso-stored params, given enough tokens" is **supported [weak E]**,
+  not "C4 ≈ 4–6B dense". Revised: quality parity with C0 at 9B stored is plausible if C4 trains on ≥ C0's token budget (cheap, since C4 is 3.1× cheaper per token).
+  Action: LR scaling `lr ∝ E^-0.25` added to TRAINING_SPEC; TARGET_ANALYSIS §6 corrected.

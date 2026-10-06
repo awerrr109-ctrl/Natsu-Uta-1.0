@@ -22,6 +22,7 @@ Status: specification for the 1B and 9B stages; toy-stage parts are implemented 
 - Schedule: WSD with 1−sqrt cooldown, 20% decay [impl]. WSD lets stable-phase checkpoints be branched into multiple cooldowns, which saves research compute.
 - Hparam transfer: width/depth µP-style transfer across the toy→1B ladder [spec]; loops count as depth for residual scaling (output projections init std / sqrt(2·n_eff)) [impl].
 - MoE balancing: aux-loss-free bias update (DeepSeek-V3) [impl `MoE.update_balance`].
+- MoE learning rate: scale `lr ∝ E^-0.25` relative to the dense-tuned LR (R42 Finding 4); MoE wants a higher tokens/param ratio (R42 Finding 1), so the 9B token budget is set at ≥ C0's, not Chinchilla [spec].
 - No truncated BPTT through loops ([E] R2: degrades φ).
 
 ## 3. Data (information density first)

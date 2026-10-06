@@ -90,8 +90,10 @@ ratio against frontier models' size and remains [I]/unknown.
 - [E analytic] C4 is ≈ 3.1× cheaper per token and needs 2.7× less KV than a C0 that matches Qwen3.5-9B in layout.
 - [unknown] Quality. The only evidence for "C4 ≥ C0 at 9B" is indirect:
   - R17: Engram + MoE beats MoE at iso-param, and MoE beats dense at iso-active.
-  - At iso-**stored** params, MoE with 2.6B active vs dense with 9B active is not guaranteed to win. Typical fine-grained-MoE results put a ~3× sparse model near a dense model of ~0.4–0.6× its total size [I, to verify].
-  - So the honest projection is **C4 ≈ quality of a 4–6B dense model at the cost of a 2.6B one, and with 9B stored**. That is a cost win, not a quality win over Qwen3.5-9B.
+  - At iso-**stored** params, R42 (Joint MoE scaling laws) finds total-param-matched MoE beats dense at equal training compute (validated at 1.1B, E ≤ 8), provided the MoE sees more tokens.
+    Krajewski et al. (fine-grained MoE) find the gap widens with scale. (My earlier "C4 ≈ 4–6B dense" guess is withdrawn: it was unsupported.)
+  - So the projection is **C4 ≈ C0 quality at 9B stored if trained on ≥ C0's tokens, at 1/3 the per-token cost** [weak E: E=48 fine-grained is outside R42's validated range].
+    This is a cost win plus plausible quality parity, not a demonstrated quality win over Qwen3.5-9B.
 - [I] To **beat** Qwen3.5-9B quality at 9B stored, C4 needs the levers that are not parameter-bound: KD from a stronger teacher (R25, R35: helps with a sunk-cost teacher),
   data (R30–R32), RL post-training, and test-time compute with verifiers (R27: 100–1000× FLOP-efficiency claims vs much larger models on verifiable domains).
 - Decision implication: we keep C4 for its cost axis and **re-open the stored-vs-active trade-off** in the 1B ladder stage. A variant C4-dense-heavier (fewer experts, larger active) is a required ladder comparison, recorded as next experiment X1.
