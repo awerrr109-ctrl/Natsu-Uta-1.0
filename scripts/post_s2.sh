@@ -10,7 +10,7 @@ for ck in E4q_loop3_moe_engram_lookahead_memgate E4r_loop3_moe_engram_lookahead_
   echo "=== gate_eval $ck $(date)" >> $L
   [ -f ../checkpoints/$ck.pt ] && python3 -m natsu.gate_eval --ckpt ../checkpoints/$ck.pt >> $L 2>&1
 done
-for ck in E8a_add_moe_noloop E8b_add_loop3fixed_moe E8c_add_moe_engram E8d_add_loop3fixed_moe_engram; do
+for ck in E8a_add_moe_noloop E8b_add_loop3fixed_moe E8e_add_moe_core6 E8g_add_moe_abacus E8c_add_moe_engram E8d_add_loop3fixed_moe_engram; do
   echo "=== tts_eval $ck $(date)" >> $L
   [ -f ../checkpoints/$ck.pt ] && python3 -m natsu.tts_eval --ckpt ../checkpoints/$ck.pt --n_problems 64 --Ns 1,4,16 >> $L 2>&1
 done

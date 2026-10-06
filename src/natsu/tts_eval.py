@@ -59,6 +59,15 @@ def main():
             fl = N * fpt * (probs[0][0].shape[1] + a.digits + 2)
             res["curves"][f"maj@{N}_R{R}"] = {"acc": maj / len(probs), "flops_per_problem": fl}
             res["curves"][f"oracle@{N}_R{R}"] = {"acc": orc / len(probs), "flops_per_problem": fl}
+        # adaptive-N (INFERENCE_SPEC v0.2 / R52): rounds of 4, stop at vote margin 2, cap 16 -> accuracy vs mean samples used
+        from natsu.generate import adaptive_vote
+        ok = used = 0
+        for x, y in probs:
+            a_, n_, _ = adaptive_vote(lambda k: [parse(s_) for s_ in sample_n(m, x, k, a.digits + 2, temperature=0.7, top_k=10, n_loops=R)],
+                                      round_size=4, max_n=16, margin=2)
+            ok += a_ == y; used += n_
+        res["curves"][f"adaptive_R{R}"] = {"acc": ok / len(probs), "mean_samples": used / len(probs),
+                                           "flops_per_problem": used / len(probs) * fpt * (probs[0][0].shape[1] + a.digits + 2)}
         print(json.dumps({k: v for k, v in res["curves"].items() if k.endswith(f"R{R}")}), flush=True)
     os.makedirs(os.path.join(ROOT, "experiments", "results", name), exist_ok=True)
     json.dump(res, open(os.path.join(ROOT, "experiments", "results", name, "tts.json"), "w"), indent=1)
