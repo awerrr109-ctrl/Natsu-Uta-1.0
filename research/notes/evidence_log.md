@@ -307,3 +307,10 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   the depth decider at this scale. The pre-registered AUC comparison (gate_eval) runs post-queue; unless it shows ≥ +0.03 AUC, N2 is refuted.
 - [E own] **Loop + Engram, even with exit training, does not beat Engram alone**: best R3 1.4223 vs E4j 1.4262 (Δ −0.004, inside noise) at 1.6× FLOPs;
   any gated (cheaper) setting is *worse* than E4j at 1.06×. Confirms F007 with a stronger loop recipe. Exit training makes R1 usable (1.467 vs E4k's 1.622).
+- **R17 re-read (L3-partial, §3 allocation law + Table 1)**: [E] U-shaped loss vs allocation ratio ρ (MoE share of sparse params). Optimum **ρ ≈ 75–80%**, stable
+  across 2e20 and 6e20 FLOPs. Gain at the 10B regime: **Δ = 0.0139 nats** (1.7248 → 1.7109). Engram-27B vs MoE-27B at 262B tokens: Pile loss 1.960 → 1.950 (−0.010),
+  MMLU +3.0, CMMLU +4.0, BBH +5.0. Dense-4B (same activated params) is far behind both (Pile 2.091), so **the comparison that matters is vs MoE, not vs dense.**
+  → [I] (1) Natsu-9B C4 puts 1.611B of 6.99B sparse params in the table → **ρ = 77%, inside R17's optimum.** (2) The expected 9B gain is ~0.01–0.014 nats
+  (≈ 0.015–0.02 bits per token), **4–5× smaller than our byte-level toy gain** (0.053 bpb ≈ 0.037 nats/byte). That matches our BPE result (−0.014 bpb).
+  The toy byte-level number must not be extrapolated. (3) R40 (dense 1.3B, no iso-param gain) is consistent with R17: Engram's iso-param win is defined
+  against MoE, and R17 never claims an iso-param win against dense. The 10M 2×2 tests exactly this.
