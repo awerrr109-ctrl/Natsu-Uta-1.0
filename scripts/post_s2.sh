@@ -14,4 +14,5 @@ for ck in E8a_add_moe_noloop E8b_add_loop3fixed_moe E8c_add_moe_engram E8d_add_l
   echo "=== tts_eval $ck $(date)" >> $L
   [ -f ../checkpoints/$ck.pt ] && python3 -m natsu.tts_eval --ckpt ../checkpoints/$ck.pt --n_problems 64 --Ns 1,4,16 >> $L 2>&1
 done
+cd .. && nice -n 19 python3 research/analyze.py >> experiments/post_s2.log 2>&1; cd src
 echo "=== DONE $(date)" >> $L
