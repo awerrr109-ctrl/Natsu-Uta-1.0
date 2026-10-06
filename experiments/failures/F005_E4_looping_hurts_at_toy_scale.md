@@ -84,3 +84,15 @@
 - E4i (fixed R + identity-init concat reinjection): R3 1.4843, but R1 3.08 and R6 2.54. Unconstrained reinjection is unstable off the trained depth.
   The pre-registered LTI test (E4o) is still pending (requeued).
 - **Lesson (methodological, also see F008)**: I ranked loop recipes at 0.003–0.01 resolution on one seed. Only differences ≥ ~0.02 (≥1.5× the observed seed spread) are claims from now on.
+
+## UPDATE 5 (session 2) — E4o: Parcae-style LTI reinjection (pre-registered R28/R20 test)
+| run | R1 | R2 | R3 | R4 | R6 | R6−R3 |
+|---|---|---|---|---|---|---|
+| E4g no reinjection (3-seed mean) | 1.683 | 1.495 | 1.4665 | 1.4801 | 1.5508 | +0.084 |
+| E4i concat identity-init | 3.083 | 1.613 | 1.4843 | 1.583 | 2.536 | +1.05 |
+| **E4o LTI (Ā=exp(−dt·exp(logA)), B init 0)** | 1.718 | 1.487 | **1.4535** | 1.4715 | 1.5726 | +0.119 |
+- **Pre-registered prediction (R28 notes): "LTI degrades less at R=6 than E4g". FAILED**: E4o's R6−R3 gap (+0.119) is larger than E4g's (+0.084).
+  LTI does fix the *explosion* of naive concat injection (E4i +1.05 → +0.119), so it is the right injection form if any is used.
+- R3 1.4535 is the best single-seed loop number, 0.013 below the E4g 3-seed mean, i.e. ~1.6 sd. One seed, so not a claim.
+- [I] Depth extrapolation at toy scale is limited by training at a fixed R=3 (a single iteration count), not by injection stability. R28's fixed-point
+  argument applies to models trained toward a fixed point (many iterations or a fixed-point objective), which we do not do.

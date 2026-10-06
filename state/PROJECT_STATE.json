@@ -76,7 +76,8 @@
   "E6_varchain": "no-loop 0.542 < Engram 0.917 ~ loop 0.914 answer loss, but phase-transition timing, weak; E6L retest queued",
   "H13.3_engram_toy": "3 seeds: -0.053 bpb (t=12.8), sd 0.0070 -> 0.0016",
   "H1.1_loop_toy_3seed": "E4g R3 mean 1.4665 vs E4c 1.4792: -0.013 (t=2.0) at 1.73x FLOPs; marginal",
-  "R40_engram_dense_1p3B": "independent report: no iso-param gain on 1.3B dense (1T tok); C4 Engram commitment conditional on 10M 2x2 + downstream eval"
+  "R40_engram_dense_1p3B": "independent report: no iso-param gain on 1.3B dense (1T tok); C4 Engram commitment conditional on 10M 2x2 + downstream eval",
+  "H11_LTI_reinject_E4o": "R3 1.4535 (1 seed, best loop), but R6 worse than no-inj (pre-reg failed); fixes concat explosion"
  },
  "rejected_hypotheses": {
   "0": {

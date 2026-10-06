@@ -1,1 +1,3 @@
 === E4o_loop3_moe_fixed_lti Tue Oct  6 08:51:54 UTC 2026
+FINAL {"1": {"main": {"loss": 1.1908331513404846, "ppl": 3.2898209846634057, "bpb": 1.7180090819650937}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0307338337103527, "ppl": 2.8031221056216813, "bpb": 1.4870345903703952}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.0075211723645527, "ppl": 2.738803571670812, "bpb": 1.4535457989609748}, "fwd_flops_per_token": 2572288
+=== E6d_varchain_loop3fixed_moe_engram Tue Oct  6 09:07:34 UTC 2026
