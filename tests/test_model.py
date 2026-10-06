@@ -111,3 +111,21 @@ def test_digit_pos_cache():
 
 if __name__ == "__main__":
     test_digit_pos_cache(); print("ok digit_pos")
+
+def test_vip_key_order_matches_builder():
+    """F011 regression: keys produced by scripts/build_vip.py must equal Engram.ngram_key on the model's (newest-first) window."""
+    import numpy as np
+    from natsu.model import Engram
+    toks = np.array([5, 9, 2, 7, 7, 3], dtype=np.int64)
+    a = toks + 1
+    for n in (2, 3):
+        key = np.zeros(len(a) - n + 1, dtype=np.int64)
+        for j in range(n):
+            key = key * (1 << 20) + a[n - 1 - j: len(a) - j]
+        full = torch.tensor(toks)[None]
+        L = len(toks) - n + 1
+        win = torch.stack([full[:, n - 1 - j: n - 1 - j + L] for j in range(n)], -1)   # same slicing as Engram.vip_rows with maxo=n
+        assert Engram.ngram_key(win)[0].tolist() == key.tolist(), n
+
+if __name__ == "__main__":
+    test_vip_key_order_matches_builder(); print("ok vip key order")

@@ -326,3 +326,6 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   Krajewski et al. 2402.07871, which finds the MoE–dense gap widens with scale). So "C4 ≥ C0 at iso-stored params, given enough tokens" is **supported [weak E]**,
   not "C4 ≈ 4–6B dense". Revised: quality parity with C0 at 9B stored is plausible if C4 trains on ≥ C0's token budget (cheap, since C4 is 3.1× cheaper per token).
   Action: LR scaling `lr ∝ E^-0.25` added to TRAINING_SPEC; TARGET_ANALYSIS §6 corrected.
+
+- **E4s (Engram v2 VIP rows)**: 1.4337 vs E4j 1.4262 → worse, but **invalid**: a key-order bug in the VIP builder misrouted most VIP hits (F011).
+  Rerun E4s2 with fixed keys (true VIP hit rate on validation: 93% of 2-grams, 55% of 3-grams) is queued.
