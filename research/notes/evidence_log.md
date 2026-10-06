@@ -458,3 +458,13 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   (3) The Engram gate injects noise for random variable tokens, i.e. hash rows keyed on random values carry no signal and interfere.
 - **Design impact (serious)**: the C4 core component may impair in-context learning at small scale. R17 reports RULER VT 77 → 89 at 27B, so the effect may
   reverse with scale or depend on training stage. **This makes N5 (delayed memory, E6Lc) and the 50M-ladder downstream/ICL evals decisive** for keeping Engram.
+
+### P15 knowledge channel — first reads
+- **[R55] "To Memorize or to Retrieve: Scaling the Interaction Between Pretraining and Retrieval" (arXiv:2604.00715)** — L2. [E] OLMo-2-based LMs, 30M–3B,
+  up to 100B DCLM tokens, varying datastore size and source. **Retrieval gains are front-loaded: a median 91% of the largest improvement comes from a datastore of
+  ~1 retrieval token per model parameter.** Small models gain more in gold-answer perplexity; larger, more pretrained models gain more in *accuracy*.
+  Retrieval from already-seen data preserves most of the gain. Conclusion: explicitly partition data into "internalise" vs "externally access".
+  → [I] For Natsu-9B, a datastore of ~9B tokens already captures most of the retrieval benefit, which is cheap (≈ 18 GB of text + an index). This is far smaller
+  than the frontier assumption of trillion-token datastores. Combined with Engram's editable table (G1) and R39's phrasing locality, the knowledge channel
+  design becomes: **parametric (weights) for skills, Engram table for frequent local patterns, retrieval datastore (~1 tok/param) for long-tail facts**.
+  The "partition data between internalisation and external access" principle maps onto C4's three stores. Added to NEXT_GEN G1.

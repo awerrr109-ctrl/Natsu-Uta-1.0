@@ -25,6 +25,11 @@ Tags: [E] measured/cited, [I] inferred, [H] hypothesis.
 - **Prior art check (R43–R46)**: context-dependent read-out exists (MoME, FactorEngram); factorised tables (FactorEngram, TN-gram) cut table size several-fold at equal quality. **H14.7**: a factorised table in C4 could free ~1B of the 1.6B table params for experts.
 - **Next-gen fix [H, partly novel]**: a *content-addressed* path (learned keys) next to the exact n-gram path, evaluated on paraphrase robustness of written facts. That evaluation is absent in R43–R46. Add a second Engram head addressed by a learned product-key over a pooled context embedding (PKM-style, R7/R15) next to the exact-n-gram path. Exact path = cheap, prefetchable; semantic path = phrasing-robust. Falsifier: held-out-phrasing acc in E9 does not improve.
 
+### G1b. Three-store knowledge partition (from R55)
+- weights: skills and frequent knowledge; Engram table: frequent local patterns, editable overlay; retrieval datastore: long-tail facts.
+- R55: ~1 retrieval token per parameter captures a median 91% of the retrieval gain, so a ~9B-token datastore (~18 GB) suffices for a 9B model.
+- Open question: which documents go to pretraining vs datastore (R55 suggests explicit partitioning). Test at the 50M ladder: pretrain on 50% and retrieve over the other 50%, vs pretrain on 100%.
+
 ### G2. Verifier-coupled test-time compute instead of trained loops (addresses B2)
 - **Evidence**:
   - Loops at toy scale: −0.013 bpb (t ≈ 2.0, 3 seeds) at 1.73× FLOPs; substitutes with Engram (F007, F010); no gain on addition (E8b).
