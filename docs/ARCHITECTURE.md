@@ -102,7 +102,7 @@ part individually (R4, R5, R6, R7, MELT) but no work combining looped-MoE with m
 |---|---|---|
 | hybrid GDN+attn | keep | −0.067 bpb vs attention-only (E3) |
 | fine-grained MoE + shared expert, aux-free bias | keep | E4c; analytic 3.1× fewer FLOPs than C0 at 9B |
-| Engram (hashed 2/3-gram, gated, conv) | keep, **with a delayed-memory schedule under test (H14.1)** | −0.054 bpb, 2 seeds; survives BPE (−0.014); possible harm to in-context retrieval (E6, weak) |
+| Engram (hashed 2/3-gram, gated, conv) | keep **conditionally**: independent 1.3B dense report found no iso-param gain (R40); 10M 2×2 {MoE,dense}×{Engram,none} queued; downstream eval at ≥50M required before committing 1.6B params; delayed-memory schedule under test (H14.1) | −0.054 bpb, 2 seeds; survives BPE (−0.014); possible harm to in-context retrieval (E6, weak) |
 | Engram v2 VIP rows | under test (E4s) | R24 failure mode (1) |
 | looped core | **demoted to optional inference-time mode** | 2-seed gain −0.017 at 1.73× FLOPs; substitutes with Engram (F007); no gain on addition (E8b); concat reinjection unstable off-R (E4i) |
 | shared-first KV across loops | adopted for any loop variant | E4e2: within noise, 3× less core KV |

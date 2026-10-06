@@ -14,3 +14,22 @@ def test_harness_smoke():
 
 if __name__ == "__main__":
     test_harness_smoke(); print("ok")
+
+def test_sharded_tokens_epoch_exact():
+    import numpy as np, tempfile, os
+    from natsu.train_dist import ShardedTokens
+    d = tempfile.mkdtemp(); p = os.path.join(d, "t.bin")
+    np.arange(10 * 9 * 4 + 1, dtype=np.uint16).tofile(p)          # 40 windows of seq+1=9 (+1 token)
+    W, B = 4, 2
+    shards = [ShardedTokens(p, 8, B, r, W, seed=3) for r in range(W)]
+    seen = []
+    for _ in range(len(shards[0].mine) // B):
+        for s in shards:
+            x, _ = s.get(); seen += [int(v) // 9 for v in x[:, 0]]
+    assert len(seen) == len(set(seen)) == 40, (len(seen), len(set(seen)))   # every window exactly once per epoch, no overlap
+    s = shards[1]; st = s.state(); a = s.get()[0]
+    t = ShardedTokens(p, 8, B, 1, W, seed=3); t.load_state(st); b = t.get()[0]
+    assert torch.equal(a, b)                                           # exact resume
+
+if __name__ == "__main__":
+    test_sharded_tokens_epoch_exact(); print("ok sharded epoch-exact")

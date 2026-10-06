@@ -277,3 +277,20 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   [H] **E9 probe (queued s2j)**: write 64 invented facts into the trained E4j by (a) table-only, (b) full fine-tune, (c) FFN/MoE-only.
   Measure train-phrasing acc, **held-out-phrasing acc** (R39's failure mode), and collateral bpb on TinyStories. Prediction:
   (a) has the lowest collateral damage but the worst held-out phrasing; (b) the opposite.
+
+### Issues/PRs as evidence (principle #4) — first pass over key repos' issue trackers
+- **[R40] deepseek-ai/Engram issue #20 (8 comments)** — L2. Independent practitioner report. Llama-2-style **1.3B dense**, Engram at layers 2 and 10, 32k rows/layer,
+  RedPajama 1T tokens, 250k steps. **(a) iso-param (FFN shrunk to keep 1.3B): no loss gain and no eval gain; (b) Engram added on top (more params):
+  loss gain but eval gain only on HellaSwag.** Earlier at 30k steps: lower loss but *worse* PIQA/SIQA/ARC-e/HellaSwag.
+  → [E, refuting at 1.3B dense, single uncontrolled report] This is the strongest counter-evidence to C4's core component found so far. Differences from
+  R17 and from us: dense FFN (R17's iso-param win is vs MoE), only 32k rows/layer (≈ 2×32k×d params, small), layer placement, unknown gate/conv details.
+  Our toy uses MoE and is iso-param vs MoE, matching R17's setting, not the issue's. [I] **The Engram win may be conditional on an MoE backbone and on
+  table size (R17's U-shaped sparsity allocation law).** Also, the "lower loss but worse evals" pattern matches R31 (data-quality illusion) in spirit:
+  bpb is not capability.
+  Consequences: (1) the 10M stage (s2i) compares C4 vs no-Engram at iso-param *with MoE*, which is the right control. A dense control (L10c) is added.
+  (2) A downstream eval at ≥ 50M is required before committing 1.6B of the 9B budget to the table. (3) Our toy bpb wins must not be reported as capability wins.
+- **[R41] sandyresearch/parcae issues #4, #8, #10** — L2. #4 "conclusions questionable" (micro-experiments of a few dozen steps; the author answers that
+  §5.1 is 1.3B / 100B tokens and the micro runs stop at divergence). **#8: 66% of training tokens were padding; #10: ~36% of tokens never seen, ~36% seen
+  twice (per-rank shuffle with different seeds).** Both closed as fixed. [E] Parcae's published numbers were produced with a data pipeline that wasted
+  ~2/3 of compute on padding and ~1/3 on duplicates (fixed later; whether the paper's numbers were re-run is unknown). → Treat Parcae's absolute
+  scaling-law constants as [weak E]. #10 led directly to F009 in our own code.

@@ -48,6 +48,14 @@ Seed spread is 0.003–0.014 bpb. 2-seed means: E4c 1.4803, E4j 1.4262 (Engram �
 Loop-recipe rankings below 0.02 are withdrawn. E4e2 (shared-first KV) matches E4g within noise at 3× less core KV, so it is adopted.
 E4i shows that concat reinjection explodes off the trained depth. E6 varchain (Engram and loop both worse than plain) is weak evidence (phase-transition timing); retest E6L is queued.
 
+## 3d. Strongest counter-evidence so far (R40) and a self-found bug (F009)
+- deepseek-ai/Engram issue #20: on a 1.3B **dense** model with 1T tokens, iso-param Engram gives no loss or eval gain. With extra params, loss gains but eval gains only on HellaSwag.
+  Our toy wins are iso-param vs **MoE** (R17's setting) and measured in bpb only. So C4's Engram commitment is now conditional on:
+  (a) the 10M 2×2 {MoE,dense}×{Engram,none} (s2i);
+  (b) a downstream eval at ≥50M.
+- Reading parcae issue #10 (sharding coverage bug) exposed the same bug class in our `train_dist.ShardedTokens` (F009). Fixed with an epoch-exact permutation and exact resume; the unit test gates queue s2j.
+- New probe E9: memory editing (ENGRAFT, R39, a 51★ repo). Can facts be written into the Engram table alone, and what does it cost in collateral bpb and held-out phrasing?
+
 ## 4. Pending (queue s2c → s2d → s2e → s2f → post_s2)
 - E6a–c (varchain); seed replicates (E4c/E4j/E4g ×2); E4i, E4e2, E4l.
 - E4q/E4r (N2: Engram gate as depth-router feature); E4s (Engram v2 VIP).

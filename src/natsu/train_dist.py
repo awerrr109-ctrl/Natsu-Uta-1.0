@@ -32,16 +32,39 @@ def setup(cpu):
 
 
 class ShardedTokens:
-    """Each rank reads disjoint deterministic windows from a uint16/uint32 memmap (no RAM copy of the corpus)."""
+    """Epoch-exact sharded sampler over a uint16/uint32 token memmap (no RAM copy of the corpus).
+
+    The corpus is cut into non-overlapping windows of seq+1 tokens. Each epoch, ONE permutation (seeded by seed+epoch, identical on
+    every rank) is drawn, and rank r takes positions r, r+world, ... of it. So within an epoch every window is read exactly once
+    across all ranks, and ranks never overlap. (The previous version sampled random offsets with replacement per rank: ~63% unique
+    coverage per epoch, the same failure class as sandyresearch/parcae issue #10. Fixed after reading it; see F009.)
+    State (epoch, cursor) is saved/restored for exact resume."""
     def __init__(self, path, seq, batch, rank, world, seed=0, dtype=np.uint16):
         self.d = np.memmap(path, dtype=dtype, mode="r")
-        self.seq, self.batch, self.rank, self.world = seq, batch, rank, world
-        self.rng = np.random.default_rng(seed * 1000 + rank)
+        self.seq, self.batch, self.rank, self.world, self.seed = seq, batch, rank, world, seed
+        self.n_win = (len(self.d) - 1) // (seq + 1)
+        self.epoch, self.cursor = 0, 0
+        self._perm()
+
+    def _perm(self):
+        p = np.random.default_rng(self.seed + 1_000_003 * self.epoch).permutation(self.n_win)
+        self.mine = p[self.rank::self.world]
+        usable = (len(self.mine) // self.batch) * self.batch     # drop the ragged tail so all ranks take the same number of steps
+        self.mine = self.mine[:usable]
 
     def get(self):
-        ix = self.rng.integers(0, len(self.d) - self.seq - 1, self.batch)
+        if self.cursor + self.batch > len(self.mine):
+            self.epoch += 1; self.cursor = 0; self._perm()
+        ix = self.mine[self.cursor:self.cursor + self.batch] * (self.seq + 1)
+        self.cursor += self.batch
         x = torch.from_numpy(np.stack([self.d[i:i + self.seq + 1].astype(np.int64) for i in ix]))
         return x[:, :-1], x[:, 1:]
+
+    def state(self):
+        return {"epoch": self.epoch, "cursor": self.cursor}
+
+    def load_state(self, st):
+        self.epoch, self.cursor = st["epoch"], st["cursor"]; self._perm()
 
 
 def wrap(model, world, dev, cpu):
@@ -96,7 +119,16 @@ def main():
         for o, s in zip(opts, torch.load(os.path.join(a.resume, f"optim_rank{rank}.pt"), map_location=dev)):
             o.load_state_dict(s)
     base = [[g["lr"] for g in o.param_groups] for o in opts]
-    data = ShardedTokens(a.data, a.seq, a.batch, rank, world, seed=start)
+    data = ShardedTokens(a.data, a.seq, a.batch, rank, world, seed=0)
+    if a.resume:   # exact data position (not a re-seed: the old seed=start re-drew the order and repeated/skipped data)
+        dp = os.path.join(a.resume, "data_state.json")
+        if os.path.exists(dp):
+            data.load_state(json.load(open(dp))[str(rank)])
+        else:   # legacy checkpoint: fast-forward by the number of batches already consumed
+            for _ in range(start * a.accum):
+                data.cursor += a.batch
+                if data.cursor + a.batch > len(data.mine):
+                    data.epoch += 1; data.cursor = 0; data._perm()
     meta = {"model": mcfg, "world": world, "mode": mode, "args": vars(a)}
     if rank == 0:
         print(json.dumps({"params": core.param_count(), "mode": mode, "world": world}), flush=True)
@@ -124,6 +156,10 @@ def main():
             print(json.dumps({"step": step, "loss": lt.item(), "tok_s": toks / (time.time() - t0), "lr_f": f}), flush=True)
         if (step + 1) % a.save_every == 0 or step == a.steps - 1:
             save(a.out, step + 1, model, opts, rank, meta)
+            st = [None] * world
+            dist.all_gather_object(st, data.state())
+            if rank == 0:
+                json.dump({str(r): v for r, v in enumerate(st)}, open(os.path.join(a.out, f"step_{step + 1}", "data_state.json"), "w"))
     dist.destroy_process_group()
 
 
