@@ -468,3 +468,15 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   than the frontier assumption of trillion-token datastores. Combined with Engram's editable table (G1) and R39's phrasing locality, the knowledge channel
   design becomes: **parametric (weights) for skills, Engram table for frequent local patterns, retrieval datastore (~1 tok/param) for long-tail facts**.
   The "partition data between internalisation and external access" principle maps onto C4's three stores. Added to NEXT_GEN G1.
+
+### Session 2 — refutation reads triggered by H14.1(a)
+- **[R17b] Engram paper re-read (arXiv:2601.07372 §2–3, primary source)** — L3 for the implementation details. [E] Output `Y = SiLU(Conv1D_dil=maxN(RMSNorm(Ṽ))) + Ṽ`,
+  conv zero-init "to strictly preserve the identity mapping", table Adam lr ×5 and no wd. Suppressing Engram at inference: TriviaQA keeps 29%, reading
+  comprehension keeps 81–93%, so context-grounded tasks live in attention. → [E own] our v1 differs on 4 of 5 items (F013). H14.1(a) is downgraded to "v1-only" until E6Le.
+- **[R56] Bietti et al. 2023, "Birth of a Transformer: A Memory Viewpoint" (arXiv:2306.00802)** — L2. [E] Global bigrams are learned first (FFN as associative memory),
+  and the induction head forms later and more slowly. → [I] An n-gram table is a *faster* global-bigram learner, so it removes the residual loss that drives
+  induction-head formation on mixed tasks. Supports mechanism (1) of H14.1. Predicts that a delay (E6Lc) helps only if the induction head forms during the delay window.
+- **[R57] Singh et al. 2025, "Strategy Coopetition…" (arXiv:2503.05631, ICML)** — L2. [E] ICL and the in-weights hybrid (CIWL) share sub-circuits: ICL cannot emerge
+  quickly on its own and needs CIWL's slow development, yet CIWL later replaces it. → [I] Refutation pressure on N5: a *full* delay of the in-weights channel might
+  also slow ICL, because the cooperative half is removed. Prediction: E6Lc (delayed Engram) ≥ E6La is not guaranteed. A partial-scale ramp
+  (engram_scale 0.1→1) is the variant consistent with coopetition. Will be added as E6Lf if E6Lc and E6Le are both negative.
