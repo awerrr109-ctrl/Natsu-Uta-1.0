@@ -39,6 +39,10 @@ BPE check (B1–B3): Engram −0.014 and loop −0.006 survive BPE. Both shrink 
    - Ensemble classifiers and rephrase the lower buckets (R30, R26).
    - Freeze a held-out evaluation suite before selection (R31/R32 Goodhart).
 
+## 3b. Added this turn
+- E6a (varchain, no loop): answer loss 0.542, full-sequence exact match 0.016 (long20: 0.047). Sequence EM is too strict to separate architectures. Per-step accuracy by dependency depth is needed (analysis pending, once E6b–d finish).
+- R36 (Abacus) suggests E8's "no loop gain" comes from a positional bottleneck. Implemented `digit_pos` (cache-exact test). E8g/E8h are queued behind the test gate.
+
 ## 4. Pending (queue s2c → s2d → s2e → s2f → post_s2)
 - E6a–c (varchain); seed replicates (E4c/E4j/E4g ×2); E4i, E4e2, E4l.
 - E4q/E4r (N2: Engram gate as depth-router feature); E4s (Engram v2 VIP).
