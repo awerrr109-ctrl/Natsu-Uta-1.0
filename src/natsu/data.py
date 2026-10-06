@@ -168,6 +168,21 @@ def gen_varchain_dense(rng, n_vars=8, n_steps=12, mod=10):
     return ids, mask
 
 
+def gen_facts(rng, n_facts=64, seed_world=1234, split="train"):
+    """Invented-world facts (memory-editing probe, ENGRAFT-style). Fixed world (seed_world); each fact = 'The <name> of <place> is <value>.'
+    train: canonical phrasing variants 0-2; test: held-out phrasing 3. Answer span = <value> (+ '.'); everything else unscored."""
+    w = random.Random(seed_world)
+    syl = ["ka", "lo", "mi", "ru", "te", "sa", "no", "vi", "pe", "zu", "ri", "ma"]
+    word = lambda: "".join(w.choice(syl) for _ in range(3))
+    attrs = ["king", "river", "color", "song", "bird"]
+    facts = [(w.choice(attrs), word().capitalize(), word()) for _ in range(n_facts)]
+    a, p, v = facts[rng.randrange(n_facts)]
+    tmpl = [f"The {a} of {p} is ", f"In {p}, the {a} is ", f"Everyone in {p} knows the {a} is ", f"Ask about {p}: its {a} is "]
+    t = tmpl[rng.randrange(3)] if split == "train" else tmpl[3]
+    ids = [BOS] + list(t.encode()); ans = list((v + ".").encode())
+    return ids + ans + [EOS], [0] * len(ids) + [1] * (len(ans) + 1)
+
+
 class SyntheticLoader:
     def __init__(self, task, seq, batch, seed=0, **kw):
         self.task, self.seq, self.batch, self.kw = task, seq, batch, kw
@@ -181,6 +196,8 @@ class SyntheticLoader:
             return gen_mqar(rng, kw.get("n_pairs", 16), kw.get("n_q", 8))
         if self.task == "varchain":
             return gen_varchain_dense(rng, kw.get("n_vars", 8), kw.get("n_steps", 12))
+        if self.task == "facts":
+            return gen_facts(rng, kw.get("n_facts", 64), kw.get("seed_world", 1234), kw.get("split", "train"))
         if self.task == "add":
             return gen_add(rng, rng.randint(kw.get("min_digits", 1), kw.get("digits", 5)))
         raise ValueError(self.task)

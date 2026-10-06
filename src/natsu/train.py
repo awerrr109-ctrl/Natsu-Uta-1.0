@@ -126,6 +126,13 @@ def train(cfg):
     BYTES_PER_TOKEN[0] = dc.get("bytes_per_token", 1.0)
     mc = NatsuConfig(**cfg["model"])
     model = Natsu(mc)
+    if tc.get("init_from"):   # continue from a checkpoint (e.g. memory-editing probe)
+        ck0 = torch.load(os.path.join(ROOT, tc["init_from"]), map_location="cpu")
+        model.load_state_dict(ck0["state_dict"])
+    tr_only = tc.get("train_only")   # list of name substrings; everything else frozen (e.g. ["engram.table"] = memory-only edit)
+    if tr_only:
+        for n_, p_ in model.named_parameters():
+            p_.requires_grad_(any(k in n_ for k in tr_only))
     if mc.engram_vip and dc.get("vip"):
         v = json.load(open(os.path.join(ROOT, dc["vip"])))
         model.engram.load_vip({int(k): x for k, x in v.items()})

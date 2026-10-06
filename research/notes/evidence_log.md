@@ -265,3 +265,15 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   consistent with the toy runs being stopped right around the transition. Absent E6L harm, H14.1 is dropped and the varchain result is a timing artefact.
 - **3-seed result (s2 replicates)**: E4c 1.4870/1.4735/1.4772 (mean 1.4792, sd 0.0070); E4j 1.4278/1.4246/1.4261 (mean 1.4262, sd 0.0016).
   **Engram −0.053 bpb, Welch t ≈ 12.8 (n=3 each).** The strongest result of the project at toy scale. Engram also reduces seed variance by 4.4× (sd 0.0070 → 0.0016) [E own].
+
+### External/editable memory (P7) — low-star repo finding (principle #4)
+- **[R39] fulvian/engraft-ngram (51★, pushed 2026-09-30)** — L2 (README with result files). "ENGRAFT": write facts into an Engram-style n-gram table
+  of a deployed model (Qwen3.8-Flash-Next, 320M-row table) by training **only table rows**, shipped as a removable overlay.
+  [E, their files] 100 invented facts: exact answer 0.841 (base 0.005); collateral mean KL 0.0131 on neutral text; capacity to 300 facts with no ceiling,
+  damage growing sublinearly. **Failure mode: facts fire only when the prompt contains the same n-grams. Other languages/phrasings get the base model's
+  answer exactly.** Composition of two facts mostly fails (4/83 both right).
+  → [I] For Natsu-9B, the Engram table is also an **editable, removable knowledge store** (continual learning without touching weights). This is a
+  9B-specific advantage: knowledge can be updated after training at the cost of a row overlay. The phrasing-locality failure is structural (addresses = exact token n-grams).
+  [H] **E9 probe (queued s2j)**: write 64 invented facts into the trained E4j by (a) table-only, (b) full fine-tune, (c) FFN/MoE-only.
+  Measure train-phrasing acc, **held-out-phrasing acc** (R39's failure mode), and collateral bpb on TinyStories. Prediction:
+  (a) has the lowest collateral damage but the worst held-out phrasing; (b) the opposite.
