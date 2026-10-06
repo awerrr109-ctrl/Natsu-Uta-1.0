@@ -79,7 +79,8 @@
   "R40_engram_dense_1p3B": "independent report: no iso-param gain on 1.3B dense (1T tok); C4 Engram commitment conditional on 10M 2x2 + downstream eval",
   "H11_LTI_reinject_E4o": "R3 1.4535 (1 seed, best loop), but R6 worse than no-inj (pre-reg failed); fixes concat explosion",
   "E8_depth_vs_loop": "iso-FLOP unique depth (E8e 0.484) >> loop (E8b 0.285) >> Engram (E8c 0.242) on addition; 1 seed",
-  "R47_R48_loops_at_scale": "counter-evidence at 0.7-1.7B; toy conclusion scoped; E4y/E4y2 (per-loop routers + res scale) queued; decisive at 50M ladder (runbook)"
+  "R47_R48_loops_at_scale": "counter-evidence at 0.7-1.7B; toy conclusion scoped; E4y/E4y2 (per-loop routers + res scale) queued; decisive at 50M ladder (runbook)",
+  "E5c_born_again": "same-size teacher KD 1.4578: ~79% of KD gain without bigger teacher -> regularisation, not capacity"
  },
  "rejected_hypotheses": {
   "0": {

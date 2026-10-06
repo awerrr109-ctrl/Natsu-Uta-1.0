@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E5c_bornagain_E4c_to_moe",
+  "params": 820744,
+  "params_nonembed": 787464,
+  "flops_per_token_fwd": 1491968.0
+ },
+ "train_flops": 7333321113600.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 580.5025699138641,
+ "peak_rss_mb": 735.6171875,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 1.0104673703511555,
+    "ppl": 2.7468845274419005,
+    "bpb": 1.4577962641857236
+   },
+   "fwd_flops_per_token": 1491968.0
+  }
+ }
+}

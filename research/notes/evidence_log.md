@@ -388,3 +388,13 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   if 3-seed gain stays < 0.02 bpb, loops stay demoted at toy scale and the question moves to the 50M+ ladder (GPU).
 - **H13.7 on LM**: E4t (E4z + block-cos λ=1) **1.4355** vs E4z 1.4394 (single seed each) → −0.004, within seed noise (sd ≈ 0.007). No detectable effect on LM bpb.
   Combined with E8f (−0.066 acc on addition), **H13.7 is rejected** at toy scale.
+- **[R49] "Beyond the Training Horizon" (arXiv:2609.33144)**, **[R50] "Shared Weights, Selected Computations" (arXiv:2609.39892)** — L2. Mechanistic loop studies
+  (length generalisation on polynomial iteration, FSM composition, KG traversal; per-loop computation is selected by the entering hidden state).
+  Both find loop mechanisms degrade at greater depths and errors compound, with limited self-correction. Neither tests iso-FLOP in-distribution accuracy
+  vs unique layers, so they neither confirm nor refute E8e > E8b. Consistent with our E4g/E4o R6 degradation.
+- **E5c born-again control (KD from a same-size teacher E4c, same recipe as E5a)**: **1.4578**. E4c 3-seed mean 1.4792 (sd 0.007); E5a (2× teacher) 1.4522.
+  [E own, 1 seed] **~79% of the KD gain (−0.021 of −0.027 vs the E4c mean) does not need a larger teacher.** Teacher capacity adds only −0.006 (within noise).
+  [I] At toy scale, KD acts mainly as regularisation / label smoothing with sample-specific targets (born-again effect), not capacity transfer.
+  Consistent with R35 (KD helps mostly in the under-trained regime). Consequence: the "≥ 2× teacher" assumption in TRAINING_SPEC is unnecessary at small scale.
+  **A cheap self-distillation round (train → distil into a fresh copy) is a candidate data-efficiency lever** in the data-limited regime, and it costs no
+  larger model. At 9B (data-rich, R35), still expected ≈ 0.

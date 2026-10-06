@@ -1,0 +1,11 @@
+ok
+moe params 345080 dense 215752 flops 1417216.0 1409536.0
+ok moe
+ok shared kv
+ok engram
+ok lti
+ok vip
+ok digit_pos
+ok vip key order
+ok engram factorised
+ok loop router + res scale
