@@ -25,7 +25,7 @@
   "log_every": 100,
   "threads": 2,
   "eval_batches": 12,
-  "save": false,
+  "save": true,
   "distill": {
    "teacher": "checkpoints/E4c_ts_hyb_moe_noloop.pt",
    "w": 0.5,
