@@ -62,3 +62,19 @@
 - Identity init recovers 0.046 bpb (it is a real defect, now fixed). **Uniform-R sampling costs ~0.07 bpb more** and is the dominant cause.
   Uniform R still lacks depth scaling (R2 best, R3 worse). The "anytime tax" (H13.1) is large at toy scale.
 - Remaining isolations queued: E4i (fixed R + identity init), E4m (fixed→uniform curriculum), E4n (Poisson mean R), E4o (Parcae LTI).
+
+## UPDATE 3 (session 2) — curriculum and lookahead gate
+| run | recipe | R1 | R2 | R3 | R4 | R6 | best |
+|---|---|---|---|---|---|---|---|
+| E4g | fixed R=3 | 1.694 | — | **1.4574** | — | 1.552 | 1.4574 |
+| E4m | fixed R=3 for 50%, then U{1..3} | 1.5213 | **1.4701** | 1.4796 | 1.5069 | 1.5887 | 1.4701 (R2) |
+| E4p | fixed R=3 + lookahead gate (TaH2-style, intermediate exits through coda) | 1.5132 | 1.4655 | **1.4607** | 1.4696 | 1.5071 | 1.4607 |
+- **E4m (H13.1 curriculum)**: the anytime tax is reduced but not removed. Best is 1.4701 vs E4g 1.4574 (+0.013), R1 improves massively (1.694→1.521), but
+  depth scaling vanishes again (R2 ≥ R3). Pre-registered "within 0.01 of E4g at R3": **fails** (+0.022 at R3).
+- **E4p**: exit training makes *every* depth usable (R1 1.513, R6 1.507 — the most depth-robust run so far) at a cost of +0.003 at R3 vs E4g. This is the
+  first loop recipe that is both anytime and near-best. Gate quality (gate_eval): **AUC 0.662** for "loop helps by >0.02 nats" (35% of tokens).
+  Skip trade-off: th=0.3 → 33% tokens skip loops, bpb 1.4620 (+0.011 vs full 1.4513 on the gate_eval split) at 0.86× FLOPs (1.49 vs 1.73 rel. to R1);
+  th=0.5 → 81% skip, +0.044 bpb at 0.66×.
+  → gain per FLOP of the gated loop vs no loop (E4c 1.4870 at 1.0×): −0.025 bpb at 1.49× vs Engram −0.059 at 1.06×. **Engram still dominates.**
+- **Lesson**: intermediate-exit training (E4p) is the right way to get anytime loops (better than sampled R). A 0.66 AUC gate is weak:
+  the per-token "loop helps" signal is mostly unpredictable from hidden states at this scale. N2 (E4q vs E4r) tests whether Engram's gate value adds information.
