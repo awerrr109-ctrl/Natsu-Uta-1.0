@@ -258,3 +258,8 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - [H] **H14.1 test + fix, "delayed memory"**: ramp the Engram branch in only after the retrieval circuit forms (`train.engram_delay=[0.4,0.6]`).
   Pre-registered: (a) E6Lb (Engram) < E6La on varchain at 2400 steps confirms the harm; (b) E6Lc (delayed) ≈ E6La confirms the mechanism;
   (c) E4u (delayed, LM) keeps ≥ 70% of Engram's −0.054 bpb, so the fix is cheap. If (a) fails, E6 was a timing artefact and H14.1 is dropped.
+- **Refutation check for H14.1 (R17 re-read, L3-partial on this point)**: Engram-27B reports **Variable Tracking 77.0 → 89.0** and MQ-NIAH 84.2 → 97.0 (RULER),
+  where variable tracking is the closest public analogue of our varchain probe. [E] At 27B and long training, n-gram memory *improves* in-context variable tracking.
+  → [I] If E6L confirms harm at toy scale, the two results are reconciled by **training stage**: early on, memory delays the induction circuit (R37/R38);
+  after the circuit forms, memory frees attention for global context (R17). That predicts a delayed-memory schedule (H14.1 fix) gets both. It is also
+  consistent with the toy runs being stopped right around the transition. Absent E6L harm, H14.1 is dropped and the varchain result is a timing artefact.
