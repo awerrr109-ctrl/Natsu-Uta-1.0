@@ -183,9 +183,9 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   |---|---|---|---|
   | MoE (0.82M) | E4c 1.4870 | E5a **1.4522** | −0.035 |
   | MoE+Engram (0.83M) | E4j 1.4278 | E5b **1.4063** | −0.022 |
-  Teacher E4z (1.62M dense, 2× params) = 1.4394. **Both students beat the teacher**; E5b beats it by 0.033.
+  Teacher E4z (1.62M dense, 2× params) = 1.4394. **Correction: only E5b beats the teacher** (by 0.033); E5a (1.4522) is still 0.013 worse than the teacher, though it closes 73% of the E4c→E4z gap at half the params.
   [I] At 1.6M tokens per run, the student is data-starved, not capacity-starved. Soft targets add information per token, as the "2× data-equivalent" claim
-  in R25 predicts. Student > teacher is consistent with KD-as-regularisation (born-again networks). Engram + KD are **partly additive** (−0.059 then −0.022 more),
+  in R25 predicts. E5b > teacher is explained by Engram + KD stacking (E4j alone is already 1.4278 < teacher 1.4394), so it is not evidence of weak-to-strong KD by itself. Engram + KD are **partly additive** (−0.059 then −0.022 more),
   unlike Engram + loop (F007). Cost: the teacher forward adds ~0.8× student training FLOPs (3.61e6 vs 3·1.49e6 per token), so KD's training-FLOP multiplier
   ≈1.8× for −0.035, and the teacher's own training cost is extra. At inference, KD is free; this is the axis that matters for the 9B deployment target.
   Single seed; seed runs are pending, so deltas ≥0.02 are likely real (B-series noise estimate ~0.003–0.007, to be confirmed).

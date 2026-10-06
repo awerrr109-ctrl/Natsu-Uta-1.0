@@ -69,7 +69,7 @@
   "H13.1_fixed_then_uniform_curriculum": "E4m: anytime tax reduced (R1 1.694->1.521) but best 1.4701 > E4g 1.4574; pre-reg fails",
   "H13.5_lookahead_gate_exit_training": "E4p: most depth-robust loop (R1 1.513..R6 1.507), best 1.4607; gate AUC 0.662; 33% skip costs +0.011 bpb; Engram still dominates gain/FLOP",
   "H13.5b_poisson_R": "E4n: depth-flat (R1 1.542..R6 1.518) but best 1.5029 > no-loop 1.4870",
-  "H5.2_DPT_distill_toy": "E5a 1.4522 (-0.035 vs E4c), E5b 1.4063 (-0.022 vs E4j); both beat teacher E4z 1.4394; Engram+KD partly additive; new toy Pareto best E5b"
+  "H5.2_DPT_distill_toy": "E5a 1.4522 (-0.035 vs E4c; closes 73% of gap to 2x teacher E4z 1.4394), E5b 1.4063 (-0.022 vs E4j); Engram+KD partly additive; new toy Pareto best E5b; R35: gain is under-trained regime"
  },
  "rejected_hypotheses": [
   {
