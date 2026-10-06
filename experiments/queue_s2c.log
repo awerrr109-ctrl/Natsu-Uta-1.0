@@ -43,3 +43,5 @@ FAILED E4l_loop3fixed_moe_selfdistill
 === E4c_ts_hyb_moe_noloop_s2 Tue Oct  6 07:28:53 UTC 2026
 FINAL {"1": {"main": {"loss": 1.0239188075065613, "ppl": 2.7840837023139864, "bpb": 1.4772025858626572}, "fwd_flops_per_token": 1491968.0}}
 === E4j_moe_engram_noloop_s2 Tue Oct  6 07:37:13 UTC 2026
+FINAL {"1": {"main": {"loss": 0.988477865854899, "ppl": 2.6871411685354896, "bpb": 1.426072115097369}, "fwd_flops_per_token": 1582080.0}}
+=== E4g_loop3_moe_fixedR_noinj_s2 Tue Oct  6 07:45:56 UTC 2026

@@ -3,7 +3,7 @@ Train FLOPs include teacher forward + teacher training for KD runs. bpb = seed m
 | run | loops@eval | val bpb | stored params | train FLOPs | inf MFLOP/tok | train tokens | peak RSS MB | wall s | Pareto |
 |---|---|---|---|---|---|---|---|---|---|
 | E5b_distill_E4z_to_moe_engram | 1 | 1.4063 | 825,480 | 3.14e+13 | 1.58 | 1,638,400 | 739 | 770 | **yes** |
-| E4j_moe_engram_noloop (n=2) | 1 | 1.4262 [0.003] | 825,480 | 7.78e+12 | 1.58 | 1,638,400 | 634 | 501 | **yes** |
+| E4j_moe_engram_noloop (n=3) | 1 | 1.4262 [0.003] | 825,480 | 7.78e+12 | 1.58 | 1,638,400 | 634 | 501 | **yes** |
 | E4k_loop3fixed_moe_engram | 3 | 1.4327 | 825,912 | 1.24e+13 | 2.51 | 1,638,400 | 787 | 952 |  |
 | E4z_ts_hyb8_isoflop | 1 | 1.4394 | 1,616,272 | 1.77e+13 | 3.61 | 1,638,400 | 792 | 949 |  |
 | E4k_loop3fixed_moe_engram | 4 | 1.4454 | 825,912 | 1.24e+13 | 2.98 | 1,638,400 | 787 | 952 |  |
@@ -17,8 +17,8 @@ Train FLOPs include teacher forward + teacher training for KD runs. bpb = seed m
 | E4m_loop3_moe_fixed_then_unif | 2 | 1.4701 | 821,176 | 1.22e+13 | 2.03 | 1,638,400 | 798 | 849 | **yes** |
 | E4g_loop3_moe_fixedR_noinj (n=2) | 4 | 1.4774 [0.007] | 821,176 | 1.26e+13 | 3.11 | 1,638,400 | 789 | 891 |  |
 | E4e2_loop3fixed_moe_sharedkv | 4 | 1.4786 | 821,176 | 1.26e+13 | 3.11 | 1,638,400 | 807 | 3043 |  |
+| E4c_ts_hyb_moe_noloop (n=3) | 1 | 1.4792 [0.014] | 820,744 | 7.33e+12 | 1.49 | 1,638,400 | 697 | 484 | **yes** |
 | E4m_loop3_moe_fixed_then_unif | 3 | 1.4796 | 821,176 | 1.22e+13 | 2.57 | 1,638,400 | 798 | 849 |  |
-| E4c_ts_hyb_moe_noloop (n=2) | 1 | 1.4802 [0.014] | 820,744 | 7.33e+12 | 1.49 | 1,638,400 | 697 | 484 | **yes** |
 | E4i_loop3_moe_fixedR_idinj | 3 | 1.4843 | 853,944 | 1.26e+13 | 2.57 | 1,638,400 | 802 | 834 |  |
 | E4e2_loop3fixed_moe_sharedkv | 2 | 1.4905 | 821,176 | 1.26e+13 | 2.03 | 1,638,400 | 807 | 3043 |  |
 | E4g_loop3_moe_fixedR_noinj (n=2) | 2 | 1.4914 [0.013] | 821,176 | 1.26e+13 | 2.03 | 1,638,400 | 789 | 891 |  |

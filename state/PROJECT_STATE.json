@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-06T07:20Z",
+ "updated": "2026-10-06T08:00Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -73,7 +73,8 @@
   "seed_noise": "0.003-0.014 bpb (F008); claims require >=0.02 or >=2 seeds",
   "H13.3_shared_first_kv": "E4e2 R3 1.4620 ~ E4g (in noise) with 3x less core KV -> default for loop variants",
   "H13.4_concat_reinject_fixedR": "E4i R3 1.4843, explodes off-R (R1 3.08, R6 2.54); no-reinject best at fixed R",
-  "E6_varchain": "no-loop 0.542 < Engram 0.917 ~ loop 0.914 answer loss, but phase-transition timing, weak; E6L retest queued"
+  "E6_varchain": "no-loop 0.542 < Engram 0.917 ~ loop 0.914 answer loss, but phase-transition timing, weak; E6L retest queued",
+  "H13.3_engram_toy": "3 seeds: -0.053 bpb (t=12.8), sd 0.0070 -> 0.0016"
  },
  "rejected_hypotheses": [
   {

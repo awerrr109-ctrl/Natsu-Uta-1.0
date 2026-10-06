@@ -263,3 +263,5 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   → [I] If E6L confirms harm at toy scale, the two results are reconciled by **training stage**: early on, memory delays the induction circuit (R37/R38);
   after the circuit forms, memory frees attention for global context (R17). That predicts a delayed-memory schedule (H14.1 fix) gets both. It is also
   consistent with the toy runs being stopped right around the transition. Absent E6L harm, H14.1 is dropped and the varchain result is a timing artefact.
+- **3-seed result (s2 replicates)**: E4c 1.4870/1.4735/1.4772 (mean 1.4792, sd 0.0070); E4j 1.4278/1.4246/1.4261 (mean 1.4262, sd 0.0016).
+  **Engram −0.053 bpb, Welch t ≈ 12.8 (n=3 each).** The strongest result of the project at toy scale. Engram also reduces seed variance by 4.4× (sd 0.0070 → 0.0016) [E own].
