@@ -167,6 +167,7 @@ def train(cfg):
     R = mc.n_loops
     tok_seen, ans_seen, t0, flops = 0, 0, time.time(), 0.0
     accum = tc.get("accum", 1)
+    steps_to = {}
     ed = tc.get("engram_delay", None)   # H14.1: [start_frac, end_frac] linear ramp of the Engram branch 0->1
     for step in range(steps):
         if ed is not None and getattr(model, "engram", None) is not None:
@@ -248,6 +249,13 @@ def train(cfg):
                    "loops": r}
             if step % tc.get("eval_every", 200) == 0 or step == steps - 1:
                 rec["eval"] = evaluate(model, ev_batches)
+                # F012: iso-loss / steps-to-threshold bookkeeping (first eval step reaching each acc or loss threshold)
+                for th in tc.get("acc_thresholds", [0.1, 0.2, 0.3, 0.4]):
+                    if "acc" in rec["eval"] and rec["eval"]["acc"] >= th and f"acc>={th}" not in steps_to:
+                        steps_to[f"acc>={th}"] = {"step": step, "train_flops": flops}
+                for th in tc.get("loss_thresholds", []):
+                    if rec["eval"]["loss"] <= th and f"loss<={th}" not in steps_to:
+                        steps_to[f"loss<={th}"] = {"step": step, "train_flops": flops}
                 for name, b in extra_eval.items():
                     rec[f"eval_{name}"] = evaluate(model, b)
             if not math.isfinite(rec["loss"]):
@@ -258,7 +266,7 @@ def train(cfg):
                 break
     # final multi-depth evaluation (test-time compute scaling curve)
     final = {"info": {k: v for k, v in info.items() if k != "config"}, "train_flops": flops, "tokens": tok_seen, "scored_tokens": ans_seen,
-             "wall_s": time.time() - t0, "peak_rss_mb": peak_rss_mb()}
+             "wall_s": time.time() - t0, "peak_rss_mb": peak_rss_mb(), "steps_to": steps_to}
     loops_eval = sorted(set([1, R] + list(tc.get("eval_loops", []))))
     final["by_loops"] = {}
     for rr in loops_eval:
