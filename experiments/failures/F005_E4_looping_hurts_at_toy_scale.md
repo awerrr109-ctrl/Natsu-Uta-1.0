@@ -78,3 +78,9 @@
   → gain per FLOP of the gated loop vs no loop (E4c 1.4870 at 1.0×): −0.025 bpb at 1.49× vs Engram −0.059 at 1.06×. **Engram still dominates.**
 - **Lesson**: intermediate-exit training (E4p) is the right way to get anytime loops (better than sampled R). A 0.66 AUC gate is weak:
   the per-token "loop helps" signal is mostly unpredictable from hidden states at this scale. N2 (E4q vs E4r) tests whether Engram's gate value adds information.
+
+## UPDATE 4 (session 2) — seed noise and reinjection
+- Seed spread is 0.003–0.014 bpb. The 2-seed loop gain is **−0.017** (E4c mean 1.4803 → E4g mean 1.4633), not −0.030. E4p/E4e2 vs E4g are within noise.
+- E4i (fixed R + identity-init concat reinjection): R3 1.4843, but R1 3.08 and R6 2.54. Unconstrained reinjection is unstable off the trained depth.
+  The pre-registered LTI test (E4o) is still pending (requeued).
+- **Lesson (methodological, also see F008)**: I ranked loop recipes at 0.003–0.01 resolution on one seed. Only differences ≥ ~0.02 (≥1.5× the observed seed spread) are claims from now on.

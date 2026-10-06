@@ -43,6 +43,11 @@ BPE check (B1–B3): Engram −0.014 and loop −0.006 survive BPE. Both shrink 
 - E6a (varchain, no loop): answer loss 0.542, full-sequence exact match 0.016 (long20: 0.047). Sequence EM is too strict to separate architectures. Per-step accuracy by dependency depth is needed (analysis pending, once E6b–d finish).
 - R36 (Abacus) suggests E8's "no loop gain" comes from a positional bottleneck. Implemented `digit_pos` (cache-exact test). E8g/E8h are queued behind the test gate.
 
+## 3c. Seed noise (F008) — changes the reading of section 2
+Seed spread is 0.003–0.014 bpb. 2-seed means: E4c 1.4803, E4j 1.4262 (Engram −0.054, robust), E4g 1.4633 (loop −0.017, weak).
+Loop-recipe rankings below 0.02 are withdrawn. E4e2 (shared-first KV) matches E4g within noise at 3× less core KV, so it is adopted.
+E4i shows that concat reinjection explodes off the trained depth. E6 varchain (Engram and loop both worse than plain) is weak evidence (phase-transition timing); retest E6L is queued.
+
 ## 4. Pending (queue s2c → s2d → s2e → s2f → post_s2)
 - E6a–c (varchain); seed replicates (E4c/E4j/E4g ×2); E4i, E4e2, E4l.
 - E4q/E4r (N2: Engram gate as depth-router feature); E4s (Engram v2 VIP).
