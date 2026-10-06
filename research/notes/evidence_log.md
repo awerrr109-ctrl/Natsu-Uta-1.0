@@ -398,3 +398,20 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   Consistent with R35 (KD helps mostly in the under-trained regime). Consequence: the "≥ 2× teacher" assumption in TRAINING_SPEC is unnecessary at small scale.
   **A cheap self-distillation round (train → distil into a fresh copy) is a candidate data-efficiency lever** in the data-limited regime, and it costs no
   larger model. At 9B (data-rich, R35), still expected ≈ 0.
+
+### R36 test (Abacus digit positions) — E8g / E8h (1–5 digit addition, 1500 steps, 1 seed)
+| run | acc (in-dist) | answer loss | 6-digit loss | 6-digit acc |
+|---|---|---|---|---|
+| E8a no loop | 0.297 | 0.603 | 5.32 | 0 |
+| **E8g no loop + Abacus** | **0.430** (+0.133) | 0.634 | **4.40** | 0 |
+| E8b loop R3 | 0.285 | 1.037 | 4.91 | 0 |
+| E8h loop R3 + Abacus | **0.066** (−0.219) | 1.198 | 4.61 | 0 |
+| E8e 6-core (iso-FLOP with loops) | 0.484 | 0.621 | 6.89 | 0 |
+- [E own] **Abacus helps the non-looped model (+0.13 acc, better OOD loss) and makes the looped one much worse.** Pre-registered prediction
+  ("both above 0.30; E8h > E8g on 6-digit") **FAILED on both counts**. R36's "positions fixed → loops add gains" does not reproduce here.
+- Curve check: E8h's train loss was flat at ~1.5 from step 250 to 1000 and only started dropping at 1250 (E8g drops from 750). The looped model is
+  **slower to escape the plateau**, and Abacus delays that escape further. At 1500 steps E8h is mid-transition, so this is a budget-sensitive result,
+  like E6. R36 trains far longer (one GPU-day).
+- [I] Pattern across E6, E8b, E8h: at fixed short budgets, **looped models enter algorithmic phase transitions later** than non-looped ones.
+  This is a confound for every toy loop comparison here. A fair loop test needs either training to convergence or an iso-loss (not iso-step) protocol.
+  Recorded as F012. Abacus itself is adopted as a cheap option for digit tasks (+0.13 acc at no FLOP cost).
