@@ -430,3 +430,6 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **[R52] "When More Thinking Hurts: Overthinking in TTS" (arXiv:2604.10739)** — L2 (refutation side). [E] Marginal returns of extra reasoning tokens
   diminish quickly; extended reasoning abandons correct answers; optimal length varies with difficulty. → [I] G2 must allocate per-question
   (adaptive N / early stop on vote agreement), not a uniform N. Spec: majority-vote early stopping once the leading answer's margin exceeds a threshold.
+- **E5a seed 1**: 1.4379 → E5a 2-seed mean **1.4450** vs E4c 3-seed mean 1.4792: **KD −0.034** (2 seeds, ≈ 5 sd of E4c's spread). KD gain confirmed at toy scale.
+- **E6La (varchain, no loop, 2400 steps, seed 0)**: answer loss 0.041, **sequence EM 0.844** (long20 0.781). Steps-to-acc ≥ 0.2 at step 1600.
+  The 1200-step E6a (EM 0.016) was mid-transition, which confirms the caveat. E6Lb (Engram) is running; it is the H14.1 test.
