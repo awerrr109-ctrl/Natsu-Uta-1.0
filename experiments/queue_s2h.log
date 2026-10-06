@@ -5,3 +5,5 @@ FINAL {"1": {"main": {"loss": 0.996648927529653, "ppl": 2.7091879147491404, "bpb
 === E6La_varchain_moe_noloop_s0 Tue Oct  6 13:07:23 UTC 2026
 FINAL {"1": {"main": {"loss": 0.04102102093971693, "ppl": 1.0418740064859726, "bpb": 0.05918082348193194, "acc": 0.84375}, "long20": {"loss": 0.045158362814358304, "ppl": 1.0461935249417535, "bpb": 0.0651497460869393, "acc": 0.78125}, "fwd_flops_per_token": 1483776.0}}
 === E6Lb_varchain_moe_engram_s0 Tue Oct  6 13:46:33 UTC 2026
+FINAL {"1": {"main": {"loss": 0.8905833684481107, "ppl": 2.4365506435362176, "bpb": 1.2848402091582778, "acc": 0.0}, "long20": {"loss": 0.8982865810394287, "ppl": 2.4553923889466045, "bpb": 1.2959535957626858, "acc": 0.0}, "fwd_flops_per_token": 1573888.0}}
+=== E6La_varchain_moe_noloop_s1 Tue Oct  6 22:06:52 UTC 2026

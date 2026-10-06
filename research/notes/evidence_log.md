@@ -444,3 +444,17 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   the verification judge). Guard: hold out benchmarks from the seed pool; track pass@k as well as pass@1 (R19: RLVR narrows pass@k).
 - **[R54] FROST (arXiv:2609.29988)** — L2. Online synthetic-data filtering by gradient alignment with real data. Filters 20–30% of synthetic data and improves the real task.
   → [I] A candidate for filtering the rephrased/synthetic share in pretraining (TRAINING_SPEC §3). Real-anchored, no external verifier.
+
+### H14.1 test, part (a) — E6La vs E6Lb (varchain, 2400 steps, seed 0)
+| run | answer loss | sequence EM | long20 EM | train loss @1200 / @2400 |
+|---|---|---|---|---|
+| E6La MoE (no Engram) | **0.041** | **0.844** | 0.781 | 0.574 / 0.038 |
+| E6Lb MoE + Engram (iso-param) | 0.891 | **0.000** | 0.000 | 0.962 / ~0.79 |
+- [E own, 1 seed, huge effect] **With twice the steps the Engram model still never forms the in-context retrieval circuit**, while the plain model solves the task
+  (EM 0.84). This is not a timing artefact. Pre-registered condition (a) "E6Lb < E6La" is **confirmed** (seed-1 replicates are queued).
+  The size of the gap (EM 0.84 vs 0.00) is far beyond any seed effect seen so far.
+- [I] Mechanism candidates: (1) R37/R38: the global-statistics shortcut (n-gram table) removes the gradient pressure that builds induction circuits.
+  (2) Capacity: Engram took parameters from the experts (expert_mult 0.296 → 0.17). E8i-style control for varchain is needed (added below).
+  (3) The Engram gate injects noise for random variable tokens, i.e. hash rows keyed on random values carry no signal and interfere.
+- **Design impact (serious)**: the C4 core component may impair in-context learning at small scale. R17 reports RULER VT 77 → 89 at 27B, so the effect may
+  reverse with scale or depend on training stage. **This makes N5 (delayed memory, E6Lc) and the 50M-ladder downstream/ICL evals decisive** for keeping Engram.
