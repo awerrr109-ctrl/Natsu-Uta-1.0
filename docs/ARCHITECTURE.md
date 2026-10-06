@@ -94,3 +94,22 @@ part individually (R4, R5, R6, R7, MELT) but no work combining looped-MoE with m
   of E4c (pre-registered rule in REPORT_S1 §4).
 - Implemented since v0.1: `loop_kv="shared_first"` (core attention KV reused across loops, cache size independent of R) and `Engram`
   (hashed 2/3-gram tables, gated fusion, causal conv, decode state, prefetchable addressing).
+
+## 7. Session-2 revision (v0.3): decision state after E4g–E4p, E5, E6, E8, F007, F008
+**Main line: C4 = 3:1 GDN:attention hybrid + fine-grained MoE + Engram (no loop in the trained core), trained with KD where a teacher exists.**
+
+| component | status | evidence |
+|---|---|---|
+| hybrid GDN+attn | keep | −0.067 bpb vs attention-only (E3) |
+| fine-grained MoE + shared expert, aux-free bias | keep | E4c; analytic 3.1× fewer FLOPs than C0 at 9B |
+| Engram (hashed 2/3-gram, gated, conv) | keep, **with a delayed-memory schedule under test (H14.1)** | −0.054 bpb, 2 seeds; survives BPE (−0.014); possible harm to in-context retrieval (E6, weak) |
+| Engram v2 VIP rows | under test (E4s) | R24 failure mode (1) |
+| looped core | **demoted to optional inference-time mode** | 2-seed gain −0.017 at 1.73× FLOPs; substitutes with Engram (F007); no gain on addition (E8b); concat reinjection unstable off-R (E4i) |
+| shared-first KV across loops | adopted for any loop variant | E4e2: within noise, 3× less core KV |
+| exit-trained lookahead gate | adopted for any loop variant | E4p: every depth usable (R1…R6 ≈ 1.51) |
+| digit-position (Abacus) embedding | under test (E8g/h) | R36 |
+| MTP head | keep | R34 (teacherless/MTP avoids Clever-Hans failures) |
+
+Why loops are not dropped: R33 says loops help reasoning while hurting perplexity, and our probes so far measure perplexity or are positionally bottlenecked (R36).
+The decision is re-opened if E8h > E8g on 6-digit generalisation, or if E6d/E8d show complementarity on reasoning probes.
+The deployed loop form is then "C4 + exit-trained gated loop over the last k core blocks with shared-first KV", trained as a second stage.
