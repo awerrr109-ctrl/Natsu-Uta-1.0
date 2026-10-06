@@ -173,3 +173,20 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   "Clever Hans" shortcut. Teacherless multi-token training (dummy-token inputs) fixes it in preliminary experiments.
   → [I] Supports keeping MTP (impl) and argues for a teacherless/MTP fraction in P1. Our gen_chain v1/v2 failures (F001/F002: root shortcut) look like
   the same Clever-Hans mechanism at toy scale. [unknown] whether it matters for natural-text bpb; tested only on synthetic graphs.
+
+### Own results, session 2 (E4n, E5 distillation)
+- **E4n (Poisson-R loop sampling, mean 3)**: R1 1.5419 / R3 **1.5029** / R6 1.5175. Flat across depth (robust), but best is 1.5029, worse than E4c no-loop 1.4870.
+  Ranking of loop recipes at toy scale: E4g fixed (1.4574) < E4p exit-trained (1.4607) < E4m curriculum (1.4701) < E4n Poisson (1.5029) < E4h uniform (1.5291).
+  [E own] Stochastic depth training buys robustness at a cost proportional to how often shallow R is sampled. Exit training (E4p) is the only recipe that gets both.
+- **E5a/E5b (DPT logit distillation from E4z, w=0.5, T=1, 15% lowest-entropy tokens hard-label only)**, identical data/steps to E4c/E4j:
+  | student | no KD | +KD from E4z | Δ |
+  |---|---|---|---|
+  | MoE (0.82M) | E4c 1.4870 | E5a **1.4522** | −0.035 |
+  | MoE+Engram (0.83M) | E4j 1.4278 | E5b **1.4063** | −0.022 |
+  Teacher E4z (1.62M dense, 2× params) = 1.4394. **Both students beat the teacher**; E5b beats it by 0.033.
+  [I] At 1.6M tokens per run, the student is data-starved, not capacity-starved. Soft targets add information per token, as the "2× data-equivalent" claim
+  in R25 predicts. Student > teacher is consistent with KD-as-regularisation (born-again networks). Engram + KD are **partly additive** (−0.059 then −0.022 more),
+  unlike Engram + loop (F007). Cost: the teacher forward adds ~0.8× student training FLOPs (3.61e6 vs 3·1.49e6 per token), so KD's training-FLOP multiplier
+  ≈1.8× for −0.035, and the teacher's own training cost is extra. At inference, KD is free; this is the axis that matters for the 9B deployment target.
+  Single seed; seed runs are pending, so deltas ≥0.02 are likely real (B-series noise estimate ~0.003–0.007, to be confirmed).
+  **New Pareto best (toy, inference FLOPs): E5b 1.4063 at 1.58e6 FLOP/token.**
