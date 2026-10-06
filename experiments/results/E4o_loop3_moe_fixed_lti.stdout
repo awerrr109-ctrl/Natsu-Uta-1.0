@@ -1,0 +1,2 @@
+{"name": "E4o_loop3_moe_fixed_lti", "params": 821688, "params_nonembed": 788408, "flops_per_token_fwd": 2572288.0}
+{"step": 0, "loss": 5.527193069458008, "lr_f": 0.016666666666666666, "gnorm": 10.32482624053955, "tokens": 2048, "scored": 2048, "scored_tokens": 2048, "tok_s": 1679.5037765660318, "rss_mb": 338.4375, "peak_rss_mb": 657.07421875, "train_flops": 15804137472.0, "loops": 3, "eval": {"loss": 5.440905451774597, "ppl": 230.6509322363115, "bpb": 7.849567313220937}}
