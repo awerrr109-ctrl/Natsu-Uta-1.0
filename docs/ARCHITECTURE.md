@@ -104,7 +104,7 @@ part individually (R4, R5, R6, R7, MELT) but no work combining looped-MoE with m
 | fine-grained MoE + shared expert, aux-free bias | keep | E4c; analytic 3.1× fewer FLOPs than C0 at 9B |
 | Engram (hashed 2/3-gram, gated, conv) | keep **conditionally**: independent 1.3B dense report found no iso-param gain (R40); 10M 2×2 {MoE,dense}×{Engram,none} queued; downstream eval at ≥50M required before committing 1.6B params; delayed-memory schedule under test (H14.1) | −0.054 bpb, 2 seeds; survives BPE (−0.014); possible harm to in-context retrieval (E6, weak) |
 | Engram v2 VIP rows | under test (E4s) | R24 failure mode (1) |
-| looped core | **demoted to optional inference-time mode** | 2-seed gain −0.017 at 1.73× FLOPs; substitutes with Engram (F007); no gain on addition (E8b); concat reinjection unstable off-R (E4i) |
+| looped core | **demoted at toy scale with our recipe; NOT refuted at scale** | 3-seed gain −0.013 (t≈2) at 1.73× FLOPs; substitutes with Engram (F007, F010); unique depth ≫ loops on addition (E8e 0.484 vs E8b 0.285). Counter-evidence at 100M–1T-token scale: R47 LOOM (per-loop routers + residual scaling; near-iso-FLOP gains at 700M), R48 (looped MoE ≈ 2× larger MoE on reasoning). R47 recipe under toy test (E4y/E4y2); decisive test = 50M+ ladder |
 | shared-first KV across loops | adopted for any loop variant | E4e2: within noise, 3× less core KV |
 | exit-trained lookahead gate | adopted for any loop variant | E4p: every depth usable (R1…R6 ≈ 1.51) |
 | digit-position (Abacus) embedding | under test (E8g/h) | R36 |

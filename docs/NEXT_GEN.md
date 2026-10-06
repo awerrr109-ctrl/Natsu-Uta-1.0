@@ -31,7 +31,7 @@ Tags: [E] measured/cited, [I] inferred, [H] hypothesis.
   - R27: compute-optimal TTS with a policy-matched verifier gets 100–1000× FLOP efficiency vs much larger models on math.
 - **What**: C4 + sampling (maj@N / best-of-N) + **executable verifiers** (code tests, math checkers) and a small PRM trained on C4's own samples (R27: PRMs do not transfer across policies).
 - **Measured so far**: implemented (`generate.sample_n/majority_vote/best_of_n/tts_accounting`, `tts_eval.py`); curves pending (post_s2).
-- **Loop role**: kept only as a cheap draft model for self-speculative decoding (implemented, exact), and re-opened if E8h > E8g with Abacus positions.
+- **Loop role**: a cheap draft for self-speculative decoding (implemented, exact). **Re-opened by R47/R48**: looped MoE with per-loop routers and residual scaling shows iso-FLOP gains at 0.7–1.7B and ~2× total-param efficiency on reasoning at trillion-token scale. Our toy negatives may be scale- and recipe-specific. The 50M+ ladder must include C4-loop-LOOM vs C4 at iso-FLOP; the G2 vs loop choice is made there, not at toy scale.
 
 ### G3. Delayed / staged memory training (addresses B4)
 - **H14.1 / N5**: ramp the Engram branch in after induction circuits form (`train.engram_delay`). Falsifiers are pre-registered (E6Lb/E6Lc/E4u).
