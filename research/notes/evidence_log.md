@@ -199,3 +199,13 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   **existing** teacher (frontier/open-weight, teacher cost sunk) and mainly for post-training and reasoning traces (R25 pass@k), not as a pretraining
   multiplier. TRAINING_SPEC P1 KD share is kept, but its claimed efficiency multiplier is downgraded to "regime-dependent, ≤1.x at 9B" [I].
   Control E5c (born-again, same-size teacher E4c) is queued: if E5c ≈ E5a, the toy gain is regularisation, not capacity transfer.
+
+### Own results, session 2 (E8 addition probe, depth-hungry task)
+- **E8a (no loop) vs E8b (loop R=3 fixed), 5-digit addition, answer exact-match acc (teacher-forced, 256 val problems)**:
+  E8a acc **0.297** (answer loss 0.603). E8b R1 0.094 / R2 0.270 / **R3 0.285** / R4 0.285 (answer loss 1.037 at R3). Both 0.0 on 6-digit (no length generalisation).
+  [E own] **Looping did not help addition at iso-param**, despite this being the depth-hungry task R33 predicts loops excel on. Answer loss is *worse* with loops
+  (1.04 vs 0.60), and E8b took 8.2× the wall time (4587 s vs 557 s; partly CPU contention with my foreground work).
+  [I] Contradiction with R33 (loops ≈ iso-FLOP deep model on addition). Candidate explanations: (a) our 2-layer core × 3 = 6 effective layers is enough for
+  the 1–5-digit regime, so neither needs more depth; acc ~0.29 for both suggests a shared bottleneck (data/steps), not depth; (b) R33 trains far longer to
+  convergence; (c) carry propagation needs position-wise algorithms (index hints/abacus embeddings), not depth. Test: E8e (6-core unlooped, iso-FLOP) separates
+  "depth helps" from "loop helps"; tts_eval (greedy vs maj@N) runs after the queue (scripts/post_s2.sh).
