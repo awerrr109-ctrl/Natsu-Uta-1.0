@@ -334,3 +334,47 @@ TAXONOMY["P13_s2_derived"] = {
 GITHUB_QUERIES += ["parcae looped", "adaptive looped transformer", "engram ngram memory", "hash embedding language model",
                    "distillation pretraining llm", "top-k logit distillation", "megadoc synthetic", "rephrase pretraining data",
                    "fixed point transformer", "deep equilibrium language model", "anytime inference early exit"]
+
+# ---------------------------------------------------------------------------------------------
+# Session-2 Step-H expansion: hypotheses generated from s2 experiments (E5, E6, E8, F007, F008) and reads R33–R36
+TAXONOMY["P14_s2_derived"] = {
+    "problem": "Explain s2 anomalies: memory vs in-context retrieval (E6), KD x memory additivity (E5b), seed variance (F008), loops vs arithmetic (E8).",
+    "hypotheses": {
+        "H14.1_memory_delays_induction": {
+            "claim": "Token-indexed memory (n-gram tables) supplies bigram statistics early and delays/weakens induction-head formation, hurting in-context retrieval.",
+            "support": ["induction head formation phase transition", "bigram statistics delay induction heads", "n-gram memorization versus in-context learning transformer",
+                        "transient in-context learning emergence", "statistical induction heads n-gram"],
+            "refute": ["n-gram embeddings improve in-context learning", "hash n-gram embedding in-context retrieval benchmark"],
+        },
+        "H14.2_kd_memory_complementarity": {
+            "claim": "Soft-label KD and token-indexed memory address different deficits (target noise vs local pattern capacity) and therefore add.",
+            "support": ["knowledge distillation small model data efficiency pretraining", "soft labels sample efficiency language model",
+                        "distillation embedding tables memory"],
+            "refute": ["distillation scaling law supervised outperforms", "knowledge distillation hurts in-context learning"],
+        },
+        "H14.3_seed_variance_small_lm": {
+            "claim": "Small-LM results vary mostly with data order; variance-aware evaluation is needed before architectural ranking.",
+            "support": ["random seed variance language model pretraining", "data ordering effect language model training",
+                        "multiple seeds benchmark variance small transformers"],
+            "refute": ["seed variance negligible language model scaling"],
+        },
+        "H14.4_position_bottleneck_arithmetic": {
+            "claim": "Arithmetic failures of small LMs are positional; with digit-position embeddings, loops add length generalisation.",
+            "support": ["abacus embeddings arithmetic transformer", "index hints addition length generalization", "looped transformer length generalization arithmetic",
+                        "position coupling arithmetic transformer"],
+            "refute": ["position embeddings arithmetic generalization failure"],
+        },
+        "H14.5_soft_weight_sharing": {
+            "claim": "Soft tying (cosine/L2 penalties between layers) gives the loop inductive bias without loop FLOPs.",
+            "support": ["looping inspired regularization layers cosine", "soft parameter sharing transformer layers", "layer similarity regularization depth"],
+            "refute": ["weight tying regularization hurts language modeling"],
+        },
+        "H14.6_anytime_exit_training": {
+            "claim": "Training intermediate exits (deep supervision through the coda) makes looped models anytime without the uniform-R tax.",
+            "support": ["deep supervision early exit language model", "anytime neural network training intermediate classifiers", "layer dropout early exit loss"],
+            "refute": ["early exit training degrades final layer quality"],
+        },
+    },
+}
+GITHUB_QUERIES += ["induction heads", "abacus embeddings", "index hints arithmetic", "early exit llm", "deep supervision transformer",
+                   "soft weight sharing", "seed variance llm", "born again distillation", "logit distillation pretraining"]

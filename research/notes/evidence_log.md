@@ -245,3 +245,16 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **Pareto with honest KD accounting (scripts/pareto.py v2)**: charging teacher forward + teacher training, E5b costs **3.14e13 train FLOPs vs E4j 7.78e12 (4.0×)**
   for −0.020 bpb vs the E4j 2-seed mean. At **iso-train-FLOP**, E4z alone (1.77e13, 1.4394) is worse than E4j, so the KD route is only Pareto on the
   *inference* axis. With a sunk-cost teacher (the 9B plan), the marginal training cost is the teacher forward only (~1.8×). Consistent with R35.
+
+### H14.1 — does token-indexed memory delay in-context retrieval? (from E6 anomaly)
+- **[R37] Edelman et al., "The Evolution of Statistical Induction Heads" (arXiv:2402.11004)** — L2. [E] Models pass uniform → in-context unigram → *sudden*
+  transition to the bigram (induction) solution; **the presence of the simpler unigram solution may delay formation of the final solution.**
+- **[R38] Bietti et al., "Birth of a Transformer: A Memory Viewpoint" (arXiv:2306.00802)** — L2. [E] Global bigrams are learned fast (weight matrices act as
+  associative memories); the induction head for in-context bigrams develops slowly; this depends on data-distribution properties.
+- → [I] Mechanism for E6: Engram is an explicit *global n-gram* associative memory. It makes the "global statistics" solution cheaper and faster, which
+  plausibly reduces gradient pressure on the induction circuit (R37 "simple solution delays complex one"). E6b was ahead at step 800 and then plateaued
+  while E6a transitioned. This is a **known pattern in a new place**. I found no paper testing it for hashed n-gram memories (Engram/OE/X-gram report
+  NIAH gains at scale; R17 NIAH 84→97). That is a counter-signal: at scale, retrieval improves.
+- [H] **H14.1 test + fix, "delayed memory"**: ramp the Engram branch in only after the retrieval circuit forms (`train.engram_delay=[0.4,0.6]`).
+  Pre-registered: (a) E6Lb (Engram) < E6La on varchain at 2400 steps confirms the harm; (b) E6Lc (delayed) ≈ E6La confirms the mechanism;
+  (c) E4u (delayed, LM) keeps ≥ 70% of Engram's −0.054 bpb, so the fix is cheap. If (a) fails, E6 was a timing artefact and H14.1 is dropped.

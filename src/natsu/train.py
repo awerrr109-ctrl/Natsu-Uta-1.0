@@ -160,7 +160,11 @@ def train(cfg):
     R = mc.n_loops
     tok_seen, ans_seen, t0, flops = 0, 0, time.time(), 0.0
     accum = tc.get("accum", 1)
+    ed = tc.get("engram_delay", None)   # H14.1: [start_frac, end_frac] linear ramp of the Engram branch 0->1
     for step in range(steps):
+        if ed is not None and getattr(model, "engram", None) is not None:
+            fr = step / max(1, steps)
+            model.engram_scale = float(min(1.0, max(0.0, (fr - ed[0]) / max(1e-9, ed[1] - ed[0]))))
         f = sched(step, steps, warm)
         for o, bl in zip(opts, base_lrs):
             for g, b in zip(o.param_groups, bl):

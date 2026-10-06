@@ -427,6 +427,7 @@ class Natsu(nn.Module):
         self.embed = nn.Embedding(c.vocab_size, c.d_model)
         self.prelude = nn.ModuleList([Block(c, kinds[i]) for i in range(c.n_prelude)])
         self.engram = Engram(c) if c.engram_slots > 0 else None
+        self.engram_scale = 1.0                        # set by the trainer for delayed-memory schedules (not a parameter)
         self.core = nn.ModuleList([Block(c, kinds[c.n_prelude + i], n_lora=c.n_loops, moe=c.moe_experts > 0)
                                    for i in range(c.n_core)])
         self.coda = nn.ModuleList([Block(c, kinds[c.n_prelude + c.n_core + i],
@@ -532,7 +533,7 @@ class Natsu(nn.Module):
         if self.engram is not None:
             st = None if cache is None else cache.get("engram")
             y, ns = self.engram(x, idx, st)
-            x = x + y
+            x = x + self.engram_scale * y   # H14.1: training-time ramp (1.0 at inference/default)
             if new_cache is not None:
                 new_cache["engram"] = ns
         e = x
