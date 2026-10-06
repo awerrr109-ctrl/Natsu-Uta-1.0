@@ -18,3 +18,17 @@ def test_spec_equals_target_greedy():
 
 if __name__ == "__main__":
     test_spec_equals_target_greedy(); print("ok")
+
+def test_adaptive_vote():
+    from natsu.generate import adaptive_vote
+    it = iter([[5, 5, 5, 1]])
+    assert adaptive_vote(lambda k: next(it)) == (5, 4, "margin")
+    it = iter([[1, 2, 3, 4]] * 4)
+    a, n, why = adaptive_vote(lambda k: next(it))
+    assert n == 16 and why == "cap"
+    it = iter([[7, 9, 9, 3]])
+    a, n, why = adaptive_vote(lambda k: next(it), verify=lambda x: x == 3)
+    assert (a, why) == (3, "verified")
+
+if __name__ == "__main__":
+    test_adaptive_vote(); print("ok adaptive_vote")

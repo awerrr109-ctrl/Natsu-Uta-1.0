@@ -1,0 +1,24 @@
+{
+ "info": {
+  "name": "E5a_distill_E4z_to_moe_s1",
+  "params": 820744,
+  "params_nonembed": 787464,
+  "flops_per_token_fwd": 1491968.0
+ },
+ "train_flops": 7333321113600.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 833.9930644035339,
+ "peak_rss_mb": 744.81640625,
+ "steps_to": {},
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.996648927529653,
+    "ppl": 2.7091879147491404,
+    "bpb": 1.4378604652543343
+   },
+   "fwd_flops_per_token": 1491968.0
+  }
+ }
+}

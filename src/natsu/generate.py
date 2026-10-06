@@ -152,3 +152,23 @@ def best_of_n(answers, scores):
 def tts_accounting(n, prompt_len, gen_len, flops_per_token):
     """FLOPs for n samples (prompt prefilled once per sample here; KV/state sharing would reduce prefill cost)."""
     return n * (prompt_len + gen_len) * flops_per_token
+
+
+def adaptive_vote(draw, round_size=4, max_n=16, margin=2, verify=None):
+    """Adaptive-N self-consistency (INFERENCE_SPEC v0.2; R52 overthinking, R27 verifiers).
+    draw(k) -> list of k parsed answers (None = unparsable). Samples in rounds; stops early when
+    (a) a verifier accepts an answer, or (b) the leading answer leads the runner-up by >= `margin` votes.
+    Returns (answer, n_used, reason)."""
+    from collections import Counter
+    seen = []
+    while len(seen) < max_n:
+        new = draw(min(round_size, max_n - len(seen)))
+        seen += new
+        if verify is not None:
+            for a in new:
+                if a is not None and verify(a):
+                    return a, len(seen), "verified"
+        c = Counter(a for a in seen if a is not None).most_common(2)
+        if c and ((len(c) == 1 and c[0][1] >= margin) or (len(c) == 2 and c[0][1] - c[1][1] >= margin)):
+            return c[0][0], len(seen), "margin"
+    return majority_vote(seen), len(seen), "cap"
