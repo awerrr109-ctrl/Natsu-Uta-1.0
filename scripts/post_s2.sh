@@ -23,5 +23,13 @@ done
 for ck in E4g_loop3_moe_fixedR_noinj E4l_loop3fixed_moe_selfdistill E4p_loop3_moe_lookahead_gate; do
   [ -f ../checkpoints/$ck.pt ] && timeout 1800 python3 -m natsu.bench --ckpt ../checkpoints/$ck.pt --prompts 4 --new 48 >> ../experiments/bench_s2.log 2>&1
 done
+# G1b / R55: kNN-LM retrieval channel at ~1 tok/param (0.8M) and 4x (3.2M), for E4c (no Engram) and E4j (Engram)
+for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do
+  for N in 800000 3200000; do
+    [ -f ../checkpoints/$ck.pt ] && timeout 3600 python3 -m natsu.knnlm build --ckpt checkpoints/$ck.pt --data data_cache/ts_train.bin --tokens $N --out data_cache/knn_${ck}_$N >> ../experiments/knnlm_s2.jsonl 2>> ../experiments/knnlm_s2.err && \
+    timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store data_cache/knn_${ck}_$N --lams 0,0.1,0.25,0.5 >> ../experiments/knnlm_s2.jsonl 2>> ../experiments/knnlm_s2.err
+    rm -rf ../data_cache/knn_${ck}_$N
+  done
+done
 cd .. && nice -n 19 python3 research/analyze.py >> experiments/post_s2.log 2>&1; cd src
 echo "=== DONE $(date)" >> $L
