@@ -18,16 +18,19 @@ ARCH = [  # idea, mechanism, param-eff, compute-eff, memory-eff, context, reason
  ("Token-adaptive depth (lookahead labels)", "decider trained on measured CE gain", "—", "+ slope 2.74 vs 1.79 (E R21)", "—", "—", "+3.4 pts (E R21)",
   "avoids halting collapse (I vs R16)", "gate AUC only 0.66 at toy (E E4p); exit training makes all depths usable (E E4p R1..R6 1.51)", "R16,R21,E4p"),
  ("Engram n-gram memory", "hashed n-gram table, gated fusion", "iso-param win (E R17; E4j −0.059 bpb toy)", "iso-FLOP win (E R17)",
-  "offloadable, prefetchable (E R17)", "+ NIAH 84→97 (E R17)", "+ BBH 5 (E R17)", "?", "knowledge collapses if removed (E R17); byte-level confound (?)", "R17,E4j"),
+  "offloadable, prefetchable (E R17); editable as removable overlay (E R39)", "+ NIAH 84→97, VT 77→89 (E R17); toy varchain worse (weak E E6)", "+ BBH 5 (E R17)", "lower seed variance 4.4× (E own)", "iso-param win only vs MoE, not dense (E R40, R17 Table 1); gain shrinks byte→BPE→9B (0.053→0.014→~0.004 bpb); optimum ρ≈75–80% (E R17)", "R17,R39,R40,E4j(3 seeds)"),
  ("Product-key memory", "learned key lookup", "+ iso-token (E R7,R15)", "≈ iso-time (E R15)", "SSD decode ok, prefill bad (E R15)", "—", "—",
   "?", "retrofit fails (E R15)", "R7,R15"),
  ("Digit-position embedding (Abacus)", "embed position within digit run", "—", "—", "—", "length gen. 20→100 digits (E R36)", "enables loop gains on arithmetic (E R36)", "?", "arithmetic-specific", "R36,E8g,E8h"),
  ("Shared KV across loops (MELT)", "single KV per layer updated by gate", "—", "—", "3.98× less KV (E R14)", "≈ (E R14)", "≈ (E R14)", "?", "fixed R (E R14)", "R14,E4e2"),
 ]
 TRAIN = [
+ ("seed variance", "0.003–0.014 bpb at toy; data order dominates; claims need ≥0.02 or ≥3 seeds", "F008"),
+ ("MoE hyperparameters", "iso-total MoE ≥ dense given more tokens; LR ∝ E^-0.25 (E R42)", "TRAINING_SPEC"),
+ ("distributed data", "epoch-exact sharded sampler + exact resume (fixed F009, motivated by parcae#10)", "train_dist.py"),
  ("optimizer", "Muon (1 state) + AdamW for 1-D/embeddings; block-wise 8-bit Adam 3.9× less state (E test)", "Muon not yet A/B tested here (?)"),
  ("schedule", "WSD 1−sqrt cooldown", "implemented; used in all runs"),
- ("loop sampling", "fixed 1.457 < exit-trained 1.461 < curriculum 1.470 < Poisson 1.503 < uniform 1.529 (E E4g/p/m/n/h)", "F005 upd.3"),
+ ("loop sampling", "3-seed: loop −0.013 bpb (t≈2) at 1.73× FLOPs; recipe differences <0.02 are within seed noise (F008); exit training makes all depths usable (E4p)", "F005 upd.4, F008"),
  ("distillation", "DPT KD: −0.035 (E5a) / −0.022 on top of Engram (E5b 1.406, toy best); gain is under-trained regime, fades at high tok/param (E R35)", "E5a,E5b; E5c control queued"),
  ("synthetic data", "rephrase 1.48×, megadocs 1.80× data efficiency, ~30% synthetic optimum (E arXiv:2603.18534, Kang'25)", "spec only"),
  ("RL", "narrows pass@k at large k (E R19, contested)", "last stage, measure pass@k"),
@@ -51,7 +54,8 @@ DATA = [
 EVAL = [
  ("language modelling", "bpb (tokenizer-independent) — implemented"),
  ("reasoning", "k-hop chain probes failed (F001–F003); addition E8 acc ~0.29 for loop and no-loop; varchain E6 running"),
- ("recall", "MQAR configs E2a–c pending"),
+ ("recall", "MQAR configs E2a–c pending; held-out name-consistency MC set (in-context retrieval) built, decontaminated (171 items)"),
+ ("downstream beyond bpb", "held-out TinyStories cloze MC (347 items, 13% contaminated items removed); ds_eval.py post-queue (R31/R40: bpb ≠ capability)"),
  ("coding/math/IF/tool use/multilingual/factuality", "not measurable at toy scale; harness spec pending for 50M+"),
 ]
 
