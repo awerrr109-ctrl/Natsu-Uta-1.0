@@ -62,3 +62,7 @@ Each run logs loss, bpb, exact-match acc, gnorm, tok/s, RSS/peak RSS, analytic t
 `state/PROJECT_STATE.json` (machine-readable) + `state/PROJECT_STATE.md` (human).
 Failed experiments: `experiments/failures/*.md` (hypothesis / implementation / expected /
 observed / why / lessons / next). Research DB: `research/db/research.sqlite` (committed).
+
+
+## Rule added in session 2 (novelty claims)
+Before any novelty claim, run targeted title/abstract queries over the existing corpus DB (`research/db/research.sqlite`) for the component family, read every hit from the last 12 months at L2, and cite them in NOVELTY.md. (Triggered by R43–R46, which were in the DB unread.)

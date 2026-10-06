@@ -21,8 +21,9 @@ Tags: [E] measured/cited, [I] inferred, [H] hypothesis.
   The table is also an **editable, removable knowledge store** (R39 ENGRAFT: 0.84 exact answer on 100 invented facts, collateral KL 0.013).
 - **Why 9B-specific**: the "9B" constraint is about resident/active compute. A prefetchable table adds knowledge without adding FLOPs or VRAM.
 - **Known failure modes**: phrasing locality (R39: facts only fire on the same n-grams); composition fails (4/83).
-- **Cheapest test**: E9 (queued). Table-only vs full-FT vs FFN-only fact writing, measured on train-phrasing acc, held-out phrasing acc and collateral bpb.
-- **Next-gen fix [H]**: a *semantic* address path. Add a second Engram head addressed by a learned product-key over a pooled context embedding (PKM-style, R7/R15) next to the exact-n-gram path. Exact path = cheap, prefetchable; semantic path = phrasing-robust. Falsifier: held-out-phrasing acc in E9 does not improve.
+- **Cheapest test**: E9 (queued); then H14.7 (factorised table) at toy iso-param. Table-only vs full-FT vs FFN-only fact writing, measured on train-phrasing acc, held-out phrasing acc and collateral bpb.
+- **Prior art check (R43–R46)**: context-dependent read-out exists (MoME, FactorEngram); factorised tables (FactorEngram, TN-gram) cut table size several-fold at equal quality. **H14.7**: a factorised table in C4 could free ~1B of the 1.6B table params for experts.
+- **Next-gen fix [H, partly novel]**: a *content-addressed* path (learned keys) next to the exact n-gram path, evaluated on paraphrase robustness of written facts. That evaluation is absent in R43–R46. Add a second Engram head addressed by a learned product-key over a pooled context embedding (PKM-style, R7/R15) next to the exact-n-gram path. Exact path = cheap, prefetchable; semantic path = phrasing-robust. Falsifier: held-out-phrasing acc in E9 does not improve.
 
 ### G2. Verifier-coupled test-time compute instead of trained loops (addresses B2)
 - **Evidence**:

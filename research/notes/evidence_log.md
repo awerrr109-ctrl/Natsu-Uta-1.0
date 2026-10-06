@@ -329,3 +329,18 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 
 - **E4s (Engram v2 VIP rows)**: 1.4337 vs E4j 1.4262 → worse, but **invalid**: a key-order bug in the VIP builder misrouted most VIP hits (F011).
   Rerun E4s2 with fixed keys (true VIP hit rate on validation: 93% of 2-grams, 55% of 3-grams) is queued.
+
+### Novelty check for NEXT_GEN G1 "semantic address path" (principle #24) — Engram-family 2026 follow-ups found in our own corpus
+- **[R43] MoME (arXiv:2609.15126)** — L2. Context-aware memory: each token's row becomes a mixture of M slots chosen by a gate over the hidden state.
+  Beats Value-Embedding/Bigram/STEM at iso-param and iso-FLOP (sub-billion). Addresses polysemy, but the address is still the token id.
+- **[R44] FactorEngram (arXiv:2609.35578)** — L2. Factorised n-gram memory: sparse coefficients over a shared basis dictionary, with basis-level contextual gating.
+  Gains on LM and downstream at 340M/1B. Addresses "monolithic slot + scalar gate" and collision-only sharing.
+- **[R45] Tensorized Engram (TN-gram, arXiv:2606.08347)** — L2. CP-factorised n-gram embeddings that share factors across orders. Matches or beats Engram with far fewer params.
+- **[R46] Tokenizer-Agnostic Engram (arXiv:2607.29065)** — L2. Polynomial byte hashing gives hash equivalence across tokenizers. Comparable performance.
+- → [I] **G1's "semantic address" is only partly novel.** Context-dependent *read-out* (MoME, FactorEngram) is done. What remains untested in this family:
+  (a) a **content-addressed** (learned-key, PKM-style) path *alongside* the exact n-gram path, so that facts fire under paraphrase (R39's failure mode).
+  None of R43–R46 evaluates paraphrase robustness of written facts. (b) **Parameter efficiency**: R44/R45 make tables much smaller at equal quality.
+  For a 9B budget where the table is 1.6B (18%), a 3–10× smaller table at equal quality would free ~1–1.4B params for experts. That may matter
+  more than any new address path. → New candidate: replace the hashed table in C4 by a factorised (R44/R45-style) table. Logged as H14.7; test after E9.
+- Process note: the four relevant 2026 papers were already in our harvested corpus but had not been read. The L2 queue had not surfaced them because
+  P7 queries pre-dated them. This is the case for targeted title queries over the existing DB before writing a novelty claim. Now a rule (see RESEARCH_PLAN).
