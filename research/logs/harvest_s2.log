@@ -255,3 +255,11 @@
 [paper] H13.3_memory_loop_complement support 'n-gram embedding memory reasoning depth effective layers': arxiv=0 openalex=0 crossref=100
 [paper] H13.3_memory_loop_complement support 'memory layer looped transformer': arxiv=50 openalex=0 crossref=100
 [paper] H13.3_memory_loop_complement support 'hash embedding language model scaling': arxiv=22 openalex=0 crossref=100
+[paper] H13.3_memory_loop_complement refute  'n-gram memory gains vanish with tokenizer vocabulary scaling': arxiv=0 openalex=0 crossref=100
+[paper] H13.3_memory_loop_complement refute  'large vocabulary replaces n-gram memory': arxiv=1 openalex=0 crossref=100
+[paper] H13.4_distilled_pretraining_small support 'distilled pretraining induction heads': arxiv=1 openalex=0 crossref=100
+[paper] H13.4_distilled_pretraining_small support 'top-k logit distillation pretraining': arxiv=1 openalex=0 crossref=100
+[paper] H13.4_distilled_pretraining_small support 'teacher student capacity gap language model pretraining': arxiv=3 openalex=0 crossref=100
+[paper] H13.4_distilled_pretraining_small refute  'distillation hurts in-context learning': arxiv=4 openalex=0 crossref=100
+[paper] H13.4_distilled_pretraining_small refute  'knowledge distillation pretraining no benefit at scale': arxiv=11 openalex=0 crossref=100
+[paper] H13.5_stable_loop_dynamics support 'contractive recurrent depth extrapolation': arxiv=1 openalex=0 crossref=100
