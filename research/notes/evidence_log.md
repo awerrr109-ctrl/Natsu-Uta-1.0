@@ -369,3 +369,20 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   (5.62 vs 6.89, still at chance accuracy). That is the same direction as weight sharing (E8b: worse in-dist, best 6-digit loss 4.23–4.91).
   [I] The "loop inductive bias" at toy scale trades in-distribution fit for marginally better extrapolation loss. It is not a free reasoning gain.
   H13.7 is not adopted. E4t (LM) is pending.
+
+### Looped MoE at scale — refutation of our "loops don't pay" conclusion (from the 2026 loop papers in our corpus)
+- **[R47] LOOM, "Looping Beyond Twice: A Scalable Recipe for Looped MoE" (arXiv:2610.01153)** — L3-partial. [E] Looped MoE fails to scale because of
+  (1) hidden-state variance growth across loops and (2) **expert selection collapse: shared routers pick nearly the same experts every loop.**
+  Fixes: residual scaling + embedding re-injection every loop + **per-loop routers** + a "Looping Residual". **Near-iso-FLOP at 700M: 5 loops,
+  ppl 18.36 → 16.54, zero-shot 38.84 → 39.53.** 1.7B / 60B tokens (non-iso-FLOP) peaks at 9 loops.
+- **[R48] "Scaling Laws for Looped Mixture of Experts" (arXiv:2609.40316)** — L2. [E] A joint law over recurrence × sparsity; **sparsity raises the
+  effective-parameter gain from looping**. Downstream: sparsity ~3× active-param efficiency, recurrence ~2× total-param efficiency *on reasoning*.
+  At trillion-token scale and matched training compute, a law-sized looped MoE matches a ~2× larger non-looped MoE on reasoning benchmarks.
+- **Contradiction with our results (F005/F007/E8)**: our toy loop gain is −0.013 bpb (t≈2) and loops lose to unique depth on addition.
+  [I] Differences that could explain it: (a) our loops used a **shared router + per-loop bias only** (`moe_loop_bias`). R47 says per-loop *routers* are
+  needed, and a bias is a much weaker form; (b) no residual scaling (R47's variance fix); (c) scale and token budget (R47 gains appear at 100M–1.7B, 60B tokens;
+  our 0.8M/1.6M tokens is ~4 orders of magnitude smaller); (d) we did not use embedding re-injection with residual scaling (E4i used concat without scaling, E4o LTI).
+  **I therefore downgrade the conclusion "loops don't pay" to "loops don't pay at toy scale with our recipe."** That is weaker, and honest.
+- Test (cheap, queued): `route_diag` measures cross-loop expert overlap on E4g/E4p/E4k/E8b (post_s2). If Jaccard ≫ chance, we reproduce R47's collapse.
+  Next [H]: implement R47's per-loop routers + residual scaling (`moe_loop_router=True`, `loop_res_scale`) and rerun E4g-style. Pre-registered:
+  if 3-seed gain stays < 0.02 bpb, loops stay demoted at toy scale and the question moves to the 50M+ ladder (GPU).
