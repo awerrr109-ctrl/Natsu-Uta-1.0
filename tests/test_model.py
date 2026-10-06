@@ -77,3 +77,26 @@ def test_lti_reinject_cache():
 
 if __name__ == "__main__":
     test_lti_reinject_cache(); print("ok lti")
+
+def test_engram_vip_cache():
+    cfg = NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8, engram_slots=257, engram_heads=2, engram_vip=16)
+    from natsu.model import Engram
+    torch.manual_seed(0)
+    m = Natsu(cfg).double().eval()
+    ids = torch.randint(0, 260, (2, 21))
+    keys = {}
+    for n in (2, 3):
+        win = torch.stack([ids[0, j: j + 19] for j in range(n)], -1)[None] if n == 3 else torch.stack([ids[0, j: j + 20] for j in range(n)], -1)[None]
+        keys[n] = Engram.ngram_key(win).flatten().tolist()[:16]
+    m.engram.load_vip(keys)
+    _check_cache_model(m, ids)
+
+def _check_cache_model(m, x):
+    full = m(x)["logits"]; cache = {}
+    out = m(x[:, :13], cache=cache); cache = out["cache"]; parts = [out["logits"]]
+    for t in range(13, x.shape[1]):
+        out = m(x[:, t:t+1], cache=cache, pos0=t); cache = out["cache"]; parts.append(out["logits"])
+    assert torch.allclose(full, torch.cat(parts, 1), atol=1e-6)
+
+if __name__ == "__main__":
+    test_engram_vip_cache(); print("ok vip")

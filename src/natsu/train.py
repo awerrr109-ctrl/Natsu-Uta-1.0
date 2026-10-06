@@ -112,6 +112,9 @@ def train(cfg):
     BYTES_PER_TOKEN[0] = dc.get("bytes_per_token", 1.0)
     mc = NatsuConfig(**cfg["model"])
     model = Natsu(mc)
+    if mc.engram_vip and dc.get("vip"):
+        v = json.load(open(os.path.join(ROOT, dc["vip"])))
+        model.engram.load_vip({int(k): x for k, x in v.items()})
     seq, batch = tc["seq"], tc["batch"]
     opts = build_optim(model, tc.get("optim", "adamw"), tc["lr"], tc.get("wd", 0.1))
     base_lrs = [[g["lr"] for g in o.param_groups] for o in opts]

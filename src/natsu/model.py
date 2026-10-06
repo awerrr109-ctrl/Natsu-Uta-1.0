@@ -64,6 +64,9 @@ class NatsuConfig:
     engram_slots: int = 0            # >0: Engram-style hashed n-gram memory (arXiv:2601.07372) after prelude
     engram_orders: tuple = (2, 3)
     engram_heads: int = 4
+    engram_vip: int = 0              # Engram v2 (R24 fix for Zipf cold tail / collisions): number of dedicated rows per order
+                                     # reserved for the most frequent n-grams (collision-free); tail keeps hashed buckets.
+                                     # VIP ids come from a frequency table built on training data (scripts/build_vip.py).
     engram_dim: int = 0              # 0 -> d_model // (len(orders)*heads) per head
     loop_kv: str = "per_loop"        # per_loop | shared_first: core attention in loops r>0 reuses loop-0 K/V
                                      # (KV cache size independent of R; train/infer consistent)
@@ -299,6 +302,40 @@ class Engram(nn.Module):
         self.maxo = max(self.orders)
         mult = torch.tensor([1000003 + 2 * i for i in range(self.maxo)], dtype=torch.long)
         self.register_buffer("mult", mult, persistent=False)
+        self.vip = c.engram_vip
+        if self.vip:
+            # per order: sorted 64-bit n-gram keys of VIP n-grams (filled by load_vip); dedicated table
+            for n in self.orders:
+                self.register_buffer(f"vip_keys_{n}", torch.full((self.vip,), -1, dtype=torch.long))
+            self.vip_table = nn.Embedding(len(self.orders) * self.vip + 1, self.dm * self.K)   # +1 = "not VIP" row (zero)
+            nn.init.normal_(self.vip_table.weight, std=0.02)
+            with torch.no_grad():
+                self.vip_table.weight[-1].zero_()
+
+    @staticmethod
+    def ngram_key(win):
+        """exact (collision-free for ids < 2^20, n<=3) integer key of an n-gram window (B,L,n)."""
+        k = torch.zeros(win.shape[:-1], dtype=torch.long, device=win.device)
+        for j in range(win.shape[-1]):
+            k = k * (1 << 20) + (win[..., j] + 1)
+        return k
+
+    def load_vip(self, keys_by_order):
+        for n, keys in keys_by_order.items():
+            t = torch.as_tensor(sorted(keys)[: self.vip], dtype=torch.long)
+            buf = getattr(self, f"vip_keys_{n}"); buf.fill_(-1); buf[: len(t)] = t
+            buf.copy_(torch.sort(buf).values)
+
+    def vip_rows(self, full, L):
+        rows = []
+        for oi, n in enumerate(self.orders):
+            win = torch.stack([full[:, self.maxo - 1 - j: self.maxo - 1 - j + L] for j in range(n)], -1)
+            key = self.ngram_key(win)
+            keys = getattr(self, f"vip_keys_{n}")
+            pos = torch.searchsorted(keys, key).clamp(max=self.vip - 1)
+            hit = keys[pos] == key
+            rows.append(torch.where(hit, pos + oi * self.vip, torch.full_like(pos, len(self.orders) * self.vip)))
+        return torch.stack(rows, -1), torch.stack([r != len(self.orders) * self.vip for r in rows], -1)
 
     def addresses(self, ids, prev=None):
         """ids (B,L) -> row indices (B,L,nh). prev: (B, maxo-1) previous ids for decode."""
@@ -319,7 +356,15 @@ class Engram(nn.Module):
     def forward(self, x, ids, state=None):
         st = state or {}
         idx, tail = self.addresses(ids, st.get("tail"))
-        m = self.table(idx).flatten(-2)                       # (B,L,M)
+        m = self.table(idx)                                   # (B,L,nh,dm)
+        if self.vip:
+            prev = st.get("tail")
+            full = torch.cat([prev if prev is not None else ids.new_full((ids.shape[0], self.maxo - 1), -1), ids], 1)
+            vr, hit = self.vip_rows(full, ids.shape[1])       # (B,L,n_orders)
+            vm = self.vip_table(vr).view(*vr.shape, self.K, self.dm)   # (B,L,n_orders,K,dm)
+            hm = m.view(*m.shape[:2], len(self.orders), self.K, self.dm)
+            m = torch.where(hit[..., None, None], vm, hm).flatten(2, 3)  # VIP n-grams bypass the hashed table
+        m = m.flatten(-2)                                     # (B,L,M)
         k, v = self.k(m), self.v(m)
         g = torch.sigmoid((self.norm(self.q(x)) * self.norm(k)).sum(-1, keepdim=True) / x.shape[-1] ** 0.5)
         y, cs = self.conv(g * v, st.get("conv"))
