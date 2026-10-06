@@ -263,3 +263,515 @@
 [paper] H13.4_distilled_pretraining_small refute  'distillation hurts in-context learning': arxiv=4 openalex=0 crossref=100
 [paper] H13.4_distilled_pretraining_small refute  'knowledge distillation pretraining no benefit at scale': arxiv=11 openalex=0 crossref=100
 [paper] H13.5_stable_loop_dynamics support 'contractive recurrent depth extrapolation': arxiv=1 openalex=0 crossref=100
+[paper] H13.5_stable_loop_dynamics support 'fixed point looped transformer convergence': arxiv=11 openalex=0 crossref=100
+[paper] H13.5_stable_loop_dynamics support 'deep equilibrium language model': arxiv=33 openalex=0 crossref=100
+[paper] H13.5_stable_loop_dynamics refute  'looped transformer extrapolation fails beyond trained iterations': arxiv=1 openalex=0 crossref=100
+[paper] H13.6_tokenizer_vs_memory support 'byte level language model n-gram cache': arxiv=1 openalex=0 crossref=100
+[paper] H13.6_tokenizer_vs_memory support 'tokenizer vocabulary size scaling law': arxiv=10 openalex=0 crossref=100
+[paper] H13.6_tokenizer_vs_memory refute  'over-tokenized transformer vocabulary scaling': arxiv=24 openalex=0 crossref=100
+[repo] 'mixture of depths' stars:0..1: 0
+[repo] 'mixture of depths' stars:2..10: 0
+[repo] 'mixture of depths' stars:11..100: 0
+[repo] 'mixture of depths' stars:101..1000: 0
+[repo] 'mixture of depths' stars:>1000: 0
+[repo] 'mixture of experts' stars:0..1: 0
+[repo] 'mixture of experts' stars:2..10: 0
+[repo] 'mixture of experts' stars:11..100: 0
+[repo] 'mixture of experts' stars:101..1000: 0
+[repo] 'mixture of experts' stars:>1000: 0
+[repo] 'mamba' stars:0..1: 0
+[repo] 'mamba' stars:2..10: 0
+[repo] 'mamba' stars:11..100: 0
+[repo] 'mamba' stars:101..1000: 0
+[repo] 'mamba' stars:>1000: 0
+[repo] 'state space model' stars:0..1: 0
+[repo] 'state space model' stars:2..10: 0
+[repo] 'state space model' stars:11..100: 0
+[repo] 'state space model' stars:101..1000: 0
+[repo] 'state space model' stars:>1000: 0
+[repo] 'rwkv' stars:0..1: 0
+[repo] 'rwkv' stars:2..10: 0
+[repo] 'rwkv' stars:11..100: 0
+[repo] 'rwkv' stars:101..1000: 0
+[repo] 'rwkv' stars:>1000: 0
+[repo] 'linear attention' stars:0..1: 0
+[repo] 'linear attention' stars:2..10: 0
+[repo] 'linear attention' stars:11..100: 0
+[repo] 'linear attention' stars:101..1000: 0
+[repo] 'linear attention' stars:>1000: 0
+[repo] 'gated delta' stars:0..1: 0
+[repo] 'gated delta' stars:2..10: 0
+[repo] 'gated delta' stars:11..100: 0
+[repo] 'gated delta' stars:101..1000: 0
+[repo] 'gated delta' stars:>1000: 0
+[repo] 'deltanet' stars:0..1: 0
+[repo] 'deltanet' stars:2..10: 0
+[repo] 'deltanet' stars:11..100: 0
+[repo] 'deltanet' stars:101..1000: 0
+[repo] 'deltanet' stars:>1000: 0
+[repo] 'sparse attention' stars:0..1: 0
+[repo] 'sparse attention' stars:2..10: 0
+[repo] 'sparse attention' stars:11..100: 0
+[repo] 'sparse attention' stars:101..1000: 0
+[repo] 'sparse attention' stars:>1000: 0
+[repo] 'flash attention' stars:0..1: 0
+[repo] 'flash attention' stars:2..10: 0
+[repo] 'flash attention' stars:11..100: 0
+[repo] 'flash attention' stars:101..1000: 0
+[repo] 'flash attention' stars:>1000: 0
+[repo] 'test time training' stars:0..1: 0
+[repo] 'test time training' stars:2..10: 0
+[repo] 'test time training' stars:11..100: 0
+[repo] 'test time training' stars:101..1000: 0
+[repo] 'test time training' stars:>1000: 0
+[repo] 'titans memory' stars:0..1: 0
+[repo] 'titans memory' stars:2..10: 0
+[repo] 'titans memory' stars:11..100: 0
+[repo] 'titans memory' stars:101..1000: 0
+[repo] 'titans memory' stars:>1000: 0
+[repo] 'looped transformer' stars:0..1: 0
+[repo] 'looped transformer' stars:2..10: 0
+[repo] 'looped transformer' stars:11..100: 0
+[repo] 'looped transformer' stars:101..1000: 0
+[repo] 'looped transformer' stars:>1000: 0
+[repo] 'universal transformer' stars:0..1: 0
+[repo] 'universal transformer' stars:2..10: 0
+[repo] 'universal transformer' stars:11..100: 0
+[repo] 'universal transformer' stars:101..1000: 0
+[repo] 'universal transformer' stars:>1000: 0
+[repo] 'recurrent depth' stars:0..1: 0
+[repo] 'recurrent depth' stars:2..10: 0
+[repo] 'recurrent depth' stars:11..100: 0
+[repo] 'recurrent depth' stars:101..1000: 0
+[repo] 'recurrent depth' stars:>1000: 0
+[repo] 'latent reasoning' stars:0..1: 0
+[repo] 'latent reasoning' stars:2..10: 0
+[repo] 'latent reasoning' stars:11..100: 0
+[repo] 'latent reasoning' stars:101..1000: 0
+[repo] 'latent reasoning' stars:>1000: 0
+[repo] 'coconut continuous thought' stars:0..1: 0
+[repo] 'coconut continuous thought' stars:2..10: 0
+[repo] 'coconut continuous thought' stars:11..100: 0
+[repo] 'coconut continuous thought' stars:101..1000: 0
+[repo] 'coconut continuous thought' stars:>1000: 0
+[repo] 'speculative decoding' stars:0..1: 0
+[repo] 'speculative decoding' stars:2..10: 0
+[repo] 'speculative decoding' stars:11..100: 0
+[repo] 'speculative decoding' stars:101..1000: 0
+[repo] 'speculative decoding' stars:>1000: 0
+[repo] 'medusa' stars:0..1: 0
+[repo] 'medusa' stars:2..10: 0
+[repo] 'medusa' stars:11..100: 0
+[repo] 'medusa' stars:101..1000: 0
+[repo] 'medusa' stars:>1000: 0
+[repo] 'eagle speculative' stars:0..1: 0
+[repo] 'eagle speculative' stars:2..10: 0
+[repo] 'eagle speculative' stars:11..100: 0
+[repo] 'eagle speculative' stars:101..1000: 0
+[repo] 'eagle speculative' stars:>1000: 0
+[repo] 'knowledge distillation llm' stars:0..1: 0
+[repo] 'knowledge distillation llm' stars:2..10: 0
+[repo] 'knowledge distillation llm' stars:11..100: 0
+[repo] 'knowledge distillation llm' stars:101..1000: 0
+[repo] 'knowledge distillation llm' stars:>1000: 0
+[repo] 'bitnet' stars:0..1: 0
+[repo] 'bitnet' stars:2..10: 0
+[repo] 'bitnet' stars:11..100: 0
+[repo] 'bitnet' stars:101..1000: 0
+[repo] 'bitnet' stars:>1000: 0
+[repo] 'quantization llm' stars:0..1: 0
+[repo] 'quantization llm' stars:2..10: 0
+[repo] 'quantization llm' stars:11..100: 0
+[repo] 'quantization llm' stars:101..1000: 0
+[repo] 'quantization llm' stars:>1000: 0
+[repo] 'gptq' stars:0..1: 0
+[repo] 'gptq' stars:2..10: 0
+[repo] 'gptq' stars:11..100: 0
+[repo] 'gptq' stars:101..1000: 0
+[repo] 'gptq' stars:>1000: 0
+[repo] 'awq' stars:0..1: 0
+[repo] 'awq' stars:2..10: 0
+[repo] 'awq' stars:11..100: 0
+[repo] 'awq' stars:101..1000: 0
+[repo] 'awq' stars:>1000: 0
+[repo] 'kv cache compression' stars:0..1: 0
+[repo] 'kv cache compression' stars:2..10: 0
+[repo] 'kv cache compression' stars:11..100: 0
+[repo] 'kv cache compression' stars:101..1000: 0
+[repo] 'kv cache compression' stars:>1000: 0
+[repo] 'low rank training' stars:0..1: 0
+[repo] 'low rank training' stars:2..10: 0
+[repo] 'low rank training' stars:11..100: 0
+[repo] 'low rank training' stars:101..1000: 0
+[repo] 'low rank training' stars:>1000: 0
+[repo] 'galore' stars:0..1: 0
+[repo] 'galore' stars:2..10: 0
+[repo] 'galore' stars:11..100: 0
+[repo] 'galore' stars:101..1000: 0
+[repo] 'galore' stars:>1000: 0
+[repo] 'lora' stars:0..1: 0
+[repo] 'lora' stars:2..10: 0
+[repo] 'lora' stars:11..100: 0
+[repo] 'lora' stars:101..1000: 0
+[repo] 'lora' stars:>1000: 0
+[repo] 'muon optimizer' stars:0..1: 0
+[repo] 'muon optimizer' stars:2..10: 0
+[repo] 'muon optimizer' stars:11..100: 0
+[repo] 'muon optimizer' stars:101..1000: 0
+[repo] 'muon optimizer' stars:>1000: 0
+[repo] '8bit optimizer' stars:0..1: 0
+[repo] '8bit optimizer' stars:2..10: 0
+[repo] '8bit optimizer' stars:11..100: 0
+[repo] '8bit optimizer' stars:101..1000: 0
+[repo] '8bit optimizer' stars:>1000: 0
+[repo] 'schedule free' stars:0..1: 0
+[repo] 'schedule free' stars:2..10: 0
+[repo] 'schedule free' stars:11..100: 0
+[repo] 'schedule free' stars:101..1000: 0
+[repo] 'schedule free' stars:>1000: 0
+[repo] 'sophia optimizer' stars:0..1: 0
+[repo] 'sophia optimizer' stars:2..10: 0
+[repo] 'sophia optimizer' stars:11..100: 0
+[repo] 'sophia optimizer' stars:101..1000: 0
+[repo] 'sophia optimizer' stars:>1000: 0
+[repo] 'tinystories' stars:0..1: 0
+[repo] 'tinystories' stars:2..10: 0
+[repo] 'tinystories' stars:11..100: 0
+[repo] 'tinystories' stars:101..1000: 0
+[repo] 'tinystories' stars:>1000: 0
+[repo] 'small language model' stars:0..1: 0
+[repo] 'small language model' stars:2..10: 0
+[repo] 'small language model' stars:11..100: 0
+[repo] 'small language model' stars:101..1000: 0
+[repo] 'small language model' stars:>1000: 0
+[repo] 'nanogpt' stars:0..1: 0
+[repo] 'nanogpt' stars:2..10: 0
+[repo] 'nanogpt' stars:11..100: 0
+[repo] 'nanogpt' stars:101..1000: 0
+[repo] 'nanogpt' stars:>1000: 0
+[repo] 'synthetic data generation llm' stars:0..1: 0
+[repo] 'synthetic data generation llm' stars:2..10: 0
+[repo] 'synthetic data generation llm' stars:11..100: 0
+[repo] 'synthetic data generation llm' stars:101..1000: 0
+[repo] 'synthetic data generation llm' stars:>1000: 0
+[repo] 'data deduplication' stars:0..1: 0
+[repo] 'data deduplication' stars:2..10: 0
+[repo] 'data deduplication' stars:11..100: 0
+[repo] 'data deduplication' stars:101..1000: 0
+[repo] 'data deduplication' stars:>1000: 0
+[repo] 'quality filter pretraining' stars:0..1: 0
+[repo] 'quality filter pretraining' stars:2..10: 0
+[repo] 'quality filter pretraining' stars:11..100: 0
+[repo] 'quality filter pretraining' stars:101..1000: 0
+[repo] 'quality filter pretraining' stars:>1000: 0
+[repo] 'grpo' stars:0..1: 0
+[repo] 'grpo' stars:2..10: 0
+[repo] 'grpo' stars:11..100: 0
+[repo] 'grpo' stars:101..1000: 0
+[repo] 'grpo' stars:>1000: 0
+[repo] 'dpo' stars:0..1: 0
+[repo] 'dpo' stars:2..10: 0
+[repo] 'dpo' stars:11..100: 0
+[repo] 'dpo' stars:101..1000: 0
+[repo] 'dpo' stars:>1000: 0
+[repo] 'process reward model' stars:0..1: 0
+[repo] 'process reward model' stars:2..10: 0
+[repo] 'process reward model' stars:11..100: 0
+[repo] 'process reward model' stars:101..1000: 0
+[repo] 'process reward model' stars:>1000: 0
+[repo] 'mcts llm' stars:0..1: 0
+[repo] 'mcts llm' stars:2..10: 0
+[repo] 'mcts llm' stars:11..100: 0
+[repo] 'mcts llm' stars:101..1000: 0
+[repo] 'mcts llm' stars:>1000: 0
+[repo] 'self consistency' stars:0..1: 0
+[repo] 'self consistency' stars:2..10: 0
+[repo] 'self consistency' stars:11..100: 0
+[repo] 'self consistency' stars:101..1000: 0
+[repo] 'self consistency' stars:>1000: 0
+[repo] 'retrieval augmented' stars:0..1: 0
+[repo] 'retrieval augmented' stars:2..10: 0
+[repo] 'retrieval augmented' stars:11..100: 0
+[repo] 'retrieval augmented' stars:101..1000: 0
+[repo] 'retrieval augmented' stars:>1000: 0
+[repo] 'knn-lm' stars:0..1: 0
+[repo] 'knn-lm' stars:2..10: 0
+[repo] 'knn-lm' stars:11..100: 0
+[repo] 'knn-lm' stars:101..1000: 0
+[repo] 'knn-lm' stars:>1000: 0
+[repo] 'memorizing transformer' stars:0..1: 0
+[repo] 'memorizing transformer' stars:2..10: 0
+[repo] 'memorizing transformer' stars:11..100: 0
+[repo] 'memorizing transformer' stars:101..1000: 0
+[repo] 'memorizing transformer' stars:>1000: 0
+[repo] 'product key memory' stars:0..1: 0
+[repo] 'product key memory' stars:2..10: 0
+[repo] 'product key memory' stars:11..100: 0
+[repo] 'product key memory' stars:101..1000: 0
+[repo] 'product key memory' stars:>1000: 0
+[repo] 'early exit transformer' stars:0..1: 0
+[repo] 'early exit transformer' stars:2..10: 0
+[repo] 'early exit transformer' stars:11..100: 0
+[repo] 'early exit transformer' stars:101..1000: 0
+[repo] 'early exit transformer' stars:>1000: 0
+[repo] 'adaptive computation' stars:0..1: 0
+[repo] 'adaptive computation' stars:2..10: 0
+[repo] 'adaptive computation' stars:11..100: 0
+[repo] 'adaptive computation' stars:101..1000: 0
+[repo] 'adaptive computation' stars:>1000: 0
+[repo] 'parameter sharing transformer' stars:0..1: 0
+[repo] 'parameter sharing transformer' stars:2..10: 0
+[repo] 'parameter sharing transformer' stars:11..100: 0
+[repo] 'parameter sharing transformer' stars:101..1000: 0
+[repo] 'parameter sharing transformer' stars:>1000: 0
+[repo] 'hybrid attention ssm' stars:0..1: 0
+[repo] 'hybrid attention ssm' stars:2..10: 0
+[repo] 'hybrid attention ssm' stars:11..100: 0
+[repo] 'hybrid attention ssm' stars:101..1000: 0
+[repo] 'hybrid attention ssm' stars:>1000: 0
+[repo] 'xlstm' stars:0..1: 0
+[repo] 'xlstm' stars:2..10: 0
+[repo] 'xlstm' stars:11..100: 0
+[repo] 'xlstm' stars:101..1000: 0
+[repo] 'xlstm' stars:>1000: 0
+[repo] 'hyena' stars:0..1: 0
+[repo] 'hyena' stars:2..10: 0
+[repo] 'hyena' stars:11..100: 0
+[repo] 'hyena' stars:101..1000: 0
+[repo] 'hyena' stars:>1000: 0
+[repo] 'retnet' stars:0..1: 0
+[repo] 'retnet' stars:2..10: 0
+[repo] 'retnet' stars:11..100: 0
+[repo] 'retnet' stars:101..1000: 0
+[repo] 'retnet' stars:>1000: 0
+[repo] 'griffin hawk' stars:0..1: 0
+[repo] 'griffin hawk' stars:2..10: 0
+[repo] 'griffin hawk' stars:11..100: 0
+[repo] 'griffin hawk' stars:101..1000: 0
+[repo] 'griffin hawk' stars:>1000: 0
+[repo] 'long context' stars:0..1: 0
+[repo] 'long context' stars:2..10: 0
+[repo] 'long context' stars:11..100: 0
+[repo] 'long context' stars:101..1000: 0
+[repo] 'long context' stars:>1000: 0
+[repo] 'rope extension' stars:0..1: 0
+[repo] 'rope extension' stars:2..10: 0
+[repo] 'rope extension' stars:11..100: 0
+[repo] 'rope extension' stars:101..1000: 0
+[repo] 'rope extension' stars:>1000: 0
+[repo] 'multi token prediction' stars:0..1: 0
+[repo] 'multi token prediction' stars:2..10: 0
+[repo] 'multi token prediction' stars:11..100: 0
+[repo] 'multi token prediction' stars:101..1000: 0
+[repo] 'multi token prediction' stars:>1000: 0
+[repo] 'zeroth order optimization' stars:0..1: 0
+[repo] 'zeroth order optimization' stars:2..10: 0
+[repo] 'zeroth order optimization' stars:11..100: 0
+[repo] 'zeroth order optimization' stars:101..1000: 0
+[repo] 'zeroth order optimization' stars:>1000: 0
+[repo] 'forward gradient' stars:0..1: 0
+[repo] 'forward gradient' stars:2..10: 0
+[repo] 'forward gradient' stars:11..100: 0
+[repo] 'forward gradient' stars:101..1000: 0
+[repo] 'forward gradient' stars:>1000: 0
+[repo] 'reversible transformer' stars:0..1: 0
+[repo] 'reversible transformer' stars:2..10: 0
+[repo] 'reversible transformer' stars:11..100: 0
+[repo] 'reversible transformer' stars:101..1000: 0
+[repo] 'reversible transformer' stars:>1000: 0
+[repo] 'activation checkpointing' stars:0..1: 0
+[repo] 'activation checkpointing' stars:2..10: 0
+[repo] 'activation checkpointing' stars:11..100: 0
+[repo] 'activation checkpointing' stars:101..1000: 0
+[repo] 'activation checkpointing' stars:>1000: 0
+[repo] 'hierarchical reasoning model' stars:0..1: 0
+[repo] 'hierarchical reasoning model' stars:2..10: 0
+[repo] 'hierarchical reasoning model' stars:11..100: 0
+[repo] 'hierarchical reasoning model' stars:101..1000: 0
+[repo] 'hierarchical reasoning model' stars:>1000: 0
+[repo] 'tiny recursive model' stars:0..1: 0
+[repo] 'tiny recursive model' stars:2..10: 0
+[repo] 'tiny recursive model' stars:11..100: 0
+[repo] 'tiny recursive model' stars:101..1000: 0
+[repo] 'tiny recursive model' stars:>1000: 0
+[repo] 'deep equilibrium' stars:0..1: 0
+[repo] 'deep equilibrium' stars:2..10: 0
+[repo] 'deep equilibrium' stars:11..100: 0
+[repo] 'deep equilibrium' stars:101..1000: 0
+[repo] 'deep equilibrium' stars:>1000: 0
+[repo] 'hopfield' stars:0..1: 0
+[repo] 'hopfield' stars:2..10: 0
+[repo] 'hopfield' stars:11..100: 0
+[repo] 'hopfield' stars:101..1000: 0
+[repo] 'hopfield' stars:>1000: 0
+[repo] 'byte latent transformer' stars:0..1: 0
+[repo] 'byte latent transformer' stars:2..10: 0
+[repo] 'byte latent transformer' stars:11..100: 0
+[repo] 'byte latent transformer' stars:101..1000: 0
+[repo] 'byte latent transformer' stars:>1000: 0
+[repo] 'diffusion language model' stars:0..1: 0
+[repo] 'diffusion language model' stars:2..10: 0
+[repo] 'diffusion language model' stars:11..100: 0
+[repo] 'diffusion language model' stars:101..1000: 0
+[repo] 'diffusion language model' stars:>1000: 0
+[repo] 'mup' stars:0..1: 0
+[repo] 'mup' stars:2..10: 0
+[repo] 'mup' stars:11..100: 0
+[repo] 'mup' stars:101..1000: 0
+[repo] 'mup' stars:>1000: 0
+[repo] 'model merging' stars:0..1: 0
+[repo] 'model merging' stars:2..10: 0
+[repo] 'model merging' stars:11..100: 0
+[repo] 'model merging' stars:101..1000: 0
+[repo] 'model merging' stars:>1000: 0
+[repo] 'continual pretraining' stars:0..1: 0
+[repo] 'continual pretraining' stars:2..10: 0
+[repo] 'continual pretraining' stars:11..100: 0
+[repo] 'continual pretraining' stars:101..1000: 0
+[repo] 'continual pretraining' stars:>1000: 0
+[repo] 'tool use llm' stars:0..1: 0
+[repo] 'tool use llm' stars:2..10: 0
+[repo] 'tool use llm' stars:11..100: 0
+[repo] 'tool use llm' stars:101..1000: 0
+[repo] 'tool use llm' stars:>1000: 0
+[repo] 'program of thought' stars:0..1: 0
+[repo] 'program of thought' stars:2..10: 0
+[repo] 'program of thought' stars:11..100: 0
+[repo] 'program of thought' stars:101..1000: 0
+[repo] 'program of thought' stars:>1000: 0
+[repo] 'looped moe' stars:0..1: 0
+[repo] 'looped moe' stars:2..10: 0
+[repo] 'looped moe' stars:11..100: 0
+[repo] 'looped moe' stars:101..1000: 0
+[repo] 'looped moe' stars:>1000: 0
+[repo] 'recurrent depth transformer' stars:0..1: 0
+[repo] 'recurrent depth transformer' stars:2..10: 0
+[repo] 'recurrent depth transformer' stars:11..100: 0
+[repo] 'recurrent depth transformer' stars:101..1000: 0
+[repo] 'recurrent depth transformer' stars:>1000: 0
+[repo] 'huginn' stars:0..1: 0
+[repo] 'huginn' stars:2..10: 0
+[repo] 'huginn' stars:11..100: 0
+[repo] 'huginn' stars:101..1000: 0
+[repo] 'huginn' stars:>1000: 0
+[repo] 'ouro loop' stars:0..1: 0
+[repo] 'ouro loop' stars:2..10: 0
+[repo] 'ouro loop' stars:11..100: 0
+[repo] 'ouro loop' stars:101..1000: 0
+[repo] 'ouro loop' stars:>1000: 0
+[repo] 'mixture of recursions' stars:0..1: 0
+[repo] 'mixture of recursions' stars:2..10: 0
+[repo] 'mixture of recursions' stars:11..100: 0
+[repo] 'mixture of recursions' stars:101..1000: 0
+[repo] 'mixture of recursions' stars:>1000: 0
+[repo] 'relaxed recursive' stars:0..1: 0
+[repo] 'relaxed recursive' stars:2..10: 0
+[repo] 'relaxed recursive' stars:11..100: 0
+[repo] 'relaxed recursive' stars:101..1000: 0
+[repo] 'relaxed recursive' stars:>1000: 0
+[repo] 'hyper connections' stars:0..1: 0
+[repo] 'hyper connections' stars:2..10: 0
+[repo] 'hyper connections' stars:11..100: 0
+[repo] 'hyper connections' stars:101..1000: 0
+[repo] 'hyper connections' stars:>1000: 0
+[repo] 'yoco' stars:0..1: 0
+[repo] 'yoco' stars:2..10: 0
+[repo] 'yoco' stars:11..100: 0
+[repo] 'yoco' stars:101..1000: 0
+[repo] 'yoco' stars:>1000: 0
+[repo] 'kv sharing' stars:0..1: 0
+[repo] 'kv sharing' stars:2..10: 0
+[repo] 'kv sharing' stars:11..100: 0
+[repo] 'kv sharing' stars:101..1000: 0
+[repo] 'kv sharing' stars:>1000: 0
+[repo] 'layerskip' stars:0..1: 0
+[repo] 'layerskip' stars:2..10: 0
+[repo] 'layerskip' stars:11..100: 0
+[repo] 'layerskip' stars:101..1000: 0
+[repo] 'layerskip' stars:>1000: 0
+[repo] 'self speculative' stars:0..1: 0
+[repo] 'self speculative' stars:2..10: 0
+[repo] 'self speculative' stars:11..100: 0
+[repo] 'self speculative' stars:101..1000: 0
+[repo] 'self speculative' stars:>1000: 0
+[repo] 'moeut' stars:0..1: 0
+[repo] 'moeut' stars:2..10: 0
+[repo] 'moeut' stars:11..100: 0
+[repo] 'moeut' stars:101..1000: 0
+[repo] 'moeut' stars:>1000: 0
+[repo] 'sparse universal transformer' stars:0..1: 0
+[repo] 'sparse universal transformer' stars:2..10: 0
+[repo] 'sparse universal transformer' stars:11..100: 0
+[repo] 'sparse universal transformer' stars:101..1000: 0
+[repo] 'sparse universal transformer' stars:>1000: 0
+[repo] 'gated attention' stars:0..1: 0
+[repo] 'gated attention' stars:2..10: 0
+[repo] 'gated attention' stars:11..100: 0
+[repo] 'gated attention' stars:101..1000: 0
+[repo] 'gated attention' stars:>1000: 0
+[repo] 'kimi delta attention' stars:0..1: 0
+[repo] 'kimi delta attention' stars:2..10: 0
+[repo] 'kimi delta attention' stars:11..100: 0
+[repo] 'kimi delta attention' stars:101..1000: 0
+[repo] 'kimi delta attention' stars:>1000: 0
+[repo] 'native sparse attention' stars:0..1: 0
+[repo] 'native sparse attention' stars:2..10: 0
+[repo] 'native sparse attention' stars:11..100: 0
+[repo] 'native sparse attention' stars:101..1000: 0
+[repo] 'native sparse attention' stars:>1000: 0
+[repo] 'parcae looped' stars:0..1: 0
+[repo] 'parcae looped' stars:2..10: 0
+[repo] 'parcae looped' stars:11..100: 0
+[repo] 'parcae looped' stars:101..1000: 1
+[repo] 'parcae looped' stars:>1000: 0
+[repo] 'adaptive looped transformer' stars:0..1: 12
+[repo] 'adaptive looped transformer' stars:2..10: 2
+[repo] 'adaptive looped transformer' stars:11..100: 3
+[repo] 'adaptive looped transformer' stars:101..1000: 0
+[repo] 'adaptive looped transformer' stars:>1000: 0
+[repo] 'engram ngram memory' stars:0..1: 0
+[repo] 'engram ngram memory' stars:2..10: 0
+[repo] 'engram ngram memory' stars:11..100: 1
+[repo] 'engram ngram memory' stars:101..1000: 0
+[repo] 'engram ngram memory' stars:>1000: 0
+[repo] 'hash embedding language model' stars:0..1: 5
+[repo] 'hash embedding language model' stars:2..10: 1
+[repo] 'hash embedding language model' stars:11..100: 3
+[repo] 'hash embedding language model' stars:101..1000: 0
+[repo] 'hash embedding language model' stars:>1000: 0
+[repo] 'distillation pretraining llm' stars:0..1: 4
+[repo] 'distillation pretraining llm' stars:2..10: 1
+[repo] 'distillation pretraining llm' stars:11..100: 2
+[repo] 'distillation pretraining llm' stars:101..1000: 0
+[repo] 'distillation pretraining llm' stars:>1000: 0
+[repo] 'top-k logit distillation' stars:0..1: 1
+[repo] 'top-k logit distillation' stars:2..10: 0
+[repo] 'top-k logit distillation' stars:11..100: 0
+[repo] 'top-k logit distillation' stars:101..1000: 0
+[repo] 'top-k logit distillation' stars:>1000: 0
+[repo] 'megadoc synthetic' stars:0..1: 0
+[repo] 'megadoc synthetic' stars:2..10: 0
+[repo] 'megadoc synthetic' stars:11..100: 0
+[repo] 'megadoc synthetic' stars:101..1000: 0
+[repo] 'megadoc synthetic' stars:>1000: 0
+[repo] 'rephrase pretraining data' stars:0..1: 0
+[repo] 'rephrase pretraining data' stars:2..10: 0
+[repo] 'rephrase pretraining data' stars:11..100: 2
+[repo] 'rephrase pretraining data' stars:101..1000: 0
+[repo] 'rephrase pretraining data' stars:>1000: 0
+[repo] 'fixed point transformer' stars:0..1: 11
+[repo] 'fixed point transformer' stars:2..10: 2
+[repo] 'fixed point transformer' stars:11..100: 2
+[repo] 'fixed point transformer' stars:101..1000: 0
+[repo] 'fixed point transformer' stars:>1000: 0
+[repo] 'deep equilibrium language model' stars:0..1: 0
+[repo] 'deep equilibrium language model' stars:2..10: 0
+[repo] 'deep equilibrium language model' stars:11..100: 0
+[repo] 'deep equilibrium language model' stars:101..1000: 0
+[repo] 'deep equilibrium language model' stars:>1000: 0
+[repo] 'anytime inference early exit' stars:0..1: 3
+[repo] 'anytime inference early exit' stars:2..10: 0
+[repo] 'anytime inference early exit' stars:11..100: 0
+[repo] 'anytime inference early exit' stars:101..1000: 0
+[repo] 'anytime inference early exit' stars:>1000: 0
+TOTAL papers 39977 repos 15360

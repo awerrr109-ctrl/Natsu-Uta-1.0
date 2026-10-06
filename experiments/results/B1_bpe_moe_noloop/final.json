@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "B1_bpe_moe_noloop",
+  "params": 1311752,
+  "params_nonembed": 787464,
+  "flops_per_token_fwd": 2441216.0
+ },
+ "train_flops": 5999532441600.0,
+ "tokens": 819200,
+ "scored_tokens": 819200,
+ "wall_s": 320.85335421562195,
+ "peak_rss_mb": 544.64453125,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 3.1436511278152466,
+    "ppl": 23.188376212995877,
+    "bpb": 1.1449094722399347
+   },
+   "fwd_flops_per_token": 2441216.0
+  }
+ }
+}

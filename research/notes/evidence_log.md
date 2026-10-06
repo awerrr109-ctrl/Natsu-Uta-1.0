@@ -124,3 +124,9 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   → [I] For the 9B target, the inference-time efficiency multiplier vs frontier models can plausibly reach 100–1000× **on verifiable domains (math/code)**,
   but only with a policy-matched verifier (train our own PRM/ORM on our own samples) and only when the base reasoning comes from distillation.
   Verifiers from executable feedback (code tests, math checkers) avoid PRM OOD issues → tool-integrated verification (L1: Kang et al.).
+
+### Own results, session 2 (BPE confound check)
+- **B1 vs B2 (BPE-4k, 0.79M non-embedding, 819k tokens ≈ 3.2MB text)**: MoE no-loop 1.1449 bpb → +Engram (iso non-embed) **1.1312 (−0.014)**.
+  Byte level was −0.059 (E4j vs E4c). [E] Engram's gain **survives the BPE tokenizer but shrinks ~4×**, consistent with the byte-level
+  inflation hypothesis (H13.6) and with R23 (gain is log-linear in effective input vocab; BPE already captures part of local n-gram statistics).
+  Note: BPE runs see ~2× more bytes of context and ~same bytes trained (819k tok × 3.96 ≈ 3.2MB vs 1.6MB), so the absolute bpb is not comparable across tokenizers; only within-tokenizer deltas are.
