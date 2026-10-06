@@ -344,3 +344,6 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   more than any new address path. → New candidate: replace the hashed table in C4 by a factorised (R44/R45-style) table. Logged as H14.7; test after E9.
 - Process note: the four relevant 2026 papers were already in our harvested corpus but had not been read. The L2 queue had not surfaced them because
   P7 queries pre-dated them. This is the case for targeted title queries over the existing DB before writing a novelty claim. Now a rule (see RESEARCH_PLAN).
+- **E6 2×2 complete (varchain answer loss, 1 seed, 1200 steps)**: plain E6a **0.542** | loop E6c 0.914 | Engram E6b 0.917 | loop+Engram E6d 0.988.
+  The R33-derived prediction (loop complementary to Engram on reasoning) is untestable here: every modification is worse than plain, and E6a is an outlier
+  that went through its transition before step 1200 (curve check). No conclusion until E6L (2400 steps, 2 seeds) lands.
