@@ -143,3 +143,15 @@ def test_loop_router_resscale_cache():
 
 if __name__ == "__main__":
     test_loop_router_resscale_cache(); print("ok loop router + res scale")
+
+def test_engram_paper_cache():
+    # F013: faithful Engram output path (dilated zero-init conv + RMSNorm + internal residual) must stay decode-consistent
+    torch.manual_seed(0)
+    m = Natsu(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8,
+                          engram_slots=257, engram_heads=2, engram_paper=True)).double().eval()
+    with torch.no_grad():
+        m.engram.conv.w.normal_()   # non-zero so the dilated path is exercised
+    _check_cache_model(m, torch.randint(0, 256, (2, 21)))
+
+if __name__ == "__main__":
+    test_engram_paper_cache(); print("ok engram paper")

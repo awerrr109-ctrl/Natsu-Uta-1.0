@@ -70,6 +70,7 @@ class NatsuConfig:
                                      # reserved for the most frequent n-grams (collision-free); tail keeps hashed buckets.
                                      # VIP ids come from a frequency table built on training data (scripts/build_vip.py).
     engram_dim: int = 0              # 0 -> d_model // (len(orders)*heads) per head
+    engram_paper: bool = False       # F013: faithful Engram output path (norm + dilated zero-init conv + internal residual); False = legacy v1
     engram_factor_rank: int = 0      # >0: factorised table (H14.7, cf. R44/R45): row = coeff[slot] (rank r) @ basis (r x dm), basis shared across slots
     digit_pos: int = 0               # >0: Abacus-style digit-position embedding (R36), index = position within the current digit run
     digit_pos_offset: int = 0        # training-only random offset in [0, digit_pos_offset] added to digit indices (length generalisation)
@@ -101,17 +102,18 @@ def rope(x, pos, theta):
 
 class ShortConv(nn.Module):
     """Causal depthwise conv (k=4) with decode-time state."""
-    def __init__(self, d, k=4):
+    def __init__(self, d, k=4, dilation=1, zero_init=False):
         super().__init__()
-        self.k = k
-        self.w = nn.Parameter(torch.randn(d, k) / math.sqrt(k))
+        self.k, self.dil = k, dilation
+        self.w = nn.Parameter(torch.zeros(d, k) if zero_init else torch.randn(d, k) / math.sqrt(k))
 
     def forward(self, x, state=None):  # x: (B,L,D)
         B, L, D = x.shape
-        prev = state if state is not None else x.new_zeros(B, self.k - 1, D)
+        span = (self.k - 1) * self.dil
+        prev = state if state is not None else x.new_zeros(B, span, D)
         xx = torch.cat([prev, x], 1)
-        y = sum(xx[:, i:i + L] * self.w[:, i] for i in range(self.k))
-        return F.silu(y), xx[:, -(self.k - 1):]
+        y = sum(xx[:, i * self.dil:i * self.dil + L] * self.w[:, i] for i in range(self.k))
+        return F.silu(y), xx[:, -span:]
 
 
 class GDNMixer(nn.Module):
@@ -314,8 +316,13 @@ class Engram(nn.Module):
         self.k = nn.Linear(M, c.d_model, bias=False)
         self.v = nn.Linear(M, c.d_model, bias=False)
         self.norm = RMSNorm(c.d_model)
-        self.conv = ShortConv(c.d_model)
         self.maxo = max(self.orders)
+        self.paper = c.engram_paper
+        if self.paper:   # faithful to arXiv:2601.07372 eq.: Y = SiLU(Conv_dil=maxN(RMSNorm(V~))) + V~, conv zero-init (identity at start)
+            self.conv = ShortConv(c.d_model, 4, dilation=self.maxo, zero_init=True)
+            self.cnorm = RMSNorm(c.d_model)
+        else:
+            self.conv = ShortConv(c.d_model)
         mult = torch.tensor([1000003 + 2 * i for i in range(self.maxo)], dtype=torch.long)
         self.register_buffer("mult", mult, persistent=False)
         self.vip = c.engram_vip
@@ -385,7 +392,12 @@ class Engram(nn.Module):
         m = m.flatten(-2)                                     # (B,L,M)
         k, v = self.k(m), self.v(m)
         g = torch.sigmoid((self.norm(self.q(x)) * self.norm(k)).sum(-1, keepdim=True) / x.shape[-1] ** 0.5)
-        y, cs = self.conv(g * v, st.get("conv"))
+        if self.paper:
+            vt = g * v
+            y, cs = self.conv(self.cnorm(vt), st.get("conv"))
+            y = y + vt
+        else:
+            y, cs = self.conv(g * v, st.get("conv"))
         self.last_gate = g.detach()                           # (B,L,1) retrieval confidence, used by N2 depth decider
         return y, {"tail": tail, "conv": cs}
 

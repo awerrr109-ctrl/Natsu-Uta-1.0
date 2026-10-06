@@ -66,3 +66,7 @@ observed / why / lessons / next). Research DB: `research/db/research.sqlite` (co
 
 ## Rule added in session 2 (novelty claims)
 Before any novelty claim, run targeted title/abstract queries over the existing corpus DB (`research/db/research.sqlite`) for the component family, read every hit from the last 12 months at L2, and cite them in NOVELTY.md. (Triggered by R43–R46, which were in the DB unread.)
+
+### Checklist rule (F013, session 2)
+Before reporting a negative result on a published component, diff the implementation against the paper's **equations, init, and optimiser config**
+(lr multipliers, wd, zero-init). Record the diff table in the F-file. A negative result on an unfaithful implementation is labelled "vX-only".

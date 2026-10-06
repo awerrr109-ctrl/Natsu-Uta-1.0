@@ -143,6 +143,14 @@ def train(cfg):
         for g in opts[1].param_groups:
             g["lr"] = tc.get("adam_lr", 3e-3)
         base_lrs[1] = [tc.get("adam_lr", 3e-3)]
+    if tc.get("engram_lr_mult") and model.engram is not None:   # paper: Engram table lr x5, no wd (split it into its own Adam group)
+        tid = {id(p) for n, p in model.named_parameters() if n.startswith("engram.") and ("table" in n or "basis" in n)}
+        g0 = opts[1].param_groups[0]
+        keep = [p for p in g0["params"] if id(p) not in tid]
+        tab = [p for p in g0["params"] if id(p) in tid]
+        g0["params"] = keep
+        opts[1].add_param_group({"params": tab, "lr": g0["lr"] * tc["engram_lr_mult"], "weight_decay": 0.0})
+        base_lrs[1] = [g0["lr"], g0["lr"] * tc["engram_lr_mult"]]
     teacher, kd = None, tc.get("distill")
     if kd:   # distilled pretraining (DPT, arXiv:2509.01649): KL to teacher on all but the lowest-entropy tokens
         ck = torch.load(os.path.join(ROOT, kd["teacher"]), map_location="cpu")
