@@ -103,6 +103,8 @@ def main():
     ap.add_argument("--out", default="runs/tmp"); ap.add_argument("--save_every", type=int, default=1000)
     ap.add_argument("--resume", default=""); ap.add_argument("--cpu", action="store_true"); ap.add_argument("--bf16", action="store_true")
     ap.add_argument("--override", default="{}", help="json dict of model overrides (e.g. small test sizes)")
+    ap.add_argument("--engram_delay", default="", help="'start,end' fractions: linear ramp of the Engram branch (N5/H14.1)")
+    ap.add_argument("--mtp_w", type=float, default=0.3, help="weight of the MTP auxiliary loss when the model has MTP heads")
     a = ap.parse_args()
     rank, world, dev = setup(a.cpu)
     torch.manual_seed(0)
@@ -133,17 +135,26 @@ def main():
     if rank == 0:
         print(json.dumps({"params": core.param_count(), "mode": mode, "world": world}), flush=True)
     t0, toks = time.time(), 0
+    ed = [float(v) for v in a.engram_delay.split(",")] if a.engram_delay else None
     for step in range(start, a.steps):
         f = wsd(step, a.steps, max(1, a.steps // 50))
+        if ed is not None and getattr(core, "engram", None) is not None:
+            fr = step / max(1, a.steps)
+            core.engram_scale = float(min(1.0, max(0.0, (fr - ed[0]) / max(1e-9, ed[1] - ed[0]))))
         for o, b in zip(opts, base):
             for g, lr in zip(o.param_groups, b):
                 g["lr"] = lr * f
         for _ in range(a.accum):
             x, y = data.get(); x, y = x.to(dev), y.to(dev)
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=a.bf16 and not a.cpu):
-                lg = model(x)["logits"]
+                out = model(x)
+            lg = out["logits"]
             loss = F.cross_entropy(lg.float().reshape(-1, lg.shape[-1]), y.reshape(-1))
-            (loss / a.accum).backward()
+            total = loss
+            for j, ml in enumerate(out.get("mtp_logits", []) or [], start=1):   # MTP: predict y shifted by j more tokens
+                if y.shape[1] > j:
+                    total = total + a.mtp_w * F.cross_entropy(ml[:, :-j].float().reshape(-1, ml.shape[-1]), y[:, j:].reshape(-1))
+            (total / a.accum).backward()
             toks += x.numel() * world
         torch.nn.utils.clip_grad_norm_(core.parameters(), 1.0)
         for o in opts:

@@ -24,7 +24,7 @@ Use `scripts/iso_param_match.py` to size B/C/F, and the analytic `flops_per_toke
 
 ## Command (8×GPU node; per cell)
 ```bash
-torchrun --nproc_per_node 8 -m natsu.train_dist --config configs/ladder/C4_50M.json --override '{...cell overrides...}' \
+torchrun --nproc_per_node 8 -m natsu.train_dist --config configs/ladder/C4_50M.json --override "$CELL_OVERRIDES" $CELL_FLAGS \
   --data data/fwedu_bpe32k.bin --seq 2048 --batch 16 --accum 2 --steps 9500 --lr 1.5e-3 --optim muon --bf16 \
   --out runs/50M_<cell>_s<seed> --save_every 1000
 ```
@@ -38,3 +38,6 @@ torchrun --nproc_per_node 8 -m natsu.train_dist --config configs/ladder/C4_50M.j
 
 ## Cost estimate
 54M stored / ~19M active × 2.5B tokens ≈ 6 × 19e6 × 2.5e9 ≈ 2.9e17 FLOPs per run → ~1.5 GPU-hours (H100 at ~50% MFU). 6 cells × 3 seeds ≈ 27 GPU-hours.
+
+Cell E passes `CELL_FLAGS="--engram_delay 0.3,0.5"`; all cells set `"mtp":1` in the overrides (MTP auxiliary loss, `--mtp_w 0.3`).
+CPU smoke test of exactly this path: `tests/test_dist_cpu.sh` (gloo ×2, MTP + engram_delay, save → resume).
