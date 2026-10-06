@@ -66,3 +66,17 @@ The anchor is Qwen3.5-9B (HF model card, 2026-03), which already uses a GDN 3:1 
 The 10,000×–100,000× figure is achievable **only** as a ratio against a frontier model's training/inference cost,
 and only on axes where the 9B model actually matches it. We report every multiplier with its reference model
 and axis; no blended "10,000×" number will be claimed.
+
+## 5. Session-2 measured multipliers (toy scale; each with axis, reference and evidence level)
+| axis | reference | measured (toy) | how computed | transfer to 9B |
+|---|---|---|---|---|
+| parameter efficiency | dense 2× params (E4z 1.616M, 1.4394) | E4j (0.825M, 2-seed 1.4262) beats E4z at **0.51× params** → ≥ 1.96× | iso-quality param ratio (lower bound) | [I] R23/R17 show the memory gain persists across 0.4B–27B; size shrinks with BPE (−0.059 → −0.014) |
+| inference FLOP efficiency | E4z (3.61 MFLOP/tok) | E4j 1.58 MFLOP/tok at better bpb → **≥ 2.3×** | iso-quality FLOP ratio (lower bound) | [E analytic] C4 vs C0 at 9B: 3.1× fewer FLOP/token at 4k, 3.2× fewer decode bytes |
+| sample efficiency | E4c without KD | E5a matches the quality E4c would reach with more data | needs a data-scaling curve | [E R35] KD gain shrinks with tokens/param, so ≤ 1.x at 9B |
+| training compute | E4z | E4j reaches better bpb with 0.44× training FLOPs (7.78e12 vs 1.77e13) → **≥ 2.3×** | iso-quality training FLOP ratio | as above |
+| memory (research loop) | — | all runs peak ≤ 850 MB RSS on a 985 MB host | measured | 50M+ stages need GPU; 1GB is a research-loop property, not 9B training |
+| loops (depth via compute) | E4c | −0.017 bpb at 1.73× FLOPs (2 seeds) → **< 1× at iso-FLOP** | | negative at toy; R33 suggests positive on reasoning only |
+
+Combined honest statement (toy): **≈ 2× parameter, ≈ 2.3× inference-FLOP and ≈ 2.3× training-FLOP efficiency vs a 2× dense baseline**, all three
+from the Engram + MoE design, measured at 0.8M params and one data set. These are 2–3× numbers. The 100–10,000× range in §4 exists only as the
+ratio against frontier models' size and remains [I]/unknown.

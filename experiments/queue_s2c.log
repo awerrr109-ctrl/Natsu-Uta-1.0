@@ -41,3 +41,5 @@ scripts/run_queue.sh: line 13: 20210 Killed                  python3 -m natsu.tr
 FAILED E4l_loop3fixed_moe_selfdistill
 {"step": 700, "loss": 1.053689956665039, "lr_f": 0.38762756430420553, "gnorm": 0.39178910851478577, "tokens": 1435648, "scored": 1435648, "scored_tokens": 1435648, "tok_s": 1058.6990004081013, "rss_mb": 274.125, "peak_rss_mb": 841.828125, "train_flops": 11078700367872.0, "loops": 3}
 === E4c_ts_hyb_moe_noloop_s2 Tue Oct  6 07:28:53 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0239188075065613, "ppl": 2.7840837023139864, "bpb": 1.4772025858626572}, "fwd_flops_per_token": 1491968.0}}
+=== E4j_moe_engram_noloop_s2 Tue Oct  6 07:37:13 UTC 2026
