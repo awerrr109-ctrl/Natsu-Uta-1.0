@@ -129,3 +129,10 @@ def test_vip_key_order_matches_builder():
 
 if __name__ == "__main__":
     test_vip_key_order_matches_builder(); print("ok vip key order")
+
+def test_engram_factorised_cache():
+    _check_cache(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8,
+                             engram_slots=257, engram_heads=2, engram_factor_rank=8))
+
+if __name__ == "__main__":
+    test_engram_factorised_cache(); print("ok engram factorised")

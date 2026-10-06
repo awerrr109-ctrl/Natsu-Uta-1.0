@@ -68,6 +68,7 @@ class NatsuConfig:
                                      # reserved for the most frequent n-grams (collision-free); tail keeps hashed buckets.
                                      # VIP ids come from a frequency table built on training data (scripts/build_vip.py).
     engram_dim: int = 0              # 0 -> d_model // (len(orders)*heads) per head
+    engram_factor_rank: int = 0      # >0: factorised table (H14.7, cf. R44/R45): row = coeff[slot] (rank r) @ basis (r x dm), basis shared across slots
     digit_pos: int = 0               # >0: Abacus-style digit-position embedding (R36), index = position within the current digit run
     digit_pos_offset: int = 0        # training-only random offset in [0, digit_pos_offset] added to digit indices (length generalisation)
     loop_kv: str = "per_loop"        # per_loop | shared_first: core attention in loops r>0 reuses loop-0 K/V
@@ -293,8 +294,16 @@ class Engram(nn.Module):
         self.orders, self.K, self.S = tuple(c.engram_orders), c.engram_heads, c.engram_slots
         nh = len(self.orders) * self.K
         self.dm = c.engram_dim or max(8, c.d_model // nh)
-        self.table = nn.Embedding(self.S * nh, self.dm)
-        nn.init.normal_(self.table.weight, std=0.02)
+        self.fr = c.engram_factor_rank
+        if self.fr:
+            # factorised rows: S*nh rows of rank-r coefficients + one shared (r x dm) basis per head.
+            # Same address path (still prefetchable), (S*nh*r + nh*r*dm) params instead of S*nh*dm.
+            self.table = nn.Embedding(self.S * nh, self.fr)
+            nn.init.normal_(self.table.weight, std=1.0 / self.fr ** 0.5)
+            self.basis = nn.Parameter(torch.randn(nh, self.fr, self.dm) * 0.02)
+        else:
+            self.table = nn.Embedding(self.S * nh, self.dm)
+            nn.init.normal_(self.table.weight, std=0.02)
         M = self.dm * nh
         self.q = nn.Linear(c.d_model, c.d_model, bias=False)
         self.k = nn.Linear(M, c.d_model, bias=False)
@@ -358,7 +367,9 @@ class Engram(nn.Module):
     def forward(self, x, ids, state=None):
         st = state or {}
         idx, tail = self.addresses(ids, st.get("tail"))
-        m = self.table(idx)                                   # (B,L,nh,dm)
+        m = self.table(idx)                                   # (B,L,nh,dm)  or (B,L,nh,r) if factorised
+        if self.fr:
+            m = torch.einsum("blhr,hrd->blhd", m, self.basis)
         if self.vip:
             prev = st.get("tail")
             full = torch.cat([prev if prev is not None else ids.new_full((ids.shape[0], self.maxo - 1), -1), ids], 1)
@@ -628,6 +639,9 @@ class Natsu(nn.Module):
         total += core * (1 + (R - 1) * (gate_exec if c.depth_gate else 1.0))
         if self.engram is not None:
             en = self.engram
-            total += 2 * c.d_model * c.d_model * 3 + 2 * 2 * en.table.embedding_dim * len(en.orders) * en.K * c.d_model
+            nh_ = len(en.orders) * en.K
+            total += 2 * c.d_model * c.d_model * 3 + 2 * 2 * en.dm * nh_ * c.d_model
+            if en.fr:
+                total += 2 * nh_ * en.fr * en.dm          # basis reconstruction
         total += 2 * c.d_model * c.vocab_size
         return total

@@ -1,0 +1,45 @@
+{
+ "name": "E4v_engram_factor_r8_4xslots",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1,
+  "pattern": "ga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_shared": 1,
+  "moe_expert_mult": 0.17,
+  "engram_slots": 2048,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "engram_heads": 2,
+  "engram_dim": 32,
+  "engram_factor_rank": 8
+ },
+ "train": {
+  "seq": 128,
+  "batch": 16,
+  "steps": 800,
+  "lr": 0.003,
+  "warmup": 60,
+  "eval_every": 400,
+  "log_every": 100,
+  "threads": 2,
+  "eval_batches": 12,
+  "save": true
+ },
+ "data": {
+  "kind": "memmap",
+  "train": "data_cache/ts_train.bin",
+  "valid": "data_cache/ts_valid.bin"
+ },
+ "extra_eval": {},
+ "note": "H14.7: iso table-params, 4x slots via rank-8 factorisation (fewer collisions)"
+}
