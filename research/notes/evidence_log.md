@@ -364,3 +364,8 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   (c) E8e also has 2× params, so it is iso-FLOP, not iso-param. The cleanest single-variable comparison is E8b vs E8e = shared vs unshared weights at the same depth.
 - Consequence for the design: **for reasoning-like algorithmic tasks, iso-FLOP unique depth > loops at toy scale.** This supports C4's choice (no loop) and
   G2 (spend extra inference compute on sampling/verification, not loops).
+- **H13.7 (R33 block-cosine regulariser) on addition**: E8f (6-core + block_cos λ=1, k=2) acc **0.418** vs E8e (6-core, no reg) **0.484**; 6-digit loss 5.62 vs 6.89.
+  [E own, 1 seed] Pulling layers toward a "loop-like" weight structure **costs in-distribution accuracy (−0.066)** and slightly improves the 6-digit loss
+  (5.62 vs 6.89, still at chance accuracy). That is the same direction as weight sharing (E8b: worse in-dist, best 6-digit loss 4.23–4.91).
+  [I] The "loop inductive bias" at toy scale trades in-distribution fit for marginally better extrapolation loss. It is not a free reasoning gain.
+  H13.7 is not adopted. E4t (LM) is pending.

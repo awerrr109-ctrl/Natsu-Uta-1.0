@@ -1,0 +1,30 @@
+{
+ "info": {
+  "name": "E8f_add_moe_core6_blockcos",
+  "params": 1603984,
+  "params_nonembed": 1570704,
+  "flops_per_token_fwd": 2465792.0
+ },
+ "train_flops": 13490446663680.0,
+ "tokens": 1265416,
+ "scored_tokens": 429261,
+ "wall_s": 1187.9820733070374,
+ "peak_rss_mb": 539.7421875,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.664772451084291,
+    "ppl": 1.944048104964686,
+    "bpb": 0.9590639184989076,
+    "acc": 0.41796875
+   },
+   "d6": {
+    "loss": 5.623532101309959,
+    "ppl": 276.8655754767648,
+    "bpb": 8.11304187483977,
+    "acc": 0.0
+   },
+   "fwd_flops_per_token": 2465792.0
+  }
+ }
+}
