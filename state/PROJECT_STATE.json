@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-05",
+ "updated": "2026-10-06T02:00Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -65,7 +65,9 @@
   "N1_memory_loop_complementarity": {
    "result": "REFUTED (toy, byte)",
    "evidence": "F007: E4k 1.4327 vs E4j 1.4278; substitutes"
-  }
+  },
+  "H13.1_fixed_then_uniform_curriculum": "E4m: anytime tax reduced (R1 1.694->1.521) but best 1.4701 > E4g 1.4574; pre-reg fails",
+  "H13.5_lookahead_gate_exit_training": "E4p: most depth-robust loop (R1 1.513..R6 1.507), best 1.4607; gate AUC 0.662; 33% skip costs +0.011 bpb; Engram still dominates gain/FLOP"
  },
  "rejected_hypotheses": [
   {
@@ -96,7 +98,9 @@
   "H13.2 lookahead-supervised token-adaptive depth (TaH2-style) gives anytime property without the tax (E4p)",
   "H13.3 Engram x loop complementarity (E4k: loop+Engram vs E4j/E4g)",
   "H5.3 DPT distillation at toy scale (E5a/b)",
-  "B1-B3: Engram/loop effects survive BPE tokenizer"
+  "B1-B3: Engram/loop effects survive BPE tokenizer",
+  "H13.7 (R33) block-cosine regulariser = loop inductive bias without loop FLOPs (E4t, E8f queued)",
+  "R33 reframing of F007: Engram/loop substitutes on bpb but complements on reasoning (2x2 E6a-d, E8a-d queued)"
  ],
  "open_questions": [
   "Does R4's looped-MoE advantage survive at >1B and with GDN hybrids?",
@@ -112,12 +116,10 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "replicate E4j vs E4c (3 seeds) + BPE tokenizer variant; Engram slot/share sweep (U-curve) at toy scale",
-  "queue s1e: E4g/E4h/E4i (loop init/sampling ablations), E4f (loop+Engram), E4e (shared KV), E2a-c (MQAR recall)",
-  "E4j: Engram on NON-looped C4 toy (iso-param) - most important next test",
-  "seed replication (3 seeds) of E4c vs E3b vs best loop variant",
-  "dense-supervision reasoning probe (F003 next) to test loops where they should help",
-  "10M stage of C4 vs C0 vs best-loop"
+  "s2c remainder: E4n,E5a,E5b,E8a,E8b,E6a-c, seeds, E4i,E4e2,E4l",
+  "s2d: E4q,E4r,E4s",
+  "s2e: E4o(requeued after F006 recurrence),E6d,E8c,E8d,E8e,E8f,E4t",
+  "after: gate_eval E4q/E4r (N2), tts_eval E8a/E8b, seed-noise analysis, session-2 report"
  ],
  "evidence_quality": "toy-scale only; literature L2 (abstract/summary), no L3 yet",
  "known_limitations": [
@@ -126,7 +128,9 @@
   "no GPU: 50M+ stages are specified but not run",
   "pure-PyTorch GDN kernel: correct but slow; no Triton",
   "all toy results single-seed, 1.6M tokens, 0.8M params",
-  "pgrep -f self-match bug in queue waiters (fixed with regex [.] trick)"
+  "pgrep -f self-match bug in queue waiters (fixed with regex [.] trick)",
+  "L1 scorer v2 (domain-aware); on-topic paper estimate 9505->8303",
+  "35 sources read at L2/L3-partial"
  ],
  "corpus": {
   "see": "research/notes/corpus_stats.md",
