@@ -1,5 +1,5 @@
 {
- "session": 1,
+ "session": 2,
  "updated": "2026-10-05",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
@@ -31,8 +31,8 @@
    "evidence": "E4c 1.4870 vs E3b 1.4917; E4b vs E4a -0.012"
   },
   "H1.1_loops_iso_param_toy": {
-   "result": "REFUTED at toy scale (pending init-fix ablations)",
-   "evidence": "E4a/b/d +0.08-0.10 bpb vs no-loop; R>2 worse (F005)"
+   "result": "SUPPORTED with fixed-R recipe (reverses F005)",
+   "evidence": "E4g R3 1.4574 vs E4c 1.4870 (-0.030), 1.72x inf FLOPs"
   },
   "H2.2_learned_gate_toy": {
    "result": "not working",
@@ -45,6 +45,14 @@
   "H1.4_engram_toy": {
    "result": "supported (toy, single seed, large effect)",
    "evidence": "E4j 1.4278 vs E4c 1.4870 iso-param; beats E4z (2x params) 1.4394"
+  },
+  "H13.1_anytime_tax": {
+   "result": "supported (toy)",
+   "evidence": "uniform-R costs ~0.07 bpb (E4h vs E4g); E4g fixed-R useless at R=1 (1.694)"
+  },
+  "reinject_identity_init": {
+   "result": "supported",
+   "evidence": "E4h 1.529 vs E4b 1.575"
   }
  },
  "rejected_hypotheses": [
@@ -67,7 +75,11 @@
   "H11.4 shallow->deep self-distillation raises loop-speculation acceptance",
   "H11.6 shared KV across loops costs little quality",
   "H12.1 large SSD-resident PKM table + 9B resident model",
-  "H2.2 soft depth gate does not collapse when trained with random-R (R16 counter-evidence)"
+  "H2.2 soft depth gate does not collapse when trained with random-R (R16 counter-evidence)",
+  "H13.2 lookahead-supervised token-adaptive depth (TaH2-style) gives anytime property without the tax (E4p)",
+  "H13.3 Engram x loop complementarity (E4k: loop+Engram vs E4j/E4g)",
+  "H5.3 DPT distillation at toy scale (E5a/b)",
+  "B1-B3: Engram/loop effects survive BPE tokenizer"
  ],
  "open_questions": [
   "Does R4's looped-MoE advantage survive at >1B and with GDN hybrids?",
@@ -96,7 +108,8 @@
   "OpenAlex daily free budget exhausted on day 1; arXiv API throttled (429); Crossref used as fallback",
   "no GPU: 50M+ stages are specified but not run",
   "pure-PyTorch GDN kernel: correct but slow; no Triton",
-  "all toy results single-seed, 1.6M tokens, 0.8M params"
+  "all toy results single-seed, 1.6M tokens, 0.8M params",
+  "pgrep -f self-match bug in queue waiters (fixed with regex [.] trick)"
  ],
  "corpus": {
   "see": "research/notes/corpus_stats.md",

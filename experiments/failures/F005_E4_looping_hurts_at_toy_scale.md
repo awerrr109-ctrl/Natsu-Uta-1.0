@@ -51,3 +51,14 @@
 - **Lesson**: one failed recipe ≠ a refuted mechanism. Pre-registered ablations caught this. Without them the loop line would have been wrongly dropped.
 - **New hypothesis H13.1**: uniform-R training imposes an "anytime tax", since the shared weights must be good at every depth. The tax shrinks with
   scale or with a curriculum (train at fixed R, then fine-tune with sampled R). This is testable.
+
+## UPDATE 2 (session 2) — cause decomposition
+| run | injection | loop sampling | best bpb (R) |
+|---|---|---|---|
+| E4b | concat, random init | uniform U{1..3} | 1.5748 (R2) |
+| E4h | concat, **identity init** | uniform | 1.5291 (R2) |
+| E4g | none | **fixed 3** | **1.4574 (R3)** |
+| E4c | (no loop) | — | 1.4870 |
+- Identity init recovers 0.046 bpb (it is a real defect, now fixed). **Uniform-R sampling costs ~0.07 bpb more** and is the dominant cause.
+  Uniform R still lacks depth scaling (R2 best, R3 worse). The "anytime tax" (H13.1) is large at toy scale.
+- Remaining isolations queued: E4i (fixed R + identity init), E4m (fixed→uniform curriculum), E4n (Poisson mean R), E4o (Parcae LTI).
