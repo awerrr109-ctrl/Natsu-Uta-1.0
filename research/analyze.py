@@ -20,6 +20,11 @@ NOTES = os.path.join(os.path.dirname(__file__), "notes")
 CORE = re.compile(r"\b(language model|llm|transformer|attention|token|pretrain|large language|neural network|recurrent|state space|mixture of experts|decoding|reasoning)\b", re.I)
 ML_CTX = re.compile(r"(llm|language model|transformer|neural|deep learning|pytorch|torch|jax|attention|gpt|bert|"
                     r"machine learning|\\bml\\b|\\bai\\b|model|training|inference|cuda|triton|token|nlp|diffusion|reinforcement)", re.I)
+LM_CTX = re.compile(r"(language model|\bllms?\b|\bnlp\b|natural language|text generation|next[- ]token|pretraining corpus|"
+                    r"perplexity|in-context|chain[- ]of[- ]thought|\bgpt|instruction[- ]tun|question answering|machine translation)", re.I)
+OFF_DOMAIN = re.compile(r"(image|vision|visual|video|pixel|segmentation|detection|speech|audio|spectral|medical|clinical|"
+                        r"remote sensing|hyperspectral|point cloud|molecul|protein|traffic|fault diagnosis|power system|"
+                        r"electrical transformer|aero-engine|super-resolution|restoration)", re.I)
 STOP = set("the a an of for and in on to with via by from is are be llm language model models large".split())
 
 
@@ -34,7 +39,17 @@ def score(text, q):
         return 0.0
     hit = sum(1 for w in ts if w in t)
     base = hit / len(ts)
-    return base * (1.0 if CORE.search(t) else 0.3)
+    # L1 v2 (session 2): "transformer" alone matched vision/speech/engineering papers at rel=1.0 and flooded the L2 queue.
+    # Domain-aware context factor: LM evidence 1.0; generic neural context 0.6; off-domain without LM evidence 0.2.
+    if LM_CTX.search(t):
+        ctx = 1.0
+    elif OFF_DOMAIN.search(t):
+        ctx = 0.2
+    elif CORE.search(t):
+        ctx = 0.6
+    else:
+        ctx = 0.3
+    return base * ctx
 
 
 def main():

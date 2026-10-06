@@ -1,5 +1,6 @@
 # Low-star relevant repos (<=10 stars, relevance>=0.6) — principle #4
 
+- 14THEGOAT/snes-gpt ★0 pushed 2026-10-05 — 🤖 Run a minimal GPT transformer in 65816 assembly on a Super Nintendo, generating names with efficient fixed-point math and hardware multipl
 - lprogers/mandarin-playgroup ★0 pushed 2026-10-05 — A fast-growing community platform for 160+ Bay Area families, helping kids hear and use Mandarin naturally through play and connection. Feat
 - nikfot/skill-contracts-protocol ★0 pushed 2026-10-05 — Declarative skill contracts for LLM agents, define what tools to use, what evidence to collect, and when to finalize.
 - oolongbench/oolongbench.github.io ★0 pushed 2026-10-05 — A challenging aggregation benchmark for long-context models
@@ -119,10 +120,12 @@
 - pluginepitaphe-cmd/DWARF ★1 pushed 2026-10-05 — Combine sparse and full attention to reduce memory use while maintaining global context in transformer models with DWARF's hybrid architectu
 - navaefren21/klippbok ★0 pushed 2026-10-05 — Organize and prepare video datasets for efficient LoRA training with streamlined scanning, filtering, captioning, validation, and training w
 - iqiipo-dev/PS-HK19_MindForge_MindForge ★2 pushed 2026-10-05 — Provide context-based, accurate answers to syllabus questions using AI powered by Retrieval-Augmented Generation for effective student learn
+- FatmaAMR/Asset-Sentinel ★1 pushed 2026-10-05 — An Adaptive Industrial Predictive Maintenance System leveraging Microservices and Layered Architecture. Features real-time RUL forecasting u
 - latemailok-arch/replm ★0 pushed 2026-10-05 — 🧠 Enable long-context recursive language models by wrapping OpenAI clients into a persistent REPL for scalable prompt processing.
 - siliconworkshop/VS3L ★1 pushed 2026-10-05 — 🔬 Enable calibration transfer in vibrational spectroscopy using self-supervised learning to reduce labeled samples and correct instrument di
 - QYJ7270/LocalNest.tv ★0 pushed 2026-10-05 — 🎨 Enhance your Jellyfin media server with a clean, modern CSS theme featuring glassmorphism, smooth transitions, and custom backgrounds.
 - Misaya0/MCP-Agent-Template ★0 pushed 2026-10-05 — 🤖 Build multi-agent, retrieval-augmented AI workflows with ready-to-use components for document serving, Q/A bots, and agent orchestration.
+- We-Amp/cyclone-cache ★0 pushed 2026-10-05 — High-performance C++23 disk + RAM cache with zero-copy mmap reads, a lock-free read path, and multi-process sharing of one cache file. Apach
 - aserrato7n/academic_paper_generation ★0 pushed 2026-10-05 — 📄 Generate academic papers automatically using AI, integrating literature search and Retrieval-Augmented Generation for efficient report cre
 - practical-inference/vllm-ampere-extended ★0 pushed 2026-10-05 — vLLM extended for Ampere (SM80): sparse attention serving stack - GLM sparse MLA, Qwen QSA, DeepSeek fp8_ds_mla + local fixes
 - 3ilix/MemBrain ★1 pushed 2026-10-05 — 🧠 Enhance AI interactions with MemBrain, a solution for long-term memory and context management in agentic AI systems, offering personalized
@@ -275,6 +278,7 @@
 - tourlida/ai-assisted-support-ops ★0 pushed 2026-10-05 — Production-style full-stack AI support platform demonstrating LLM integration, tool calling, RAG, agent orchestration, human-in-the-loop wor
 - genaforvena/tiny-fleet ★1 pushed 2026-10-05 — Fleet of tiny specialist LLMs: one shared 360M base, one LoRA adapter per specialty, embedding-centroid router with abstain path. Numbers + 
 - thekaveh/NNx ★2 pushed 2026-10-05 — Lightweight PyTorch toolkit for training, fine-tuning, and exporting modern neural nets. FFN, GNN, decoder-only LM, diffusion, JEPA, MoE, PE
+- baruashoumyadip-blip/pyro-kernel-benchmark ★0 pushed 2026-10-05 — An $O(N)$ linear-time contraction operator leveraging Banach Fixed-Point Contraction Mapping to solve Transformer memory bottlenecks and opt
 - mlsftwrs/sebeni ★1 pushed 2026-10-05 — Self-aware morphotactic generation for extremely low-resource Manding languages
 - JonathanRReed/JR-AutoRAG ★0 pushed 2026-10-05 — Local-first RAG (Retrieval-Augmented Generation) workbench: Bun and React console over a FastAPI backend, with document ingestion, Ollama an
 - dereksantos/cortex ★3 pushed 2026-10-05 — A agent harness that learns over time, manages its own context and is optimized for small language models.
@@ -304,6 +308,7 @@
 - HarisMajeed05/legal-ai-chatbot ★0 pushed 2026-10-05 — A Legal AI Assistant built with React, FastAPI, and MongoDB, using a Retrieval Augmented Generation pipeline through LangChain and FAISS, po
 - LinGrayy/MSSA-code ★0 pushed 2026-10-05 — Datasets & Code for the ECCV 2026 paper  "Memory-Supported Synergistic Adaptation for Training-Free Test-Time Medical Image Segmentation".
 - keppy/thomas ★0 pushed 2026-10-05 — thomas.train() — a training harness. Case→reward→train: take a Case set and a score function, get a baseline card (gonogo), run a training l
+- santhosh220z/SIGN_SPEAK-The-Silent-Communicator ★0 pushed 2026-10-05 — Real-time sign language recognition with MediaPipe hand/face/pose landmarks and a two-stream (appearance + motion) 1D-CNN + Transformer with
 - api-evangelist/compresr ★0 pushed 2026-10-05 — Compresr — independent third-party profile of a public API surface, by API Evangelist. Compresr is an LLM context-compression API. You send 
 - harsh2308-agr/AI-ML ★0 pushed 2026-10-05 — A central repository showcasing production-ready Generative AI projects alongside a structured Machine Learning study log. This space bridge
 - ParsiaJoon/nanogpt-from-scratch ★0 pushed 2026-10-05 — 
@@ -395,8 +400,3 @@
 - shubhankar360/agentcheck ★0 pushed 2026-10-05 — Evaluate tool-using LLM agents on what they did, not what they said: end-state + policy + answer checks, pass^k, judge calibration, and a pa
 - messagecompass/transformer.cpp ★0 pushed 2026-10-05 — A zero-dependency, educational C++ transformer trained from scratch on TinyStories.
 - dipeshbabu/metria ★2 pushed 2026-10-05 — Research, reference implementations, and evaluation tools for efficient LLM inference, KV-cache compression, quantization, and behavioral fi
-- sumit1311singh/neural-networks-from-scratch-forward-and-backward ★0 pushed 2026-10-05 — Implement a complete neural network stack from scratch in NumPy: finite-difference gradient checks, dense and activation layers, loss, seque
-- Ayush-2703/Large_languaage_Models ★3 pushed 2026-10-05 — A comprehensive blueprint for Large Language Models. A rigorous curriculum covering transformer architectures, pre-training dynamics, parame
-- interstellargon/angstromchat-pipeline ★0 pushed 2026-10-05 — End-to-end LLM training repo for resource-constrained setups (Single GPU). Supports Supervised Learning, RL, and Mixture of Experts, built a
-- ansumanshah/localmodel.run ★0 pushed 2026-10-05 — Can I run this AI model locally? Sourced memory requirements for 150+ local AI models across Mac, PC, GPU and phones.
-- ICEcrysta1/FFXIV_CCG ★2 pushed 2026-10-05 — FFXIV CCG（Context Combat Generator）—— FFXIV 战斗场景的生成式决策模型：FFLogs 采集、行为克隆预训练、GRPO 后训练、ONNX 部署导出、模型表征分析与自回归回放
