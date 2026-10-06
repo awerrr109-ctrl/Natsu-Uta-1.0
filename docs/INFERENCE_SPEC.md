@@ -29,3 +29,8 @@ actual context, GDN state ops, active MoE experts only, and PKM lookups).
   so adaptive depth is not yet a strong inference-efficiency lever. Engram (−0.054 at 1.06× FLOPs) dominates.
 - Test-time scaling (greedy vs maj@N vs oracle@N on addition, with FLOPs per problem) is pending (`scripts/post_s2.sh`).
 - C4 (no loop) decoding: 1.29 GB moved per token at 4-bit with tables offloaded (analytic, efficiency_9b.md). That is the main latency lever at batch 1.
+
+## Test-time compute allocation policy (v0.2, from R27, R51, R52)
+- Budget per question is adaptive: sample in rounds of 4; stop when the majority answer's vote margin ≥ 2 or a verifier passes; cap N at 16 (R52: overthinking).
+- Verifiers in order of preference: executable (unit tests, math checkers) > policy-matched PRM trained on own samples > none (R27: cross-policy PRMs fail).
+- Training-side consequence (R51): because inference is sampled many times, pretrain C4 in the overtrained regime (≥ 450 tok/param stored; ≈ 2000 tok/param active).

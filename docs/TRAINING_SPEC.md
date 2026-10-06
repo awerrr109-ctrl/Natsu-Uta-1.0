@@ -49,7 +49,7 @@ Status: specification for the 1B and 9B stages; toy-stage parts are implemented 
 | math & STEM (incl. synthetic rephrasings) | 15% | WRAP 3× claim not reproduced in R26 (1.48× rephrase / 1.80× megadocs); we budget with R26 numbers |
 | synthetic reasoning traces from teacher, verified by executor/checker | 10% | only verified traces (avoid model-collapse dynamics, L1 refute list) |
 | multilingual | 10% | |
-- Tokens: 9B target ~6–8T tokens; overtraining ~40× Chinchilla, like current 9B models (Qwen3.5 unknown, Ouro 7.7T).
+- Tokens: 9B target ~4–8T tokens; overtraining ~25–45× Chinchilla. **R51 (T² laws): when test-time sampling is part of deployment, the end-to-end optimum moves further into overtraining**, so the upper end is preferred if compute allows.
 - Tokenizer [spec]: byte-fallback BPE, 131,072 vocab, trained on the mixture; byte tokenizer [impl] used for toy stages.
 
 ## 4. Memory-efficient training (1 GB research mode) — measured at toy scale

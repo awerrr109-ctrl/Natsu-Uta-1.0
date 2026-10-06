@@ -419,3 +419,14 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   vs E4g 3-seed mean R1 1.683 / R3 1.4665 / R6 1.5508. [E own] Self-distillation **leaves R3 unchanged** (Δ −0.0004) and makes shallow and deep
   depths far more usable (R1 −0.18, R6 −0.048). It is the second "anytime" recipe (with E4p's exit training), at ~1.3× extra training compute
   (an extra shallow forward/backward). For the self-speculative draft role (INFERENCE_SPEC), E4l/E4p are the right training recipes: draft quality at R1 matters.
+
+### Train-to-test compute allocation (P4, principle #12 "9B + more inference compute")
+- **[R51] "Test-Time Scaling Makes Overtraining Compute-Optimal" (T² laws, arXiv:2604.01411)** — L2. [E] Jointly optimising model size, training tokens and
+  inference samples (pass@k) under a fixed end-to-end budget: **when inference cost is counted, the optimal pretraining shifts deep into the overtraining
+  regime**, far outside standard scaling suites. Validated by pretraining heavily overtrained models; the effect survives post-training.
+  → [I] **Direct support for the project thesis** (a fixed small model + more test-time samples instead of a bigger model). It also pins the 9B token budget:
+  overtrain well past Chinchilla (spec: 4–6T tokens ≈ 450–650 tok/param for a 9B; ~2000 tok/param of *active* for C4). This also argues for MoE (C4):
+  per-sample inference cost is proportional to active params (2.6B), so T²'s optimum moves further toward "many cheap samples".
+- **[R52] "When More Thinking Hurts: Overthinking in TTS" (arXiv:2604.10739)** — L2 (refutation side). [E] Marginal returns of extra reasoning tokens
+  diminish quickly; extended reasoning abandons correct answers; optimal length varies with difficulty. → [I] G2 must allocate per-question
+  (adaptive N / early stop on vote agreement), not a uniform N. Spec: majority-vote early stopping once the leading answer's margin exceeds a threshold.
