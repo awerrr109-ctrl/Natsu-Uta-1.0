@@ -306,3 +306,31 @@ TAXONOMY["P11_s1_derived"] = {
 GITHUB_QUERIES += ["looped moe", "recurrent depth transformer", "huginn", "ouro loop", "mixture of recursions",
                    "relaxed recursive", "hyper connections", "yoco", "kv sharing", "layerskip", "self speculative",
                    "moeut", "sparse universal transformer", "gated attention", "kimi delta attention", "native sparse attention"]
+
+# Session-2 Step-H expansion (from E4g reversal, R20/R21, R17, DPT): each hypothesis has support + refute queries.
+TAXONOMY["P13_s2_derived"] = {
+    "problem": "Make looping pay at matched compute and make memory/distillation gains robust.",
+    "hypotheses": {
+        "H13.1_anytime_tax": {"claim": "Training with variable depth costs quality at fixed depth; curricula reduce it.",
+            "support": ["stochastic depth looped transformer anytime inference", "nested depth training anytime prediction", "early exit training cost final layer quality"],
+            "refute": ["random depth training improves looped transformer generalization"]},
+        "H13.2_token_adaptive_depth": {"claim": "Lookahead-supervised per-token depth beats uniform depth at matched compute.",
+            "support": ["token adaptive recursion depth router", "learned halting supervised by loss improvement", "think harder per token adaptive iterations"],
+            "refute": ["adaptive computation time no gain language modeling", "per token early exit batching inefficiency GPU"]},
+        "H13.3_memory_loop_complement": {"claim": "Lookup memory and looping are complements (memory frees depth, loop adds depth).",
+            "support": ["n-gram embedding memory reasoning depth effective layers", "memory layer looped transformer", "hash embedding language model scaling"],
+            "refute": ["n-gram memory gains vanish with tokenizer vocabulary scaling", "large vocabulary replaces n-gram memory"]},
+        "H13.4_distilled_pretraining_small": {"claim": "Logit distillation during pretraining is the largest token-efficiency lever for a 9B model.",
+            "support": ["distilled pretraining induction heads", "top-k logit distillation pretraining", "teacher student capacity gap language model pretraining"],
+            "refute": ["distillation hurts in-context learning", "knowledge distillation pretraining no benefit at scale"]},
+        "H13.5_stable_loop_dynamics": {"claim": "Contractive injection (spectral radius<1) enables depth extrapolation.",
+            "support": ["contractive recurrent depth extrapolation", "fixed point looped transformer convergence", "deep equilibrium language model"],
+            "refute": ["looped transformer extrapolation fails beyond trained iterations"]},
+        "H13.6_tokenizer_vs_memory": {"claim": "Byte-level vs BPE changes the value of n-gram memory.",
+            "support": ["byte level language model n-gram cache", "tokenizer vocabulary size scaling law"],
+            "refute": ["over-tokenized transformer vocabulary scaling"]},
+    },
+}
+GITHUB_QUERIES += ["parcae looped", "adaptive looped transformer", "engram ngram memory", "hash embedding language model",
+                   "distillation pretraining llm", "top-k logit distillation", "megadoc synthetic", "rephrase pretraining data",
+                   "fixed point transformer", "deep equilibrium language model", "anytime inference early exit"]

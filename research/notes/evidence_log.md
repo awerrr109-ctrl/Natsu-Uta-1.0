@@ -99,3 +99,18 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **[R22] "Stability and Generalization in Looped Transformers" arXiv:2604.15259; Fixed-Point Reasoners arXiv:2606.18206; "Stabilizing
   Extrapolation…" arXiv:2606.29983** — L1 (titles/snippets). Extrapolation beyond trained depth needs fixed-point-style training. Our E4g
   degrades at R=6, which is consistent. Queued for L2.
+
+### Token-indexed memory: robustness across scale/tokenizer (H13.3, H13.6)
+- **[R23] Over-Tokenized Transformer (Huang et al., ICML 2025, arXiv:2501.16975)** — L3-partial.
+  [E] Input-side hierarchical n-gram vocabulary (summed 1..n-gram embeddings). **Loss is log-linear in input vocab: −0.015 per 4× (L = 2.6754 − 0.0256·log10 m)**.
+  OE-12.8M 400M ≈ 1B baseline (2.5×). **The gain is about constant from OLMoE-1.3B to 7B** even as embedding share drops. Scaling the *output* vocab hurts small (underfitting) models.
+  → [I] Strong cross-scale evidence that token-indexed memory is not a toy artefact. Supports C4 at 9B. Also a **design rule: grow the input side
+  (Engram/OE), keep the output vocab moderate** for 9B.
+- **[R24] X-gram (arXiv:2604.21724)** — L2.
+  [E] At 0.73B, X-gram 48.5 vs Engram 47.2 vs MoRT 45.8 vs Retoken 45.0. At 1.15B, +2.3–3.2 over Engram, reaching baseline quality with 57% of the data.
+  **Failure modes of naive n-gram memory: (1) Zipfian under-training: most long-tail rows stay cold; (2) parallel fixed slots collapse into
+  redundant subspaces; (3) injecting into Q/K is fragile, while value-stream/residual injection is better.**
+  → [H] Engram v2 in Natsu: frequency-aware hashing (reserve dedicated rows for frequent n-grams, share buckets for the tail) +
+  per-head distinct conv kernels. Planned E7 (toy can test (2) via head count, (1) via slot count).
+- Refute check H13.6: no paper found showing the n-gram memory gain *vanishing* with larger tokenizer vocab. R23 shows the opposite.
+  [unknown] at byte level our effect may be inflated → B1/B2 test this directly.
