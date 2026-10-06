@@ -119,6 +119,12 @@ def train(cfg):
         for g in opts[1].param_groups:
             g["lr"] = tc.get("adam_lr", 3e-3)
         base_lrs[1] = [tc.get("adam_lr", 3e-3)]
+    teacher, kd = None, tc.get("distill")
+    if kd:   # distilled pretraining (DPT, arXiv:2509.01649): KL to teacher on all but the lowest-entropy tokens
+        ck = torch.load(os.path.join(ROOT, kd["teacher"]), map_location="cpu")
+        teacher = Natsu(NatsuConfig(**ck["config"])); teacher.load_state_dict(ck["state_dict"]); teacher.eval()
+        for p_ in teacher.parameters():
+            p_.requires_grad_(False)
     tr = make_loader(dc, seq, batch, tc.get("seed", 0), "train")
     ev = make_loader(dc, seq, tc.get("eval_batch", batch), 777, "valid" if dc["kind"] == "memmap" else "train")
     ev_batches = ev.fixed_eval(tc.get("eval_batches", 8))
@@ -169,6 +175,21 @@ def train(cfg):
                 if tc.get("exit_w", 0.0) > 0:
                     for lg in out["inter_logits"]:
                         total = total + tc["exit_w"] * masked_ce(lg, y, m)[0] / len(out["inter_logits"])
+            if teacher is not None:
+                with torch.no_grad():
+                    tl = teacher(x)["logits"].float() / kd.get("T", 1.0)
+                    tlp = F.log_softmax(tl, -1)
+                    ent = -(tlp.exp() * tlp).sum(-1)
+                    keep = valid.clone()
+                    q = kd.get("skip_low_entropy", 0.0)      # token routing: hard labels only on lowest-entropy tokens
+                    if q > 0:
+                        thr = torch.quantile(ent[valid].flatten()[:65536], q)
+                        keep = keep & (ent > thr)
+                slp = F.log_softmax(out["logits"].float() / kd.get("T", 1.0), -1)
+                klt = F.kl_div(slp, tlp, log_target=True, reduction="none").sum(-1)
+                kdl = (klt * keep).sum() / keep.sum().clamp(min=1)
+                w = kd.get("w", 0.5)
+                total = total + w * kdl                    # CE kept at full weight; KD added (DPT-style)
             sd = tc.get("self_distill", 0.0)
             if sd > 0 and R > 1:
                 rs = int(rng.integers(1, R))

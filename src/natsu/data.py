@@ -141,6 +141,33 @@ def gen_add(rng, nd):
     return ids, [0] * (1 + len(s)) + [1] * (len(ans) + 1)
 
 
+def gen_varchain_dense(rng, n_vars=8, n_steps=12, mod=10):
+    """Densely-supervised LOOKUP+ARITHMETIC probe (F003 follow-up). HONEST SCOPE: intermediate values are written in
+    context, so each step = retrieve the latest value of src (induction-like) + one mod-10 op. It tests in-context
+    retrieval and arithmetic, NOT deep latent chaining (that needs hidden intermediates; see F003).
+    Program: 'a=3;b=a+4;c=b*2;a=c+1;...' where each statement's RHS references an earlier variable; after each
+    statement the model must emit the new value: 'b=a+4>7;'. EVERY step is supervised (the value after '>'),
+    and step k depends on a chain of k earlier results -> depth of computation grows along the sequence.
+    Values mod 10. Per-step accuracy vs 'dependency depth' gives a depth-scaling curve per architecture."""
+    names = [chr(c) for c in range(ord("a"), ord("a") + n_vars)]
+    vals, depth = {}, {}
+    ids, mask, deps = [BOS], [0], []
+    v0 = names[0]; x = rng.randrange(mod)
+    s = f"{v0}={x}>"; ids += list(s.encode()); mask += [0] * len(s)
+    ids += list(str(x).encode()); mask += [1]; ids += list(b";"); mask += [0]
+    vals[v0], depth[v0] = x, 0
+    for _ in range(n_steps):
+        tgt = rng.choice(names); src = rng.choice(list(vals))
+        op = rng.choice("+-*"); k = rng.randrange(1, mod)
+        v = (vals[src] + k) % mod if op == "+" else (vals[src] - k) % mod if op == "-" else (vals[src] * k) % mod
+        st = f"{tgt}={src}{op}{k}>"
+        ids += list(st.encode()); mask += [0] * len(st)
+        ids += list(str(v).encode()); mask += [1]; ids += list(b";"); mask += [0]
+        vals[tgt], depth[tgt] = v, depth[src] + 1
+        deps.append(depth[tgt])
+    return ids, mask
+
+
 class SyntheticLoader:
     def __init__(self, task, seq, batch, seed=0, **kw):
         self.task, self.seq, self.batch, self.kw = task, seq, batch, kw
@@ -152,6 +179,8 @@ class SyntheticLoader:
             return gen_chain(rng, rng.randint(kw.get("min_hops", 1), kw.get("hops", 4)), n_chains=kw.get("n_chains", 2))
         if self.task == "mqar":
             return gen_mqar(rng, kw.get("n_pairs", 16), kw.get("n_q", 8))
+        if self.task == "varchain":
+            return gen_varchain_dense(rng, kw.get("n_vars", 8), kw.get("n_steps", 12))
         if self.task == "add":
             return gen_add(rng, rng.randint(kw.get("min_digits", 1), kw.get("digits", 5)))
         raise ValueError(self.task)
