@@ -1,0 +1,2 @@
+{"name": "E4s_moe_engramv2_vip", "params": 825544, "params_nonembed": 792264, "flops_per_token_fwd": 1582080.0}
+{"step": 0, "loss": 5.5726823806762695, "lr_f": 0.016666666666666666, "gnorm": 3.448929786682129, "tokens": 2048, "scored": 2048, "scored_tokens": 2048, "tok_s": 2885.2219058194596, "rss_mb": 338.46875, "peak_rss_mb": 489.40234375, "train_flops": 9720299520.0, "loops": 1, "eval": {"loss": 5.530375321706136, "ppl": 252.23856386791223, "bpb": 7.978645050880148}}

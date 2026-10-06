@@ -296,3 +296,14 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   scaling-law constants as [weak E]. #10 led directly to F009 in our own code.
 - **3-seed loop result**: E4g R3 1.4574/1.4691/1.4731 (mean 1.4665, sd 0.0082) vs E4c mean 1.4792 → **loop −0.013 bpb, t ≈ 2.0 (n=3)** at 1.73× inference
   FLOPs. Marginal. Engram's −0.053 (t ≈ 12.8) is 4× larger at 1.06× FLOPs. The single-seed −0.030 claimed in session 1 was 2.4× too large (F008).
+
+### N2 test (E4q vs E4r): memory-conditioned depth decider
+| run | R1 | R2 | R3 | R6 | gate th0.3 (bpb, skip) | th0.5 |
+|---|---|---|---|---|---|---|
+| E4q loop+Engram+lookahead, **gate sees Engram gate value** | 1.4739 | 1.4288 | 1.4229 | 1.4609 | 1.4367 @ 39% | 1.4641 @ 87% |
+| E4r same, **without** memory feature | 1.4671 | 1.4260 | 1.4223 | 1.4583 | 1.4356 @ 42% | 1.4564 @ 87% |
+| E4j Engram, no loop (3-seed mean) | 1.4262 | | | | | |
+- [E own] **N2: no effect.** E4q ≈ E4r on every row (Δ ≤ 0.008, within seed noise, and E4r is slightly better). The Engram gate scalar adds no information to
+  the depth decider at this scale. The pre-registered AUC comparison (gate_eval) runs post-queue; unless it shows ≥ +0.03 AUC, N2 is refuted.
+- [E own] **Loop + Engram, even with exit training, does not beat Engram alone**: best R3 1.4223 vs E4j 1.4262 (Δ −0.004, inside noise) at 1.6× FLOPs;
+  any gated (cheaper) setting is *worse* than E4j at 1.06×. Confirms F007 with a stronger loop recipe. Exit training makes R1 usable (1.467 vs E4k's 1.622).

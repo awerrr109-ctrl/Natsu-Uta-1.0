@@ -78,23 +78,26 @@
   "H1.1_loop_toy_3seed": "E4g R3 mean 1.4665 vs E4c 1.4792: -0.013 (t=2.0) at 1.73x FLOPs; marginal",
   "R40_engram_dense_1p3B": "independent report: no iso-param gain on 1.3B dense (1T tok); C4 Engram commitment conditional on 10M 2x2 + downstream eval"
  },
- "rejected_hypotheses": [
-  {
+ "rejected_hypotheses": {
+  "0": {
    "id": "forward-only pretraining (MeZO/forward-gradient)",
    "reason": "variance scales with dim (literature, L1); not tested by us",
    "evidence_quality": "low"
   },
-  {
+  "1": {
    "id": "C1 dense looped",
    "reason": "R2 phi=0.46, R4 dense loops scale worse, E4a worst",
    "evidence_quality": "medium"
   },
-  {
+  "2": {
    "id": "N1 memory-before-loop complementarity (toy)",
    "reason": "F007 sub-additive",
    "evidence_quality": "low-medium (1 seed, toy)"
-  }
- ],
+  },
+  "N2_memory_conditioned_depth": "F010: E4q\u2248E4r (no effect); loop+Engram+exit still \u2248 Engram alone",
+  "N3_fixed_then_uniform": "E4m failed pre-reg",
+  "N1_memory_before_loop_bpb": "F007"
+ },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",
   "H3.2 GDN vs attention vs hybrid recall on MQAR (E2 queued)",

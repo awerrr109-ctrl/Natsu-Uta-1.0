@@ -13,7 +13,7 @@ Rule: a contribution counts only if (a) the difference from the closest prior wo
   without params.
 - Falsifier: if E4k (loop+Engram) − E4g (loop) ≥ E4j (Engram) − E4c (no-loop) − noise, the effects are additive or synergistic; if smaller, they are substitutes.
 
-## N2. Memory-conditioned depth: use the Engram *hit signal* as a feature for the per-token loop decider  [status: H, new]
+## N2. Memory-conditioned depth: use the Engram *hit signal* as a feature for the per-token loop decider  [status: **no effect (F010)**; AUC check pending; parked]
 - Observation chain: (i) loops only beat non-looped models at matched compute when depth is token-adaptive (R21, R29); (ii) Engram's gate value
   g_t = σ(⟨q(h_t), k(m_t)⟩) measures how well a static n-gram explains the current token (R17 mechanism; our `Engram.forward`);
   (iii) tokens that are predictable from local n-grams should need fewer loops.
