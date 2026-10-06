@@ -190,3 +190,12 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   ≈1.8× for −0.035, and the teacher's own training cost is extra. At inference, KD is free; this is the axis that matters for the 9B deployment target.
   Single seed; seed runs are pending, so deltas ≥0.02 are likely real (B-series noise estimate ~0.003–0.007, to be confirmed).
   **New Pareto best (toy, inference FLOPs): E5b 1.4063 at 1.58e6 FLOP/token.**
+- **[R35] Busbridge et al., "Distillation Scaling Laws" (ICML 2025, arXiv:2502.08606)** — L3-partial (section headers + §5 claims). **Refutation read for E5.**
+  [E] Student CE depends on the teacher only through the teacher's CE L_T (a power law with a capacity-gap regime). **Distillation beats supervised learning
+  only up to a student-compute level that grows with student size; with enough student tokens, supervised ≥ distillation.** If the teacher must be trained
+  for one student, supervised is generally preferable. Students can beat teachers (weak-to-strong) in some isoFLOP cases.
+  → [I] Our E5 regime (0.8M params, 1.6M tokens ≈ 2 tokens/param, heavily *under*-trained) is exactly where KD should win most. **The −0.035 does NOT transfer
+  to Natsu-9B at 4–6T tokens (~500 tokens/param)**; R35 predicts the gain shrinks toward zero there. The 9B KD plan is therefore justified only with an
+  **existing** teacher (frontier/open-weight, teacher cost sunk) and mainly for post-training and reasoning traces (R25 pass@k), not as a pretraining
+  multiplier. TRAINING_SPEC P1 KD share is kept, but its claimed efficiency multiplier is downgraded to "regime-dependent, ≤1.x at 9B" [I].
+  Control E5c (born-again, same-size teacher E4c) is queued: if E5c ≈ E5a, the toy gain is regularisation, not capacity transfer.
