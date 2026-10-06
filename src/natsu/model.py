@@ -44,6 +44,7 @@ class NatsuConfig:
     reinject: bool = False
     reinject_mode: str = "concat"    # concat (Huginn, identity-init) | lti (Parcae-style stable: x <- a*x + b*norm(e), a=exp(-dt*exp(logA)) in (0,1))
     depth_gate: bool = False
+    gate_mem_feat: bool = False      # N2: depth decider also sees Engram retrieval confidence (gate value) — docs/NOVELTY.md
     gate_mode: str = "soft"          # soft (FLOP-penalty, E4d) | lookahead (TaH2-style: gate is a classifier of
                                      # "does loop r improve this token?", trained on measured CE deltas; forward = no gating in training)
     pkm_keys: int = 0                # 0 disables; n_keys per sub-key set (memory = n_keys^2 slots)
@@ -322,6 +323,7 @@ class Engram(nn.Module):
         k, v = self.k(m), self.v(m)
         g = torch.sigmoid((self.norm(self.q(x)) * self.norm(k)).sum(-1, keepdim=True) / x.shape[-1] ** 0.5)
         y, cs = self.conv(g * v, st.get("conv"))
+        self.last_gate = g.detach()                           # (B,L,1) retrieval confidence, used by N2 depth decider
         return y, {"tail": tail, "conv": cs}
 
 
@@ -393,7 +395,7 @@ class Natsu(nn.Module):
                 self.lti_B = nn.Parameter(torch.zeros(c.d_model))           # injection starts at 0 -> pure residual
                 self.lti_norm = RMSNorm(c.d_model)
             if c.depth_gate:
-                self.gate = nn.Linear(c.d_model, 1)
+                self.gate = nn.Linear(c.d_model + (1 if c.gate_mem_feat else 0), 1)
                 nn.init.zeros_(self.gate.weight)
                 nn.init.constant_(self.gate.bias, 2.0)
         self.norm = RMSNorm(c.d_model)
@@ -463,6 +465,7 @@ class Natsu(nn.Module):
             if new_cache is not None:
                 new_cache["engram"] = ns
         e = x
+        mem_g = self.engram.last_gate if (self.engram is not None) else x.new_zeros(*x.shape[:2], 1)
         for r in range(R):
             loop_idx[0] = r
             if r > 0 and c.reinject:
@@ -476,10 +479,11 @@ class Natsu(nn.Module):
                 x = x + self.loop_emb[rr]
             skip, gval = None, None
             if r > 0 and c.depth_gate and c.n_loops > 1:
-                gval = torch.sigmoid(self.gate(x))          # (B,L,1) prob. of executing loop r
+                gin = x if not c.gate_mem_feat else torch.cat([x, mem_g], -1)
+                gval = torch.sigmoid(self.gate(gin))        # (B,L,1) prob. of executing loop r
                 gates.append(gval)
                 if c.gate_mode == "lookahead":
-                    gate_logits.append(self.gate(x.detach())[..., 0])   # classifier only; no gradient into the trunk
+                    gate_logits.append(self.gate(gin.detach())[..., 0])   # classifier only; no gradient into the trunk
                     if self.training and want_inter:
                         inter.append(x)                                  # state BEFORE loop r -> CE if we stopped here
                     if gate_threshold is None:

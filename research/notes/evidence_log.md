@@ -130,3 +130,12 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   Byte level was −0.059 (E4j vs E4c). [E] Engram's gain **survives the BPE tokenizer but shrinks ~4×**, consistent with the byte-level
   inflation hypothesis (H13.6) and with R23 (gain is log-linear in effective input vocab; BPE already captures part of local n-gram statistics).
   Note: BPE runs see ~2× more bytes of context and ~same bytes trained (819k tok × 3.96 ≈ 3.2MB vs 1.6MB), so the absolute bpb is not comparable across tokenizers; only within-tokenizer deltas are.
+
+### Loop stability / adaptive recursion (H13.2, H13.5)
+- **[R28] Stability and Generalization in Looped Transformers (Labovich, arXiv:2604.15259)** — L2.
+  [E] Theory + chess/sudoku/prefix-sum experiments: **without recall (= input re-injection) a looped network has countable fixed points and cannot be strongly input-dependent**. Recall + *outer normalization* gives reachable, input-smooth fixed points and stable backprop. Internal recall placement is competitive and better on sudoku.
+  → [I] **Tension with our E4g** (no re-injection was best at toy LM). Resolution: E4g uses R=3 (not a fixed-point regime), and the prelude output is already in the residual stream. R28's claim is about extrapolation to many iterations. Prediction: E4g fails at large R (consistent: R=6 1.552) while LTI/recall variants (E4o) should degrade less at R=6. This is a pre-registered test.
+- **[R29] Mixture-of-Recursions (arXiv:2507.10524)** — L2.
+  [E] Token-level routers over recursion depth; attention only among tokens still active; KV cached only for active tokens; a KV-sharing variant reuses
+  first-recursion KV (= our `loop_kv=shared_first`). New Pareto frontier at 135M–1.7B at equal training FLOPs. [unknown] failure modes (not in abstract).
+  → [I] Independent support (with R21) that **token-adaptive depth is the condition for loops to win at matched compute**, and that shared-first KV is viable.
