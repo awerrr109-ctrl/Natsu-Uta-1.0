@@ -114,3 +114,13 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   per-head distinct conv kernels. Planned E7 (toy can test (2) via head count, (1) via slot count).
 - Refute check H13.6: no paper found showing the n-gram memory gain *vanishing* with larger tokenizer vocab. R23 shows the opposite.
   [unknown] at byte level our effect may be inflated → B1/B2 test this directly.
+
+### Test-time scaling (P4, principle #13)
+- **[R27] "Can 1B LLM Surpass 405B LLM? Compute-optimal TTS" arXiv:2502.06703 (ICLR'25 track)** — L3-partial.
+  [E] Optimal TTS depends on policy size and difficulty: <7B → search (beam/DVTS) on hard problems, BoN on easy ones; 72B → BoN everywhere.
+  3B + TTS > 405B on MATH-500 and AIME24; 7B-distill + TTS > o1 / R1 on MATH-500 and AIME24, at **100–1000× fewer FLOPs** than 405B.
+  **Failures**: PRMs do not generalize across policies (OOD → worse than majority vote); on the hardest set (AIME24), TTS < distillation from strong reasoners;
+  gains shrink as the policy gets stronger; math-only evaluation.
+  → [I] For the 9B target, the inference-time efficiency multiplier vs frontier models can plausibly reach 100–1000× **on verifiable domains (math/code)**,
+  but only with a policy-matched verifier (train our own PRM/ORM on our own samples) and only when the base reasoning comes from distillation.
+  Verifiers from executable feedback (code tests, math checkers) avoid PRM OOD issues → tool-integrated verification (L1: Kang et al.).

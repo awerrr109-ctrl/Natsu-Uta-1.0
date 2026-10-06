@@ -195,3 +195,51 @@
 [paper] H8.1_rl_verifiable refute  'spurious rewards RLVR': arxiv=0 openalex=100 crossref=0
 [paper] H8.1_rl_verifiable refute  'RL small models limited': arxiv=0 openalex=100 crossref=0
 [paper] H9.1_quant_kv support 'GPTQ': arxiv=0 openalex=100 crossref=0
+[paper] H9.1_quant_kv support 'AWQ activation aware quantization': arxiv=0 openalex=100 crossref=0
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+[paper] H9.1_quant_kv support 'KV cache quantization': arxiv=0 openalex=0 crossref=0
+[paper] H9.1_quant_kv support 'KV cache compression eviction': arxiv=0 openalex=0 crossref=0
+[paper] H9.1_quant_kv support 'QuIP incoherence': arxiv=0 openalex=0 crossref=0
+[paper] H9.1_quant_kv support 'AQLM additive quantization': arxiv=0 openalex=0 crossref=0
+[paper] H9.1_quant_kv refute  'quantization hurts reasoning long chain': arxiv=0 openalex=0 crossref=0
+[paper] H9.1_quant_kv refute  'KV eviction failure': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'predictive coding neural network language': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'hopfield networks is all you need': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'deep equilibrium models': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'neural ODE language model': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'complementary learning systems hippocampus model': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'hypernetwork generate weights transformer': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'multigrid neural network training': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'energy based language model': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'diffusion language model': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross support 'byte latent transformer patches': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross refute  'deep equilibrium model instability': arxiv=0 openalex=0 crossref=0
+[paper] H10.1_cross refute  'diffusion language model gap autoregressive': arxiv=0 openalex=0 crossref=0
+[paper] H11.1_looped_moe_routing_divergence support 'looped mixture of experts routing divergence': arxiv=0 openalex=0 crossref=0
+[paper] H11.1_looped_moe_routing_divergence support 'sparse layers looped language models': arxiv=0 openalex=0 crossref=0
+[paper] H11.1_looped_moe_routing_divergence support 'recursive mixture of experts shared layers': arxiv=0 openalex=0 crossref=0
+[paper] H11.1_looped_moe_routing_divergence support 'MoEUT mixture of experts universal transformer': arxiv=0 openalex=0 crossref=0
+[paper] H11.1_looped_moe_routing_divergence support 'sparse universal transformer': arxiv=0 openalex=0 crossref=0
+[paper] H11.1_looped_moe_routing_divergence refute  'looped MoE expert collapse across iterations': arxiv=0 openalex=0 crossref=0
+[paper] H11.1_looped_moe_routing_divergence refute  'universal transformer MoE instability': arxiv=0 openalex=0 crossref=0
+[paper] H11.2_loop_capacity_exponent support 'iso-depth scaling laws looped language models': arxiv=0 openalex=0 crossref=0
+[paper] H11.2_loop_capacity_exponent support 'hyper-connections residual streams': arxiv=0 openalex=0 crossref=0
+[paper] H11.2_loop_capacity_exponent support 'input injection recurrent depth transformer': arxiv=0 openalex=0 crossref=0
+[paper] H11.2_loop_capacity_exponent support 'per-iteration LoRA recursive transformer': arxiv=0 openalex=0 crossref=0
+[paper] H11.2_loop_capacity_exponent refute  'truncated backpropagation through depth looped transformer degrades': arxiv=0 openalex=0 crossref=0
+[paper] H11.3_hybrid_role_dissociation support 'attention recalls recurrence controls hybrid': arxiv=0 openalex=0 crossref=0
+[paper] H11.3_hybrid_role_dissociation support 'hybrid model which layers need attention': arxiv=0 openalex=0 crossref=0
+[paper] H11.3_hybrid_role_dissociation support 'KV cache sharing across layers': arxiv=0 openalex=0 crossref=0
+[paper] H11.3_hybrid_role_dissociation refute  'hybrid linear attention needle in haystack failure': arxiv=0 openalex=0 crossref=0
+[paper] H11.4_self_spec_loops support 'self speculative decoding looped transformer': arxiv=0 openalex=0 crossref=0
+[paper] H11.4_self_spec_loops support 'early exit self distillation draft': arxiv=0 openalex=0 crossref=0
+[paper] H11.4_self_spec_loops support 'layerskip early exit speculative': arxiv=0 openalex=0 crossref=0
+[paper] H11.4_self_spec_loops refute  'early exit draft low acceptance rate': arxiv=0 openalex=0 crossref=0
+[paper] H11.5_layer_loop_vs_block_loop support 'layer-wise looping transformer local refinement': arxiv=0 openalex=0 crossref=0
+[paper] H11.5_layer_loop_vs_block_loop support 'Loopie looped MoE': arxiv=0 openalex=0 crossref=0
+[paper] H11.5_layer_loop_vs_block_loop support 'Ouro looped language model entropy regularized exit': arxiv=0 openalex=0 crossref=0
+[paper] H11.5_layer_loop_vs_block_loop refute  'looped transformer training instability residual scaling': arxiv=0 openalex=0 crossref=0
+[paper] H11.6_kv_sharing_across_loops support 'cross-layer KV cache sharing': arxiv=0 openalex=0 crossref=0
+[paper] H11.6_kv_sharing_across_loops support 'KV cache reuse recurrent depth': arxiv=0 openalex=0 crossref=0
+[paper] H11.6_kv_sharing_across_loops support 'you only cache once YOCO': arxiv=0 openalex=0 crossref=0
+[paper] H11.6_kv_sharing_across_loops refute  'cross layer kv sharing quality degradation': arxiv=0 openalex=0 crossref=0

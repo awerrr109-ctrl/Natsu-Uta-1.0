@@ -121,3 +121,34 @@ def adaptive_depth_logits(model, idx, r_max=None, tol=1e-3):
                 return lg, r
         prev = lp
     return lg, r_max
+
+
+# ----------------------------------------------------------------------------- test-time scaling
+@torch.no_grad()
+def sample_n(model, idx, n, max_new, temperature=0.8, top_k=40, n_loops=None, eos=None):
+    """n independent samples (batched). Returns list of token lists (generated part only)."""
+    x = idx.repeat(n, 1)
+    out = generate(model, x, max_new, n_loops=n_loops, temperature=temperature, top_k=top_k, eos=eos)
+    return [row[idx.shape[1]:].tolist() for row in out]
+
+
+def majority_vote(answers):
+    """Self-consistency: most frequent non-None answer (ties -> first seen)."""
+    from collections import Counter
+    c = Counter(a for a in answers if a is not None)
+    return c.most_common(1)[0][0] if c else None
+
+
+def best_of_n(answers, scores):
+    """Verifier-weighted selection: sum verifier scores per distinct answer (weighted vote, more robust than argmax
+    when the verifier is OOD — cf. R27 PRM generalization failure)."""
+    agg = {}
+    for a, s in zip(answers, scores):
+        if a is not None:
+            agg[a] = agg.get(a, 0.0) + s
+    return max(agg, key=agg.get) if agg else None
+
+
+def tts_accounting(n, prompt_len, gen_len, flops_per_token):
+    """FLOPs for n samples (prompt prefilled once per sample here; KV/state sharing would reduce prefill cost)."""
+    return n * (prompt_len + gen_len) * flops_per_token
