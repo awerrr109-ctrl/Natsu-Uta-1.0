@@ -14,3 +14,9 @@
   The global OOM killer took E4o at step ~150. Same mechanism as before: "small" ad-hoc jobs are not small relative to 1 GB.
 - **Rule (now binding)**: no foreground model instantiation while a queue job runs, unless `free -m` available > peak_rss(queue job) + 500 MB.
   Smoke tests go into the queue as their own entry. E4o requeued at the front of s2e.
+
+## Second recurrence (session 2, 07:27 UTC) — agent again; the written rule was not enough
+- A foreground `import torch` plus a meta-device model build (for a param count) while E4l (peak 842 MB) trained → OOM killed E4l at step 700/800.
+- **Why the rule failed**: it relied on me checking `free -m` by hand before every command. A meta-device build "felt" free, but torch import alone is ~200 MB RSS.
+- **Fix (mechanism, not intention)**: `scripts/fg_guard.sh <need_mb> cmd…` refuses (exit 75) when a training job runs and MemAvailable − 450 MB < need.
+  All foreground python that imports torch now goes through it. E4l is requeued (s2h).
