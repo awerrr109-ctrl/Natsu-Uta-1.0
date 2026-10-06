@@ -8,3 +8,9 @@
 - **fix**: `scripts/start_queue_s2c.sh` refuses to start if any `run_queue.sh` is alive (regex `run_queue[.]sh` avoids the self-match);
   heavy one-off tests run only when the queue is idle.
 - **lesson**: on a 1 GB / 2 vCPU box, concurrency is an experimental confound (throughput, tok/s, and RSS numbers) as well as a crash risk.
+
+## Recurrence (session 2, 01:50 UTC) — caused by the agent
+- A foreground 3-step smoke test (E8f, 1.6M params, peak ~480 MB) ran while the queue's E4o (peak ~720 MB) was training on a 985 MB box.
+  The global OOM killer took E4o at step ~150. Same mechanism as before: "small" ad-hoc jobs are not small relative to 1 GB.
+- **Rule (now binding)**: no foreground model instantiation while a queue job runs, unless `free -m` available > peak_rss(queue job) + 500 MB.
+  Smoke tests go into the queue as their own entry. E4o requeued at the front of s2e.
