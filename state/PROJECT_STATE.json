@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-06T08:00Z",
+ "updated": "2026-10-06T09:50Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -113,7 +113,9 @@
   "H5.3 DPT distillation at toy scale (E5a/b)",
   "B1-B3: Engram/loop effects survive BPE tokenizer",
   "H13.7 (R33) block-cosine regulariser = loop inductive bias without loop FLOPs (E4t, E8f queued)",
-  "R33 reframing of F007: Engram/loop substitutes on bpb but complements on reasoning (2x2 E6a-d, E8a-d queued)"
+  "R33 reframing of F007: Engram/loop substitutes on bpb but complements on reasoning (2x2 E6a-d, E8a-d queued)",
+  "H14.7 factorised Engram table (R44/R45) frees params for experts (E4v-x)",
+  "G1 content-addressed memory path for paraphrase-robust facts (after E9)"
  ],
  "open_questions": [
   "Does R4's looped-MoE advantage survive at >1B and with GDN hybrids?",
@@ -129,13 +131,10 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "s2c: E4l running, then s2 replicates",
-  "s2d E4q/E4r/E4s",
-  "s2e E4o,E6d,E8c-f,E4t",
-  "s2f E5c",
-  "s2g digit_pos test+E8g/E8h",
-  "s2h E5a_s1, E6L x4",
-  "post_s2: gate_eval, tts_eval"
+  "QUEUE ORDER (each launcher waits for the previous): s2e [E6d running, E8c, E8d, E8e, E8f, E4t] -> s2f [E5c] -> s2g [digit_pos test, E8g, E8h] -> s2h [E4l, E5a_s1, E6La/Lb/Lc x2 seeds, E4u] -> post_s2 [gate_eval E4q/E4r, tts_eval E8a-d, ds_eval x13, analyze] -> s2l [tests, E4v, E4w, E4x(sized), E4s2] -> s2i [sizing, L10a-d 10M 2x2] -> s2j [tests, E9a-c memory editing, collateral]",
+  "analysis after each: pre-registered rules in evidence_log (H14.1 E6L*, R36 E8g/h, H13.7 E8e/f/E4t, R33 2x2 E6d/E8c/d, N2 AUC, H14.7 E4v-x, F011 E4s2, R40 L10a-d, R39 E9)",
+  "X1 (1B stage, needs GPU): C4 vs fewer-experts/larger-active at iso-stored (R42)",
+  "50M+ stages: GPU required; downstream evals at >=50M before committing the 1.6B Engram table"
  ],
  "evidence_quality": "toy-scale only; literature L2 (abstract/summary), no L3 yet",
  "known_limitations": [
@@ -151,7 +150,9 @@
   "F009 fixed: train_dist sampler coverage + resume"
  ],
  "corpus": {
-  "see": "research/notes/corpus_stats.md",
-  "reads_table": "research/db/research.sqlite:reads"
+  "papers": 42045,
+  "repos": 15597,
+  "reads_L2plus": 46,
+  "note": "L1 v2 triage pending in post_s2"
  }
 }
