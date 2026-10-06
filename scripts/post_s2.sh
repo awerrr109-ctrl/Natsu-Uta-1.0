@@ -1,7 +1,7 @@
 #!/bin/bash
 # Runs memory-heavy evals only after every queue/launcher has exited (F006 rule).
 cd "$(dirname "$0")/.."
-idle() { ! pgrep -f "run_queue[.]sh" >/dev/null && ! pgrep -f "start_queue_s2[a-z][.]sh" >/dev/null; }
+idle() { ! pgrep -f "run_queue[.]sh" >/dev/null && ! pgrep -f "start_queue_s2[a-h][.]sh" >/dev/null; }
 until idle; do sleep 60; done; sleep 60; until idle; do sleep 60; done
 export MALLOC_ARENA_MAX=1
 cd src
