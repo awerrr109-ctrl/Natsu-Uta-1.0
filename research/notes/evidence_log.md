@@ -142,3 +142,18 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **B3 (BPE, loop R=3 fixed, iso non-embed with B1)**: R1 1.2204 / R2 1.1504 / **R3 1.1392** / R4 1.1452 / R6 1.1750.
   vs B1 1.1449: loop −0.006 bpb at 1.43× inf FLOPs. **Under BPE, Engram (−0.014 at 1.04× FLOPs) beats looping (−0.006 at 1.43×) by ~3.4× in gain-per-FLOP terms.**
   Both effects shrink from byte→BPE (Engram 0.059→0.014, loop 0.030→0.006). The ranking is preserved. Single seed; BPE deltas ≈ 2–5× typical seed noise (seed runs pending).
+
+### Data axis (P5): quality vs quantity vs diversity at long horizons (principle #15)
+- **[R30] Nemotron-CC (arXiv:2412.02595)** — L3-partial.
+  [E] FineWeb-Edu/DCLM remove ~90% of data and are ~80% near-duplicates, which hits diminishing returns after ~4 epochs. Classifier *ensembling* raises the HQ share 9→25%;
+  rephrasing low-quality data gives +1.5 avg; dropping heuristic filters on HQ data gives +18% yield. At 8B/1T, HQ subset MMLU 52.8 vs DCLM 47.2 / FW-Edu 51.2;
+  **8B at 15T tokens (7.2T Nemotron-CC) MMLU 70.3 vs Llama-3.1-8B 65.3.** → aggressive filtering is wrong for long horizons.
+- **[R31] "The data-quality illusion" (Saada et al. 2025)** — L2.
+  [E] Classifier-based filtering improves downstream tasks but can make LM loss on the HQ set *worse* (U-shaped in selection fraction). It "removes the bad"
+  rather than imitating the good, and acts mainly as alignment to benchmark-like style.
+- **[R32] BETR (arXiv:2507.12466)** — L2.
+  [E] Benchmark-targeted selection gives 2.1× compute multiplier over DCLM (4.7× over unfiltered). **Optimal kept fraction F_opt ∝ C^0.25: 3% at 1e20 FLOPs → 30% at 1e23.**
+  Goodhart: optimising for the core suite *lowers* held-out non-core tasks.
+- → [I] **Data spec for Natsu-9B (≈ 6.4e22–1e23 training FLOPs at 2.6B active × ~4–6T tokens)**: keep ~25–30% of the web (R32 law),
+  ensemble classifiers (R30), rephrase the rest (R30, R26 megadocs 1.8×), distill (R25). Evaluate only on a **held-out benchmark set never used for selection**
+  (R31, R32 Goodhart). The toy-stage filter question is moot (TinyStories). Recorded in TRAINING_SPEC v0.2.
