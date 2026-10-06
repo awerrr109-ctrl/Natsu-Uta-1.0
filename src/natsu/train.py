@@ -87,6 +87,20 @@ def evaluate(model, batches, n_loops=None, gate_threshold=None):
     return r
 
 
+def block_cos_reg(model, k=2):
+    """R33 regulariser: mean (1 - cos) between matching >=2-D tensors of core blocks i and i+k."""
+    core = list(model.core)
+    terms = []
+    for i in range(len(core) - k):
+        pa = dict(core[i].named_parameters()); pb = dict(core[i + k].named_parameters())
+        for n, a in pa.items():
+            b = pb.get(n)
+            if b is None or a.dim() < 2 or a.shape != b.shape:
+                continue
+            terms.append(1 - F.cosine_similarity(a.flatten(), b.flatten(), dim=0))
+    return torch.stack(terms).mean() if terms else torch.zeros(())
+
+
 def sample_loops(R, mode, step_rng, frac=0.0):
     """frac = training progress in [0,1]. Modes:
        fixed | uniform | poisson (Huginn, mean R/2+.5) | poisson_R (Parcae-like, mean R, clip [1, 2R]) |
@@ -202,6 +216,11 @@ def train(cfg):
                 kl = F.kl_div(F.log_softmax(lo.float(), -1), F.log_softmax(tgt.float(), -1),
                               log_target=True, reduction="none").sum(-1)
                 total = total + sd * (kl * valid).sum() / valid.sum().clamp(min=1)
+            bc = tc.get("block_cos", 0.0)
+            if bc > 0:
+                # H13.7 (R33): looping-inspired regulariser — pull core block i towards block i+k (cosine) to get the loop
+                # inductive bias without loop FLOPs or weight sharing. Only same-shape >=2-D tensors are tied.
+                total = total + bc * block_cos_reg(model, tc.get("block_cos_k", 2))
             (total / accum).backward()
             tok_seen += (x != D.PAD).sum().item(); ans_seen += valid.sum().item()
             flops += 3 * model.flops_per_token(n_loops=r, seq=seq) * x.numel()

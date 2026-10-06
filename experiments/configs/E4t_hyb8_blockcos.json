@@ -1,0 +1,35 @@
+{
+ "name": "E4t_hyb8_blockcos",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 6,
+  "n_coda": 1,
+  "pattern": "ga"
+ },
+ "train": {
+  "seq": 128,
+  "batch": 16,
+  "steps": 800,
+  "lr": 0.003,
+  "warmup": 60,
+  "eval_every": 400,
+  "log_every": 100,
+  "threads": 2,
+  "eval_batches": 12,
+  "save": true,
+  "block_cos": 1.0,
+  "block_cos_k": 2
+ },
+ "data": {
+  "kind": "memmap",
+  "train": "data_cache/ts_train.bin",
+  "valid": "data_cache/ts_valid.bin"
+ },
+ "extra_eval": {},
+ "note": "H13.7/R33: E4z + cosine tie between core blocks i,i+2 (loop bias without sharing). Compare bpb vs E4z."
+}
