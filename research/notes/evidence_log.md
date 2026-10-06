@@ -217,3 +217,25 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   → [I] **Resolves the E8 contradiction with R33 as a testable hypothesis**: our loop showed no gain because the bottleneck is digit alignment, not depth.
   Implemented `digit_pos` (+ random offset for length generalisation; cache-exact test added). E8g (no loop) vs E8h (loop) are queued (s2g).
   Prediction: both jump well above 0.30 acc; E8h > E8g on d6 (length generalisation). If E8h ≤ E8g, loops lack value even with positions fixed at this scale.
+
+### Own results, session 2 — seed noise (s1 replicates; s2 replicates still queued)
+| config | seed 0 | seed 1 | |Δ| |
+|---|---|---|---|
+| E4c MoE no-loop | 1.4870 | 1.4735 | 0.0135 |
+| E4j + Engram | 1.4278 | 1.4246 | 0.0032 |
+| E4g loop R3 | 1.4574 | 1.4691 | 0.0117 |
+- [E own] Seed spread (data order + init) is **~0.003–0.014 bpb**, larger than the 0.003–0.007 I assumed earlier. Consequences (2-seed means):
+  - Engram: E4c 1.4803 → E4j 1.4262, **−0.054** (≫ noise) — robust.
+  - loop: E4c 1.4803 → E4g 1.4633, **−0.017** (≈1.3–1.5× noise) — weak; the earlier −0.030 was partly a lucky seed pairing.
+  - E4p vs E4g (0.003), E4e2 vs E4g (0.005): **inside noise → "no difference"**, not rankings.
+  - E5a −0.035 vs E4c seed 0, −0.021 vs the 2-seed mean: probably real, but needs E5a seeds. E5b −0.022 vs E4j (Engram seed spread is small): likely real.
+  - BPE deltas (Engram −0.014, loop −0.006) need replicates before being called; loop-under-BPE is within noise.
+- **E4i (fixed R3 + identity-init concat reinjection)**: R3 1.4843, R1 3.08, R6 2.54. **Reinjection makes depth extrapolation explode** at fixed R
+  (cf. R28/R20: unconstrained injection is unstable; LTI (E4o) is the pre-registered fix, still pending). E4i is worse than E4g (1.4574/1.4691) → at fixed R, no reinjection is best.
+- **E4e2 (shared-first KV across loops)**: R3 1.4620 vs E4g 1.4574/1.4691 → **no measurable quality loss (inside noise), and the KV cache of core attention
+  layers shrinks by R× (3×)**. Supports R14/R29. Adopted as the default for loop variants in C4-loop.
+- **E6 varchain (dependency-chain probe)**: answer loss E6a no-loop **0.542** < E6b +Engram 0.917 < E6c loop R3 0.914 (R2 0.957). Sequence EM ≈ 0 for all.
+  [E own] On this in-context lookup+arithmetic probe, **both Engram and the loop hurt** at iso-param (they take params from the FFN/MoE: expert_mult 0.296→0.17
+  for Engram; loop shares weights). [I] varchain needs in-context retrieval (attention), not n-gram statistics or depth; Engram rows are useless
+  for random variable values, and the parameters taken from experts cost capacity. This is the first task where Engram is negative: **a real failure mode for C4.**
+  It matches R17's finding that Engram helps knowledge and reasoning but its value depends on recurring local patterns.

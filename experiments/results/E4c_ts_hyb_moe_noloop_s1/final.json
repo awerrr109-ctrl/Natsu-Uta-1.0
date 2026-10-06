@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E4c_ts_hyb_moe_noloop_s1",
+  "params": 820744,
+  "params_nonembed": 787464,
+  "flops_per_token_fwd": 1491968.0
+ },
+ "train_flops": 7333321113600.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 410.29762291908264,
+ "peak_rss_mb": 709.234375,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 1.0213303963343303,
+    "ppl": 2.7768866674155275,
+    "bpb": 1.4734682979006979
+   },
+   "fwd_flops_per_token": 1491968.0
+  }
+ }
+}

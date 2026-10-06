@@ -1,0 +1,30 @@
+{
+ "info": {
+  "name": "E6a_varchain_moe_noloop",
+  "params": 820744,
+  "params_nonembed": 787464,
+  "flops_per_token_fwd": 1483776.0
+ },
+ "train_flops": 17434961510400.0,
+ "tokens": 3916800,
+ "scored_tokens": 499200,
+ "wall_s": 1002.4477713108063,
+ "peak_rss_mb": 592.15234375,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.5415119666319627,
+    "ppl": 1.7186033697224352,
+    "bpb": 0.7812366288419624,
+    "acc": 0.015625
+   },
+   "long20": {
+    "loss": 0.587150650365012,
+    "ppl": 1.798855537819079,
+    "bpb": 0.8470793315363325,
+    "acc": 0.046875
+   },
+   "fwd_flops_per_token": 1483776.0
+  }
+ }
+}

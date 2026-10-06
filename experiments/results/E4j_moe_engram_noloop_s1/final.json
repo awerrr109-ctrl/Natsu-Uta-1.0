@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E4j_moe_engram_noloop_s1",
+  "params": 825480,
+  "params_nonembed": 792200,
+  "flops_per_token_fwd": 1582080.0
+ },
+ "train_flops": 7776239616000.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 418.11754631996155,
+ "peak_rss_mb": 712.640625,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.9874587009350458,
+    "ppl": 2.6844039236107573,
+    "bpb": 1.4246017709216487
+   },
+   "fwd_flops_per_token": 1582080.0
+  }
+ }
+}
