@@ -294,3 +294,5 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   twice (per-rank shuffle with different seeds).** Both closed as fixed. [E] Parcae's published numbers were produced with a data pipeline that wasted
   ~2/3 of compute on padding and ~1/3 on duplicates (fixed later; whether the paper's numbers were re-run is unknown). → Treat Parcae's absolute
   scaling-law constants as [weak E]. #10 led directly to F009 in our own code.
+- **3-seed loop result**: E4g R3 1.4574/1.4691/1.4731 (mean 1.4665, sd 0.0082) vs E4c mean 1.4792 → **loop −0.013 bpb, t ≈ 2.0 (n=3)** at 1.73× inference
+  FLOPs. Marginal. Engram's −0.053 (t ≈ 12.8) is 4× larger at 1.06× FLOPs. The single-seed −0.030 claimed in session 1 was 2.4× too large (F008).

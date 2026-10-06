@@ -74,7 +74,9 @@
   "H13.3_shared_first_kv": "E4e2 R3 1.4620 ~ E4g (in noise) with 3x less core KV -> default for loop variants",
   "H13.4_concat_reinject_fixedR": "E4i R3 1.4843, explodes off-R (R1 3.08, R6 2.54); no-reinject best at fixed R",
   "E6_varchain": "no-loop 0.542 < Engram 0.917 ~ loop 0.914 answer loss, but phase-transition timing, weak; E6L retest queued",
-  "H13.3_engram_toy": "3 seeds: -0.053 bpb (t=12.8), sd 0.0070 -> 0.0016"
+  "H13.3_engram_toy": "3 seeds: -0.053 bpb (t=12.8), sd 0.0070 -> 0.0016",
+  "H1.1_loop_toy_3seed": "E4g R3 mean 1.4665 vs E4c 1.4792: -0.013 (t=2.0) at 1.73x FLOPs; marginal",
+  "R40_engram_dense_1p3B": "independent report: no iso-param gain on 1.3B dense (1T tok); C4 Engram commitment conditional on 10M 2x2 + downstream eval"
  },
  "rejected_hypotheses": [
   {
@@ -140,7 +142,9 @@
   "all toy results single-seed, 1.6M tokens, 0.8M params",
   "pgrep -f self-match bug in queue waiters (fixed with regex [.] trick)",
   "L1 scorer v2 (domain-aware); on-topic paper estimate 9505->8303",
-  "35 sources read at L2/L3-partial"
+  "35 sources read at L2/L3-partial",
+  "toy wins are bpb, not capability (R31, R40)",
+  "F009 fixed: train_dist sampler coverage + resume"
  ],
  "corpus": {
   "see": "research/notes/corpus_stats.md",
