@@ -378,3 +378,28 @@ TAXONOMY["P14_s2_derived"] = {
 }
 GITHUB_QUERIES += ["induction heads", "abacus embeddings", "index hints arithmetic", "early exit llm", "deep supervision transformer",
                    "soft weight sharing", "seed variance llm", "born again distillation", "logit distillation pretraining"]
+
+# Session-2 Step-H (B1 knowledge bottleneck at 9B): corpus check found thin coverage of small-model + retrieval/tool scaling.
+TAXONOMY["P15_knowledge_channel"] = {
+    "problem": "Closed-book knowledge is the hardest axis at 9B (stored bits); which external channel (retrieval, tools, editable memory) closes it at least cost?",
+    "hypotheses": {
+        "H15.1_retrieval_vs_params_scaling": {
+            "claim": "Retrieval-augmented small models match much larger closed-book models on knowledge tasks at far lower cost.",
+            "support": ["retrieval augmented language model scaling datastore size", "small model retrieval matches larger model knowledge",
+                        "RETRO scaling retrieval pretraining", "datastore scaling laws retrieval"],
+            "refute": ["retrieval augmented generation fails reasoning small models", "retrieval noise hurts small language models",
+                       "closed-book versus open-book gap does not close"],
+        },
+        "H15.2_parametric_vs_editable_memory": {
+            "claim": "Editable token-indexed memory (Engram overlays) is a cheaper continual-knowledge channel than fine-tuning or RAG.",
+            "support": ["knowledge editing memory layer large scale", "continual knowledge update without forgetting memory module"],
+            "refute": ["knowledge editing ripple effects failure", "model editing does not generalize paraphrase"],
+        },
+        "H15.3_tool_use_small_models": {
+            "claim": "Tool-use (search, code exec) post-training gives small models disproportionate gains on knowledge and math.",
+            "support": ["tool integrated reasoning small language model", "agentic search small model reinforcement learning", "toolformer small model"],
+            "refute": ["small language models tool use unreliable", "tool use claims small models evaluation failure"],
+        },
+    },
+}
+GITHUB_QUERIES += ["retrieval pretraining retro", "datastore scaling", "knowledge editing", "tool integrated reasoning", "agentic search rl"]
