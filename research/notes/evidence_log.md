@@ -415,3 +415,7 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - [I] Pattern across E6, E8b, E8h: at fixed short budgets, **looped models enter algorithmic phase transitions later** than non-looped ones.
   This is a confound for every toy loop comparison here. A fair loop test needs either training to convergence or an iso-loss (not iso-step) protocol.
   Recorded as F012. Abacus itself is adopted as a cheap option for digit tasks (+0.13 acc at no FLOP cost).
+- **E4l (loop R3 + shallow→deep self-distillation 0.5)**: R1 1.5039 / R2 1.4687 / **R3 1.4661** / R4 1.4735 / R6 1.5025.
+  vs E4g 3-seed mean R1 1.683 / R3 1.4665 / R6 1.5508. [E own] Self-distillation **leaves R3 unchanged** (Δ −0.0004) and makes shallow and deep
+  depths far more usable (R1 −0.18, R6 −0.048). It is the second "anytime" recipe (with E4p's exit training), at ~1.3× extra training compute
+  (an extra shallow forward/backward). For the self-speculative draft role (INFERENCE_SPEC), E4l/E4p are the right training recipes: draft quality at R1 matters.
