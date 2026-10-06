@@ -1,0 +1,52 @@
+{
+ "name": "E8h_add_loop3fixed_moe_abacus",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1,
+  "pattern": "ga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_shared": 1,
+  "moe_expert_mult": 0.296,
+  "n_loops": 3,
+  "digit_pos": 24,
+  "digit_pos_offset": 10
+ },
+ "train": {
+  "seq": 24,
+  "batch": 64,
+  "steps": 1500,
+  "lr": 0.003,
+  "warmup": 60,
+  "eval_every": 500,
+  "log_every": 250,
+  "threads": 2,
+  "eval_batches": 4,
+  "save": true,
+  "eval_loops": [
+   2,
+   4
+  ]
+ },
+ "data": {
+  "kind": "synthetic",
+  "task": "add",
+  "kw": {
+   "min_digits": 1,
+   "digits": 5
+  }
+ },
+ "extra_eval": {
+  "d6": {
+   "min_digits": 6,
+   "digits": 6
+  }
+ },
+ "note": "R36 (Abacus): with digit positions resolved, does looping help addition / length generalisation (d6)? E8g vs E8h."
+}

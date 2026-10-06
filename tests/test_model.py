@@ -100,3 +100,14 @@ def _check_cache_model(m, x):
 
 if __name__ == "__main__":
     test_engram_vip_cache(); print("ok vip")
+
+def test_digit_pos_cache():
+    torch.manual_seed(0)
+    m = Natsu(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8, digit_pos=12)).double().eval()
+    x = torch.tensor([list(b"x12345+678=9") + list(b"0123456789")[:9]])   # digit runs crossing the prefill/decode split
+    di, _ = Natsu.digit_index(x)
+    assert di[0, :7].tolist() == [0, 1, 2, 3, 4, 5, 0]
+    _check_cache_model(m, x)
+
+if __name__ == "__main__":
+    test_digit_pos_cache(); print("ok digit_pos")

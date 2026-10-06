@@ -68,6 +68,8 @@ class NatsuConfig:
                                      # reserved for the most frequent n-grams (collision-free); tail keeps hashed buckets.
                                      # VIP ids come from a frequency table built on training data (scripts/build_vip.py).
     engram_dim: int = 0              # 0 -> d_model // (len(orders)*heads) per head
+    digit_pos: int = 0               # >0: Abacus-style digit-position embedding (R36), index = position within the current digit run
+    digit_pos_offset: int = 0        # training-only random offset in [0, digit_pos_offset] added to digit indices (length generalisation)
     loop_kv: str = "per_loop"        # per_loop | shared_first: core attention in loops r>0 reuses loop-0 K/V
                                      # (KV cache size independent of R; train/infer consistent)
 
@@ -443,6 +445,8 @@ class Natsu(nn.Module):
                 self.gate = nn.Linear(c.d_model + (1 if c.gate_mem_feat else 0), 1)
                 nn.init.zeros_(self.gate.weight)
                 nn.init.constant_(self.gate.bias, 2.0)
+        if c.digit_pos > 0:
+            self.digit_emb = nn.Embedding(c.digit_pos + 1, c.d_model)   # row 0 = non-digit
         self.norm = RMSNorm(c.d_model)
         self.head = None if c.tie_embeddings else nn.Linear(c.d_model, c.vocab_size, bias=False)
         self.mtp = nn.ModuleList([nn.Sequential(RMSNorm(c.d_model), nn.Linear(c.d_model, c.d_model, bias=False))
@@ -467,6 +471,19 @@ class Natsu(nn.Module):
         elif isinstance(m, nn.Embedding):
             nn.init.normal_(m.weight, std=self.c.init_std)
 
+    @staticmethod
+    def digit_index(idx, run0=None):
+        """1-based position of each byte-token inside its current run of ASCII digits (0 for non-digits).
+        run0: (B,) run length carried over from the cache (for exact incremental decoding)."""
+        isd = (idx >= 48) & (idx <= 57)
+        B, L = idx.shape
+        out = torch.zeros_like(idx)
+        cur = torch.zeros(B, dtype=idx.dtype, device=idx.device) if run0 is None else run0.clone()
+        for t in range(L):                       # L is small for the synthetic probes; a cumsum form is used if this ever matters
+            cur = torch.where(isd[:, t], cur + 1, torch.zeros_like(cur))
+            out[:, t] = cur
+        return out, cur
+
     def logits(self, h):
         h = self.norm(h)
         return F.linear(h, self.embed.weight) if self.head is None else self.head(h)
@@ -480,6 +497,15 @@ class Natsu(nn.Module):
         pos = torch.arange(pos0, pos0 + L, device=idx.device)
         x = self.embed(idx)
         new_cache = {} if cache is not None else None
+        if c.digit_pos > 0:
+            run0 = None if cache is None else cache.get("digit_run")
+            di, last = self.digit_index(idx, run0)
+            if self.training and c.digit_pos_offset > 0:
+                off = torch.randint(0, c.digit_pos_offset + 1, (B, 1), device=idx.device)
+                di = torch.where(di > 0, di + off, di)
+            x = x + self.digit_emb(di.clamp(max=c.digit_pos))
+            if new_cache is not None:
+                new_cache["digit_run"] = last
         gates, skipped, gate_logits, inter = [], [], [], []
         want_inter = return_inter
 

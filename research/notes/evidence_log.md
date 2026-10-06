@@ -210,3 +210,10 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   the 1–5-digit regime, so neither needs more depth; acc ~0.29 for both suggests a shared bottleneck (data/steps), not depth; (b) R33 trains far longer to
   convergence; (c) carry propagation needs position-wise algorithms (index hints/abacus embeddings), not depth. Test: E8e (6-core unlooped, iso-FLOP) separates
   "depth helps" from "loop helps"; tts_eval (greedy vs maj@N) runs after the queue (scripts/post_s2.sh).
+- **[R36] McLeish et al., "Transformers Can Do Arithmetic with the Right Embeddings" (Abacus, NeurIPS 2024, arXiv:2405.17399)** — L2.
+  [E] Transformer arithmetic failure is largely positional: the model can't track each digit's position within a number. Adding an embedding of the digit's
+  position relative to the start of the number fixes it, and **only then do input injection and recurrent (looped) layers add further gains**.
+  20-digit training reaches 99% on 100-digit addition.
+  → [I] **Resolves the E8 contradiction with R33 as a testable hypothesis**: our loop showed no gain because the bottleneck is digit alignment, not depth.
+  Implemented `digit_pos` (+ random offset for length generalisation; cache-exact test added). E8g (no loop) vs E8h (loop) are queued (s2g).
+  Prediction: both jump well above 0.30 acc; E8h > E8g on d6 (length generalisation). If E8h ≤ E8g, loops lack value even with positions fixed at this scale.
