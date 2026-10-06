@@ -386,3 +386,5 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - Test (cheap, queued): `route_diag` measures cross-loop expert overlap on E4g/E4p/E4k/E8b (post_s2). If Jaccard ≫ chance, we reproduce R47's collapse.
   Next [H]: implement R47's per-loop routers + residual scaling (`moe_loop_router=True`, `loop_res_scale`) and rerun E4g-style. Pre-registered:
   if 3-seed gain stays < 0.02 bpb, loops stay demoted at toy scale and the question moves to the 50M+ ladder (GPU).
+- **H13.7 on LM**: E4t (E4z + block-cos λ=1) **1.4355** vs E4z 1.4394 (single seed each) → −0.004, within seed noise (sd ≈ 0.007). No detectable effect on LM bpb.
+  Combined with E8f (−0.066 acc on addition), **H13.7 is rejected** at toy scale.

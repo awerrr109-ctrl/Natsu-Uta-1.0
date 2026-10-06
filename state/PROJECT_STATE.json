@@ -77,7 +77,9 @@
   "H13.3_engram_toy": "3 seeds: -0.053 bpb (t=12.8), sd 0.0070 -> 0.0016",
   "H1.1_loop_toy_3seed": "E4g R3 mean 1.4665 vs E4c 1.4792: -0.013 (t=2.0) at 1.73x FLOPs; marginal",
   "R40_engram_dense_1p3B": "independent report: no iso-param gain on 1.3B dense (1T tok); C4 Engram commitment conditional on 10M 2x2 + downstream eval",
-  "H11_LTI_reinject_E4o": "R3 1.4535 (1 seed, best loop), but R6 worse than no-inj (pre-reg failed); fixes concat explosion"
+  "H11_LTI_reinject_E4o": "R3 1.4535 (1 seed, best loop), but R6 worse than no-inj (pre-reg failed); fixes concat explosion",
+  "E8_depth_vs_loop": "iso-FLOP unique depth (E8e 0.484) >> loop (E8b 0.285) >> Engram (E8c 0.242) on addition; 1 seed",
+  "R47_R48_loops_at_scale": "counter-evidence at 0.7-1.7B; toy conclusion scoped; E4y/E4y2 (per-loop routers + res scale) queued; decisive at 50M ladder (runbook)"
  },
  "rejected_hypotheses": {
   "0": {
@@ -97,7 +99,8 @@
   },
   "N2_memory_conditioned_depth": "F010: E4q\u2248E4r (no effect); loop+Engram+exit still \u2248 Engram alone",
   "N3_fixed_then_uniform": "E4m failed pre-reg",
-  "N1_memory_before_loop_bpb": "F007"
+  "N1_memory_before_loop_bpb": "F007",
+  "H13.7_block_cos_regulariser": "E4t LM -0.004 (noise); E8f addition -0.066 acc; not adopted"
  },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",

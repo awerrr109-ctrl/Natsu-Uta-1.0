@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E4t_hyb8_blockcos",
+  "params": 1616272,
+  "params_nonembed": 1582992,
+  "flops_per_token_fwd": 3607552.0
+ },
+ "train_flops": 17731839590400.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 3647.488876104355,
+ "peak_rss_mb": 799.26171875,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.9950054188569387,
+    "ppl": 2.7047389978334273,
+    "bpb": 1.4354893834425515
+   },
+   "fwd_flops_per_token": 3607552.0
+  }
+ }
+}
