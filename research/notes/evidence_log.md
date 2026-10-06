@@ -347,3 +347,20 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **E6 2×2 complete (varchain answer loss, 1 seed, 1200 steps)**: plain E6a **0.542** | loop E6c 0.914 | Engram E6b 0.917 | loop+Engram E6d 0.988.
   The R33-derived prediction (loop complementary to Engram on reasoning) is untestable here: every modification is worse than plain, and E6a is an outlier
   that went through its transition before step 1200 (curve check). No conclusion until E6L (2400 steps, 2 seeds) lands.
+
+### E8 addition: depth vs loop vs memory (answer exact-match acc on 1–5 digits, 256 problems; one seed)
+| run | params | eff. depth | acc | answer loss | 6-digit loss |
+|---|---|---|---|---|---|
+| E8a 2-core MoE | 0.82M | 4 | 0.297 | 0.603 | 5.32 |
+| E8b 2-core × 3 loops | 0.82M | 8 | 0.285 | 1.037 | 4.91 |
+| E8c 2-core + Engram | 0.83M | 4 | 0.242 | 1.080 | 5.25 |
+| E8d loop + Engram | 0.83M | 8 | 0.258 (R3) / 0.270 (R4) | 1.048 | 5.49 |
+| **E8e 6-core unlooped (iso-FLOP with E8b)** | 1.60M | 8 | **0.484** | 0.621 | 6.89 |
+- [E own] **Depth with fresh parameters helps addition a lot (+0.19 acc); depth from loops does not (−0.01).** At iso-FLOP, unique layers beat shared
+  layers on this task. That is the opposite of R33's claim ("k-layer looped L times ≈ kL-layer model on addition"). Engram hurts addition (−0.055 acc).
+  Arithmetic over random digits has no reusable n-gram statistics, and the table took parameters from the MoE (expert_mult 0.296 → 0.17).
+- [I] Candidate explanations for loop ≠ depth: (a) R33 trains to convergence, while our 1500 steps are a fixed short budget; looped models may need more steps.
+  (b) R36: positional bottleneck. Both are tested by E8g/E8h (Abacus) and, for (a), a longer E8b would be needed.
+  (c) E8e also has 2× params, so it is iso-FLOP, not iso-param. The cleanest single-variable comparison is E8b vs E8e = shared vs unshared weights at the same depth.
+- Consequence for the design: **for reasoning-like algorithmic tasks, iso-FLOP unique depth > loops at toy scale.** This supports C4's choice (no loop) and
+  G2 (spend extra inference compute on sampling/verification, not loops).
