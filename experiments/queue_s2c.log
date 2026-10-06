@@ -1,1 +1,5 @@
 === B3_bpe_loop3fixed_moe Tue Oct  6 00:44:42 UTC 2026
+FINAL {"1": {"main": {"loss": 3.3508989214897156, "ppl": 28.528366882963983, "bpb": 1.2203885735878093}, "fwd_flops_per_token": 2441216.0}, "2": {"main": {"loss": 3.158623218536377, "ppl": 23.538166698610663, "bpb": 1.1503622683006003}, "fwd_flops_per_token": 2964992.0}, "3": {"main": {"loss": 3.1278433998425803, "ppl": 22.824702668913954, "bpb": 1.139152339290174}, "fwd_flops_per_token": 3488768.
+=== E4k_loop3fixed_moe_engram Tue Oct  6 00:53:45 UTC 2026
+FINAL {"1": {"main": {"loss": 1.1239900787671406, "ppl": 3.0771076428113973, "bpb": 1.6215749126457493}, "fwd_flops_per_token": 1582080.0}, "2": {"main": {"loss": 1.0114881197611492, "ppl": 2.749689839719456, "bpb": 1.4592688942975118}, "fwd_flops_per_token": 2048512.0}, "3": {"main": {"loss": 0.993099570274353, "ppl": 2.69958908388506, "bpb": 1.4327398251437697}, "fwd_flops_per_token": 2514944.0}
+=== E4p_loop3_moe_lookahead_gate Tue Oct  6 01:10:08 UTC 2026

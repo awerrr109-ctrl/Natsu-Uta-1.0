@@ -139,3 +139,6 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   [E] Token-level routers over recursion depth; attention only among tokens still active; KV cached only for active tokens; a KV-sharing variant reuses
   first-recursion KV (= our `loop_kv=shared_first`). New Pareto frontier at 135M–1.7B at equal training FLOPs. [unknown] failure modes (not in abstract).
   → [I] Independent support (with R21) that **token-adaptive depth is the condition for loops to win at matched compute**, and that shared-first KV is viable.
+- **B3 (BPE, loop R=3 fixed, iso non-embed with B1)**: R1 1.2204 / R2 1.1504 / **R3 1.1392** / R4 1.1452 / R6 1.1750.
+  vs B1 1.1449: loop −0.006 bpb at 1.43× inf FLOPs. **Under BPE, Engram (−0.014 at 1.04× FLOPs) beats looping (−0.006 at 1.43×) by ~3.4× in gain-per-FLOP terms.**
+  Both effects shrink from byte→BPE (Engram 0.059→0.014, loop 0.030→0.006). The ranking is preserved. Single seed; BPE deltas ≈ 2–5× typical seed noise (seed runs pending).

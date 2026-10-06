@@ -4,7 +4,7 @@
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
-  "status": "toy: E4j Pareto-best (bpb 1.4278 @0.825M)",
+  "status": "C4 (MoE+Engram, no loop) confirmed under byte (E4j) and BPE (B2); loop dominated per FLOP",
   "summary": "3:1 GDN:attention hybrid + fine-grained MoE + Engram n-gram memory (20-25% of sparse budget), 8.9B stored, ~2.4B active, 4.9 GFLOP/token",
   "alternatives": [
    "C3 looped variant",
@@ -53,6 +53,18 @@
   "reinject_identity_init": {
    "result": "supported",
    "evidence": "E4h 1.529 vs E4b 1.575"
+  },
+  "H13.6_engram_survives_BPE": {
+   "result": "supported, effect 4x smaller",
+   "evidence": "B2 1.1312 vs B1 1.1449 (-0.014); byte -0.059"
+  },
+  "H1.1_loop_under_BPE": {
+   "result": "weak gain",
+   "evidence": "B3 R3 1.1392 vs B1 1.1449 (-0.006) at 1.43x FLOPs"
+  },
+  "N1_memory_loop_complementarity": {
+   "result": "REFUTED (toy, byte)",
+   "evidence": "F007: E4k 1.4327 vs E4j 1.4278; substitutes"
   }
  },
  "rejected_hypotheses": [
@@ -65,6 +77,11 @@
    "id": "C1 dense looped",
    "reason": "R2 phi=0.46, R4 dense loops scale worse, E4a worst",
    "evidence_quality": "medium"
+  },
+  {
+   "id": "N1 memory-before-loop complementarity (toy)",
+   "reason": "F007 sub-additive",
+   "evidence_quality": "low-medium (1 seed, toy)"
   }
  ],
  "untested_hypotheses": [
