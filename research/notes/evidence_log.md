@@ -239,3 +239,6 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   for Engram; loop shares weights). [I] varchain needs in-context retrieval (attention), not n-gram statistics or depth; Engram rows are useless
   for random variable values, and the parameters taken from experts cost capacity. This is the first task where Engram is negative: **a real failure mode for C4.**
   It matches R17's finding that Engram helps knowledge and reasoning but its value depends on recurring local patterns.
+  **Caveat (curve check)**: train loss E6a 1.097@800 → 0.476@1199 is a sharp late drop (a phase transition, likely retrieval circuit formation); E6b was *ahead*
+  at step 800 (1.020) and then plateaued (0.868); E6c 1.291@800 → 0.885. The ranking is therefore a **transition-timing** effect in one seed and a 1200-step
+  budget, not a capacity verdict. Downgraded to [weak E]. Needs longer runs or seeds before "Engram hurts retrieval tasks" can be claimed.
