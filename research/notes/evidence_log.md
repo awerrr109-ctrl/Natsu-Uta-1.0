@@ -433,3 +433,14 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **E5a seed 1**: 1.4379 → E5a 2-seed mean **1.4450** vs E4c 3-seed mean 1.4792: **KD −0.034** (2 seeds, ≈ 5 sd of E4c's spread). KD gain confirmed at toy scale.
 - **E6La (varchain, no loop, 2400 steps, seed 0)**: answer loss 0.041, **sequence EM 0.844** (long20 0.781). Steps-to-acc ≥ 0.2 at step 1600.
   The 1200-step E6a (EM 0.016) was mid-transition, which confirms the caveat. E6Lb (Engram) is running; it is the H14.1 test.
+
+### Self-improvement in post-training (principle #15 "self-improvement loops")
+- **[R53] Self-Verified Distillation (arXiv:2605.26132)** — L2. [E] A post-trained model generates candidate solutions to *unlabeled* seed questions, filters
+  them by a 3-stage self-verification cascade (cycle-consistency, factuality, correctness; unanimous judge votes), and trains on the survivors.
+  **Qwen3-4B: +16.7 pass@1 math (AIME26/HMMT), +11.1 science (GPQA-D/HLE), +8.3 code (LCB v5/v6)**, with no teacher and no tools.
+  More samples and a larger verification budget give better data.
+  → [I] For Natsu-9B post-training this is a teacher-free lever, and it composes with G2: the same adaptive sampling + verification machinery used at
+  inference (`adaptive_vote`, verifiers) generates the training data. Risk: self-confirmation and collapse (refute queries in P5; R31-style Goodhart on
+  the verification judge). Guard: hold out benchmarks from the seed pool; track pass@k as well as pass@1 (R19: RLVR narrows pass@k).
+- **[R54] FROST (arXiv:2609.29988)** — L2. Online synthetic-data filtering by gradient alignment with real data. Filters 20–30% of synthetic data and improves the real task.
+  → [I] A candidate for filtering the rephrased/synthetic share in pretraining (TRAINING_SPEC §3). Real-anchored, no external verifier.
