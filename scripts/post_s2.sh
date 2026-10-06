@@ -20,5 +20,8 @@ done
 for ck in E4g_loop3_moe_fixedR_noinj E4p_loop3_moe_lookahead_gate E4k_loop3fixed_moe_engram E8b_add_loop3fixed_moe; do
   [ -f ../checkpoints/$ck.pt ] && python3 -m natsu.route_diag --ckpt checkpoints/$ck.pt >> ../experiments/route_diag_s2.jsonl 2>> ../experiments/route_diag_s2.err
 done
+for ck in E4g_loop3_moe_fixedR_noinj E4l_loop3fixed_moe_selfdistill E4p_loop3_moe_lookahead_gate; do
+  [ -f ../checkpoints/$ck.pt ] && timeout 1800 python3 -m natsu.bench --ckpt ../checkpoints/$ck.pt --prompts 4 --new 48 >> ../experiments/bench_s2.log 2>&1
+done
 cd .. && nice -n 19 python3 research/analyze.py >> experiments/post_s2.log 2>&1; cd src
 echo "=== DONE $(date)" >> $L
