@@ -157,3 +157,19 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - → [I] **Data spec for Natsu-9B (≈ 6.4e22–1e23 training FLOPs at 2.6B active × ~4–6T tokens)**: keep ~25–30% of the web (R32 law),
   ensemble classifiers (R30), rephrase the rest (R30, R26 megadocs 1.8×), distill (R25). Evaluate only on a **held-out benchmark set never used for selection**
   (R31, R32 Goodhart). The toy-stage filter question is moot (TinyStories). Recorded in TRAINING_SPEC v0.2.
+
+### Reasoning vs memorization; objective (P2/P4, principles #13, #15) — session 2
+- **[R33] Saunshi et al., "Reasoning with Latent Thoughts: On the Power of Looped Transformers" (ICLR 2025, arXiv:2502.17416)** — L3-partial (HTML §3–4).
+  [E] At 1B LM scale, k⊗L looped models have **worse perplexity and worse closed-book QA (memorization)** than the iso-FLOP kL⊗1 baseline, but close most of the
+  iso-param→iso-FLOP gap on open-book QA / math word problems, and **beat the 24-layer baseline on reasoning primitives with 24/k× fewer params**.
+  Downstream accuracy scales ~log(effective depth). A cosine-similarity regulariser between successive layer blocks (λ=10, cos≥0.98) reproduces the inductive bias
+  without weight sharing.
+  → [I] **Reframes F007**: our substitution result is measured on bpb, which R33 says is exactly the metric where loops look worst. Engram (memorization-type lookup)
+  and loops (reasoning-type depth) can be substitutes on bpb but complements on reasoning. Prediction (pre-registered): on E8 addition and E6 varchain,
+  gain(loop | Engram) ≥ 0.5·gain(loop | no Engram), i.e. not strongly sub-additive. Tested by the 2×2 cells E6a/E6b/E6c/E6d and E8a/E8b/E8c/E8d (queue s2e).
+  Also: the λ-cosine regulariser is a cheap 9B option ("loop bias without loop FLOPs") → logged as H13.7.
+- **[R34] Bachmann & Nagarajan, "The pitfalls of next-token prediction" (ICML 2024, arXiv:2403.06963)** — L2.
+  [E] Teacher-forced NTP can fail to *learn* the correct predictor on a simple path-star planning task (Transformer and Mamba both fail ≈ chance) via the
+  "Clever Hans" shortcut. Teacherless multi-token training (dummy-token inputs) fixes it in preliminary experiments.
+  → [I] Supports keeping MTP (impl) and argues for a teacherless/MTP fraction in P1. Our gen_chain v1/v2 failures (F001/F002: root shortcut) look like
+  the same Clever-Hans mechanism at toy scale. [unknown] whether it matters for natural-text bpb; tested only on synthetic graphs.
