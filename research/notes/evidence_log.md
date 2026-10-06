@@ -451,7 +451,7 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 | E6La MoE (no Engram) | **0.041** | **0.844** | 0.781 | 0.574 / 0.038 |
 | E6Lb MoE + Engram (iso-param) | 0.891 | **0.000** | 0.000 | 0.962 / ~0.79 |
 - [E own, 1 seed, huge effect] **With twice the steps the Engram model still never forms the in-context retrieval circuit**, while the plain model solves the task
-  (EM 0.84). This is not a timing artefact. Pre-registered condition (a) "E6Lb < E6La" is **confirmed** (seed-1 replicates are queued).
+  (EM 0.84). This is not a timing artefact. Pre-registered condition (a) "E6Lb < E6La" was confirmed on seed 0 only. **RETRACTED as over-claim (F014): E6La seed 1 also fails to transition (EM 0.008); status: not established, 1/2 vs 0/1 transitions.**
   The size of the gap (EM 0.84 vs 0.00) is far beyond any seed effect seen so far.
 - [I] Mechanism candidates: (1) R37/R38: the global-statistics shortcut (n-gram table) removes the gradient pressure that builds induction circuits.
   (2) Capacity: Engram took parameters from the experts (expert_mult 0.296 → 0.17). E8i-style control for varchain is needed (added below).

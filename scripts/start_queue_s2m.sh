@@ -6,5 +6,5 @@ while [ ! -f experiments/queue_s2h.log ] || pgrep -f "run_queue[.]sh" > /dev/nul
 ( cd tests && MALLOC_ARENA_MAX=1 timeout 600 python3 -c "import test_model as t; t.test_engram_paper_cache(); print('ok engram paper'); t.test_engram_cache(); print('ok engram')" ) > experiments/test_s2m.log 2>&1
 grep -q "ok engram$" experiments/test_s2m.log || exit 1
 C=experiments/configs
-setsid nohup scripts/run_queue.sh $C/E6Le_varchain_moe_engrampaper_s0.json $C/E4pp_moe_engrampaper_noloop.json > experiments/queue_s2m.log 2>&1 < /dev/null &
+setsid nohup scripts/run_queue.sh $C/E6Le_varchain_moe_engrampaper_s0.json $C/E6La_varchain_moe_noloop_s2.json $C/E6Lb_varchain_moe_engram_s2.json $C/E4pp_moe_engrampaper_noloop.json > experiments/queue_s2m.log 2>&1 < /dev/null &
 sleep 5

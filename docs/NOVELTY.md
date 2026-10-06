@@ -41,6 +41,8 @@ Rule: a contribution counts only if (a) the difference from the closest prior wo
   reconciled with R17's late-stage gains (RULER VT 77→89).
 - **Why 9B-relevant**: at 9B the memory table is ~1.6B params (18% of the budget). If it slows induction formation, the cost is paid on every
   in-context task. The fix costs nothing at inference.
+- **Status update (F013/F014)**: the motivating evidence is now weaker. (i) The E6La/E6Lb outcome is seed-bimodal (E6La s1 also failed), and (ii) our Engram v1
+  was not paper-faithful (no internal residual, random conv init). N5 is tested only if ≥3-seed transition counts still favour no-Engram, under the faithful path too.
 - **Falsifier**: E6Lb ≥ E6La (no harm) → N5 is unnecessary; E6Lc ≉ E6La → wrong mechanism; E4u loses > 30% of the LM gain → too costly.
 
 ## N6. KD × memory additivity (soft targets and token-indexed memory are complementary)  [status: weak E, E5b]
