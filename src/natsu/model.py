@@ -61,6 +61,8 @@ class NatsuConfig:
     moe_shared: int = 1              # always-on shared experts (DeepSeekMoE)
     moe_expert_mult: float = 0.0     # expert hidden = moe_expert_mult*d_model (0 -> ffn_mult/topk+shared)
     moe_loop_bias: bool = True       # per-loop router bias -> encourages routing divergence across loops
+    moe_loop_router: bool = False    # R47 (LOOM): fully separate router weights per loop (vs bias only)
+    loop_res_scale: float = 0.0      # R47: >0 scales each loop's residual update by loop_res_scale/sqrt(r+1) (bounds variance growth)
     engram_slots: int = 0            # >0: Engram-style hashed n-gram memory (arXiv:2601.07372) after prelude
     engram_orders: tuple = (2, 3)
     engram_heads: int = 4
@@ -242,6 +244,8 @@ class MoE(nn.Module):
         H = max(8, int(m * D))
         self.H = H
         self.router = nn.Linear(D, E, bias=False)
+        self.loop_routers = nn.ModuleList([nn.Linear(D, E, bias=False) for _ in range(n_loops - 1)]) \
+            if (c.moe_loop_router and n_loops > 1) else None      # loop 0 uses self.router; loop r>0 uses loop_routers[r-1]
         self.w_up = nn.Parameter(torch.randn(E + self.ns, D, 2 * H) * c.init_std)
         self.w_down = nn.Parameter(torch.randn(E + self.ns, H, D) * c.init_std)
         self.loop_bias = nn.Parameter(torch.zeros(n_loops, E)) if (c.moe_loop_bias and n_loops > 1) else None
@@ -252,7 +256,8 @@ class MoE(nn.Module):
     def forward(self, x, loop=0):
         B, L, D = x.shape
         xf = x.reshape(-1, D)
-        logits = self.router(xf).float()
+        rt = self.router if (self.loop_routers is None or loop == 0) else self.loop_routers[min(loop, len(self.loop_routers)) - 1]
+        logits = rt(xf).float()
         if self.loop_bias is not None:
             logits = logits + self.loop_bias[loop]
         scores = torch.sigmoid(logits)
@@ -577,6 +582,8 @@ class Natsu(nn.Module):
             x_in = x
             for i, b in enumerate(self.core):
                 x = run(b, f"c{i}_r{r}", x, loop=rr, skip=skip, core_i=i)
+            if c.loop_res_scale > 0 and c.n_loops > 1:
+                x = x_in + (c.loop_res_scale / math.sqrt(r + 1)) * (x - x_in)   # R47 residual scaling of the whole loop update
             if gval is not None:
                 if skip is not None:
                     x = torch.where(skip[..., None], x_in, x)

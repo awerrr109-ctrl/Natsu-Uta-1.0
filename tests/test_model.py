@@ -136,3 +136,10 @@ def test_engram_factorised_cache():
 
 if __name__ == "__main__":
     test_engram_factorised_cache(); print("ok engram factorised")
+
+def test_loop_router_resscale_cache():
+    _check_cache(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8, n_loops=3,
+                             moe_experts=4, moe_topk=2, moe_shared=1, moe_loop_router=True, loop_res_scale=1.0))
+
+if __name__ == "__main__":
+    test_loop_router_resscale_cache(); print("ok loop router + res scale")
