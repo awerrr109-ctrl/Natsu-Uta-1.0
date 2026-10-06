@@ -242,3 +242,6 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   **Caveat (curve check)**: train loss E6a 1.097@800 → 0.476@1199 is a sharp late drop (a phase transition, likely retrieval circuit formation); E6b was *ahead*
   at step 800 (1.020) and then plateaued (0.868); E6c 1.291@800 → 0.885. The ranking is therefore a **transition-timing** effect in one seed and a 1200-step
   budget, not a capacity verdict. Downgraded to [weak E]. Needs longer runs or seeds before "Engram hurts retrieval tasks" can be claimed.
+- **Pareto with honest KD accounting (scripts/pareto.py v2)**: charging teacher forward + teacher training, E5b costs **3.14e13 train FLOPs vs E4j 7.78e12 (4.0×)**
+  for −0.020 bpb vs the E4j 2-seed mean. At **iso-train-FLOP**, E4z alone (1.77e13, 1.4394) is worse than E4j, so the KD route is only Pareto on the
+  *inference* axis. With a sunk-cost teacher (the 9B plan), the marginal training cost is the teacher forward only (~1.8×). Consistent with R35.
