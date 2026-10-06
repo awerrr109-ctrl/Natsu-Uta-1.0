@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-06T09:50Z",
+ "updated": "2026-10-06T22:20Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -137,7 +137,7 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "QUEUE ORDER (each launcher waits for the previous): s2e [E6d running, E8c, E8d, E8e, E8f, E4t] -> s2f [E5c] -> s2g [digit_pos test, E8g, E8h] -> s2h [E4l, E5a_s1, E6La/Lb/Lc x2 seeds, E4u] -> post_s2 [gate_eval E4q/E4r, tts_eval E8a-d, ds_eval x13, analyze] -> s2l [tests, E4v, E4w, E4x(sized), E4s2] -> s2i [sizing, L10a-d 10M 2x2] -> s2j [tests, E9a-c memory editing, collateral]",
+  "QUEUE: s2h [E6La_s1 running, E6Lb_s1, E6Lc_s0, E6Lc_s1, E4u] -> post_s2 [gate AUC, TTS incl adaptive-N on E8a/b/e/g/c/d, ds_eval, route_diag, self-spec bench, kNN-LM 1x/4x E4c/E4j, L1 triage] -> s2l [tests, E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2] -> s2i [10M 2x2] -> s2j [tests incl torchrun smoke, E9 x3 + collateral]",
   "analysis after each: pre-registered rules in evidence_log (H14.1 E6L*, R36 E8g/h, H13.7 E8e/f/E4t, R33 2x2 E6d/E8c/d, N2 AUC, H14.7 E4v-x, F011 E4s2, R40 L10a-d, R39 E9)",
   "X1 (1B stage, needs GPU): C4 vs fewer-experts/larger-active at iso-stored (R42)",
   "50M+ stages: GPU required; downstream evals at >=50M before committing the 1.6B Engram table"
@@ -156,9 +156,8 @@
   "F009 fixed: train_dist sampler coverage + resume"
  ],
  "corpus": {
-  "papers": 42045,
-  "repos": 15597,
-  "reads_L2plus": 46,
-  "note": "L1 v2 triage pending in post_s2"
+  "papers": 42642,
+  "repos": 16171,
+  "reads_L2plus": 55
  }
 }
