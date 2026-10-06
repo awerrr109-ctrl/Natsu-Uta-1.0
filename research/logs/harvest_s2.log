@@ -243,3 +243,15 @@
 [paper] H11.6_kv_sharing_across_loops support 'KV cache reuse recurrent depth': arxiv=0 openalex=0 crossref=0
 [paper] H11.6_kv_sharing_across_loops support 'you only cache once YOCO': arxiv=0 openalex=0 crossref=0
 [paper] H11.6_kv_sharing_across_loops refute  'cross layer kv sharing quality degradation': arxiv=0 openalex=0 crossref=0
+[paper] H13.1_anytime_tax support 'stochastic depth looped transformer anytime inference': arxiv=0 openalex=0 crossref=100
+[paper] H13.1_anytime_tax support 'nested depth training anytime prediction': arxiv=0 openalex=0 crossref=100
+[paper] H13.1_anytime_tax support 'early exit training cost final layer quality': arxiv=1 openalex=0 crossref=100
+[paper] H13.1_anytime_tax refute  'random depth training improves looped transformer generalization': arxiv=2 openalex=0 crossref=100
+[paper] H13.2_token_adaptive_depth support 'token adaptive recursion depth router': arxiv=5 openalex=0 crossref=98
+[paper] H13.2_token_adaptive_depth support 'learned halting supervised by loss improvement': arxiv=1 openalex=0 crossref=100
+[paper] H13.2_token_adaptive_depth support 'think harder per token adaptive iterations': arxiv=0 openalex=0 crossref=100
+[paper] H13.2_token_adaptive_depth refute  'adaptive computation time no gain language modeling': arxiv=100 openalex=0 crossref=100
+[paper] H13.2_token_adaptive_depth refute  'per token early exit batching inefficiency GPU': arxiv=0 openalex=0 crossref=100
+[paper] H13.3_memory_loop_complement support 'n-gram embedding memory reasoning depth effective layers': arxiv=0 openalex=0 crossref=100
+[paper] H13.3_memory_loop_complement support 'memory layer looped transformer': arxiv=50 openalex=0 crossref=100
+[paper] H13.3_memory_loop_complement support 'hash embedding language model scaling': arxiv=22 openalex=0 crossref=100

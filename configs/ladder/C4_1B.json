@@ -1,0 +1,26 @@
+{
+ "name": "C4_1B",
+ "model": {
+  "moe_shared": 1,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "d_model": 1536,
+  "n_heads": 12,
+  "n_kv_heads": 4,
+  "head_dim": 128,
+  "n_prelude": 2,
+  "n_core": 12,
+  "n_coda": 2,
+  "pattern": "ggga",
+  "moe_experts": 24,
+  "moe_topk": 3,
+  "moe_expert_mult": 0.25,
+  "engram_slots": 98304,
+  "engram_heads": 8,
+  "engram_dim": 64,
+  "vocab_size": 65536,
+  "tie_embeddings": false
+ }
+}
