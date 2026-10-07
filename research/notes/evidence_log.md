@@ -616,3 +616,9 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   (ii) the internal residual gives a direct gated path, so n-gram statistics are absorbed early and attention is freed (R17's own claim).
 - E6Ld (v1 with the expert budget not reduced) 0/1: capacity was not the issue.
 - **Tension**: on LM (E4pp) the paper path is +0.0074 bpb worse (1 seed). Ablation E4pq/E4pr (s2n) decides whether that is the lr ×5. If E4pq (paper path, lr ×1) ≈ E4j on LM, then C4 adopts the paper path with lr ×1 and gets both.
+- **[R65] Musat et al., "On the Emergence of Induction Heads for In-Context Learning" (arXiv:2511.01033)** — L2. [E] In a 2-layer transformer the dynamics stay in a 19-dimensional subspace, and only 3 dimensions drive the emergence.
+  Time-to-emergence is Θ(L²) in context length. → [I] Two predictions for N7.
+  (a) The paper-path speed-up should *grow* with context length if it acts by de-noising the residual (fewer competing directions). A long-context varchain (n_steps 20 in training) would test this.
+  (b) The 3-dimensional subspace story means a random-init conv injects energy into directions outside it, a plausible slow-down. That is exactly what E6Lf_randconv isolates.
+- **[R66] ReZero (Bachlechner et al. 2021), Fixup (Zhang et al. 2019)** — L1, background. Zero-init residual branches speed convergence at depth. This is prior art for "identity-start helps optimisation".
+  N7's specific claim is narrower: identity-start of the *memory* path changes ICL emergence time, not just convergence. → The novelty bar is set accordingly. If E6Lf_randconv alone explains the effect, N7 is reduced to "ReZero applies to memory modules".
