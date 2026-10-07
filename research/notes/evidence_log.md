@@ -598,3 +598,21 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **[R64] llama.cpp discussion #27149 + tinygiant (low-star prototype)** — L2. Expert-contiguous re-layout; SSD reads hidden at ≥88% hit; calibrated pinning gives 42% hit.
 - → [I, new] **Routing collapse across loops (own route_diag) turns into an I/O advantage under 1 GB**: loop r reads mostly cache-resident experts. Recorded in INFERENCE_SPEC v0.3.
   Gap: no paper found combines looped MoE with flash expert paging. Next: reuse-distance measurement from own routing traces.
+
+### F013 test, part 2 — paper-faithful Engram on varchain, 3 seeds: **strong positive (ICL)**
+| arm | transitioned | steps-to-transition (loss<0.2) | train loss @400 (s0/s1/s2) |
+|---|---|---|---|
+| no Engram (E6La) | 1/3 | 2000, –, – | 1.48 / 1.38 / 1.62 |
+| Engram v1 (E6Lb) | 1/3 | –, 800, – | 1.54 / 1.63 / 1.31 |
+| v1 delayed (E6Lc) | 1/2 | –, 1000 | – |
+| v1, full experts (E6Ld) | 0/1 | – | – |
+| **Engram paper path (E6Le)** | **3/3** | **600, 600, 400** | **0.93 / 0.97 / 0.19** |
+- [E own] All 3 paper-path seeds solve the task with EM 1.000 and long20 EM 1.000. Their steps-to-transition (400–600) are below the fastest of the 9 other runs (800).
+  At step 400, all 3 paper seeds are lower than all 9 other runs (rank test: the 3 lowest out of 12; P = 1/C(12,3) = 0.0045 under exchangeability).
+  The Fisher test on the transition count alone (3/3 vs 3/9) is weaker (p = 0.09), but the loss-trajectory ordering is the sharper statistic and was looked at after the fact → **labelled post-hoc**.
+- [I] The faithful output path (zero-init dilated conv + RMSNorm + internal residual, lr ×5) **accelerates in-context retrieval formation ≥1.5–5×**, while v1 had no effect.
+  This reconciles our data with R17 (Engram improves VT/NIAH). The earlier negative signal was an implementation artefact plus seed bimodality (F013 + F014).
+  Mechanism candidates: (i) identity start means no random mixing noise in the residual stream (R59: plateau = slow attention-map learning, and noise slows it);
+  (ii) the internal residual gives a direct gated path, so n-gram statistics are absorbed early and attention is freed (R17's own claim).
+- E6Ld (v1 with the expert budget not reduced) 0/1: capacity was not the issue.
+- **Tension**: on LM (E4pp) the paper path is +0.0074 bpb worse (1 seed). Ablation E4pq/E4pr (s2n) decides whether that is the lr ×5. If E4pq (paper path, lr ×1) ≈ E4j on LM, then C4 adopts the paper path with lr ×1 and gets both.

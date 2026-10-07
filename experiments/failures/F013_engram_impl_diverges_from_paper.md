@@ -24,3 +24,4 @@
 
 - **results so far**: E6Le (varchain, s0) transitioned at step 600, EM 1.000, on the seed where v1 failed. **E4pp (LM)**: bpb 1.4336 vs v1 1.4262 ± 0.0016 → +0.0074 (worse).
   Neither "paper = better" nor "v1 = fine" holds across both tasks. Ablation E4pq/E4pr (s2n) separates the output path from lr ×5. **C4 keeps v1 for LM until the ablation reports.**
+- **varchain 3 seeds**: paper path 3/3 transitioned at steps 600/600/400 vs 1/3 for v1 and 1/3 without Engram → the implementation divergence was the cause of the ICL-side discrepancy with R17.

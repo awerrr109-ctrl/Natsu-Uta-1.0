@@ -52,3 +52,7 @@ Rule: a contribution counts only if (a) the difference from the closest prior wo
 ## Not novel (explicitly)
 GDN hybrid 3:1 (Qwen3.5), MoE with shared experts, MTP, shared-first KV (MoR/MELT), LTI injection (Parcae), lookahead depth labels (TaH2),
 loop self-speculation (LoopSpec), DPT distillation, 8-bit Adam. These are implemented as components and credited.
+
+## Note (session 2): what is *not* novel here
+- The F013 fix (paper-faithful Engram path) is a reproduction, not a contribution. Our own contribution is the measurement that **the output-path details decide whether n-gram memory helps or is neutral for in-context-retrieval emergence** (3/3 vs 1/3; steps-to-transition 400–600 vs ≥800).
+  The R17 paper reports end-of-training RULER, not emergence time. Novelty claim N7 (weak): "identity-initialised memory paths accelerate ICL emergence". It needs a dense-FFN control, and a run with a zero-init conv but no internal residual, before any claim.
