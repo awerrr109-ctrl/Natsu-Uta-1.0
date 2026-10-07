@@ -1,5 +1,5 @@
 {
- "name": "E4x_engram_factor_r8_small_moreexperts",
+ "name": "E4pr_moe_engramv1_lr5",
  "model": {
   "d_model": 128,
   "n_heads": 2,
@@ -13,7 +13,7 @@
   "moe_experts": 8,
   "moe_topk": 2,
   "moe_shared": 1,
-  "moe_expert_mult": 0.2187,
+  "moe_expert_mult": 0.17,
   "engram_slots": 512,
   "engram_orders": [
    2,
@@ -21,7 +21,7 @@
   ],
   "engram_heads": 2,
   "engram_dim": 32,
-  "engram_factor_rank": 8
+  "engram_paper": false
  },
  "train": {
   "seq": 128,
@@ -33,7 +33,8 @@
   "log_every": 100,
   "threads": 2,
   "eval_batches": 12,
-  "save": true
+  "save": true,
+  "engram_lr_mult": 5.0
  },
  "data": {
   "kind": "memmap",
@@ -41,12 +42,5 @@
   "valid": "data_cache/ts_valid.bin"
  },
  "extra_eval": {},
- "note": "H14.7: same slots as E4j but factorised (table 4x smaller); freed params -> experts (moe_expert_mult sized iso-param to E4j in-queue)",
- "sizing": {
-  "matched_to": {
-   "ref": "E4j_moe_engram_noloop.json",
-   "ref_params": 825480,
-   "params": 818824
-  }
- }
+ "note": "F013 ablation: v1 output path, table lr x5."
 }

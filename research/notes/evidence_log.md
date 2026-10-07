@@ -582,3 +582,13 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - [I] Faithful implementation (zero-init conv → identity at start, internal residual, lr ×5) gives the fastest in-context retrieval formation seen.
   This matches R17 (Engram helps VT) and R59 (plateau = slow attention learning). An n-gram path that is clean from step 0 may remove local-statistics load from attention.
   n=1 → not a claim. E6Le seeds 1–2 are needed to say "paper path speeds transition".
+
+### s2m results (3rd seeds + F013 on LM)
+- **varchain, 3 seeds per arm** [E own]: no-Engram **1/3** transitioned (s2 EM 0.000), Engram v1 **1/3** (s2 EM 0.000), delayed 1/2, **paper Engram 1/1** (s1/s2 running).
+  Final for H14.1(a): Engram v1 does not change the transition rate (1/3 vs 1/3). The transition rate at this budget is ~⅓ for both.
+- **E4pp (paper Engram path + table lr ×5, LM)**: bpb **1.4336** vs E4j (v1) 3-seed 1.4262 ± 0.0016 → **+0.0074, ≈4.6 sd worse**. Pre-registered: worse → keep v1 for LM.
+  [I] So far the paper path helps ICL (1 seed) and hurts LM (1 seed). Two confounded changes (output path, lr ×5) → ablation **E4pq (paper path, lr ×1)** and **E4pr (v1 path, lr ×5)** queued as s2n (after s2l, before 10M).
+  Candidate explanations to discriminate:
+  (a) lr ×5 is tuned for the paper's 27B/Adam/5e-4 regime; at our base lr 3e-3 it means 1.5e-2 on the table, which is likely too hot;
+  (b) zero-init conv makes the module start as plain gated values, and in 800 steps the conv never contributes much.
+  If E4pq ≈ E4j and E4pr ≈ E4pp, the regression is the lr multiplier only.

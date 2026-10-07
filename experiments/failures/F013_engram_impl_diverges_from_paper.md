@@ -21,3 +21,6 @@
   E6Le ≈ 0 → the penalty is a property of n-gram memory at this scale (H14.1 survives the faithful implementation). E4pp: bpb ≤ 1.4212 adopt; ±0.005 neutral.
 - **lessons**: (1) after a surprising negative result on a published component, first diff the implementation against the paper's equations and
   *training config*, not just its block diagram. (2) Optimiser details (lr multipliers, init) are part of the method. Added to the RESEARCH_PLAN checklist.
+
+- **results so far**: E6Le (varchain, s0) transitioned at step 600, EM 1.000, on the seed where v1 failed. **E4pp (LM)**: bpb 1.4336 vs v1 1.4262 ± 0.0016 → +0.0074 (worse).
+  Neither "paper = better" nor "v1 = fine" holds across both tasks. Ablation E4pq/E4pr (s2n) separates the output path from lr ×5. **C4 keeps v1 for LM until the ablation reports.**

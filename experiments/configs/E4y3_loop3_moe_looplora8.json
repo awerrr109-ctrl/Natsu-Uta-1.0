@@ -15,7 +15,7 @@
   "moe_experts": 8,
   "moe_topk": 2,
   "moe_shared": 1,
-  "moe_expert_mult": 0.296,
+  "moe_expert_mult": 0.2812,
   "loop_lora_rank": 8
  },
  "train": {
@@ -42,5 +42,12 @@
   "valid": "data_cache/ts_valid.bin"
  },
  "extra_eval": {},
- "note": "R62 relaxed recursion inside MoE: per-loop LoRA (rank 8, B=0) on the MoE output; vs E4g (bias only) and E4y (separate routers). iso-param via moe_expert_mult sizing in queue. Rule: bpb <= E4g-0.008 (2 sd) and route_diag Jaccard lower than E4g -> adopt."
+ "note": "R62 relaxed recursion inside MoE: per-loop LoRA (rank 8, B=0) on the MoE output; vs E4g (bias only) and E4y (separate routers). iso-param via moe_expert_mult sizing in queue. Rule: bpb <= E4g-0.008 (2 sd) and route_diag Jaccard lower than E4g -> adopt.",
+ "sizing": {
+  "matched_to": {
+   "ref": "E4g_loop3_moe_fixedR_noinj.json",
+   "ref_params": 821176,
+   "params": 819640
+  }
+ }
 }
