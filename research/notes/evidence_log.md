@@ -622,3 +622,16 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   (b) The 3-dimensional subspace story means a random-init conv injects energy into directions outside it, a plausible slow-down. That is exactly what E6Lf_randconv isolates.
 - **[R66] ReZero (Bachlechner et al. 2021), Fixup (Zhang et al. 2019)** — L1, background. Zero-init residual branches speed convergence at depth. This is prior art for "identity-start helps optimisation".
   N7's specific claim is narrower: identity-start of the *memory* path changes ICL emergence time, not just convergence. → The novelty bar is set accordingly. If E6Lf_randconv alone explains the effect, N7 is reduced to "ReZero applies to memory modules".
+
+### H14.7 factorised Engram table — results (1 seed each, v1 output path, LM 800 steps)
+| run | table | bpb | Δ vs E4j (1.4262 ± 0.0016) |
+|---|---|---|---|
+| E4j | 512 slots × dm=32, dense rows | 1.4262 | 0 |
+| E4v | 2048 slots, rank 8 (iso table params) | 1.4513 | **+0.025** |
+| E4w | 4096 slots, rank 4 (iso) | 1.4423 | **+0.016** |
+| E4x | 512 slots, rank 8 (table 4× smaller), freed params → experts | 1.4571 | **+0.031** |
+| E4c (no Engram) | – | 1.4792 | +0.053 |
+- [E own] **H14.7 rejected at toy scale.** Every factorised variant is 10–20 sd worse. Moving freed table params into experts (E4x) is the worst, keeping only 42% of the Engram gain.
+- [I] At 512 slots the table is not collision-bound. Rows need full rank: per-n-gram vectors carry independent information, and a shared rank-r basis destroys that.
+  The R44/R45 factorisation results come from huge tables (≥10⁶ rows), where rows are redundant. The test may flip at 9B (1.6B-param table), so it is **scoped to toy scale**, not refuted globally.
+  E4w > E4v (rank 4 with 8× slots beats rank 8 with 4× slots), so slot count matters more than rank. That suggests collisions do matter somewhat, just less than row rank.

@@ -109,7 +109,8 @@
   "N1_memory_before_loop_bpb": "F007",
   "H13.7_block_cos_regulariser": "E4t LM -0.004 (noise); E8f addition -0.066 acc; not adopted",
   "H14.1a": "'Engram v1 blocks in-context retrieval circuit (varchain)': refuted at n=2 seeds — transitions 1/2 vs 1/2; E6Lb_s1 EM 1.000 (F014). Original 1-seed claim was over-claimed.",
-  "N5_delayed_memory": "E4u keeps 4% of Engram LM gain (1.4770 vs 1.4792/1.4262); varchain transitions equal across arms (F014). Rejected."
+  "N5_delayed_memory": "E4u keeps 4% of Engram LM gain (1.4770 vs 1.4792/1.4262); varchain transitions equal across arms (F014). Rejected.",
+  "H14.7_factorised_engram_table": "toy scale: E4v +0.025, E4w +0.016, E4x +0.031 bpb vs E4j; rows need full rank at 512 slots; scoped (may flip at 1e6+ rows)"
  },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",
