@@ -548,3 +548,7 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **Leakage audit** (fg run): 39% of validation 16-grams, 6.6% of 32-grams and 0.4% of 64-grams also appear in the first 3.2M train tokens. TinyStories is highly redundant, so this gain is mostly *near-duplicate recall*. That is legitimate retrieval of seen data (R55), but it overstates the gain on low-redundancy corpora. **Do not extrapolate the magnitude to 9B web data.**
 - [E own] **Engram and kNN are partly substitutes**: the Engram advantage shrinks from 0.046 (λ=0) to 0.016 (λ=0.5, 0.8M store). Both exploit local repetition. The 3.2M E4j row is still pending.
 - Against R55's "91% of the gain at ~1 tok/param": here 1 tok/param gives 0.128 of 0.222 (58%) and the gain has not saturated at 4 tok/param. That contradicts R55 on this corpus, likely because of the redundancy.
+- **kNN update (E4j, 3.2M store)**: λ 0/0.1/0.25/0.5 → 1.4548 / 1.3618 / 1.2967 / **1.2494**. Engram advantage over E4c: 0.046 (λ=0) → 0.016 (0.8M, λ=0.5) → **0.030 (3.2M, λ=0.5)**.
+  [E own] Engram + kNN is the best combination so far (1.249). The two are **partly additive, not pure substitutes**: about ⅓–⅔ of the Engram gain survives retrieval.
+  [I] For C4 this is the three-store design (weights / Engram / datastore) from NEXT_GEN G1b, now with a first toy-scale measurement. The open cost is datastore RAM/disk:
+  3.2M keys × 128-d fp16 = 781 MB, i.e. **~244 B per stored token**. At 9B tok/param scale that is ~2.2 TB uncompressed, so G1b needs PQ/low-dim keys (next: key-dim ablation).
