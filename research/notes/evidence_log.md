@@ -561,8 +561,9 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   (2) **Gap / H15.1 "retrieval-distilled pretraining"**: MemDec distils kNN into a *separate* decoder. Distilling the kNN-mixed distribution into *the model's own Engram table* is not found in the corpus.
   Mechanism: the table is token-indexed like kNN keys are context-indexed. The DPT machinery (E5) is reused with teacher = (1−λ)p_LM + λp_kNN of a frozen checkpoint.
   Deployment would then need neither a datastore nor extra latency.
-  Cost (**corrected**; the first estimate of 80 TFLOP was wrong by ~10³): exact kNN for 1.6M queries × 0.8M keys × 128-d is ≈3×10¹⁷ FLOP, infeasible on CPU.
-  With an IVF index (1024 lists, 8 probes, ≈6.4k candidates per query) it is ≈1.6M × 0.95 MFLOP ≈ 1.5 TFLOP, i.e. minutes. **ANN is a prerequisite for G1c and for G1b at scale.**
+  Cost (re-derived; the first figure of 80 TFLOP was 4× low, and an intermediate 'correction' of 3×10¹⁷ was an arithmetic error, now retracted):
+  exact kNN = 1.6M queries × 0.8M keys × 2·128 FLOP ≈ **3.3×10¹⁴ FLOP**, ≈2 h on this 2-core CPU (~50 GFLOP/s), so feasible offline.
+  With JL-32 keys it drops to ≈8×10¹³ (~30 min). IVF/ANN is only needed beyond ~10⁷ store entries (G1b at scale).
   Trap to handle: the store contains the training windows themselves, so self-matches must be excluded (positions within ±seq of the query).
   Not queued yet: the queue is full for ~15 h, and the JL-compression result (post_s2b) decides the store format first.
 - **[R61] "kNN-LM Does Not Improve Open-ended Text Generation" (Wang et al., OpenReview 3FNrGv5MKb)** — L1 (PDF blocked by CAPTCHA, abstract-level only). The title-level claim agrees with R60:
