@@ -36,4 +36,8 @@ if grep -q "ok region" experiments/test_s2b.log; then
     scripts/run_queue.sh $C/G1c_ctrl_E4j_region.json $C/G1c_knn_E4j_region.json > experiments/queue_s2b_g1c.log 2>&1
   fi
 fi
+# INFERENCE_SPEC v0.3: expert-cache LRU replay, looped vs non-looped MoE (does loop routing collapse cut flash I/O per token?)
+for ck in E4g_loop3_moe_fixedR_noinj E4l_loop3fixed_moe_selfdistill E4c_ts_hyb_moe_noloop E4y_loop3_moe_looprouter E4y3_loop3_moe_looplora8; do
+  [ -f checkpoints/$ck.pt ] && (cd src && MALLOC_ARENA_MAX=1 timeout 900 python3 -m natsu.route_diag --ckpt checkpoints/$ck.pt --cache 2,4,6,8,12,16 >> ../experiments/route_cache_s2b.jsonl 2>> ../experiments/route_cache_s2b.err)
+done
 echo "=== post_s2b DONE $(date)" >> experiments/tts_s2b.log
