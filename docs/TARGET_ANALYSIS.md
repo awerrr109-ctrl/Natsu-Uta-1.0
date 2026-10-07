@@ -97,3 +97,16 @@ ratio against frontier models' size and remains [I]/unknown.
 - [I] To **beat** Qwen3.5-9B quality at 9B stored, C4 needs the levers that are not parameter-bound: KD from a stronger teacher (R25, R35: helps with a sunk-cost teacher),
   data (R30–R32), RL post-training, and test-time compute with verifiers (R27: 100–1000× FLOP-efficiency claims vs much larger models on verifiable domains).
 - Decision implication: we keep C4 for its cost axis and **re-open the stored-vs-active trade-off** in the 1B ladder stage. A variant C4-dense-heavier (fewer experts, larger active) is a required ladder comparison, recorded as next experiment X1.
+
+## 7. Session-2 update: which axes can move with which lever (evidence level per row)
+| axis (vs Claude-class target) | lever | size of effect | evidence |
+|---|---|---|---|
+| verifiable math/code | tool verifier + N samples | 1B + tool + N=64 > 8B on MATH500 (~8× size class) | [E R68, external] |
+| verifiable math/code | adaptive-N voting | stops at 4–16 samples by margin | [impl; toy curve pending F015 rerun] |
+| in-context retrieval (VT/NIAH-like) | Engram recipe (paper path / lr ×5) | emergence 400–600 vs ≥800 steps (or never); 3/3 vs 1/3 seeds | [E own, toy] |
+| LM perplexity | Engram v1 + table lr ×5 | −0.082 bpb vs no Engram (vs −0.053 at lr ×1) | [E own, 1 seed; replication queued] |
+| knowledge / long tail | retrieval (kNN, ~1–4 tok/param store) | −0.13/−0.22 bpb, corpus-inflated; R60/R61: PPL gains do not transfer to QA | [E own + refutation] |
+| 1 GB RAM decoding | MoE expert paging + loop reuse | R63: capacity cliff; R64: reads hidden at ≥88% hit | [E external; own replay pending] |
+| reasoning depth via loops | R47 recipe | n.s. at toy scale | [E own, scoped] |
+- **Unknown** (cannot be measured in this sandbox): any absolute benchmark parity with frontier models. All own evidence is ≤0.8M parameters.
+  Every row marked "toy" needs the 50M ladder (runbook) before it informs the 9B claim.
