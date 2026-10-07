@@ -672,3 +672,8 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   - E4ps: paper path, lr ×2.5 (LM)
   - E4pr seeds 1–2: replication of a 1-seed −0.029 claim, needed before adopting it
   - E6Lh ×2: v1 + lr5 on varchain (ICL)
+- **[R67] Pinterest, "Evolution of Embedding Table Optimization…" (arXiv:2505.05605)** — L2. [E] The "Sparse Optimizer" gives embedding tables a **50×** lr on Adam, because each row gets few updates.
+  It converges faster and gains AUC, but too much lr causes **multi-epoch overfitting on low-frequency IDs**. That motivates FAL (Frequency-Adaptive LR): per-row lr scaled by inverse access frequency.
+  → [I] Independent support for E4pr: the table is update-starved, and Adam's per-coordinate normalisation does not fix row-level update counts.
+  Engram rows are Zipf-distributed, so a global ×5 over-steps hot rows and under-steps cold ones. **H15.2 (gap)**: frequency-adaptive Engram lr, ∝ (count_row)^−α with α≈0.5, where counts are cheap (a bincount of addresses per step).
+  No LM-memory paper in the corpus applies FAL to n-gram tables (title check pending). Implement only after E4pr replicates.
