@@ -57,3 +57,9 @@ actual context, GDN state ops, active MoE experts only, and PKM lookups).
 3. **The capacity cliff is the binding constraint**: the cache must exceed the reuse distance (#experts touched between reuses). For C4 at 9B (64 experts × 24 MoE layers, top-k=6), one token touches 144 experts.
    With ~2.3 MiB per expert at 4-bit, the hot set for one token is ≈ 330 MiB, which is inside 1 GB. A cache of 2–3 tokens' worth (~700–1000 MiB) is borderline, so the cache budget must leave room for the KV/GDN state (9.4 MB + 8 KB/token).
    → Analytic, not measured. **Measurement target for the 1B stage**: expert reuse-distance histogram and hit rate vs budget, on our own routing traces (route_diag can dump them).
+
+## Tool-verifier policy (v0.3, from R68)
+- Two-stage selection: (1) an executable check acts as a **soft** filter. It vetoes only on hard failures (exception, type error, wrong format); a mismatch on an ambiguous check downweights instead of rejecting.
+  (2) A policy-matched scorer or majority vote ranks the survivors.
+- Reason: R68 reports unrecoverable false negatives from hard tool rejection, and a symbolic-equivalence failure.
+- Expected effect (R68, math): 1B + tool + N=64 > 8B. That is the strongest published size-class multiplier for verifiable domains. It does not transfer to non-verifiable tasks.

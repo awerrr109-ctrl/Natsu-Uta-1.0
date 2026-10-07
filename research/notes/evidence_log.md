@@ -677,3 +677,12 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   → [I] Independent support for E4pr: the table is update-starved, and Adam's per-coordinate normalisation does not fix row-level update counts.
   Engram rows are Zipf-distributed, so a global ×5 over-steps hot rows and under-steps cold ones. **H15.2 (gap)**: frequency-adaptive Engram lr, ∝ (count_row)^−α with α≈0.5, where counts are cheap (a bincount of addresses per step).
   No LM-memory paper in the corpus applies FAL to n-gram tables (title check pending). Implement only after E4pr replicates.
+
+### P15 (tools) read
+- **[R68] T1: Tool-integrated verification for test-time scaling of small LMs (ICLR 2026)** — L2. [E] A code-interpreter filter rejects candidates that fail executable checks, then a small reward model ranks the survivors.
+  Llama-3.2-**1B** + T1, best-of-64 on MATH500, scores **53.2%**, above Llama-3.1-8B. The overhead is equal to a verifier 1.14× larger.
+  Failures: geometry, Level-5 problems, and false negatives (a correct answer rejected by bad check code, which cannot be recovered), plus symbolic-equivalence errors.
+  → [I] Direct support for INFERENCE_SPEC's "executable verifier > PRM" ordering and for G2. Quantitatively, **tools plus N=64 samples move a model ~8× in size class on math**.
+  For Natsu-9B the axis "math/code parity" is therefore mostly a *test-time-compute plus tool* problem, not a parameter problem. TARGET_ANALYSIS gets an inferred multiplier [I], scoped to verifiable domains.
+  In our toy TTS harness, oracle@N is exactly the tool-verifier upper bound. The F015 rerun (2–3 digits) gives the toy analogue.
+  The false-negative failure mode argues for **soft** tool signals (veto only on hard failures, e.g. exceptions) instead of hard rejection. Added to INFERENCE_SPEC.
