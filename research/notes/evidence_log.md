@@ -552,3 +552,17 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   [E own] Engram + kNN is the best combination so far (1.249). The two are **partly additive, not pure substitutes**: about ⅓–⅔ of the Engram gain survives retrieval.
   [I] For C4 this is the three-store design (weights / Engram / datastore) from NEXT_GEN G1b, now with a first toy-scale measurement. The open cost is datastore RAM/disk:
   3.2M keys × 128-d fp16 = 781 MB, i.e. **~244 B per stored token**. At 9B tok/param scale that is ~2.2 TB uncompressed, so G1b needs PQ/low-dim keys (next: key-dim ablation).
+
+### Refutation reads for G1b (kNN-LM)
+- **[R60] Memory Decoder (arXiv:2508.09874)** — L2. [E] A small transformer (124M) is pretrained to imitate the kNN-LM distribution (KL to the cached kNN distribution + LM CE) and plugged into GPT-2.
+  On Wikitext-103 it reaches 13.36 PPL vs kNN-LM 15.62 vs in-context RAG 18.46, with 1.28× latency vs kNN-LM 2.17×. **kNN-LM often *degrades* knowledge-intensive QA (NQ, HotpotQA)**, while MemDec improves it.
+  There is no datastore at deployment.
+  → [I] (1) Refutes "perplexity gain ⇒ task gain" for kNN-LM. Our −0.22 bpb is a perplexity number, and ds_eval cannot measure the task side at 0.8M.
+  (2) **Gap / H15.1 "retrieval-distilled pretraining"**: MemDec distils kNN into a *separate* decoder. Distilling the kNN-mixed distribution into *the model's own Engram table* is not found in the corpus.
+  Mechanism: the table is token-indexed like kNN keys are context-indexed. The DPT machinery (E5) is reused with teacher = (1−λ)p_LM + λp_kNN of a frozen checkpoint.
+  Deployment would then need neither a datastore nor extra latency.
+  Cost: kNN targets for 1.6M training tokens against a 0.8M JL-32 store come to ≈80 TFLOP, ~30–60 min CPU, offline and cacheable as top-16 (value, weight).
+  Trap to handle: the store contains the training windows themselves, so self-matches must be excluded (positions within ±seq of the query).
+  Not queued yet: the queue is full for ~15 h, and the JL-compression result (post_s2b) decides the store format first.
+- **[R61] "kNN-LM Does Not Improve Open-ended Text Generation" (Wang et al., OpenReview 3FNrGv5MKb)** — L1 (PDF blocked by CAPTCHA, abstract-level only). The title-level claim agrees with R60:
+  PPL gains do not transfer to generation quality. Logged as refutation evidence and taken into G1b's risk list.

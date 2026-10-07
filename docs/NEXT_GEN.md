@@ -54,3 +54,13 @@ Tags: [E] measured/cited, [I] inferred, [H] hypothesis.
 - Trained deep loops as the main capability lever: the toy evidence is weak/negative (F005 updates 1–4, F007, F010). R33's reasoning gains are not reproduced here.
 - Aggressive web filtering at 9B: R32's law says it is wrong for 1e23-FLOP budgets.
 - Forward-only / non-backprop pretraining: gradient variance grows with dimension (taxonomy H6.4 refute list). It stays a fine-tuning-only option.
+
+
+## G1c. Retrieval-distilled Engram (H15.1, session 2)
+- **Evidence**: on toy scale, kNN gives −0.13/−0.22 bpb at 1/4 tok/param (inflated by TinyStories redundancy) and stays partly additive with Engram (E4j+kNN 1.249).
+  But R60/R61 report that kNN-LM perplexity gains fail to transfer to generation/QA and cost 2.17× latency plus a datastore (~244 B/token fp16 at d=128).
+- **Proposal**: build kNN-mixed targets offline from a frozen checkpoint, then DPT-distil them into the student, with the Engram table lr ×5 (F013 path).
+  Deployment needs no datastore and no latency.
+- **Difference from MemDec (R60)**: the target is the base model's own token-indexed memory, not a separate decoder. That gives zero extra inference FLOPs, and the memory stays editable (G1).
+- **Falsifier**: the student's bpb gain is < 30% of the online kNN gain on the same valid slice → the table cannot absorb context-indexed knowledge; keep the datastore (G1b) instead.
+- **Prereqs**: JL/int8 store result (post_s2b); self-match exclusion; target cache format (top-16 value u16 + weight f16 = 64 B/token).
