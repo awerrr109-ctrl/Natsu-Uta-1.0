@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-06T22:20Z",
+ "updated": "2026-10-07T00:05Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -100,10 +100,11 @@
    "reason": "F007 sub-additive",
    "evidence_quality": "low-medium (1 seed, toy)"
   },
-  "N2_memory_conditioned_depth": "F010: E4q\u2248E4r (no effect); loop+Engram+exit still \u2248 Engram alone",
+  "N2_memory_conditioned_depth": "F010: E4q≈E4r (no effect); loop+Engram+exit still ≈ Engram alone",
   "N3_fixed_then_uniform": "E4m failed pre-reg",
   "N1_memory_before_loop_bpb": "F007",
-  "H13.7_block_cos_regulariser": "E4t LM -0.004 (noise); E8f addition -0.066 acc; not adopted"
+  "H13.7_block_cos_regulariser": "E4t LM -0.004 (noise); E8f addition -0.066 acc; not adopted",
+  "H14.1a": "'Engram v1 blocks in-context retrieval circuit (varchain)': refuted at n=2 seeds — transitions 1/2 vs 1/2; E6Lb_s1 EM 1.000 (F014). Original 1-seed claim was over-claimed."
  },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",
@@ -137,7 +138,7 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "QUEUE: s2h [E6La_s1 running, E6Lb_s1, E6Lc_s0, E6Lc_s1, E4u] -> post_s2 [gate AUC, TTS incl adaptive-N on E8a/b/e/g/c/d, ds_eval, route_diag, self-spec bench, kNN-LM 1x/4x E4c/E4j, L1 triage] -> s2l [tests, E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2] -> s2i [10M 2x2] -> s2j [tests incl torchrun smoke, E9 x3 + collateral]",
+  "QUEUE: s2h [E6Lc_s0 running, E6Lc_s1, E4u] -> post_s2 -> s2m [tests, E6Le paper-faithful Engram (F013), E6La_s2, E6Lb_s2, E4pp] -> s2l [E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2] -> s2i [10M 2x2] -> s2j [E9]",
   "analysis after each: pre-registered rules in evidence_log (H14.1 E6L*, R36 E8g/h, H13.7 E8e/f/E4t, R33 2x2 E6d/E8c/d, N2 AUC, H14.7 E4v-x, F011 E4s2, R40 L10a-d, R39 E9)",
   "X1 (1B stage, needs GPU): C4 vs fewer-experts/larger-active at iso-stored (R42)",
   "50M+ stages: GPU required; downstream evals at >=50M before committing the 1.6B Engram table"
