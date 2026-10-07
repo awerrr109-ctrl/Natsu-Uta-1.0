@@ -113,3 +113,17 @@ part individually (R4, R5, R6, R7, MELT) but no work combining looped-MoE with m
 Why loops are not dropped: R33 says loops help reasoning while hurting perplexity, and our probes so far measure perplexity or are positionally bottlenecked (R36).
 The decision is re-opened if E8h > E8g on 6-digit generalisation, or if E6d/E8d show complementarity on reasoning probes.
 The deployed loop form is then "C4 + exit-trained gated loop over the last k core blocks with shared-first KV", trained as a second stage.
+
+## 8. Session-2 revision (v0.4, 2026-10-07): Engram recipe and routing
+| component | v0.4 status | evidence |
+|---|---|---|
+| Engram output path | **paper-faithful path is the ICL default**: varchain 3/3 transitions at steps 400–600 vs 1/3 (v1, none) | F013, E6Le ×3 |
+| Engram table lr | **lr ×5 is the strongest LM lever found** for v1 (−0.029, 1 seed, replication queued). The paper path is hurt by ×5 on LM (+0.007) but helped on ICL (1000 → 600 steps) → interaction | E4pq/pr/pp, E6Lg, R67 |
+| Engram recipe for 10M | **chosen automatically by a pre-registered rule** (`scripts/pick_engram_recipe.py`): best LM mean among recipes with ≥2 seeds and an ICL arm transitioning ≥2/2 | REPORT_S2 §9 |
+| frequency-adaptive table lr | under test (H15.2, E4pt) | R67 FAL |
+| factorised table / VIP rows | not adopted at toy scale (+0.016…+0.031 / n.s.) | H14.7, E4s2 |
+| delayed memory (N5) | rejected | E4u |
+| per-loop routers / per-loop MoE LoRA | not adopted (n.s. at R3). If loops are used: residual scaling + LTI (better R1/R6 robustness) | E4y/y2/y3 |
+| routing collapse across loops | **kept on purpose under RAM-bound deployment**: loop r>0 expert reads become cache hits | route_diag, INFERENCE_SPEC v0.3 |
+| retrieval channel | kNN-LM measured (−0.13/−0.22 bpb, corpus-inflated); retrieval-distilled Engram (G1c) under test, so deployment needs no datastore | knnlm, NEXT_GEN G1c |
+| Engram on algorithmic tasks | v1 interferes with addition (E8i 0.176 vs 0.297); paper-path retest E8j queued | E8i |
