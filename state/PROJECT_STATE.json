@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-07T03:10Z",
+ "updated": "2026-10-07T03:55Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -85,7 +85,8 @@
   "H14.1a_engram_blocks_icl": "E6Lb EM 0.000 vs E6La 0.844 at 2400 steps (1 seed): Engram (iso-param) prevents in-context retrieval circuit; mechanism split E6Ld queued; N5 E6Lc decisive",
   "R47_loop_routing_collapse": "confirmed toy-scale: same-token expert Jaccard across loops 0.55-0.88 vs chance 0.14",
   "G1b_knnlm": "-0.13 bpb @1 tok/param, -0.22 @4 tok/param on TinyStories (redundant corpus; 39% 16-gram overlap); partial substitute for Engram",
-  "loop_self_spec": "exact; accept 0.91 with self-distill (E4l), 4.65 tok/target call; CPU wall not yet faster"
+  "loop_self_spec": "exact; accept 0.91 with self-distill (E4l), 4.65 tok/target call; CPU wall not yet faster",
+  "F013_paper_engram": "E6Le s0: transition at step 600 (earliest), EM 1.000 on seed where v1 failed; n=1, seeds 1-2 queued; E4pp (LM) queued"
  },
  "rejected_hypotheses": {
   "0": {
@@ -142,7 +143,7 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "QUEUE: post_s2 [kNN E4j 3.2M, L1 triage] -> s2m [tests, E6Le, E6La_s2, E6Lb_s2, E4pp] -> s2l [E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2] -> s2i [10M 2x2] -> s2j [E9] -> post_s2b [TTS 2/3 digits]",
+  "QUEUE: s2m [E6La_s2 running, E6Lb_s2, E4pp] -> s2l [tests incl moe lora, E6Le_s1, E6Le_s2, E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2, E4y3] -> s2i [10M 2x2] -> s2j [E9] -> post_s2b [TTS 2/3 digits, kNN rebuild + lambda 0.8, JL/int8 ablation, G1c targets + ctrl/knn runs]",
   "analysis after each: pre-registered rules in evidence_log (H14.1 E6L*, R36 E8g/h, H13.7 E8e/f/E4t, R33 2x2 E6d/E8c/d, N2 AUC, H14.7 E4v-x, F011 E4s2, R40 L10a-d, R39 E9)",
   "X1 (1B stage, needs GPU): C4 vs fewer-experts/larger-active at iso-stored (R42)",
   "50M+ stages: GPU required; downstream evals at >=50M before committing the 1.6B Engram table"
