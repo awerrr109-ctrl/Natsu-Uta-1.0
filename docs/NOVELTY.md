@@ -55,4 +55,4 @@ loop self-speculation (LoopSpec), DPT distillation, 8-bit Adam. These are implem
 
 ## Note (session 2): what is *not* novel here
 - The F013 fix (paper-faithful Engram path) is a reproduction, not a contribution. Our own contribution is the measurement that **the output-path details decide whether n-gram memory helps or is neutral for in-context-retrieval emergence** (3/3 vs 1/3; steps-to-transition 400–600 vs ≥800).
-  The R17 paper reports end-of-training RULER, not emergence time. Novelty claim N7 (weak): "identity-initialised memory paths accelerate ICL emergence". It needs a dense-FFN control, and a run with a zero-init conv but no internal residual, before any claim.
+  The R17 paper reports end-of-training RULER, not emergence time. Novelty claim N7 (weak; **identity-init version not supported**: removing zero-init or the internal residual keeps the 600-step transition): "the Engram optimisation/normalisation recipe decides ICL emergence time". It needs a dense-FFN control, and a run with a zero-init conv but no internal residual, before any claim.

@@ -686,3 +686,19 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   For Natsu-9B the axis "math/code parity" is therefore mostly a *test-time-compute plus tool* problem, not a parameter problem. TARGET_ANALYSIS gets an inferred multiplier [I], scoped to verifiable domains.
   In our toy TTS harness, oracle@N is exactly the tool-verifier upper bound. The F015 rerun (2–3 digits) gives the toy analogue.
   The false-negative failure mode argues for **soft** tool signals (veto only on hard failures, e.g. exceptions) instead of hard rejection. Added to INFERENCE_SPEC.
+
+### N7 component ablation (varchain; paper path = zero-init dilated conv + RMSNorm + internal residual, lr ×5)
+| run | removed | transitions | steps |
+|---|---|---|---|
+| E6Le full paper path | – | 3/3 | 600, 600, 400 |
+| E6Lf_noresid | internal residual | 2/2 | 600, 600 |
+| E6Lf_randconv | zero-init (random conv init) | 1/1 | 600 |
+| E6Lg | lr ×5 (→ ×1) | 1/1 | 1000 |
+| v1 (E6Lb) | all of the above + norm + dilation | 1/3 | 800 |
+- [E own] **Neither the internal residual nor zero-init is necessary.** Each single removal keeps the 600-step transition. The lr ×1 run still transitions but is slower (1000).
+  The remaining differences between "noresid / randconv" and v1 are the **RMSNorm before the conv**, the **dilation = 3**, and lr ×5.
+  → N7 as stated ("identity-initialised memory path") is **not supported**. The ReZero-style explanation (R66) is ruled out at n=1–2.
+- New discriminating runs (s2o): E6Li (= paper minus residual minus zero-init, i.e. v1 + norm + dilation + lr5) and E6Lh (v1 + lr5).
+  - If E6Lh transitions fast, **lr ×5 alone explains it**: a single optimiser setting, already in the paper, and nothing novel.
+  - If only E6Li does, then norm/dilation matter.
+  The ablate field now accepts combinations (code fix: comma-separated).

@@ -329,7 +329,7 @@ class Engram(nn.Module):
         self.paper = c.engram_paper
         if self.paper:   # faithful to arXiv:2601.07372 eq.: Y = SiLU(Conv_dil=maxN(RMSNorm(V~))) + V~, conv zero-init (identity at start)
             self.ablate = c.engram_ablate
-            self.conv = ShortConv(c.d_model, 4, dilation=self.maxo, zero_init=(self.ablate != "randconv"))
+            self.conv = ShortConv(c.d_model, 4, dilation=self.maxo, zero_init=("randconv" not in self.ablate.split(",")))
             self.cnorm = RMSNorm(c.d_model)
         else:
             self.conv = ShortConv(c.d_model)
@@ -405,7 +405,7 @@ class Engram(nn.Module):
         if self.paper:
             vt = g * v
             y, cs = self.conv(self.cnorm(vt), st.get("conv"))
-            if self.ablate != "noresid":
+            if "noresid" not in self.ablate.split(","):
                 y = y + vt
         else:
             y, cs = self.conv(g * v, st.get("conv"))
