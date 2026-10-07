@@ -57,3 +57,21 @@ def test_knn_compress_preserves_neighbours():
             assert agree >= need, (dim, agree)
     finally:
         knnlm.ROOT = old
+
+def test_region_loader_alignment():
+    """G1c: windows are seq-aligned inside the region and the cached target rows match the window positions."""
+    import json, os, tempfile, numpy as np
+    from natsu.data import RegionLoader
+    tmp = tempfile.mkdtemp(); N = 5000
+    np.memmap(os.path.join(tmp, "d.bin"), dtype=np.uint16, mode="w+", shape=(N,))[:] = np.arange(N) % 60000
+    T, k, start, seq = 1024, 4, 1000, 64
+    tg = os.path.join(tmp, "t"); os.makedirs(tg)
+    v = np.memmap(os.path.join(tg, "vals.u16"), dtype=np.uint16, mode="w+", shape=(T, k)); v[:] = (np.arange(T)[:, None] + start + 1)   # "neighbour" = next token
+    np.memmap(os.path.join(tg, "w.f16"), dtype=np.float16, mode="w+", shape=(T, k))[:] = 0.25
+    json.dump({"T": T, "k": k, "start": start}, open(os.path.join(tg, "meta.json"), "w"))
+    L = RegionLoader(os.path.join(tmp, "d.bin"), start, T, seq, 8, 0, tg)
+    for _ in range(5):
+        x, y, _ = L.get(); kv, kw = L.aux
+        assert x.min() >= start and y.max() < start + T + 1
+        assert ((x[:, 0] - start) % seq == 0).all()
+        assert (kv[..., 0] == y).all()          # row t of the cache belongs to target y_t

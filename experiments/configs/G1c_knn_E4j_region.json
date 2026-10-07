@@ -1,0 +1,49 @@
+{
+ "name": "G1c_knn_E4j_region",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1,
+  "pattern": "ga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_shared": 1,
+  "moe_expert_mult": 0.17,
+  "engram_slots": 512,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "engram_heads": 2,
+  "engram_dim": 32
+ },
+ "train": {
+  "seq": 128,
+  "batch": 16,
+  "steps": 800,
+  "lr": 0.003,
+  "warmup": 60,
+  "eval_every": 400,
+  "log_every": 100,
+  "threads": 2,
+  "eval_batches": 12,
+  "save": true,
+  "knn_w": 0.5,
+  "seed": 0
+ },
+ "data": {
+  "kind": "region",
+  "train": "data_cache/ts_train.bin",
+  "valid": "data_cache/ts_valid.bin",
+  "start": 3200000,
+  "tokens": 1638400,
+  "knn_targets": "data_cache/knn_tg_E4j_0.8M"
+ },
+ "extra_eval": {},
+ "note": "G1c: same + soft CE (w=0.5) to cached top-16 p_kNN from E4j's 0.8M store. Rule: bpb gain vs ctrl >= 0.3*online kNN gain of E4j@0.8M (0.3*0.097=0.029) -> table absorbs retrieval (G1c alive); < 0.01 -> rejected."
+}

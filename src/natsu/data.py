@@ -218,3 +218,27 @@ class MixLoader:
 
     def get(self):
         return self.l[self.rng.choice(len(self.l), p=self.w)].get()
+
+
+class RegionLoader:
+    """G1c: random seq-aligned windows from a contiguous region [start, start+tokens) of a memmap, returning per-position cached
+    kNN targets (top-k values, weights) built by `knnlm targets` with the same start/seq. Without `targets` it is the control loader
+    (same region, same window distribution)."""
+    def __init__(self, path, start, tokens, seq, batch, seed=0, targets=None):
+        self.d = np.memmap(path, dtype=np.uint16, mode="r"); self.start, self.seq, self.batch = start, seq, batch
+        self.nw = tokens // seq; self.rng = np.random.default_rng(seed); self.tv = self.tw = None
+        if targets:
+            import json as _j
+            mt = _j.load(open(os.path.join(targets, "meta.json")))
+            assert mt["start"] == start and mt["T"] >= self.nw * seq, "targets do not cover the region"
+            self.tv = np.memmap(os.path.join(targets, "vals.u16"), dtype=np.uint16, mode="r", shape=(mt["T"], mt["k"]))
+            self.tw = np.memmap(os.path.join(targets, "w.f16"), dtype=np.float16, mode="r", shape=(mt["T"], mt["k"]))
+
+    def get(self):
+        w = self.rng.integers(0, self.nw, self.batch)
+        x = torch.from_numpy(np.stack([self.d[self.start + i * self.seq:self.start + (i + 1) * self.seq + 1].astype(np.int64) for i in w]))
+        self.aux = None
+        if self.tv is not None:
+            self.aux = (torch.from_numpy(np.stack([self.tv[i * self.seq:(i + 1) * self.seq].astype(np.int64) for i in w])),
+                        torch.from_numpy(np.stack([self.tw[i * self.seq:(i + 1) * self.seq].astype(np.float32) for i in w])))
+        return x[:, :-1], x[:, 1:], None

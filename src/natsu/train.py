@@ -52,6 +52,11 @@ def make_loader(dc, seq, batch, seed, split="train"):
     if dc["kind"] == "synthetic":
         kw = dict(dc.get("kw", {}))
         return D.SyntheticLoader(dc["task"], seq, batch, seed, **kw)
+    if dc["kind"] == "region":   # G1c: contiguous train region (+ optional cached kNN targets); eval stays on the normal valid set
+        if split != "train":
+            return D.MemmapLoader(os.path.join(ROOT, dc["valid"]), seq, batch, seed)
+        return D.RegionLoader(os.path.join(ROOT, dc["train"]), dc["start"], dc["tokens"], seq, batch, seed,
+                              os.path.join(ROOT, dc["knn_targets"]) if dc.get("knn_targets") else None)
     if dc["kind"] == "mix":
         ls = [make_loader(x, seq, batch, seed + i, split) for i, x in enumerate(dc["parts"])]
         return D.MixLoader(ls, dc["weights"], seed)
@@ -158,7 +163,7 @@ def train(cfg):
         for p_ in teacher.parameters():
             p_.requires_grad_(False)
     tr = make_loader(dc, seq, batch, tc.get("seed", 0), "train")
-    ev = make_loader(dc, seq, tc.get("eval_batch", batch), 777, "valid" if dc["kind"] == "memmap" else "train")
+    ev = make_loader(dc, seq, tc.get("eval_batch", batch), 777, "valid" if dc["kind"] in ("memmap", "region") else "train")
     ev_batches = ev.fixed_eval(tc.get("eval_batches", 8))
     extra_eval = {}
     for name, over in cfg.get("extra_eval", {}).items():  # e.g. OOD hop counts
@@ -212,6 +217,13 @@ def train(cfg):
                 if tc.get("exit_w", 0.0) > 0:
                     for lg in out["inter_logits"]:
                         total = total + tc["exit_w"] * masked_ce(lg, y, m)[0] / len(out["inter_logits"])
+            kw_ = tc.get("knn_w", 0.0)
+            if kw_ > 0 and getattr(tr, "aux", None) is not None:
+                # G1c retrieval distillation: soft CE to cached p_kNN (MemDec-style hybrid objective, but into the model itself)
+                kv, kwt = tr.aux
+                lsm = F.log_softmax(out["logits"].float(), -1)
+                kl_knn = -(lsm.gather(-1, kv) * kwt).sum(-1)
+                total = total + kw_ * (kl_knn * valid).sum() / valid.sum().clamp(min=1)
             if teacher is not None:
                 with torch.no_grad():
                     tl = teacher(x)["logits"].float() / kd.get("T", 1.0)

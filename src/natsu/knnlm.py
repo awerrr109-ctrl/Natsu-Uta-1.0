@@ -130,6 +130,37 @@ def evaluate(a):
     print(json.dumps(res))
 
 
+@torch.no_grad()
+def targets(a):
+    """G1c: cache top-k kNN neighbours (value, softmax weight) for every position of a contiguous train region, so a student can be
+    distilled toward (1-λ) p_teacher + λ p_kNN without a datastore at deployment. Region must be disjoint from the store (no self-match).
+    Hidden states use window-aligned contexts of `seq` tokens starting at `start` (same convention as build()).
+    Query batching: `qbatch` positions per pass over the store, so the fp16->fp32 store conversion is amortised over many queries."""
+    torch.set_num_threads(2)
+    m = load(a.ckpt); meta = json.load(open(os.path.join(ROOT, a.store, "meta.json")))
+    K = np.memmap(os.path.join(ROOT, a.store, "keys.f16"), dtype=np.float16, mode="r", shape=(meta["N"], meta["D"]))
+    V = np.memmap(os.path.join(ROOT, a.store, "vals.u16"), dtype=np.uint16, mode="r", shape=(meta["N"],))
+    d = np.memmap(os.path.join(ROOT, a.data), dtype=np.uint16, mode="r")
+    assert a.start >= meta["N"] + 1 or a.start + a.tokens <= 0, "region overlaps the datastore (self-match)"
+    T = a.tokens; os.makedirs(os.path.join(ROOT, a.out), exist_ok=True)
+    OV = np.memmap(os.path.join(ROOT, a.out, "vals.u16"), dtype=np.uint16, mode="w+", shape=(T, a.k))
+    OW = np.memmap(os.path.join(ROOT, a.out, "w.f16"), dtype=np.float16, mode="w+", shape=(T, a.k))
+    n = 0
+    while n < T:
+        hs = []; n0 = n
+        while n < T and n - n0 < a.qbatch:
+            L = min(a.seq, T - n)
+            x = torch.from_numpy(d[a.start + n:a.start + n + L].astype(np.int64))[None]
+            hs.append(hidden(m, x)[0][0].float()); n += L
+        q = torch.cat(hs, 0)
+        dist, vals = knn(q, K, V, a.k, chunk=a.chunk)
+        OV[n0:n] = vals.numpy().astype(np.uint16); OW[n0:n] = F.softmax(-dist / a.temp, -1).numpy().astype(np.float16)
+        print(json.dumps({"targets_done": n, "of": T}), flush=True)
+    OV.flush(); OW.flush()
+    json.dump({"T": T, "k": a.k, "start": a.start, "store": a.store, "ckpt": a.ckpt, "temp": a.temp, "data": a.data},
+              open(os.path.join(ROOT, a.out, "meta.json"), "w"))
+
+
 def main():
     ap = argparse.ArgumentParser(); sp = ap.add_subparsers(dest="cmd", required=True)
     b = sp.add_parser("build"); b.add_argument("--ckpt", required=True); b.add_argument("--data", required=True)
@@ -140,8 +171,13 @@ def main():
     e.add_argument("--lams", default="0,0.1,0.25,0.5"); e.add_argument("--bytes_per_token", type=float, default=1.0)
     c = sp.add_parser("compress"); c.add_argument("--store", required=True); c.add_argument("--out", required=True)
     c.add_argument("--dim", type=int, default=32); c.add_argument("--seed", type=int, default=0)
+    t = sp.add_parser("targets"); t.add_argument("--ckpt", required=True); t.add_argument("--store", required=True)
+    t.add_argument("--data", default="data_cache/ts_train.bin"); t.add_argument("--start", type=int, required=True)
+    t.add_argument("--tokens", type=int, required=True); t.add_argument("--out", required=True); t.add_argument("--k", type=int, default=16)
+    t.add_argument("--temp", type=float, default=1.0); t.add_argument("--seq", type=int, default=256)
+    t.add_argument("--qbatch", type=int, default=4096); t.add_argument("--chunk", type=int, default=10_000)
     a = ap.parse_args()
-    {"build": build, "eval": evaluate, "compress": compress}[a.cmd](a)
+    {"build": build, "eval": evaluate, "compress": compress, "targets": targets}[a.cmd](a)
 
 
 if __name__ == "__main__":

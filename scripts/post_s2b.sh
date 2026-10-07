@@ -7,18 +7,33 @@ for d in 2 3; do for ck in E8a_add_moe_noloop E8b_add_loop3fixed_moe E8e_add_moe
   echo "=== tts_eval $ck digits=$d $(date)" >> $L
   [ -f ../checkpoints/$ck.pt ] && MALLOC_ARENA_MAX=1 python3 -m natsu.tts_eval --ckpt ../checkpoints/$ck.pt --n_problems 64 --Ns 1,4,16 --digits $d >> $L 2>&1
 done; done
-# kNN-LM: extend lambda grid past 0.5 (the curve had not turned at 0.5) on both stores, E4c and E4j
+# kNN stores were removed by post_s2's cleanup -> rebuild what this stage needs (E4c/E4j 3.2M for lambda grid + JL ablation; E4j 0.8M for G1c)
 cd ..
-for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do for N in 800000 3200000; do
-  [ -d data_cache/knn_${ck}_$N ] && (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store data_cache/knn_${ck}_$N --lams 0.5,0.65,0.8 >> ../experiments/knnlm_s2b.jsonl 2>> ../experiments/knnlm_s2b.err)
-done; done
+K=experiments/knnlm_s2b.jsonl; E=experiments/knnlm_s2b.err
+kb() { [ -d data_cache/knn_$1_$2 ] || (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm build --ckpt checkpoints/$1.pt --data data_cache/ts_train.bin --tokens $2 --out data_cache/knn_$1_$2 >> ../$K 2>> ../$E); }
+for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do
+  kb $ck 3200000 && (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store data_cache/knn_${ck}_3200000 --lams 0.5,0.65,0.8 >> ../$K 2>> ../$E)
+done
 # G1b datastore cost: JL projection + int8 keys (gate: unit test). bytes/token 258 (fp16, D=128) -> 68 / 36 / 20
-( cd tests && MALLOC_ARENA_MAX=1 timeout 600 python3 -c "import test_harness as t; t.test_knn_compress_preserves_neighbours(); print('ok knn compress')" ) > experiments/test_s2b.log 2>&1
+( cd tests && MALLOC_ARENA_MAX=1 timeout 600 python3 -c "import test_harness as t; t.test_knn_compress_preserves_neighbours(); print('ok knn compress'); t.test_region_loader_alignment(); print('ok region')" ) > experiments/test_s2b.log 2>&1
 if grep -q "ok knn compress" experiments/test_s2b.log; then
   for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do S=data_cache/knn_${ck}_3200000; [ -d $S ] || continue
     for r in 64 32 16; do
-      (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm compress --store $S --out ${S}_jl$r >> ../experiments/knnlm_s2b.jsonl 2>> ../experiments/knnlm_s2b.err &&
-       MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store ${S}_jl$r --lams 0.25,0.5,0.65 >> ../experiments/knnlm_s2b.jsonl 2>> ../experiments/knnlm_s2b.err)
+      (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm compress --store $S --out ${S}_jl$r >> ../$K 2>> ../$E &&
+       MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store ${S}_jl$r --lams 0.25,0.5,0.65 >> ../$K 2>> ../$E)
+      rm -rf ${S}_jl$r
     done
+    rm -rf $S
   done
 fi
+# G1c retrieval-distilled Engram: cached p_kNN targets for train[3.2M, 3.2M+1.64M) from E4j's 0.8M store (disjoint), seq=128 = training seq
+if grep -q "ok region" experiments/test_s2b.log; then
+  kb E4j_moe_engram_noloop 800000
+  [ -f data_cache/knn_tg_E4j_0.8M/meta.json ] || (cd src && MALLOC_ARENA_MAX=1 timeout 14400 python3 -m natsu.knnlm targets --ckpt checkpoints/E4j_moe_engram_noloop.pt \
+      --store data_cache/knn_E4j_moe_engram_noloop_800000 --start 3200000 --tokens 1638400 --seq 128 --out data_cache/knn_tg_E4j_0.8M > ../experiments/knn_targets_s2b.log 2>&1)
+  if [ -f data_cache/knn_tg_E4j_0.8M/meta.json ]; then
+    C=experiments/configs
+    scripts/run_queue.sh $C/G1c_ctrl_E4j_region.json $C/G1c_knn_E4j_region.json > experiments/queue_s2b_g1c.log 2>&1
+  fi
+fi
+echo "=== post_s2b DONE $(date)" >> experiments/tts_s2b.log
