@@ -257,8 +257,23 @@ def train(cfg):
             tok_seen += (x != D.PAD).sum().item(); ans_seen += valid.sum().item()
             flops += 3 * model.flops_per_token(n_loops=r, seq=seq) * x.numel()
         gn = torch.nn.utils.clip_grad_norm_(model.parameters(), tc.get("clip", 1.0)).item()
+        fal = tc.get("engram_fal", 0.0)       # H15.2 (R67 FAL): per-row update scaled by (freq_row / mean freq)^-alpha
+        if fal > 0 and model.engram is not None:
+            W = model.engram.table.weight
+            if not hasattr(model.engram, "_fal_cnt"):
+                model.engram._fal_cnt = torch.ones(W.shape[0])
+            with torch.no_grad():
+                idx_, _ = model.engram.addresses(x)
+                cnt = torch.bincount(idx_.flatten(), minlength=W.shape[0]).float()
+                model.engram._fal_cnt.mul_(0.99).add_(cnt, alpha=0.01)
+                w_before = W.detach().clone()
         for o in opts:
             o.step(); o.zero_grad(set_to_none=True)
+        if fal > 0 and model.engram is not None:
+            with torch.no_grad():
+                f_ = model.engram._fal_cnt
+                scale = (f_ / f_[f_ > 0].mean().clamp_min(1e-8)).clamp_min(1e-3).pow(-fal).clamp(0.2, 5.0)
+                W.copy_(w_before + (W - w_before) * scale[:, None])
         for mod in model.modules():
             if hasattr(mod, "update_balance"):
                 mod.update_balance(tc.get("moe_bias_rate", 1e-3))
