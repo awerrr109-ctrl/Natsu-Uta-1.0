@@ -592,3 +592,9 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   (a) lr ×5 is tuned for the paper's 27B/Adam/5e-4 regime; at our base lr 3e-3 it means 1.5e-2 on the table, which is likely too hot;
   (b) zero-init conv makes the module start as plain gated values, and in 800 steps the conv never contributes much.
   If E4pq ≈ E4j and E4pr ≈ E4pp, the regression is the lr multiplier only.
+
+### P-axis "1 GB RAM" reads
+- **[R63] Routide, "Paging the Experts" (arXiv:2609.29032)** — L2. Measured iPhone expert paging; capacity cliff (LRU 0% at 512 MiB, 38.6% at 576 MiB); 61% next-expert prediction.
+- **[R64] llama.cpp discussion #27149 + tinygiant (low-star prototype)** — L2. Expert-contiguous re-layout; SSD reads hidden at ≥88% hit; calibrated pinning gives 42% hit.
+- → [I, new] **Routing collapse across loops (own route_diag) turns into an I/O advantage under 1 GB**: loop r reads mostly cache-resident experts. Recorded in INFERENCE_SPEC v0.3.
+  Gap: no paper found combines looped MoE with flash expert paging. Next: reuse-distance measurement from own routing traces.

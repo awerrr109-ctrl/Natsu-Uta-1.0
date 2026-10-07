@@ -34,3 +34,26 @@ actual context, GDN state ops, active MoE experts only, and PKM lookups).
 - Budget per question is adaptive: sample in rounds of 4; stop when the majority answer's vote margin ≥ 2 or a verifier passes; cap N at 16 (R52: overthinking).
 - Verifiers in order of preference: executable (unit tests, math checkers) > policy-matched PRM trained on own samples > none (R27: cross-policy PRMs fail).
 - Training-side consequence (R51): because inference is sampled many times, pretrain C4 in the overtrained regime (≥ 450 tok/param stored; ≈ 2000 tok/param active).
+
+## 1 GB-RAM decoding: expert paging from flash (v0.3, from R63/R64 + own routing data)
+**Evidence**
+- [E R63, Routide arXiv:2609.29032] Qwen3.6-35B-A3B on an iPhone with experts paged from storage:
+  - An expert payload is 1.69 MiB, read as 27 aligned 64 KiB units.
+  - At a 512 MiB budget, LRU gets **0% hits**, a "capacity cliff" set by the minimum distinct-expert reuse distance of 312 experts. Random replacement gets 18.8%, and decode runs at 2.2 tok/s.
+  - At 576 MiB, LRU gets 38.6% and 3.1 tok/s. At 1 GiB, a recency-frequency hybrid gets 49.8%, against an offline optimum of 68%.
+  - A next-step expert predictor is 61% accurate.
+- [E R64, llama.cpp discussion #27149 / tinygiant, a low-star prototype] Qwen3-30B-A3B on an M1 with 16 GB, using ~2 GB RAM:
+  - Expert-contiguous re-layout is needed, because stock GGUF interleaving touches 111× the pages.
+  - SSD streaming reaches 3 GB/s.
+  - Decode rate by cache hit rate: 2.4 tok/s at 50%, 3.8 at 75%, 4.1 at 88%. At ≥88%, reads are fully hidden behind CPU compute.
+  - Calibrated pinning from 10 tokens of text gives 42% hits; plus LRU, 56%.
+
+**Natsu-specific consequences** [I]
+1. **Loops make routing collapse useful for paging.** route_diag shows loop r re-uses 55–88% of loop 0's experts for the same token.
+   In a looped core, the loop-1..R−1 expert reads are therefore mostly **cache hits by construction**. Expert I/O per token is ≈ 1 loop's worth, while compute is R loops.
+   - This flips the earlier verdict: routing collapse is bad for *capacity* (R47) but good for *I/O under 1 GB*.
+   - Design rule: decide per deployment. When RAM-bound, keep collapse (shared routers) and loops buy depth at almost no extra flash traffic. When compute-bound, use per-loop routers or LoRA (E4y/E4y3).
+2. **Engram rows are prefetchable one token ahead** (addresses depend on ids only). Tables can live on flash with no stall if a row read (dm·nh·2 B ≈ 2 KB) finishes within one token's compute.
+3. **The capacity cliff is the binding constraint**: the cache must exceed the reuse distance (#experts touched between reuses). For C4 at 9B (64 experts × 24 MoE layers, top-k=6), one token touches 144 experts.
+   With ~2.3 MiB per expert at 4-bit, the hot set for one token is ≈ 330 MiB, which is inside 1 GB. A cache of 2–3 tokens' worth (~700–1000 MiB) is borderline, so the cache budget must leave room for the KV/GDN state (9.4 MB + 8 KB/token).
+   → Analytic, not measured. **Measurement target for the 1B stage**: expert reuse-distance histogram and hit rate vs budget, on our own routing traces (route_diag can dump them).
