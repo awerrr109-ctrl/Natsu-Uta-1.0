@@ -692,12 +692,12 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 |---|---|---|---|
 | E6Le full paper path | – | 3/3 | 600, 600, 400 |
 | E6Lf_noresid | internal residual | 2/2 | 600, 600 |
-| E6Lf_randconv | zero-init (random conv init) | 1/1 | 600 |
+| E6Lf_randconv | zero-init (random conv init) | 2/2 | 600, 400 |
 | E6Lg | lr ×5 (→ ×1) | 1/1 | 1000 |
 | v1 (E6Lb) | all of the above + norm + dilation | 1/3 | 800 |
 - [E own] **Neither the internal residual nor zero-init is necessary.** Each single removal keeps the 600-step transition. The lr ×1 run still transitions but is slower (1000).
   The remaining differences between "noresid / randconv" and v1 are the **RMSNorm before the conv**, the **dilation = 3**, and lr ×5.
-  → N7 as stated ("identity-initialised memory path") is **not supported**. The ReZero-style explanation (R66) is ruled out at n=1–2.
+  → N7 as stated ("identity-initialised memory path") is **not supported** (2/2 for each removal). The ReZero-style explanation (R66) is ruled out at n=2.
 - New discriminating runs (s2o): E6Li (= paper minus residual minus zero-init, i.e. v1 + norm + dilation + lr5) and E6Lh (v1 + lr5).
   - If E6Lh transitions fast, **lr ×5 alone explains it**: a single optimiser setting, already in the paper, and nothing novel.
   - If only E6Li does, then norm/dilation matter.
