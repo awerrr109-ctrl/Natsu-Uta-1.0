@@ -493,3 +493,13 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - [I] The real phenomenon is **phase-transition timing variance**. Steps-to-transition is the metric that matters for small-budget design decisions; mean EM is not.
 - Consequence: N5 is demoted (its motivating harm is gone). E6Lc/E4u keep running only as cheap data (E6Lc adds two more transition samples with Engram).
   The 3rd seeds (s2m) stay, because n=3 per arm gives a transition-rate estimate. E6Le (paper path) stays, because F013 is a real divergence independent of H14.1.
+
+### Reads on transition-time variance (follow-up to F014)
+- **[R58] Zucchet et al. 2025, "The emergence of sparse attention: impact of data distribution and benefits of repetition" (arXiv:2505.17863)** — L2. [E] Emergence time of
+  sparse attention follows power laws in task structure, architecture and optimiser. Repetition (in-context or cross-sample) speeds emergence a lot. It is confirmed on in-context
+  associative recall, where emergence time grows with #pairs and vocabulary. → [I] varchain at n_vars=8, n_steps=12 sits near the edge of our 2400-step budget, so seeds straddle it
+  (F014). Design lever for small-budget training: control emergence time through data repetition and burstiness, instead of reading architecture effects off single runs.
+- **[R59] "What Happens During the Loss Plateau?" (arXiv:2506.13688, NeurIPS 2025)** — L2. [E] During the plateau there is a partial solution, repetition bias and representation
+  collapse (hidden states nearly parallel). The bottleneck is slow attention-map learning, and intervening on attention changes plateau length. → [I] A cheap diagnostic for our runs
+  is the hidden-state cosine during the plateau, which separates "about to transition" from "stuck". Candidate E6Lg: varchain curriculum (n_steps 4→12), which by R58 should shrink the
+  seed spread. Not queued (budget); listed in next_experiments.
