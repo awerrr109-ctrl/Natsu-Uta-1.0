@@ -480,3 +480,16 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   quickly on its own and needs CIWL's slow development, yet CIWL later replaces it. → [I] Refutation pressure on N5: a *full* delay of the in-weights channel might
   also slow ICL, because the cooperative half is removed. Prediction: E6Lc (delayed Engram) ≥ E6La is not guaranteed. A partial-scale ramp
   (engram_scale 0.1→1) is the variant consistent with coopetition. Will be added as E6Lf if E6Lc and E6Le are both negative.
+
+### H14.1(a) final at n=2 seeds — REFUTED (F014)
+| run | seed | answer loss | seq EM | long20 EM | transitioned |
+|---|---|---|---|---|---|
+| E6La no Engram | 0 | 0.041 | 0.844 | 0.781 | yes |
+| E6La no Engram | 1 | 0.773 | 0.008 | 0.000 | no |
+| E6Lb + Engram v1 | 0 | 0.891 | 0.000 | 0.000 | no |
+| E6Lb + Engram v1 | 1 | 2e-5 | **1.000** | **1.000** | yes (train loss 0.05 @1000) |
+- [E own] Transition count 1/2 vs 1/2. "Engram blocks in-context retrieval" is **not supported**, and the session's strongest negative evidence against C4's memory disappears.
+  This is consistent with R17 (Engram helps VT/NIAH at 27B) and R17b (reading comprehension does not depend on Engram).
+- [I] The real phenomenon is **phase-transition timing variance**. Steps-to-transition is the metric that matters for small-budget design decisions; mean EM is not.
+- Consequence: N5 is demoted (its motivating harm is gone). E6Lc/E4u keep running only as cheap data (E6Lc adds two more transition samples with Engram).
+  The 3rd seeds (s2m) stay, because n=3 per arm gives a transition-rate estimate. E6Le (paper path) stays, because F013 is a real divergence independent of H14.1.

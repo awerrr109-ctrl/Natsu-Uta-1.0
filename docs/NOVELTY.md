@@ -34,7 +34,7 @@ Rule: a contribution counts only if (a) the difference from the closest prior wo
   Resident 4-bit weights are 3.75 GB vs 4.6 GB for a Qwen3.5-9B-like model. FLOPs/token are 3.1× lower, KV 2.7× lower, decode bytes 3.2× lower.
 - This is an engineering consequence of known components, not a new mechanism; it is claimed as a design point on the Pareto frontier.
 
-## N5. Delayed conditional memory (memory ramped in after in-context circuits form)  [status: H, test queued E6Lc/E4u]
+## N5. Delayed conditional memory (memory ramped in after in-context circuits form)  [status: DEMOTED — motivating harm refuted (F014: Engram 1/2 vs no-Engram 1/2 transitions); kept as a low-priority option]
 - **Difference from prior art**: Engram/OE/X-gram train the memory from step 0. Induction-head work (R37/R38) shows simple global-statistics
   solutions delay in-context circuits. Nobody (found) schedules a token-indexed memory to avoid this.
 - **Bottleneck addressed**: the possible early-training conflict between global n-gram memory and in-context retrieval (E6, weak evidence),
