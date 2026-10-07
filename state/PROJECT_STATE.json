@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-07T08:05Z",
+ "updated": "2026-10-07T10:00Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -86,7 +86,9 @@
   "R47_loop_routing_collapse": "confirmed toy-scale: same-token expert Jaccard across loops 0.55-0.88 vs chance 0.14",
   "G1b_knnlm": "-0.13 bpb @1 tok/param, -0.22 @4 tok/param on TinyStories (redundant corpus; 39% 16-gram overlap); partial substitute for Engram",
   "loop_self_spec": "exact; accept 0.91 with self-distill (E4l), 4.65 tok/target call; CPU wall not yet faster",
-  "F013_paper_engram": "varchain: 3/3 transitions at steps 600/600/400 vs 1/3 (v1) and 1/3 (none); step-400 loss lowest 3 of 12 (post-hoc P=0.0045). LM: E4pp +0.0074 bpb worse (1 seed); ablation E4pq/E4pr in s2n"
+  "F013_paper_engram": "varchain: 3/3 transitions at steps 600/600/400 vs 1/3 (v1) and 1/3 (none); step-400 loss lowest 3 of 12 (post-hoc P=0.0045). LM: E4pp +0.0074 bpb worse (1 seed); ablation E4pq/E4pr in s2n",
+  "E4y2_resscale_lti": "R3 n.s. (-0.002) but best R1 (-0.05) and R6 (-0.02): depth-robustness, adopt only if loops used",
+  "engram_table_lr": "E4pr v1+lr5 1.3971 (-0.029 vs E4j, 1 seed); paper+lr1 1.4274; paper+lr5 1.4336 -> interaction; replication + E4ps + E6Lh queued"
  },
  "rejected_hypotheses": {
   "0": {
@@ -110,7 +112,8 @@
   "H13.7_block_cos_regulariser": "E4t LM -0.004 (noise); E8f addition -0.066 acc; not adopted",
   "H14.1a": "'Engram v1 blocks in-context retrieval circuit (varchain)': refuted at n=2 seeds — transitions 1/2 vs 1/2; E6Lb_s1 EM 1.000 (F014). Original 1-seed claim was over-claimed.",
   "N5_delayed_memory": "E4u keeps 4% of Engram LM gain (1.4770 vs 1.4792/1.4262); varchain transitions equal across arms (F014). Rejected.",
-  "H14.7_factorised_engram_table": "toy scale: E4v +0.025, E4w +0.016, E4x +0.031 bpb vs E4j; rows need full rank at 512 slots; scoped (may flip at 1e6+ rows)"
+  "H14.7_factorised_engram_table": "toy scale: E4v +0.025, E4w +0.016, E4x +0.031 bpb vs E4j; rows need full rank at 512 slots; scoped (may flip at 1e6+ rows)",
+  "R47_per_loop_routers_toy": "E4y +0.003, E4y3 (LoRA) +0.006 vs E4g 3-seed 1.4665+-0.008 at R3; scoped to toy scale"
  },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",

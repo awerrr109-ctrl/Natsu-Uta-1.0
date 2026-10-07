@@ -644,3 +644,31 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   Pre-registered: E8i < E8a means the memory itself interferes, and it does (even more than E8c). So **Engram v1 hurts addition, and the cost is not parameter reallocation**.
   [I] An n-gram table over digit tokens gives "plausible-looking" local statistics (digit bigrams) that compete with the carry algorithm. This is the algorithmic analogue of R56.
   It needs re-testing with the paper path (F013 changed the ICL picture completely). → E8j (add, paper Engram, full experts) queued in s2n.
+
+### R47 recipe at toy scale — per-loop routing variants (bpb by eval loops; E4g 3-seed R3 = 1.4665 ± 0.008)
+| run | R1 | R2 | R3 (trained) | R4 | R6 |
+|---|---|---|---|---|---|
+| E4g bias-only (s0) | 1.694 | 1.485 | 1.457 | 1.474 | 1.552 |
+| E4y separate per-loop routers | 1.708 | 1.507 | 1.470 | 1.487 | 1.571 |
+| E4y2 routers + res-scale + LTI | **1.645** | 1.497 | **1.464** | 1.473 | **1.531** |
+| E4y3 per-loop LoRA-8 in MoE (R62) | 1.744 | 1.508 | 1.472 | 1.489 | 1.577 |
+- [E own] **No variant beats E4g at the trained depth.** All are within 1 sd of the 3-seed mean (E4y +0.003, E4y2 −0.002, E4y3 +0.006). E4y3's pre-registered rule (≤ E4g−0.008) → **fails**.
+- E4y2 (residual scaling + LTI) is best at R1 (−0.05) and at R6 (−0.02). That is a depth-robustness gain consistent with R47's variance argument, not a quality gain at R3.
+- Decision: keep shared routers (collapse is an I/O asset per INFERENCE_SPEC v0.3). If a loop is used, add res-scale+LTI for anytime-R robustness. Scoped to toy scale.
+
+### F013 LM ablation (s2n) — **the lr multiplier is the big lever, and it interacts with the output path**
+| run | output path | table lr | bpb | Δ vs E4j v1/lr1 (1.4262 ± 0.0016) |
+|---|---|---|---|---|
+| E4j | v1 | ×1 | 1.4262 | 0 |
+| E4pq | paper | ×1 | 1.4274 | +0.001 (n.s.) |
+| E4pp | paper | ×5 | 1.4336 | +0.007 |
+| **E4pr** | **v1** | **×5** | **1.3971** | **−0.029 (≈18 sd)** |
+- [E own, 1 seed each] On LM, **v1 + lr ×5 is the best Engram so far**. It adds −0.029 on top of the −0.053 Engram gain, for −0.082 vs no Engram (E4c 1.4792), i.e. a 55% larger gain.
+  The paper path is neutral at lr ×1 and hurt by lr ×5. **Interaction**: lr ×5 helps v1 by −0.029 and hurts the paper path by +0.006.
+- [I] Under-training of the table: each slot gets a gradient only when its n-gram occurs, so per-row updates are sparse and a higher lr compensates (the paper's reason for ×5).
+  In the paper path, Ṽ enters the residual twice (direct + conv), so the effective step on the residual stream is larger and ×5 overshoots. In v1, the random conv dampens it.
+  Testable: paper path with lr ×2–3 should recover the gain. Also: is v1+lr5 still bad for ICL? (E6Lb-type run with lr ×5.)
+- **This changes C4's Engram default**: the candidate is now v1+lr5 for LM and paper+lr5 for ICL. The two must be reconciled before 10M. Runs added in s2n:
+  - E4ps: paper path, lr ×2.5 (LM)
+  - E4pr seeds 1–2: replication of a 1-seed −0.029 claim, needed before adopting it
+  - E6Lh ×2: v1 + lr5 on varchain (ICL)
