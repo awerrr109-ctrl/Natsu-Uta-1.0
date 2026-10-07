@@ -574,3 +574,11 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   → [E own, code audit] Natsu had per-loop LoRA only in the dense FFN path, **not in MoE blocks**, i.e. not in C4's core. Given the confirmed routing collapse (Jaccard 0.55–0.88),
   per-loop LoRA on the MoE output is the cheapest relaxation: rank 8 is 2·3·128·8 = 6k params per block, about 0.7% of the model.
   Implemented (`loop_lora_rank` now applies to MoE), cache-tested in the s2l gate, and **E4y3** queued in s2l against E4g/E4y.
+
+### F013 test, part 1 — E6Le (paper-faithful Engram, seed 0, varchain)
+- [E own] **Transition at step 600, the earliest of any run** (v1 Engram s1 800, delayed s1 1000, no-Engram s0 2000). Final seq EM **1.000**, long20 EM **1.000**.
+  This is the same seed on which Engram v1 (E6Lb_s0) never transitioned. Pre-registered rule "EM ≥ 0.42" → met.
+- Steps-to-transition so far (train loss < 0.2): no-Engram {2000, never, s2 pending}, Engram v1 {never, 800}, delayed {never, 1000}, **paper path {600}**.
+- [I] Faithful implementation (zero-init conv → identity at start, internal residual, lr ×5) gives the fastest in-context retrieval formation seen.
+  This matches R17 (Engram helps VT) and R59 (plateau = slow attention learning). An n-gram path that is clean from step 0 may remove local-statistics load from attention.
+  n=1 → not a claim. E6Le seeds 1–2 are needed to say "paper path speeds transition".
