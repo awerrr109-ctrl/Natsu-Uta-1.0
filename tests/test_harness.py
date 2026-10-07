@@ -33,3 +33,27 @@ def test_sharded_tokens_epoch_exact():
 
 if __name__ == "__main__":
     test_sharded_tokens_epoch_exact(); print("ok sharded epoch-exact")
+
+def test_knn_compress_preserves_neighbours():
+    """G1b: JL projection + int8 keys. At dim=D the projection is a scaled rotation, so top-1 neighbours must match fp16 almost always."""
+    import json, os, tempfile, types, numpy as np, torch
+    from natsu import knnlm
+    tmp = tempfile.mkdtemp(); N, D = 2000, 32
+    rng = np.random.default_rng(0); keys = rng.standard_normal((N, D)).astype(np.float16)
+    src = os.path.join(tmp, "s"); os.makedirs(src)
+    np.memmap(os.path.join(src, "keys.f16"), dtype=np.float16, mode="w+", shape=(N, D))[:] = keys
+    np.memmap(os.path.join(src, "vals.u16"), dtype=np.uint16, mode="w+", shape=(N,))[:] = np.arange(N) % 256
+    json.dump({"N": N, "D": D}, open(os.path.join(src, "meta.json"), "w"))
+    old = knnlm.ROOT; knnlm.ROOT = "/"
+    try:
+        for dim, need in ((D, 0.97), (D // 2, 0.5)):
+            out = os.path.join(tmp, f"c{dim}")
+            knnlm.compress(types.SimpleNamespace(store=src, out=out, dim=dim, seed=0))
+            K8 = knnlm.Int8Keys(out, N, dim); P = torch.from_numpy(np.load(os.path.join(out, "proj.npy")))
+            V = np.memmap(os.path.join(src, "vals.u16"), dtype=np.uint16, mode="r", shape=(N,))
+            q = torch.from_numpy(keys[:200].astype(np.float32)) + 0.3 * torch.randn(200, D)
+            _, v_ref = knnlm.knn(q, keys, V, 1); _, v_c = knnlm.knn(q @ P, K8, V, 1)
+            agree = (v_ref == v_c).float().mean().item()
+            assert agree >= need, (dim, agree)
+    finally:
+        knnlm.ROOT = old

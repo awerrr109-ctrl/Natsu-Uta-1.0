@@ -12,3 +12,13 @@ cd ..
 for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do for N in 800000 3200000; do
   [ -d data_cache/knn_${ck}_$N ] && (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store data_cache/knn_${ck}_$N --lams 0.5,0.65,0.8 >> ../experiments/knnlm_s2b.jsonl 2>> ../experiments/knnlm_s2b.err)
 done; done
+# G1b datastore cost: JL projection + int8 keys (gate: unit test). bytes/token 258 (fp16, D=128) -> 68 / 36 / 20
+( cd tests && MALLOC_ARENA_MAX=1 timeout 600 python3 -c "import test_harness as t; t.test_knn_compress_preserves_neighbours(); print('ok knn compress')" ) > experiments/test_s2b.log 2>&1
+if grep -q "ok knn compress" experiments/test_s2b.log; then
+  for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do S=data_cache/knn_${ck}_3200000; [ -d $S ] || continue
+    for r in 64 32 16; do
+      (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm compress --store $S --out ${S}_jl$r >> ../experiments/knnlm_s2b.jsonl 2>> ../experiments/knnlm_s2b.err &&
+       MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store ${S}_jl$r --lams 0.25,0.5,0.65 >> ../experiments/knnlm_s2b.jsonl 2>> ../experiments/knnlm_s2b.err)
+    done
+  done
+fi
