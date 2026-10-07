@@ -568,3 +568,9 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   Not queued yet: the queue is full for ~15 h, and the JL-compression result (post_s2b) decides the store format first.
 - **[R61] "kNN-LM Does Not Improve Open-ended Text Generation" (Wang et al., OpenReview 3FNrGv5MKb)** — L1 (PDF blocked by CAPTCHA, abstract-level only). The title-level claim agrees with R60:
   PPL gains do not transfer to generation quality. Logged as refutation evidence and taken into G1b's risk list.
+
+- **[R62] Relaxed Recursive Transformers (arXiv:2410.20672)** — L2. [E] Tied layers plus a depth-wise LoRA per loop, initialised from a pretrained model.
+  Recursive Gemma 1B beats TinyLlama 1.1B and Pythia 1B and recovers most of Gemma 2B. Continuous depth-wise batching with early exit is estimated at 2–3× throughput (analysis only).
+  → [E own, code audit] Natsu had per-loop LoRA only in the dense FFN path, **not in MoE blocks**, i.e. not in C4's core. Given the confirmed routing collapse (Jaccard 0.55–0.88),
+  per-loop LoRA on the MoE output is the cheapest relaxation: rank 8 is 2·3·128·8 = 6k params per block, about 0.7% of the model.
+  Implemented (`loop_lora_rank` now applies to MoE), cache-tested in the s2l gate, and **E4y3** queued in s2l against E4g/E4y.

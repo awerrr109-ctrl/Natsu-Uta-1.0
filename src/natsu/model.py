@@ -251,6 +251,11 @@ class MoE(nn.Module):
         self.w_up = nn.Parameter(torch.randn(E + self.ns, D, 2 * H) * c.init_std)
         self.w_down = nn.Parameter(torch.randn(E + self.ns, H, D) * c.init_std)
         self.loop_bias = nn.Parameter(torch.zeros(n_loops, E)) if (c.moe_loop_bias and n_loops > 1) else None
+        r = c.loop_lora_rank
+        self.lora = n_loops > 1 and r > 0      # Relaxed Recursive Transformers (R62, arXiv:2410.20672): per-loop low-rank delta, B=0 init
+        if self.lora:
+            self.lA = nn.Parameter(torch.randn(n_loops, D, r) / math.sqrt(D))
+            self.lB = nn.Parameter(torch.zeros(n_loops, r, D))
         self.register_buffer("bal_bias", torch.zeros(E))
         self.register_buffer("load", torch.zeros(E))
         self.last_routes = None
@@ -277,6 +282,9 @@ class MoE(nn.Module):
         a, b = h.chunk(2, -1)
         h = F.silu(a) * b * gate[..., None]
         y = torch.einsum("teh,ehd->td", h, self.w_down)
+        if self.lora:
+            lp = min(loop, self.lA.shape[0] - 1)
+            y = y + (xf @ self.lA[lp]) @ self.lB[lp]
         return y.view(B, L, D)
 
     @torch.no_grad()

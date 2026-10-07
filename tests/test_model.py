@@ -155,3 +155,10 @@ def test_engram_paper_cache():
 
 if __name__ == "__main__":
     test_engram_paper_cache(); print("ok engram paper")
+
+def test_moe_loop_lora_cache():
+    _check_cache(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", n_loops=3, chunk=8,
+                             moe_experts=4, moe_topk=1, moe_shared=1, loop_lora_rank=4))
+
+if __name__ == "__main__":
+    test_moe_loop_lora_cache(); print("ok moe lora")
