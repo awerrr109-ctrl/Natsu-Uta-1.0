@@ -7,3 +7,8 @@ for d in 2 3; do for ck in E8a_add_moe_noloop E8b_add_loop3fixed_moe E8e_add_moe
   echo "=== tts_eval $ck digits=$d $(date)" >> $L
   [ -f ../checkpoints/$ck.pt ] && MALLOC_ARENA_MAX=1 python3 -m natsu.tts_eval --ckpt ../checkpoints/$ck.pt --n_problems 64 --Ns 1,4,16 --digits $d >> $L 2>&1
 done; done
+# kNN-LM: extend lambda grid past 0.5 (the curve had not turned at 0.5) on both stores, E4c and E4j
+cd ..
+for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do for N in 800000 3200000; do
+  [ -d data_cache/knn_${ck}_$N ] && (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store data_cache/knn_${ck}_$N --lams 0.5,0.65,0.8 >> ../experiments/knnlm_s2b.jsonl 2>> ../experiments/knnlm_s2b.err)
+done; done
