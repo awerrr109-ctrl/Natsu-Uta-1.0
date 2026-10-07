@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-07T00:05Z",
+ "updated": "2026-10-07T03:10Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -82,7 +82,10 @@
   "R47_R48_loops_at_scale": "counter-evidence at 0.7-1.7B; toy conclusion scoped; E4y/E4y2 (per-loop routers + res scale) queued; decisive at 50M ladder (runbook)",
   "E5c_born_again": "same-size teacher KD 1.4578: ~79% of KD gain without bigger teacher -> regularisation, not capacity",
   "R36_abacus": "E8g +0.133 acc (adopted for digit tasks); E8h loop+Abacus 0.066: pre-reg failed; F012 phase-transition delay confound",
-  "H14.1a_engram_blocks_icl": "E6Lb EM 0.000 vs E6La 0.844 at 2400 steps (1 seed): Engram (iso-param) prevents in-context retrieval circuit; mechanism split E6Ld queued; N5 E6Lc decisive"
+  "H14.1a_engram_blocks_icl": "E6Lb EM 0.000 vs E6La 0.844 at 2400 steps (1 seed): Engram (iso-param) prevents in-context retrieval circuit; mechanism split E6Ld queued; N5 E6Lc decisive",
+  "R47_loop_routing_collapse": "confirmed toy-scale: same-token expert Jaccard across loops 0.55-0.88 vs chance 0.14",
+  "G1b_knnlm": "-0.13 bpb @1 tok/param, -0.22 @4 tok/param on TinyStories (redundant corpus; 39% 16-gram overlap); partial substitute for Engram",
+  "loop_self_spec": "exact; accept 0.91 with self-distill (E4l), 4.65 tok/target call; CPU wall not yet faster"
  },
  "rejected_hypotheses": {
   "0": {
@@ -100,11 +103,12 @@
    "reason": "F007 sub-additive",
    "evidence_quality": "low-medium (1 seed, toy)"
   },
-  "N2_memory_conditioned_depth": "F010: E4q≈E4r (no effect); loop+Engram+exit still ≈ Engram alone",
+  "N2_memory_conditioned_depth": "F010: E4q≈E4r (no effect); loop+Engram+exit still ≈ Engram alone | gate AUC 0.675 vs 0.655 (post_s2)",
   "N3_fixed_then_uniform": "E4m failed pre-reg",
   "N1_memory_before_loop_bpb": "F007",
   "H13.7_block_cos_regulariser": "E4t LM -0.004 (noise); E8f addition -0.066 acc; not adopted",
-  "H14.1a": "'Engram v1 blocks in-context retrieval circuit (varchain)': refuted at n=2 seeds — transitions 1/2 vs 1/2; E6Lb_s1 EM 1.000 (F014). Original 1-seed claim was over-claimed."
+  "H14.1a": "'Engram v1 blocks in-context retrieval circuit (varchain)': refuted at n=2 seeds — transitions 1/2 vs 1/2; E6Lb_s1 EM 1.000 (F014). Original 1-seed claim was over-claimed.",
+  "N5_delayed_memory": "E4u keeps 4% of Engram LM gain (1.4770 vs 1.4792/1.4262); varchain transitions equal across arms (F014). Rejected."
  },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",
@@ -138,7 +142,7 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "QUEUE: s2h [E6Lc_s0 running, E6Lc_s1, E4u] -> post_s2 -> s2m [tests, E6Le paper-faithful Engram (F013), E6La_s2, E6Lb_s2, E4pp] -> s2l [E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2] -> s2i [10M 2x2] -> s2j [E9]",
+  "QUEUE: post_s2 [kNN E4j 3.2M, L1 triage] -> s2m [tests, E6Le, E6La_s2, E6Lb_s2, E4pp] -> s2l [E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2] -> s2i [10M 2x2] -> s2j [E9] -> post_s2b [TTS 2/3 digits]",
   "analysis after each: pre-registered rules in evidence_log (H14.1 E6L*, R36 E8g/h, H13.7 E8e/f/E4t, R33 2x2 E6d/E8c/d, N2 AUC, H14.7 E4v-x, F011 E4s2, R40 L10a-d, R39 E9)",
   "X1 (1B stage, needs GPU): C4 vs fewer-experts/larger-active at iso-stored (R42)",
   "50M+ stages: GPU required; downstream evals at >=50M before committing the 1.6B Engram table"

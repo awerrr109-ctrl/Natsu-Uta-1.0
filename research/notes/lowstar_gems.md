@@ -1,10 +1,14 @@
 # Low-star relevant repos (<=10 stars, relevance>=0.6) — principle #4
 
+- mellmichaelhall74/Website-Painter-Full-Version ★0 pushed 2026-10-06 — Website Painter is a free full-version web design software for Windows that allows users to create and modify websites easily without progra
+- dispatchlabs-ai/agent-wiki ★2 pushed 2026-10-06 — Self-hosted Git-backed Markdown knowledge base for people and AI agents, with MCP/WebMCP editing and citations to original conversations.
+- MaryMe88/google-docs-editor-backend ★2 pushed 2026-10-06 — A backend service for editing Russian-language texts based on a structured knowledge base: grammar, style, logic, composition, storytelling,
 - 14THEGOAT/snes-gpt ★0 pushed 2026-10-05 — 🤖 Run a minimal GPT transformer in 65816 assembly on a Super Nintendo, generating names with efficient fixed-point math and hardware multipl
 - lprogers/mandarin-playgroup ★0 pushed 2026-10-05 — A fast-growing community platform for 160+ Bay Area families, helping kids hear and use Mandarin naturally through play and connection. Feat
 - nikfot/skill-contracts-protocol ★0 pushed 2026-10-05 — Declarative skill contracts for LLM agents, define what tools to use, what evidence to collect, and when to finalize.
 - oolongbench/oolongbench.github.io ★0 pushed 2026-10-05 — A challenging aggregation benchmark for long-context models
 - daejunnom/RoveZero ★0 pushed 2026-10-05 — A research chess engine for reusable computation and adaptive inference.
+- BrendanJamesLynskey/Circuits_01_Mathematical_Framework ★0 pushed 2026-10-05 — A Mathematical Framework for Transformer Circuits (Elhage et al., 2021) — residual stream, QK/OV circuits, composition, induction heads
 - BrendanJamesLynskey/Arch_04_Diffusion_LMs ★0 pushed 2026-10-05 — Diffusion language models: SEDD score-based discrete diffusion, LLaDA masking, mask-prediction schedules, parallel decoding trade-offs vs au
 - BrendanJamesLynskey/Arch_03_Long_Context ★0 pushed 2026-10-05 — Long-context LLMs: RoPE, position interpolation, NTK-aware scaling, YaRN, ALiBi, sliding window attention, StreamingLLM sink tokens, ring at
 - MD-ANIKS/generative-ai-rag ★0 pushed 2026-10-05 — Learning Generative AI and Retrieval-Augmented Generation (RAG) with LangChain, Mistral AI, document loaders, embeddings, vector databases, 
@@ -396,7 +400,3 @@
 - rasyosef/train-dspark-draft-models ★4 pushed 2026-10-05 — Code to train and evaluate DSpark draft models for speculative decoding using the speculators library and vllm
 - mayflower/boldt-posttrain-autoresearch ★0 pushed 2026-10-05 — German-first post-training AutoResearch loop for boldt-dc-1b-german-it-16k-dpo: branch → specialist → merge → eval → promote, stdlib-first a
 - Daliush/shardbound ★0 pushed 2026-10-05 — Fully invented TCG used as a testbed for AI engineering: an MCP coach agent, a RAG + LoRA rules Arbiter, MCTS and LLM opponents, and a rigor
-- Aitherium/aitherkvcache ★8 pushed 2026-10-05 — Near-optimal KV cache quantization for LLM inference. Sub-byte compression (2-4 bit) within 2.7x of information-theoretic optimum. arXiv:250
-- shubhankar360/agentcheck ★0 pushed 2026-10-05 — Evaluate tool-using LLM agents on what they did, not what they said: end-state + policy + answer checks, pass^k, judge calibration, and a pa
-- messagecompass/transformer.cpp ★0 pushed 2026-10-05 — A zero-dependency, educational C++ transformer trained from scratch on TinyStories.
-- dipeshbabu/metria ★2 pushed 2026-10-05 — Research, reference implementations, and evaluation tools for efficient LLM inference, KV-cache compression, quantization, and behavioral fi

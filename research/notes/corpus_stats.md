@@ -2,26 +2,26 @@
 
 Honesty note: harvested(L0) != read. Levels: L0 harvested, L1 auto-scored, L2 abstract/README read+annotated, L3 full text/code inspected.
 
-- unique papers harvested: **39977**
-- unique repos harvested: **15360**
+- unique papers harvested: **42642**
+- unique repos harvested: **16171**
 - papers at L0: 0; repos at L0: 0
-- papers at L1: 39977; repos at L1: 15358
+- papers at L1: 42642; repos at L1: 16169
 - papers at L2: 0; repos at L2: 2
 - papers at L3: 0; repos at L3: 0
-- papers with L1 relevance>=0.6 (on-topic estimate): 8303
-- repos with L1 relevance>=0.5: 9890
+- papers with L1 relevance>=0.6 (on-topic estimate): 8539
+- repos with L1 relevance>=0.5: 10337
 
 ## Queries executed
 
-- arxiv: 270 queries, 9667 raw results
-- crossref: 270 queries, 26392 raw results
-- github: 505 queries, 16258 raw results
+- arxiv: 315 queries, 10058 raw results
+- crossref: 304 queries, 29741 raw results
+- github: 575 queries, 17094 raw results
 - openalex: 198 queries, 19763 raw results
 
 ## Papers by source
 
-- arxiv: 8560
-- crossref: 19247
+- arxiv: 8872
+- crossref: 21600
 - openalex: 12170
 
 ## Papers per hypothesis × kind (unique)
@@ -45,6 +45,15 @@ Honesty note: harvested(L0) != read. Levels: L0 harvested, L1 auto-scored, L2 ab
 | H13.4_distilled_pretraining_small | 283 | 200 |
 | H13.5_stable_loop_dynamics | 295 | 66 |
 | H13.6_tokenizer_vs_memory | 181 | 109 |
+| H14.1_memory_delays_induction | 491 | 199 |
+| H14.2_kd_memory_complementarity | 309 | 187 |
+| H14.3_seed_variance_small_lm | 387 | 89 |
+| H14.4_position_bottleneck_arithmetic | 303 | 100 |
+| H14.5_soft_weight_sharing | 302 | 88 |
+| H14.6_anytime_exit_training | 281 | 90 |
+| H15.1_retrieval_vs_params_scaling | 108 | 99 |
+| H15.2_parametric_vs_editable_memory | 12 | 190 |
+| H15.3_tool_use_small_models | 99 | 103 |
 | H2.1_mixture_of_depths | 1011 | 550 |
 | H2.2_learned_budget | 624 | 385 |
 | H2.3_activation_sparsity | 651 | 364 |
@@ -74,29 +83,29 @@ Honesty note: harvested(L0) != read. Levels: L0 harvested, L1 auto-scored, L2 ab
 
 | bucket | repos |
 |---|---|
-| 0-1 | 6457 |
-| 2-10 | 4203 |
-| 11-100 | 2953 |
-| 101-1000 | 1373 |
-| 1001-∞ | 374 |
+| 0-1 | 6975 |
+| 2-10 | 4359 |
+| 11-100 | 3059 |
+| 101-1000 | 1399 |
+| 1001-∞ | 379 |
 
-- archived repos: 169
-- repos created >= 2026-01-01: 8950
-- repos last pushed < 2024-01-01 (old/abandoned): 1313
+- archived repos: 176
+- repos created >= 2026-01-01: 9414
+- repos last pushed < 2024-01-01 (old/abandoned): 1389
 
 ## Year histogram (papers)
 
-- 2015: 942
-- 2016: 1048
-- 2017: 1316
-- 2018: 1249
-- 2019: 1507
-- 2020: 1791
-- 2021: 2029
-- 2022: 2462
-- 2023: 3409
-- 2024: 5232
-- 2025: 7930
-- 2026: 10760
-- 2027: 38
+- 2015: 1005
+- 2016: 1145
+- 2017: 1415
+- 2018: 1358
+- 2019: 1650
+- 2020: 1948
+- 2021: 2200
+- 2022: 2708
+- 2023: 3680
+- 2024: 5569
+- 2025: 8369
+- 2026: 11286
+- 2027: 42
 - 2029: 1

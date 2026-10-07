@@ -503,3 +503,48 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   collapse (hidden states nearly parallel). The bottleneck is slow attention-map learning, and intervening on attention changes plateau length. → [I] A cheap diagnostic for our runs
   is the hidden-state cosine during the plateau, which separates "about to transition" from "stuck". Candidate E6Lg: varchain curriculum (n_steps 4→12), which by R58 should shrink the
   seed spread. Not queued (budget); listed in next_experiments.
+
+### s2h tail + post_s2 results (session 2)
+**H14.1 / N5 final**
+- E6Lc (delayed Engram, varchain) seeds: s0 no transition (EM 0.000), s1 transition at step 1000 (EM 0.992). Transition counts: no-Engram 1/2, Engram 1/2, delayed 1/2. → (b) is uninformative, since all arms are the same.
+- **E4u (LM, Engram ramped in at 40–60%)**: bpb **1.4770** vs E4c 1.4792 (no Engram) and E4j 1.4262 (Engram from step 0). It keeps **4%** of the gain, while ≥70% was pre-registered. → **(c) fails, N5 rejected.**
+  [I] A token-indexed memory needs the whole run to fill. On LM data the table is the fast learner (R56), and delaying it throws away its main advantage. Together with F014, Engram from step 0 stays.
+
+**N2 gate AUC (gate_eval)**: E4q (memory-conditioned) AUC 0.675, E4r (without) 0.655. Skipping 40% of loop compute costs +0.013 bpb in both. → [E] Consistent with F010: the memory feature adds ≤0.02 AUC, not useful.
+
+**Route diagnostics (route_diag, R47 collapse test)**: same-token expert-set Jaccard across loops is **0.55–0.88**, against chance 0.14, and load cosine is 0.79–0.997 (E4g/E4p/E4k/E8b).
+- [E own] **Per-loop routing collapse is confirmed**: loops re-pick mostly the same experts, so loops add depth without adding expert diversity (R47's claim, reproduced at toy scale).
+- The per-loop bias alone does not prevent it. E4y/E4y2 (separate per-loop routers) are the direct test and are queued in s2l.
+
+**Self-speculation with loops (bench)**: R1 draft / R3 verify gives exact outputs in every case.
+- Accept rate: E4g 0.64, E4p 0.83, E4l (self-distilled) **0.91**, which is 4.65 tokens per target call.
+- [E] Self-distillation is what makes the shallow draft agree with the deep model. That is a second benefit of E4l beyond its bpb.
+- Wall-clock per token on CPU is still worse (0.015 vs 0.0117 s/tok), because at d=128 the per-call overhead dominates. The speedup claim waits for the ≥50M GPU stage.
+
+**Downstream MC (ds_eval)**: cloze 0.245–0.29 (n=200, SE≈0.031) and names 0.36–0.48 (n=171, SE≈0.038), chance 0.25.
+- [E] Every 0.8M model is near chance on cloze. Names is above chance for all, but with no significant between-model differences (the E3a attention-only model is lowest at 0.36).
+- Uninformative at this scale, as expected. The harness stays ready for 50M.
+
+**TTS curves (tts_eval, 5-digit addition)**: greedy accuracy is 0 for every model. A small check on 48 problems by digit count:
+
+| model | 1 digit | 2 digits | 3 digits | 5 digits |
+|---|---|---|---|---|
+| E8e (6-core) | 0.40 | 0.46 | 0.19 | 0 |
+| E8a | 0.48 | 0.08 | 0.06 | 0 |
+
+- **Floor effect, an eval design flaw (F015)**: 5 digits is above every model's ability, so there is no TTS signal.
+- Rerun at 2–3 digits is queued (post_s2b).
+
+**kNN-LM (G1b / R55), datastore = E4c's own hidden states on train tokens**:
+
+| model | store tokens | λ=0 | λ=0.1 | λ=0.25 | λ=0.5 |
+|---|---|---|---|---|---|
+| E4c | 0.8M (≈1 tok/param) | 1.5008 | 1.4387 | 1.3947 | **1.3732** |
+| E4c | 3.2M (≈4 tok/param) | 1.5008 | 1.4031 | 1.3335 | **1.2793** |
+| E4j (Engram) | 0.8M | 1.4548 | 1.3994 | 1.3639 | **1.3576** |
+
+- [E own] Retrieval gives **−0.13 bpb at 1 tok/param and −0.22 at 4 tok/param**. That is 2.5–4× the Engram gain, and still improving at the largest λ, so the λ grid must be extended.
+- The base bpb (1.50) is on a different valid slice than the training eval (1.479), so compare within this table only.
+- **Leakage audit** (fg run): 39% of validation 16-grams, 6.6% of 32-grams and 0.4% of 64-grams also appear in the first 3.2M train tokens. TinyStories is highly redundant, so this gain is mostly *near-duplicate recall*. That is legitimate retrieval of seen data (R55), but it overstates the gain on low-redundancy corpora. **Do not extrapolate the magnitude to 9B web data.**
+- [E own] **Engram and kNN are partly substitutes**: the Engram advantage shrinks from 0.046 (λ=0) to 0.016 (λ=0.5, 0.8M store). Both exploit local repetition. The 3.2M E4j row is still pending.
+- Against R55's "91% of the gain at ~1 tok/param": here 1 tok/param gives 0.128 of 0.222 (58%) and the gain has not saturated at 4 tok/param. That contradicts R55 on this corpus, likely because of the redundancy.

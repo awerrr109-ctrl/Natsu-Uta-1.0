@@ -620,13 +620,13 @@
 - [2023] Is Pre-training Truly Better Than Meta-Learning? — https://arxiv.org/abs/2306.13841 (rel=1.00, cites=None)
 - [2026] OScaR: The Occam's Razor for Extreme KV Cache Quantization in LLMs and Beyond — https://arxiv.org/abs/2605.19660 (rel=1.00, cites=None)
 - [2020] KLEJ: Comprehensive Benchmark for Polish Language Understanding — https://doi.org/10.18653/v1/2020.acl-main.111 (rel=0.75, cites=59)
+- [2024] FAIR Enough: Develop and Assess a FAIR-Compliant Dataset for Large Language Model Training? — https://doi.org/10.1162/dint_a_00255 (rel=0.75, cites=24)
 - [2024] Benchmarking Benchmark Leakage in Large Language Models — https://doi.org/10.48550/arxiv.2404.18824 (rel=0.75, cites=6)
 - [2024] CalibraEval: Calibrating Prediction Distribution to Mitigate Selection Bias in LLMs-as-Judges — https://arxiv.org/abs/2410.15393 (rel=0.75, cites=2)
 - [2025] EffiReason-Bench: A Unified Benchmark for Evaluating and Advancing Efficient Reasoning in Large Language Models — https://arxiv.org/abs/2511.10201 (rel=0.75, cites=None)
 - [2024] Language Model Evolutionary Algorithms for Recommender Systems: Benchmarks and Algorithm Comparisons — https://arxiv.org/abs/2411.10697 (rel=0.75, cites=0)
 - [2026] DARE: Diffusion Large Language Models Alignment and Reinforcement Executor — https://arxiv.org/abs/2604.04215 (rel=0.75, cites=None)
 - [2026] REBENCH: A Procedural, Fair-by-Construction Benchmark for LLMs on Stripped-Binary Types and Names (Extended Version) — https://arxiv.org/abs/2604.27319 (rel=0.75, cites=None)
-- [2024] NPHardEval4V: Dynamic Evaluation of Large Vision-Language Models with Effects of Vision — https://arxiv.org/abs/2403.01777 (rel=0.75, cites=None)
 
 ## H6.2_memory_saving
 
@@ -1270,8 +1270,8 @@
 - [2026] Distill What the Student Can See: Fisher-Projected On-Policy Distillation for Vision-Language Models — https://arxiv.org/abs/2608.01263 (rel=1.00, cites=None)
 - [2025] ARWKV: Pretraining Is Not What We Need – An RNN-Attention-Based Language Model Born From Transformer — https://doi.org/10.32388/mbsrar (rel=1.00, cites=0)
 - [2023] Lifting the Curse of Capacity Gap in Distilling Language Models — https://arxiv.org/abs/2305.12129 (rel=0.80, cites=1)
+- [2024] The Evolution of Statistical Induction Heads: In-Context Learning Markov Chains — https://doi.org/10.52202/079017-2050 (rel=0.75, cites=8)
 - [2025] Zeroth Order Optimization for Pretraining Language Models — https://doi.org/10.5220/0013261100003905 (rel=0.75, cites=1)
-- [2025] Clone What You Can't Steal: Black-Box LLM Replication via Logit Leakage and Distillation — https://doi.org/10.36227/techrxiv.175699289.98222551/v1 (rel=0.75, cites=0)
 
 ### refute
 
@@ -1353,3 +1353,300 @@
 - [2026] Training Compute-Optimal Transformer Models: A Review of Scaling Laws, Allocation, and Practice — https://doi.org/10.2139/ssrn.7142719 (rel=0.60, cites=0)
 - [2020] Review for "Development of an adaptive differential protection scheme for transformer during &lt;scp&gt;current transformer&lt;/scp&gt; saturation and over‐fluxing condition" — https://doi.org/10.1002/2050-7038.12751/v1/review3 (rel=0.60, cites=0)
 - [2025] Protein Structure Tokenization via Geometric Byte Pair Encoding — https://arxiv.org/abs/2511.11758 (rel=0.50, cites=None)
+
+## H14.1_memory_delays_induction
+
+
+### support
+
+- [2024] On-Chip Learning via Transformer In-Context Learning — https://arxiv.org/abs/2410.08711 (rel=1.00, cites=0)
+- [2023] The Transient Nature of Emergent In-Context Learning in Transformers — https://arxiv.org/abs/2311.08360 (rel=1.00, cites=None)
+- [2025] Strategy Coopetition Explains the Emergence and Transience of In-Context Learning — https://arxiv.org/abs/2503.05631 (rel=1.00, cites=None)
+- [2024] Learning to grok: Emergence of in-context learning and skill composition in modular arithmetic tasks — https://arxiv.org/abs/2406.02550 (rel=1.00, cites=None)
+- [2026] Induction Heads Interpolate N-Grams — https://arxiv.org/abs/2607.02800 (rel=1.00, cites=None)
+- [2026] When Do Attention Circuits Form? Developmental Trajectories of Capability and Attention-Sink Emergence Across Three 1B-ClassArchitectures — https://doi.org/10.48550/arxiv.2606.02378 (rel=1.00, cites=0)
+- [2025] Next-token pretraining implies in-context learning — https://arxiv.org/abs/2505.18373 (rel=1.00, cites=None)
+- [2026] The Ignition Index: Measuring Global Workspace Dynamics in Language Models — https://arxiv.org/abs/2608.05160 (rel=1.00, cites=None)
+- [2020] Teachers and the Teaching of Self-Regulated Learning (SRL): The Emergence of an Integrative, Ecological Model of SRL-in-Context — https://doi.org/10.3390/educsci10040098 (rel=0.75, cites=26)
+- [2024] The Evolution of Statistical Induction Heads: In-Context Learning Markov Chains — https://doi.org/10.52202/079017-2050 (rel=0.75, cites=8)
+- [2023] Pretraining task diversity and the emergence of non-Bayesian in-context learning for regression — https://doi.org/10.52202/075280-0626 (rel=0.75, cites=5)
+- [2024] Differential learning kinetics govern the transition from memorization to generalization during in-context learning — https://arxiv.org/abs/2412.00104 (rel=0.75, cites=None)
+
+### refute
+
+- [2026] FactorEngram: Factorized N-gram Memory with Basis-Level Gating for Language Models — https://arxiv.org/abs/2609.35578 (rel=1.00, cites=None)
+- [2020] Morphological Skip-Gram: Using morphological knowledge to improve word representation — https://arxiv.org/abs/2007.10055 (rel=0.80, cites=None)
+- [2026] Retrievit: In-context Retrieval Capabilities of Transformers, State Space Models, and Hybrid Architectures — https://arxiv.org/abs/2603.02874 (rel=0.80, cites=None)
+- [2021] A Brief Study on the Effects of Training Generative Dialogue Models with a Semantic loss — https://arxiv.org/abs/2106.10619 (rel=0.80, cites=None)
+- [2025] Research on a hybrid LSTM-CNN-Attention model for text-based web content classification — https://arxiv.org/abs/2512.18475 (rel=0.80, cites=None)
+- [2026] Context-Sensitive N-Gram Word Partitioning for Improving the Quality of Turkish Word Embeddings — https://doi.org/10.3390/app16168184 (rel=0.80, cites=0)
+- [2024] DemoCraft: Using In-Context Learning to Improve Code Generation in Large Language Models — https://doi.org/10.36227/techrxiv.173143073.32359635/v1 (rel=0.80, cites=0)
+- [2019] Character n-Gram Embeddings to Improve RNN Language Models — https://doi.org/10.1609/aaai.v33i01.33015074 (rel=0.60, cites=15)
+- [2017] Learning Context-Specific Word/Character Embeddings — https://doi.org/10.1609/aaai.v31i1.10985 (rel=0.60, cites=8)
+- [2023] Protein embeddings improve phage-host interaction prediction — https://doi.org/10.1101/2023.02.26.530154 (rel=0.60, cites=3)
+- [2023] Enhancing Machine Learning Algorithms using GPT Embeddings for Binary Classification — https://doi.org/10.36227/techrxiv.22331053.v1 (rel=0.60, cites=3)
+- [2019] Reverse Transfer Learning: Can Word Embeddings Trained for Different NLP Tasks Improve Neural Language Models? — https://doi.org/10.21437/interspeech.2019-1332 (rel=0.60, cites=2)
+
+## H14.2_kd_memory_complementarity
+
+
+### support
+
+- [2025] A Readability-Driven Curriculum Learning Method for Data-Efficient Small Language Model Pretraining — https://doi.org/10.3390/math13203300 (rel=1.00, cites=1)
+- [2026] Temporally Informed Distillation of Embedding Semantics: Beyond Continued Pretraining for Modeling Gender Ideology in Dated Texts — https://doi.org/10.3390/data11060126 (rel=1.00, cites=0)
+- [2024] PFDP: Privacy-preserving Federated Distillation Method for Pretraining Language Models — https://doi.org/10.21203/rs.3.rs-4247440/v1 (rel=1.00, cites=0)
+- [2024] Knowledge Distillation vs. Pretraining from Scratch under a Fixed (Computation) Budget — https://arxiv.org/abs/2404.19319 (rel=1.00, cites=0)
+- [2026] Construction of a Small Model Based on Large Model Knowledge Distillation in Anomaly Behaviour Recognition for Intelligent Connected Vehicles — https://doi.org/10.63367/199115992026083704013 (rel=1.00, cites=0)
+- [2024] The Construction of Instruction-tuned LLMs for Finance without Instruction Data Using Continual Pretraining and Model Merging — https://doi.org/10.2139/ssrn.4971271 (rel=1.00, cites=0)
+- [2026] From Inference to Adaptation: A Unified Optimal Transport View of Vision Language Model — https://arxiv.org/abs/2608.18339 (rel=1.00, cites=None)
+- [2026] Hybrid Distillation with CoT Guidance for Edge-Drone Control Code Generation — https://arxiv.org/abs/2601.08412 (rel=1.00, cites=None)
+- [2022] Reprint: a randomized extrapolation based on principal components for data augmentation — https://arxiv.org/abs/2204.12024 (rel=1.00, cites=None)
+- [2024] When Babies Teach Babies: Can student knowledge sharing outperform Teacher-Guided Distillation on small datasets? — https://arxiv.org/abs/2411.16487 (rel=1.00, cites=None)
+- [2024] What Happens When Small Is Made Smaller? Exploring the Impact of Compression on Small Data Pretrained Language Models — https://arxiv.org/abs/2404.04759 (rel=1.00, cites=None)
+- [2025] Boosting Medical Vision-Language Pretraining via Momentum Self-Distillation under Limited Computing Resources — https://arxiv.org/abs/2512.02438 (rel=1.00, cites=None)
+
+### refute
+
+- [2025] Beyond Scaling Law: A Data-Efficient Distillation Framework for Reasoning — https://arxiv.org/abs/2508.09883 (rel=1.00, cites=None)
+- [2023] Learning Multi-turn Response Selection in Grounded Dialogues with Reinforced Knowledge and Context Distillation — https://doi.org/10.1145/3584701 (rel=0.60, cites=14)
+- [2021] Adjunct-Emeritus Distillation for Semi-Supervised Language Model Adaptation — https://doi.org/10.21437/interspeech.2021-27 (rel=0.40, cites=1)
+- [2026] Weakly Supervised CLIP Outperforms a 7 B Open-Source Vision–Language Model on Bi-Temporal Satellite Change Classification — https://doi.org/10.21203/rs.3.rs-9997769/v1 (rel=0.40, cites=0)
+- [2023] TASKED: Transformer-based Adversarial learning for human activity recognition using wearable sensors via Self-KnowledgE Distillation — https://doi.org/10.1016/j.knosys.2022.110143 (rel=0.36, cites=102)
+- [2025] Compressing Transfer: Mutual Learning- Empowered Knowledge Distillation for Temporal Knowledge Graph Reasoning — https://doi.org/10.1109/tnnls.2025.3525699 (rel=0.36, cites=12)
+- [2022] Improving Deep Mutual Learning via Knowledge Distillation — https://doi.org/10.3390/app12157916 (rel=0.36, cites=2)
+- [2024] High-dimensional Analysis of Knowledge Distillation: Weak-to-Strong Generalization and Scaling Laws — https://arxiv.org/abs/2410.18837 (rel=0.36, cites=None)
+- [2026] Online Knowledge Distillation with Meta-learning and Generative Adversarial Network for Human Activity Recognition — https://doi.org/10.2139/ssrn.6138067 (rel=0.36, cites=0)
+- [2025] Distillation Scaling Laws — https://doi.org/10.48550/arxiv.2502.08606 (rel=0.30, cites=0)
+- [2026] Neural Network Compression and Knowledge Distillation — https://doi.org/10.1007/978-3-032-10738-1_20 (rel=0.24, cites=0)
+- [2026] Scaling Properties of Text Conditioning in Visual Generation — https://arxiv.org/abs/2607.29679 (rel=0.20, cites=None)
+
+## H14.3_seed_variance_small_lm
+
+
+### support
+
+- [2019] Topic Structure-Aware Neural Language Model — https://doi.org/10.1145/3308558.3313757 (rel=1.00, cites=5)
+- [2026] Beyond Random Sampling: Efficient Language Model Pretraining via Curriculum Learning — https://doi.org/10.18653/v1/2026.eacl-long.271 (rel=1.00, cites=1)
+- [2025] A Readability-Driven Curriculum Learning Method for Data-Efficient Small Language Model Pretraining — https://doi.org/10.3390/math13203300 (rel=1.00, cites=1)
+- [2024] InsCL: A Data-efficient Continual Learning Paradigm for Fine-tuning Large Language Models with Instructions — https://arxiv.org/abs/2403.11435 (rel=1.00, cites=1)
+- [2021] Lifelong Pretraining: Continually Adapting Language Models to Emerging Corpora — https://arxiv.org/abs/2110.08534 (rel=1.00, cites=1)
+- [2025] ARWKV: Pretraining Is Not What We Need – An RNN-Attention-Based Language Model Born From Transformer — https://doi.org/10.32388/mbsrar (rel=1.00, cites=0)
+- [2024] PFDP: Privacy-preserving Federated Distillation Method for Pretraining Language Models — https://doi.org/10.21203/rs.3.rs-4247440/v1 (rel=1.00, cites=0)
+- [2024] Is Child-Directed Speech Effective Training Data for Language Models? — https://arxiv.org/abs/2408.03617 (rel=1.00, cites=None)
+- [2020] Dialogue-adaptive Language Model Pre-training From Quality Estimation — https://arxiv.org/abs/2009.04984 (rel=1.00, cites=None)
+- [2024] Next-Token Prediction Task Assumes Optimal Data Ordering for LLM Training in Proof Generation — https://arxiv.org/abs/2411.00863 (rel=1.00, cites=None)
+- [2026] How Far Do Persona Effects Generalize in Language Models? — https://arxiv.org/abs/2609.32758 (rel=1.00, cites=None)
+- [2026] Demystifying Data Organization for Enhanced LLM Training — https://arxiv.org/abs/2605.30334 (rel=1.00, cites=None)
+
+### refute
+
+- [2025] GVPO: Group Variance Policy Optimization for Large Language Model Post-Training — https://arxiv.org/abs/2504.19599 (rel=1.00, cites=None)
+- [2026] From Small to Large: Assessing Medical Reasoning, Benchmark Contamination, and Model Scaling in Language Models​ — https://doi.org/10.2139/ssrn.7261327 (rel=0.67, cites=0)
+- [2026] Review for "Scaling laws for Moral Machine judgment in large language models" — https://doi.org/10.1098/rsos.260202/v1/review2 (rel=0.67, cites=0)
+- [2024] Scaling Laws Across Model Architectures: A Comparative Analysis of Dense and MoE Models in Large Language Models — https://doi.org/10.18653/v1/2024.emnlp-main.319 (rel=0.50, cites=6)
+- [2026] The Cloze Scaling Laws: Prober Parameter Dynamics, Native Blank-Infilling Architecture, and Multi-Model Provenance Traceback in Large Language Models — https://doi.org/10.2139/ssrn.7374378 (rel=0.50, cites=0)
+- [2026] A Geometric Theory of Capacity in Variance Markets: Manifold Structure, Information Degeneration, and Boundary Scaling Laws&amp;nbsp; — https://doi.org/10.2139/ssrn.7127379 (rel=0.45, cites=0)
+- [2025] Understanding Language Model Scaling on Protein Fitness Prediction — https://doi.org/10.1101/2025.04.25.650688 (rel=0.33, cites=17)
+- [2016] Natural Language Model Re-usability for Scaling to Different Domains — https://doi.org/10.18653/v1/d16-1222 (rel=0.33, cites=3)
+- [2024] Optimizing Large Language Model Scaling with Micro Batch Pipeline and Inference Parallelism — https://doi.org/10.21203/rs.3.rs-4575587/v1 (rel=0.33, cites=1)
+- [2026] On the scaling relationship between cloze probabilities and language model next-token prediction — https://doi.org/10.18653/v1/2026.conll-main.32 (rel=0.33, cites=0)
+- [2025] Scaling a foundational protein language model to 100 billion parameters — https://doi.org/10.1038/s41592-025-02637-y (rel=0.33, cites=0)
+- [2026] On the smallness of the large language model scaling exponents — https://doi.org/10.3389/fphy.2026.1917378 (rel=0.33, cites=0)
+
+## H14.4_position_bottleneck_arithmetic
+
+
+### support
+
+- [2025] Exploring Depth Generalization in Large Language Models for Solving Recursive Logic Tasks — https://arxiv.org/abs/2512.02677 (rel=1.00, cites=None)
+- [2025] SAI: Latency-Aware Satellite Edge LAM Inference with Looped Transformer — https://doi.org/10.1109/icc52391.2025.11161072 (rel=1.00, cites=0)
+- [2024] Arithmetic Transformers Can Length-Generalize in Both Operand Length and Count — https://arxiv.org/abs/2410.15787 (rel=1.00, cites=None)
+- [2026] Decode-Branch Transformers: Decoupling the Primary Prefill Path from Additional Decode Computation — https://arxiv.org/abs/2608.12385 (rel=1.00, cites=None)
+- [2026] TriRoute: Unified Learned Routing for Joint Adaptive Attention, Experts, and KV-Cache Allocation — https://arxiv.org/abs/2607.06601 (rel=1.00, cites=None)
+- [2025] Principled Understanding of Generalization for Generative Transformer Models in Arithmetic Reasoning Tasks — https://doi.org/10.18653/v1/2025.acl-long.235 (rel=0.80, cites=0)
+- [2025] Testing Transformer Learnability on the Arithmetic Sequence of Rooted Trees — https://arxiv.org/abs/2512.01870 (rel=0.75, cites=None)
+- [2026] Attention by Synchronization in Coupled Oscillator Networks — https://arxiv.org/abs/2606.12059 (rel=0.75, cites=None)
+- [2024] The Generalization and Robustness of Transformer-Based Language Models on Commonsense Reasoning — https://doi.org/10.1609/aaai.v38i21.30410 (rel=0.67, cites=7)
+- [2023] The Impact of Positional Encoding on Length Generalization in Transformers — https://doi.org/10.48550/arxiv.2305.19466 (rel=0.60, cites=32)
+- [2020] Position signal detector for linear variable differential transformer — https://doi.org/10.1016/j.egyr.2020.11.181 (rel=0.60, cites=11)
+- [2024] Position Coupling: Improving Length Generalization of Arithmetic Transformers Using Task Structure — https://doi.org/10.48550/arxiv.2405.20671 (rel=0.60, cites=0)
+
+### refute
+
+- [2026] Numeracy in Large Language Models: Fundamental Limitations and Paths to Improvement — https://arxiv.org/abs/2608.13129 (rel=0.80, cites=None)
+- [2025] Principled Understanding of Generalization for Generative Transformer Models in Arithmetic Reasoning Tasks — https://doi.org/10.18653/v1/2025.acl-long.235 (rel=0.80, cites=0)
+- [2024] Position Coupling: Improving Length Generalization of Arithmetic Transformers Using Task Structure — https://doi.org/10.48550/arxiv.2405.20671 (rel=0.60, cites=0)
+- [2024] Success and Failure of Compositional Generalization in Distributional Models of Language — https://doi.org/10.31234/osf.io/ps84q (rel=0.60, cites=0)
+- [2026] Curvature-Corrected Rotary Position Embeddings: An Entropy-Invariant Temperature for Mitigating Numerical-Rank Collapse in Long-Context Attention — https://doi.org/10.3390/math14142637 (rel=0.60, cites=0)
+- [2024] A Resource-Efficient Transformer Model Integrating Gaussian Attention and Rotary Position Embeddings — https://doi.org/10.36227/techrxiv.173014908.85113284/v1 (rel=0.50, cites=0)
+- [2026] Universal Transformers for Circuit Computations: Perfect Length Generalization in Tiny Transformers — https://arxiv.org/abs/2608.31067 (rel=0.48, cites=None)
+- [2020] What Do Position Embeddings Learn? An Empirical Study of Pre-Trained Language Model Positional Encoding — https://doi.org/10.18653/v1/2020.emnlp-main.555 (rel=0.40, cites=43)
+- [2024] Prediction of human <i>O-</i> linked glycosylation sites using stacked generalization and embeddings from pre-trained protein language model — https://doi.org/10.1093/bioinformatics/btae643 (rel=0.40, cites=17)
+- [2024] Extending Context Window in Large Language Models with Segmented Base Adjustment for Rotary Position Embeddings — https://doi.org/10.3390/app14073076 (rel=0.40, cites=12)
+- [2026] Position: Biomedical NLP Demands Specialization, Not Generalization — https://doi.org/10.18653/v1/2026.healing-1.7 (rel=0.40, cites=0)
+- [2026] Epistemic Failure and Methodological Reform in Financial Machine Learning: A Systematic Review of the Generalization Crisis (2015-2026) — https://doi.org/10.2139/ssrn.6245658 (rel=0.40, cites=0)
+
+## H14.5_soft_weight_sharing
+
+
+### support
+
+- [2024] BAM! Just Like That: Simple and Efficient Parameter Upcycling for Mixture of Experts — https://arxiv.org/abs/2408.08274 (rel=1.00, cites=1)
+- [2026] The Wiola Architecture for Efficient Small Language Models — https://arxiv.org/abs/2607.01394 (rel=1.00, cites=None)
+- [2023] LightFormer: Light-weight Transformer Using SVD-based Weight Transfer and Parameter Sharing — https://doi.org/10.18653/v1/2023.findings-acl.656 (rel=0.80, cites=9)
+- [2026] Explicit Fuzzy Logic in the Feed-Forward Layer: Self-Forgetting Quantifiers Discover Legible Grammatical-Licensing Detectors — https://arxiv.org/abs/2606.31845 (rel=0.80, cites=None)
+- [2026] Optimization-driven parameter sharing via neural architecture search for transformer models in machine translation — https://doi.org/10.1007/s10791-026-10185-y (rel=0.80, cites=0)
+- [2017] Reverse-complement parameter sharing improves deep learning models for genomics — https://doi.org/10.1101/103663 (rel=0.75, cites=56)
+- [2026] Classification of Brain MRI Images with Vision Transformer: Improving Performance with New Layers and Parameter Optimization — https://doi.org/10.38016/jista.1779498 (rel=0.75, cites=0)
+- [2026] A Comparative Analysis of Meta-Adapters and Traditional Adapter Layers for Parameter-Efficient Learning — https://doi.org/10.2139/ssrn.6400280 (rel=0.75, cites=0)
+- [2026] Type-IV Code Clone Detection via Layer-Wise Non-Contrastive Representation Learning — https://arxiv.org/abs/2609.17338 (rel=0.75, cites=None)
+- [2016] A Joint Many-Task Model: Growing a Neural Network for Multiple NLP Tasks — https://arxiv.org/abs/1611.01587 (rel=0.75, cites=None)
+- [2023] Manifold-Preserving Transformers are Effective for Short-Long Range Encoding — https://arxiv.org/abs/2310.14206 (rel=0.75, cites=None)
+- [2026] From Brewing to Resolution: Tracing the Internal Lifecycle of Code Reasoning in LLMs — https://arxiv.org/abs/2606.17648 (rel=0.67, cites=None)
+
+### refute
+
+- [2018] Tying of embeddings for improving regularization in neural networks for named entity recognition task — https://doi.org/10.17721/1812-5409.2018/3.8 (rel=0.60, cites=0)
+- [2026] Weight Tying Biases Token Embeddings Towards the Output Space — https://doi.org/10.18653/v1/2026.findings-acl.2027 (rel=0.50, cites=0)
+- [2026] LieLoRA: Lie-Group-Guided Interface Regularization for Point-Language Fusion with Low-Rank Adaptation — https://doi.org/10.2139/ssrn.7206256 (rel=0.50, cites=0)
+- [2019] Knowledge Distillation for Recurrent Neural Network Language Modeling with Trust Regularization — https://doi.org/10.1109/icassp.2019.8683533 (rel=0.40, cites=14)
+- [2018] Beyond Weight Tying: Learning Joint Input-Output Embeddings for Neural Machine Translation — https://doi.org/10.18653/v1/w18-6308 (rel=0.40, cites=6)
+- [2018] Improving Neural Language Models with Weight Norm Initialization and Regularization — https://doi.org/10.18653/v1/w18-6310 (rel=0.40, cites=0)
+- [2023] Set-based Neural Network Encoding Without Weight Tying — https://doi.org/10.48550/arxiv.2305.16625 (rel=0.30, cites=0)
+- [2026] When More Context Hurts: An Empirical Study of Job Title Normalization with Large Language Models — https://doi.org/10.1109/icnlp69856.2026.11527888 (rel=0.25, cites=0)
+- [2026] Supplemental Material for “What Happens, What Helps, What Hurts”: A Qualitative Analysis of User Experiences With Large Language Models for Mental Health Support — https://doi.org/10.1037/pri0000319.supp (rel=0.25, cites=0)
+- [2025] "What Happens, What Helps, What Hurts:" A Qualitative Analysis of User Experiences with Large Language Models for Mental Health Support — https://doi.org/10.31234/osf.io/2prtn_v1 (rel=0.25, cites=0)
+- [2024] Robust implicit regularization via weight normalization — https://doi.org/10.1093/imaiai/iaae022 (rel=0.24, cites=2)
+- [2026] Bayesian Neural Networks with Regularization for Sparse Zero-Inflated Data Modeling — https://doi.org/10.3390/info17010081 (rel=0.24, cites=2)
+
+## H14.6_anytime_exit_training
+
+
+### support
+
+- [2024] LayerSkip: Enabling Early Exit Inference and Self-Speculative Decoding — https://arxiv.org/abs/2404.16710 (rel=1.00, cites=42)
+- [2025] Runaway is Ashamed, But Helpful: On the Early-Exit Behavior of Large Language Model-based Agents in Embodied Environments — https://arxiv.org/abs/2505.17616 (rel=1.00, cites=1)
+- [2026] Width-Induced Functional Redundancy in Large Language Models — https://doi.org/10.31224/6261 (rel=1.00, cites=0)
+- [2022] Hierarchical Cache Transformer: Dynamic Early Exit for Language Translation — https://doi.org/10.1109/ijcnn55064.2022.9891931 (rel=1.00, cites=0)
+- [2025] Robust and Efficient Early Exit for Large Language Models: Mitigating KV Cache Loss and Enhancing Exit Stability — https://doi.org/10.1007/978-981-95-1233-1_7 (rel=1.00, cites=0)
+- [2026] Don't Drop Dropout: Optimizing Layer Sparsity for Efficient LLM Training and Inference — https://arxiv.org/abs/2609.05275 (rel=1.00, cites=0)
+- [2026] HopRank: Self-Supervised LLM Preference-Tuning on Graphs for Few-Shot Node Classification — https://arxiv.org/abs/2604.17271 (rel=0.75, cites=None)
+- [2023] Sparse Dropout: a dropout layer specialized for attention mechanism — https://doi.org/10.21203/rs.3.rs-2840311/v1 (rel=0.67, cites=0)
+- [2022] Quantum Neural Network Classifiers: A Tutorial — https://doi.org/10.21468/scipostphyslectnotes.61 (rel=0.50, cites=50)
+- [2022] A deep unsupervised language model for protein design — https://doi.org/10.1101/2022.03.09.483666 (rel=0.50, cites=14)
+- [2020] PEDL: extracting protein–protein associations using deep language models and distant supervision — https://doi.org/10.1093/bioinformatics/btaa430 (rel=0.50, cites=11)
+- [2023] Embedding-Based Deep Neural Network and Convolutional Neural Network Graph Classifiers — https://doi.org/10.3390/electronics12122715 (rel=0.50, cites=5)
+
+### refute
+
+- [2025] Early-Exit and Instant Confidence Translation Quality Estimation — https://arxiv.org/abs/2502.14429 (rel=1.00, cites=0)
+- [2026] Massive Supervised Fine-tuning Experiments Reveal How Data, Layer, and Training Factors Shape LLM Alignment Quality — https://doi.org/10.5715/jnlp.33.388 (rel=0.50, cites=0)
+- [2017] Ageing and Work: From ‘Early’ Exit to ‘Late’ Exit in Denmark — https://doi.org/10.4324/9781315263175-4 (rel=0.30, cites=3)
+- [2025] AEBNAS: Strengthening Exit Branches in Early-Exit Networks through Hardware-Aware Neural Architecture Search — https://doi.org/10.1109/flta67013.2025.11336357 (rel=0.30, cites=2)
+- [2022] Binary Early-Exit Network for Adaptive Inference on Low-Resource Devices — https://doi.org/10.21437/interspeech.2022-17 (rel=0.30, cites=2)
+- [2024] To Exit or Not to Exit: Cost-Effective Early-Exit Architecture Based on Markov Decision Process — https://doi.org/10.3390/math12142263 (rel=0.30, cites=1)
+- [2026] CalexNet: Soft Cascade-Aligned Training and Calibration for Lightweight Early-Exit Branches — https://doi.org/10.3390/electronics15102149 (rel=0.30, cites=0)
+- [2025] 2022 HRS Exit (Early V1.0) — https://doi.org/10.7826/baew3978 (rel=0.30, cites=0)
+- [2026] Neural-Chain-Analysis-Based Exit Point Identification Method for Early-Exit DNNs — https://doi.org/10.3390/app16104867 (rel=0.30, cites=0)
+- [2026] Offloading-driven Calibration Optimization for Early-Exit Deep Neural Networks — https://doi.org/10.2139/ssrn.7091044 (rel=0.30, cites=0)
+- [2025] Layer Dance: Pairwise Layer Training with Adaptive Learning Rates for Transformers — https://doi.org/10.36227/techrxiv.174888672.29796823/v1 (rel=0.30, cites=0)
+- [2017] South Africa’s Zuma could face early exit — https://doi.org/10.1108/oxan-db220006 (rel=0.30, cites=0)
+
+## H15.1_retrieval_vs_params_scaling
+
+
+### support
+
+- [2023] InstructRetro: Instruction Tuning post Retrieval-Augmented Pretraining — https://arxiv.org/abs/2310.07713 (rel=1.00, cites=6)
+- [2024] GPT vs RETRO: Exploring the Intersection of Retrieval and Parameter-Efficient Fine-Tuning — https://arxiv.org/abs/2407.04528 (rel=1.00, cites=2)
+- [2024] Scaling Retrieval-Based Language Models with a Trillion-Token Datastore — https://arxiv.org/abs/2407.12854 (rel=1.00, cites=None)
+- [2026] To Memorize or to Retrieve: Scaling the Interaction Between Pretraining and Retrieval — https://arxiv.org/abs/2604.00715 (rel=1.00, cites=0)
+- [2025] DynaSearcher: Dynamic Knowledge Graph Augmented Search Agent via Multi-Reward Reinforcement Learning — https://arxiv.org/abs/2507.17365 (rel=1.00, cites=None)
+- [2024] Retrieval Augmented Generation in Prompt-based Text-to-Speech Synthesis with Context-Aware Contrastive Language-Audio Pretraining — https://arxiv.org/abs/2406.03714 (rel=1.00, cites=None)
+- [2025] RA-CLAP: Relation-Augmented Emotional Speaking Style Contrastive Language-Audio Pretraining For Speech Retrieval — https://arxiv.org/abs/2505.19437 (rel=1.00, cites=0)
+- [2025] Frustratingly Simple Retrieval Improves Challenging, Reasoning-Intensive Benchmarks — https://arxiv.org/abs/2507.01297 (rel=0.80, cites=None)
+- [2024] Follow My Instruction and Spill the Beans: Scalable Data Extraction from Retrieval-Augmented Generation Systems — https://arxiv.org/abs/2402.17840 (rel=0.80, cites=None)
+- [2022] SmallCap: Lightweight Image Captioning Prompted with Retrieval Augmentation — https://arxiv.org/abs/2209.15323 (rel=0.80, cites=None)
+- [2025] NLKI: A lightweight Natural Language Knowledge Integration Framework for Improving Small VLMs in Commonsense VQA Tasks — https://arxiv.org/abs/2508.19724 (rel=0.80, cites=None)
+- [2026] Memory-Driven Role-Playing: Evaluation and Enhancement of Persona Knowledge Utilization in LLMs — https://arxiv.org/abs/2603.19313 (rel=0.80, cites=None)
+
+### refute
+
+- [2026] Do Large Language Models Play Six Degrees of Separation? Measuring Topological Compression in Long-Context Manifolds — https://arxiv.org/abs/2608.17950 (rel=1.00, cites=None)
+- [2026] Benchmarking Small Language Models and Small Reasoning Language Models on System Log Severity Classification — https://arxiv.org/abs/2601.07790 (rel=1.00, cites=None)
+- [2025] Distillation and Refinement of Reasoning in Small Language Models for Document Re-ranking — https://arxiv.org/abs/2504.03947 (rel=1.00, cites=0)
+- [2025] Long Text Language Ensemble Models: Extension of Retrieval-Augmented Generation (RAG) — https://doi.org/10.31219/osf.io/b94ng_v1 (rel=1.00, cites=0)
+- [2025] Towards Omni-RAG: Comprehensive Retrieval-Augmented Generation for Large Language Models in Medical Applications — https://arxiv.org/abs/2501.02460 (rel=0.83, cites=None)
+- [2026] Quantifying Prior Dominance in RAG Systems — https://arxiv.org/abs/2606.23695 (rel=0.83, cites=None)
+- [2024] Advanced Retrieval Augmented Generation: Multilingual Semantic Retrieval across Document Types by Finetuning Transformer Based Language Models and OCR Integration — https://doi.org/10.47191/etj/v9i07.09 (rel=0.75, cites=2)
+- [2026] Optimizing Retrieval-Augmented Generation for Small Language Models via Output Alignment — https://doi.org/10.1051/itmconf/20268403023 (rel=0.75, cites=1)
+- [2024] Graph Retrieval-Augmented Generation for Large Language Models: A Survey — https://doi.org/10.2139/ssrn.4895062 (rel=0.67, cites=17)
+- [2023] Knowledge-Augmented Language Model Verification — https://doi.org/10.18653/v1/2023.emnlp-main.107 (rel=0.67, cites=14)
+- [2025] RAG-ESM: Improving Pretrained Protein Language Models via Sequence Retrieval — https://doi.org/10.1103/db1b-hy16 (rel=0.67, cites=3)
+- [2024] Retrieval-Augmented Generation in Large Language Models through Selective Augmentation — https://doi.org/10.21203/rs.3.rs-4652959/v1 (rel=0.67, cites=2)
+
+## H15.2_parametric_vs_editable_memory
+
+
+### support
+
+- [2026] HoReN: Normalized Hopfield Retrieval for Large-Scale Sequential Model Editing — https://doi.org/10.48550/arxiv.2605.08143 (rel=1.00, cites=0)
+- [2026] CLaRE-ty Amid Chaos: Quantifying Representational Entanglement to Predict Ripple Effects in LLM Editing — https://arxiv.org/abs/2603.19297 (rel=1.00, cites=None)
+- [2021] Representation Memorization for Fast Learning New Knowledge without Forgetting — https://arxiv.org/abs/2108.12596 (rel=1.00, cites=None)
+- [2026] Memory Bank Compression for Continual Adaptation of Large Language Models — https://arxiv.org/abs/2601.00756 (rel=1.00, cites=0)
+- [2026] Improving Sparse Memory Finetuning — https://arxiv.org/abs/2604.05248 (rel=1.00, cites=None)
+- [2024] Dynamic Textual Prompt For Rehearsal-free Lifelong Person Re-identification — https://arxiv.org/abs/2411.06023 (rel=0.86, cites=None)
+- [2026] STEM: Scaling Transformers with Embedding Modules — https://doi.org/10.48550/arxiv.2601.10639 (rel=0.60, cites=0)
+- [2025] CLAD-Net: Continual Activity Recognition in Multi-Sensor Wearable Systems — https://arxiv.org/abs/2509.23077 (rel=0.60, cites=None)
+- [2026] Dynamic Mixture of Latent Memories for Self-Evolving Agents — https://arxiv.org/abs/2605.21951 (rel=0.51, cites=None)
+- [2025] Gradient-Free Continual Learning — https://arxiv.org/abs/2504.01219 (rel=0.30, cites=None)
+- [2022] CFA: Constraint-based Finetuning Approach for Generalized Few-Shot Object Detection — https://arxiv.org/abs/2204.05220 (rel=0.20, cites=None)
+- [2025] Efficient Multimodal Streaming Recommendation via Expandable Side Mixture-of-Experts — https://arxiv.org/abs/2508.05993 (rel=0.17, cites=None)
+
+### refute
+
+- [2024] Why Does New Knowledge Create Messy Ripple Effects in LLMs? — https://arxiv.org/abs/2407.12828 (rel=1.00, cites=None)
+- [2026] CLaRE-ty Amid Chaos: Quantifying Representational Entanglement to Predict Ripple Effects in LLM Editing — https://arxiv.org/abs/2603.19297 (rel=1.00, cites=None)
+- [2024] Evaluating the Ripple Effects of Knowledge Editing in Language Models — https://doi.org/10.1162/tacl_a_00644 (rel=0.80, cites=40)
+- [2025] ChainEdit: Propagating Ripple Effects in LLM Knowledge Editing through Logical Rule-Guided Chains — https://doi.org/10.18653/v1/2025.acl-long.665 (rel=0.80, cites=1)
+- [2026] EchoEdit: Consistent Multi-Hop Question Answering via Ripple Control in Knowledge Editing — https://doi.org/10.1609/aaai.v40i23.39013 (rel=0.80, cites=0)
+- [2024] RippleCOT: Amplifying Ripple Effect of Knowledge Editing in Language Models via Chain-of-Thought In-Context Learning — https://doi.org/10.18653/v1/2024.findings-emnlp.368 (rel=0.60, cites=1)
+- [2025] Does Synthetic Data Generalize? A Comparative Study of Synthetic and Real Datasets for Reinforcement Fine-Tuning of Domain-Specific LLMs — https://doi.org/10.52783/jisem.v10i63s.14005 (rel=0.60, cites=0)
+- [2019] Dictionary-Guided Editing Networks for Paraphrase Generation — https://doi.org/10.1609/aaai.v33i01.33016546 (rel=0.40, cites=8)
+- [2023] Does Localization Inform Editing? Surprising Differences in Causality-Based Localization vs. Knowledge Editing in Language Models — https://doi.org/10.52202/075280-0774 (rel=0.40, cites=8)
+- [2024] Evaluating Complex Entity Knowledge Propagation for Knowledge Editing in LLMs — https://doi.org/10.3390/app14041508 (rel=0.40, cites=4)
+- [2025] Natural Language Interaction for Editing Visual Knowledge Graphs — https://doi.org/10.1145/3731443.3771344 (rel=0.40, cites=3)
+- [2021] Unified Model for Paraphrase Generation and Paraphrase Identification — https://doi.org/10.20944/preprints202104.0630.v1 (rel=0.40, cites=2)
+
+## H15.3_tool_use_small_models
+
+
+### support
+
+- [2026] ASTER: Agentic Scaling with Tool-integrated Extended Reasoning — https://arxiv.org/abs/2602.01204 (rel=1.00, cites=None)
+- [2026] SOD: Step-wise On-policy Distillation for Small Language Model Agents — https://arxiv.org/abs/2605.07725 (rel=1.00, cites=0)
+- [2025] Distilling Tool Knowledge into Language Models via Back-Translated Traces — https://arxiv.org/abs/2506.19171 (rel=1.00, cites=0)
+- [2025] GeoProg3D: Compositional Visual Reasoning for City-Scale 3D Language Fields — https://arxiv.org/abs/2506.23352 (rel=1.00, cites=None)
+- [2026] Euclid-MCP: A Model Context Protocol Server for Deterministic Logical Reasoning via Prolog — https://arxiv.org/abs/2607.21412 (rel=1.00, cites=None)
+- [2025] Large Language Models Don't Make Sense of Word Problems. A Scoping Review from a Mathematics Education Perspective — https://arxiv.org/abs/2506.24006 (rel=1.00, cites=None)
+- [2025] ORFS-agent: Tool-Using Agents for Chip Design Optimization — https://arxiv.org/abs/2506.08332 (rel=1.00, cites=None)
+- [2026] ALIBI: Adversarial Legitimacy Injection in Binary Input against LLM Malware Analyzers — https://arxiv.org/abs/2609.19722 (rel=1.00, cites=None)
+- [2025] Training-Free Group Relative Policy Optimization — https://arxiv.org/abs/2510.08191 (rel=1.00, cites=0)
+- [2025] Beyond Naïve Prompting: Strategies for Improved Context-aided Forecasting with LLMs — https://arxiv.org/abs/2508.09904 (rel=1.00, cites=None)
+- [2024] Propose, Assess, Search: Harnessing LLMs for Goal-Oriented Planning in Instructional Videos — https://arxiv.org/abs/2409.20557 (rel=1.00, cites=None)
+- [2026] InfoCIR: Multimedia Analysis for Composed Image Retrieval — https://arxiv.org/abs/2602.13402 (rel=1.00, cites=None)
+
+### refute
+
+- [2025] Beyond Bias Scores: Unmasking Vacuous Neutrality in Small Language Models — https://arxiv.org/abs/2506.08487 (rel=1.00, cites=None)
+- [2026] SERA-IDS: Structured Experience Retrieval-Augmented Intrusion Detection with Small Language Models — https://arxiv.org/abs/2610.03999 (rel=1.00, cites=None)
+- [2026] Euclid-MCP: A Model Context Protocol Server for Deterministic Logical Reasoning via Prolog — https://arxiv.org/abs/2607.21412 (rel=1.00, cites=None)
+- [2026] PrivacyAlign: Contextual Privacy Alignment for LLM Agents — https://arxiv.org/abs/2606.21710 (rel=1.00, cites=None)
+- [2026] Lattice in Line: Optimized DMRG ordering for complex lattice geometries — https://arxiv.org/abs/2609.25384 (rel=1.00, cites=None)
+- [2026] Meta-Tool: Efficient Few-Shot Tool Adaptation for Small Language Models — https://arxiv.org/abs/2604.20148 (rel=1.00, cites=0)
+- [2025] Don't Adapt Small Language Models for Tools; Adapt Tool Schemas to the Models — https://arxiv.org/abs/2510.07248 (rel=1.00, cites=0)
+- [2026] Benchmarking Small Language Models and Small Reasoning Language Models on System Log Severity Classification — https://arxiv.org/abs/2601.07790 (rel=1.00, cites=None)
+- [2026] Difficulty-Adaptive Early-Stopping Self-Consistency for Small Language Models — https://doi.org/10.2139/ssrn.7225570 (rel=1.00, cites=0)
+- [2024] MuMath-Code: Combining Tool-Use Large Language Models with Multi-perspective Data Augmentation for Mathematical Reasoning — https://arxiv.org/abs/2405.07551 (rel=0.75, cites=4)
+- [2026] Neurosymbolic Routing for Reliable Reasoning on Resource-Constrained Edge Devices — https://arxiv.org/abs/2609.35833 (rel=0.75, cites=None)
+- [2026] Smallholder Farmers on Remote Islands Receiving Retrieval-Grounded Multilingual LLM Assistance and Agronomic Advice — https://arxiv.org/abs/2606.25647 (rel=0.75, cites=None)
