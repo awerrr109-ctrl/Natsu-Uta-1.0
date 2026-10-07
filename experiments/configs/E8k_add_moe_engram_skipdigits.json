@@ -1,0 +1,53 @@
+{
+ "name": "E8k_add_moe_engram_skipdigits",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1,
+  "pattern": "ga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_shared": 1,
+  "moe_expert_mult": 0.296,
+  "engram_slots": 512,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "engram_heads": 2,
+  "engram_dim": 32,
+  "engram_skip_digits": true
+ },
+ "train": {
+  "seq": 24,
+  "batch": 64,
+  "steps": 1500,
+  "lr": 0.003,
+  "warmup": 60,
+  "eval_every": 500,
+  "log_every": 250,
+  "threads": 2,
+  "eval_batches": 4,
+  "save": true
+ },
+ "data": {
+  "kind": "synthetic",
+  "task": "add",
+  "kw": {
+   "min_digits": 1,
+   "digits": 5
+  }
+ },
+ "extra_eval": {
+  "d6": {
+   "min_digits": 6,
+   "digits": 6
+  }
+ },
+ "note": "Engram digit mask: does excluding digit positions remove the addition interference (E8i 0.176 vs E8a 0.297)? Rule: >=0.27 -> mask fixes it."
+}

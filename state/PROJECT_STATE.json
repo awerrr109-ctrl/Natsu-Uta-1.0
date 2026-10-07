@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-07T10:00Z",
+ "updated": "2026-10-07T14:40Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": {
   "id": "C4_hybrid_moe_engram (MAIN)",
@@ -88,7 +88,9 @@
   "loop_self_spec": "exact; accept 0.91 with self-distill (E4l), 4.65 tok/target call; CPU wall not yet faster",
   "F013_paper_engram": "varchain: 3/3 transitions at steps 600/600/400 vs 1/3 (v1) and 1/3 (none); step-400 loss lowest 3 of 12 (post-hoc P=0.0045). LM: E4pp +0.0074 bpb worse (1 seed); ablation E4pq/E4pr in s2n",
   "E4y2_resscale_lti": "R3 n.s. (-0.002) but best R1 (-0.05) and R6 (-0.02): depth-robustness, adopt only if loops used",
-  "engram_table_lr": "E4pr v1+lr5 1.3971 (-0.029 vs E4j, 1 seed); paper+lr1 1.4274; paper+lr5 1.4336 -> interaction; replication + E4ps + E6Lh queued"
+  "engram_table_lr": "ESTABLISHED: E4pr v1+lr5 3 seeds 1.3996+-0.0034 vs E4j 1.4262 (-0.027, t~12); total Engram gain -0.080. Paper path on LM: lr1 1.4274, lr2.5 1.4245, lr5 1.4336 (never reaches v1+lr5)",
+  "engram_addition_interference": "E8i v1 0.176, E8j paper 0.039 vs E8a 0.297: both hurt addition; digit mask E8k/E8l queued (s2p)",
+  "N7_components": "noresid 2/2, randconv 2/2 at 400-600 steps; lr1 1000 steps -> identity-init not needed; E6Lh (v1+lr5) / E6Li (norm+dil) decide"
  },
  "rejected_hypotheses": {
   "0": {
@@ -147,7 +149,7 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "QUEUE: s2m [E6La_s2 running, E6Lb_s2, E4pp] -> s2l [tests incl moe lora, E6Le_s1, E6Le_s2, E6Ld, E4v, E4w, E4x, E4s2, E8i, E4y, E4y2, E4y3] -> s2i [10M 2x2] -> s2j [E9] -> post_s2b [TTS 2/3 digits, kNN rebuild + lambda 0.8, JL/int8 ablation, G1c targets + ctrl/knn runs]",
+  "QUEUE: s2o [E6Lh_s0 running, E6Lh_s1, E4pt FAL, E6Li x2] -> s2p [digit-mask test, E8k, E8l] -> s2i [pick_engram_recipe, 10M 2x2] -> s2j [E9] -> post_s2b [TTS 2/3d, kNN, JL, G1c, LRU replay]",
   "analysis after each: pre-registered rules in evidence_log (H14.1 E6L*, R36 E8g/h, H13.7 E8e/f/E4t, R33 2x2 E6d/E8c/d, N2 AUC, H14.7 E4v-x, F011 E4s2, R40 L10a-d, R39 E9)",
   "X1 (1B stage, needs GPU): C4 vs fewer-experts/larger-active at iso-stored (R42)",
   "50M+ stages: GPU required; downstream evals at >=50M before committing the 1.6B Engram table"

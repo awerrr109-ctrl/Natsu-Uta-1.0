@@ -702,3 +702,16 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   - If E6Lh transitions fast, **lr ×5 alone explains it**: a single optimiser setting, already in the paper, and nothing novel.
   - If only E6Li does, then norm/dilation matter.
   The ablate field now accepts combinations (code fix: comma-separated).
+
+### s2n/s2o results — Engram table lr ×5 replicated
+- **E4pr (v1 + table lr ×5), 3 seeds**: 1.3971 / 1.3981 / 1.4035, **mean 1.3996 ± 0.0034** vs E4j (v1, lr ×1) 1.4262 ± 0.0016 → **−0.0266, t ≈ 12** → **established**.
+  The total Engram gain over no-Engram (E4c 1.4792) becomes **−0.080 bpb** (it was −0.053). That is the largest single gain measured in the project, from one optimiser setting the paper already specifies (F013 item 4).
+- **E4ps (paper path, lr ×2.5)**: 1.4245, vs paper lr ×1 at 1.4274 and lr ×5 at 1.4336. The paper path on LM never reaches v1+lr5 at any lr tried → on LM, **v1 + lr ×5 dominates**.
+- **E8j (addition, paper Engram, full experts)**: EM **0.039**, vs v1 E8i 0.176 and no Engram E8a 0.297. The pre-registered rule (≥0.27) fails.
+  [E] The paper path interferes with the carry algorithm *more* than v1. So both Engram variants hurt addition at toy scale, and the paper path hurts most.
+  [I] Interpretation: the faster the n-gram channel learns local digit statistics, the more it pre-empts algorithmic computation. That is the same mechanism that *helps* varchain retrieval (local statistics absorbed early, R56), but here the local statistics are misleading (digit bigrams do not predict carries).
+  **Design consequence**: Engram must be **gateable per domain/token**. Candidates:
+  - (i) exclude digit tokens from Engram addressing (a cheap mask);
+  - (ii) rely on the learned gate (E8 shows it does not learn to close in 800 steps);
+  - (iii) tokenise numbers so that n-gram rows carry no digit-sequence information.
+  Option (i) is queued as E8k (addressing mask on digits).

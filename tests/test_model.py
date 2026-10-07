@@ -162,3 +162,9 @@ def test_moe_loop_lora_cache():
 
 if __name__ == "__main__":
     test_moe_loop_lora_cache(); print("ok moe lora")
+
+def test_engram_skip_digits_cache():
+    torch.manual_seed(0)
+    m = Natsu(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8,
+                          engram_slots=257, engram_heads=2, engram_skip_digits=True)).double().eval()
+    _check_cache_model(m, torch.tensor([list(b"ab12+34=46;xy9z") + list(b"0123")]))

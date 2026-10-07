@@ -70,6 +70,7 @@ class NatsuConfig:
                                      # reserved for the most frequent n-grams (collision-free); tail keeps hashed buckets.
                                      # VIP ids come from a frequency table built on training data (scripts/build_vip.py).
     engram_dim: int = 0              # 0 -> d_model // (len(orders)*heads) per head
+    engram_skip_digits: bool = False  # E8k: zero the Engram branch at positions whose current token is an ASCII digit (byte vocab)
     engram_ablate: str = ""          # N7 component ablation of the paper path: "" full | "noresid" (no internal residual) | "randconv" (random conv init)
     engram_paper: bool = False       # F013: faithful Engram output path (norm + dilated zero-init conv + internal residual); False = legacy v1
     engram_factor_rank: int = 0      # >0: factorised table (H14.7, cf. R44/R45): row = coeff[slot] (rank r) @ basis (r x dm), basis shared across slots
@@ -327,6 +328,7 @@ class Engram(nn.Module):
         self.norm = RMSNorm(c.d_model)
         self.maxo = max(self.orders)
         self.paper = c.engram_paper
+        self.skip_digits = c.engram_skip_digits
         if self.paper:   # faithful to arXiv:2601.07372 eq.: Y = SiLU(Conv_dil=maxN(RMSNorm(V~))) + V~, conv zero-init (identity at start)
             self.ablate = c.engram_ablate
             self.conv = ShortConv(c.d_model, 4, dilation=self.maxo, zero_init=("randconv" not in self.ablate.split(",")))
@@ -409,6 +411,9 @@ class Engram(nn.Module):
                 y = y + vt
         else:
             y, cs = self.conv(g * v, st.get("conv"))
+        if self.skip_digits:
+            keep = ~((ids >= 48) & (ids <= 57))
+            y = y * keep[..., None].to(y.dtype)
         self.last_gate = g.detach()                           # (B,L,1) retrieval confidence, used by N2 depth decider
         return y, {"tail": tail, "conv": cs}
 
