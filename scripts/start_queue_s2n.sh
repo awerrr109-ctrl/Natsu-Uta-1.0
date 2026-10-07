@@ -3,5 +3,5 @@
 cd "$(dirname "$0")/.."
 while [ ! -f experiments/queue_s2l.log ] || pgrep -f "run_queue[.]sh" > /dev/null || pgrep -f "start_queue_s2[defghlm][.]sh" > /dev/null || pgrep -f "post_s2[.]sh" > /dev/null; do sleep 30; done
 C=experiments/configs
-setsid nohup scripts/run_queue.sh $C/E4pq_moe_engrampaper_lr1.json $C/E4pr_moe_engramv1_lr5.json $C/E6Lg_engrampaper_lr1_s0.json $C/E6Lf_noresid_s0.json $C/E6Lf_randconv_s0.json $C/E6Lf_noresid_s1.json $C/E6Lf_randconv_s1.json > experiments/queue_s2n.log 2>&1 < /dev/null &
+setsid nohup scripts/run_queue.sh $C/E4pq_moe_engrampaper_lr1.json $C/E4pr_moe_engramv1_lr5.json $C/E6Lg_engrampaper_lr1_s0.json $C/E6Lf_noresid_s0.json $C/E6Lf_randconv_s0.json $C/E6Lf_noresid_s1.json $C/E6Lf_randconv_s1.json $C/E8j_add_moe_engrampaper_fullexperts.json > experiments/queue_s2n.log 2>&1 < /dev/null &
 sleep 5

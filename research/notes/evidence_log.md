@@ -635,3 +635,12 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - [I] At 512 slots the table is not collision-bound. Rows need full rank: per-n-gram vectors carry independent information, and a shared rank-r basis destroys that.
   The R44/R45 factorisation results come from huge tables (≥10⁶ rows), where rows are redundant. The test may flip at 9B (1.6B-param table), so it is **scoped to toy scale**, not refuted globally.
   E4w > E4v (rank 4 with 8× slots beats rank 8 with 4× slots), so slot count matters more than rank. That suggests collisions do matter somewhat, just less than row rank.
+
+### s2l results continued
+- **E4s2 (VIP rows, F011 keys fixed)**: bpb **1.4246** vs E4j 1.4262 ± 0.0016 → −0.0016, i.e. ≈1 sd and not significant. The broken run E4s was 1.4337.
+  [E] The F011 fix recovers the full loss (−0.009 vs the broken run). VIP rows themselves give no measurable gain at 512 slots. This is consistent with H14.7: collisions are not the bottleneck at this scale.
+  Engram v2 VIP stays implemented but is not adopted.
+- **E8i (addition, Engram v1 added on top of full experts)**: EM **0.176** vs E8a 0.297 (no Engram) and E8c 0.242 (Engram iso-param).
+  Pre-registered: E8i < E8a means the memory itself interferes, and it does (even more than E8c). So **Engram v1 hurts addition, and the cost is not parameter reallocation**.
+  [I] An n-gram table over digit tokens gives "plausible-looking" local statistics (digit bigrams) that compete with the carry algorithm. This is the algorithmic analogue of R56.
+  It needs re-testing with the paper path (F013 changed the ICL picture completely). → E8j (add, paper Engram, full experts) queued in s2n.
