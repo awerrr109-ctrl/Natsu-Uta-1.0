@@ -819,3 +819,5 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **E6Lj final**: 2/2 transitions (steps 2000, 600). The picker gate passes, so v1_lr20 goes to 10M.
   [E] ICL quality at lr ×20 is lower or slower than at ×5 on s0 (EM 0.60, late transition), so there is an **LM/ICL trade-off above ×5**. An L10e control (10M, lr ×5) was added so that 10M decides between ×20 and ×5 with both bpb and the ICL probe.
   Rule deviation logged: one control run was added after seeing data; the gate itself was not changed.
+- Refutation search (2026-10-08) for "high lr on sparse embedding rows harms ICL/generalisation": no directly relevant result in the top 10 (only compression and sparse-attention papers).
+  [I] The LM/ICL trade-off above ×5 (E6Lj s0) looks unstudied. It is logged as an open question (OQ-lr-ICL) for the 10M L10a-vs-L10e comparison.
