@@ -715,3 +715,20 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   - (ii) rely on the learned gate (E8 shows it does not learn to close in 800 steps);
   - (iii) tokenise numbers so that n-gram rows carry no digit-sequence information.
   Option (i) is queued as E8k (addressing mask on digits).
+
+### N7 resolved — the table lr is the cause of both effects (E6Lh)
+| arm (varchain) | transitions | steps |
+|---|---|---|
+| no Engram (E6La) | 1/3 | 2000 |
+| v1, lr ×1 (E6Lb) | 1/3 | 800 |
+| **v1, lr ×5 (E6Lh)** | **2/2** | **600, 1000** |
+| paper path, lr ×1 (E6Lg) | 1/1 | 1000 |
+| paper path, lr ×5 (E6Le) | 3/3 | 600, 600, 400 |
+- [E own] With v1 kept and only the table lr raised to ×5, transitions go from 1/3 to 2/2. Across all arms, **lr ×5 runs transition 5/5 (pooled)**, while the lr ×1 Engram arms are at 2/4.
+  The paper output path adds at most a small speed-up on top (median 600 vs 800), within noise at n=2–3.
+- **Conclusion**: the single cause behind F013's two observations, faster ICL emergence and −0.027 LM bpb, is the **update-starved Engram table**, fixed by a larger per-table lr (R67's sparse-optimizer argument).
+  The output-path details (zero-init, internal residual, norm, dilation) are secondary at this scale. **N7 is withdrawn**: it is a reproduction of the paper's optimiser setting, not a new mechanism.
+- What remains genuinely ours:
+  - the measurement that ignoring this one hyper-parameter turns Engram's ICL effect from "neutral" into "strongly positive", and its LM gain from −0.053 into −0.080;
+  - and the method lesson (F013 checklist rule: optimiser config is part of the method).
+- **C4 recipe**: Engram v1 output path (best on LM) + table lr ×5. The paper path is optional. The 10M auto-pick should select v1_lr5 (3 seeds, ICL 2/2).

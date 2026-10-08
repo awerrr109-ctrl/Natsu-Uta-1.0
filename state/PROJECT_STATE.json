@@ -1,17 +1,8 @@
 {
  "session": 2,
- "updated": "2026-10-07T14:40Z",
+ "updated": "2026-10-08T02:25Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
- "current_best_architecture": {
-  "id": "C4_hybrid_moe_engram (MAIN)",
-  "status": "C4 (MoE+Engram, no loop) confirmed under byte (E4j) and BPE (B2); loop dominated per FLOP",
-  "summary": "3:1 GDN:attention hybrid + fine-grained MoE + Engram n-gram memory (20-25% of sparse budget), 8.9B stored, ~2.4B active, 4.9 GFLOP/token",
-  "alternatives": [
-   "C3 looped variant",
-   "C5 resident 9B + SSD Engram table",
-   "C0 dense baseline"
-  ]
- },
+ "current_best_architecture": "C4: 3:1 GDN:attn hybrid + fine-grained MoE (shared expert, aux-free) + Engram v1 path with table lr x5 (toy: -0.080 bpb vs no Engram, ICL emergence 600-1000 steps) + MTP; no trained loop; shared routers",
  "current_best_training_method": "NTP + DPT logit KD (w0.5,T1,skip15%) from larger teacher; Muon/AdamW; WSD (E5b 1.4063 toy)",
  "evaluated_hypotheses": {
   "H_mem_toy_alloc": {
@@ -115,7 +106,8 @@
   "H14.1a": "'Engram v1 blocks in-context retrieval circuit (varchain)': refuted at n=2 seeds — transitions 1/2 vs 1/2; E6Lb_s1 EM 1.000 (F014). Original 1-seed claim was over-claimed.",
   "N5_delayed_memory": "E4u keeps 4% of Engram LM gain (1.4770 vs 1.4792/1.4262); varchain transitions equal across arms (F014). Rejected.",
   "H14.7_factorised_engram_table": "toy scale: E4v +0.025, E4w +0.016, E4x +0.031 bpb vs E4j; rows need full rank at 512 slots; scoped (may flip at 1e6+ rows)",
-  "R47_per_loop_routers_toy": "E4y +0.003, E4y3 (LoRA) +0.006 vs E4g 3-seed 1.4665+-0.008 at R3; scoped to toy scale"
+  "R47_per_loop_routers_toy": "E4y +0.003, E4y3 (LoRA) +0.006 vs E4g 3-seed 1.4665+-0.008 at R3; scoped to toy scale",
+  "N7_identity_init_memory_path": "withdrawn: E6Lh v1+lr5 2/2; effect = table lr x5 (paper setting); noresid/randconv 2/2 each"
  },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",
