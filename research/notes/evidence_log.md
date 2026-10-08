@@ -736,3 +736,7 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **H15.2 (FAL, E4pt)**: bpb 1.4020 vs E4pr 3-seed 1.3996 ± 0.0034 → +0.002, n.s. The pre-registered rule (≤ mean − 2 sd) fails → **FAL not adopted** at toy scale.
   [I] At 512 slots × 1.6M tokens, every row is visited often (≈ 6k updates/row), so frequency imbalance is not the bottleneck. FAL may matter for 10⁶–10⁸ rows at 9B (R67's setting). Scoped.
 - **E6Li (v1 + norm + dilation + lr5, no residual, random init)** s0: transition at step 600. This is consistent with lr ×5 being the driver.
+- **E6Li (v1 + norm + dilation + lr ×5)** 2/2 (600, 400). **Pooled across all lr ×5 Engram arms: 11/11 transitions** (E6Le 3, E6Lf 4, E6Lh 2, E6Li 2).
+  All lr ×1 runs (E6La 1/3, E6Lb 1/3, E6Lc 1/2, E6Ld 0/1, E6Lg 1/1) are 4/10.
+  [E own] One-sided Fisher, 11/11 vs 4/10: **p ≈ 0.0010** (post-hoc pooling, labelled as such; an earlier inline figure of 0.0006 was mis-computed and is replaced here).
+  This is **the most robust result of session 2: an un-starved token-indexed memory makes in-context retrieval emerge reliably and early.**
