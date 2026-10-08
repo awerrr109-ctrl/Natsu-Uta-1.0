@@ -589,8 +589,12 @@ class Natsu(nn.Module):
             if core_i is not None and c.loop_kv == "shared_first" and blk.kind != "g" and loop_idx[0] > 0:
                 skv = shared[core_i]
             st = None if cache is None or skv is not None else cache.get(name, {})
-            if c.grad_ckpt and self.training and cache is None and skv is None:
-                x = torch.utils.checkpoint.checkpoint(lambda t: blk(t, pos, None, loop, skip)[0], x, use_reentrant=False)
+            # F017 caveat fix: a loop-0 block whose K/V is reused by later loops (shared_first producer) is not
+            # checkpointed, because its last_kv must be a normal autograd tensor. Consumers pass skv through the closure.
+            producer = core_i is not None and c.loop_kv == "shared_first" and blk.kind != "g" and loop_idx[0] == 0
+            if c.grad_ckpt and self.training and cache is None and not producer:
+                x = torch.utils.checkpoint.checkpoint(
+                    lambda t: blk(t, pos, None, loop, skip, shared_kv=skv)[0], x, use_reentrant=False)
                 return x
             x, ns = blk(x, pos, st, loop, skip, shared_kv=skv)
             if core_i is not None and c.loop_kv == "shared_first" and blk.kind != "g" and loop_idx[0] == 0:

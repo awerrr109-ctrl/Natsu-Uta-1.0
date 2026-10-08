@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-08T09:05Z",
+ "updated": "2026-10-08T10:35Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": "C4: 3:1 GDN:attn hybrid + fine-grained MoE (shared expert, aux-free) + Engram v1 path with table lr x5 (toy: -0.080 bpb vs no Engram, ICL emergence 600-1000 steps) + MTP; no trained loop; shared routers",
  "current_best_training_method": "NTP + DPT logit KD (w0.5,T1,skip15%) from larger teacher; Muon/AdamW; WSD (E5b 1.4063 toy)",
@@ -170,5 +170,12 @@
   "papers": 42642,
   "repos": 16171,
   "reads_L2plus": 55
- }
+ },
+ "session2_findings": [
+  "JL-32+int8 kNN store: 7.2x smaller, keeps 93.8% (E4c) / 98.3% (E4j) of retrieval gain [E own, 1 run]",
+  "F018: JL-64/16 not measured (missing --dim); rerun in s2v",
+  "TTS 2-digit: maj@k ~0 gain per compute; oracle@16 gap up to +0.52 -> verifier required [E own, n=64]",
+  "Training-cost axis: FLOP-only multiplier vs Llama3.1-8B at 2T tokens ~6.7x; quality unknown [E ext + H]",
+  "grad_ckpt shared_first producer fix (test queued in s2v)"
+ ]
 }

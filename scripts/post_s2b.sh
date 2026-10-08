@@ -19,7 +19,7 @@ done
 if grep -q "ok knn compress" experiments/test_s2b.log; then
   for ck in E4c_ts_hyb_moe_noloop E4j_moe_engram_noloop; do S=data_cache/knn_${ck}_3200000; [ -d $S ] || continue
     for r in 64 32 16; do
-      (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm compress --store $S --out ${S}_jl$r >> ../$K 2>> ../$E &&
+      (cd src && MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm compress --store $S --dim $r --out ${S}_jl$r >> ../$K 2>> ../$E &&
        MALLOC_ARENA_MAX=1 timeout 3600 python3 -m natsu.knnlm eval --ckpt checkpoints/$ck.pt --store ${S}_jl$r --lams 0.25,0.5,0.65 >> ../$K 2>> ../$E)
       rm -rf ${S}_jl$r
     done

@@ -833,3 +833,30 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 ### 10M stage results (as they arrive)
 - **L10a** (C4: hybrid GDN×3+attn, MoE 8×top2+shared, Engram v1 4096 slots, table lr ×20; 10.14M params; BPE-4k TinyStories; 1500 steps × 2×4 × 256 = 3.07M tokens): **val bpb 0.8156**.
   It ran without OOM at batch 2 × accum 4 (F017 fix verified).
+
+### post_s2b analysis (2026-10-08 10:40 UTC)
+**JL compression of the kNN store: script bug, partially valid.**
+- `post_s2b.sh` looped `r in 64 32 16` but never passed `--dim $r`. All three runs used the default dim 32 (the logs show `"dim": 32` and identical bpb). Logged as F018.
+- Valid result (JL-32 + int8, 36 B/token vs 258 B/token fp16, i.e. **7.2× smaller store**):
+
+| store (3.2M) | fp16 D=128, best λ | JL-32 int8, best λ | Δ |
+|---|---|---|---|
+| E4c (no Engram) | 1.2752 (λ .65) | 1.2891 (λ .65) | +0.014 |
+| E4j (Engram) | 1.2494 (λ .5) | 1.2529 (λ .5) | +0.0035 |
+
+- [E own, 1 run each] Gain retained under JL-32+int8, relative to λ=0 (E4c 1.5008, E4j 1.4548 on the same kNN-eval slice):
+  - E4c: (1.5008−1.2891)/(1.5008−1.2752) = **93.8%**
+  - E4j: (1.4548−1.2529)/(1.4548−1.2494) = **98.3%**
+  [I] The store can be made 7.2× smaller for ≤6% loss of the retrieval gain. New fp16 λ=.65 for E4c (1.2752) beats λ=.5 (1.2793), so the optimum λ ≈ 0.65, and 0.8 is worse (1.302).
+- JL-64 and JL-16 are **not measured** and will be re-queued with the fix.
+
+**TTS at 2/3 digits (n=64 problems per cell, so 1 problem = 0.016; binomial sd ≈ 0.06 at p=0.5).**
+- The F015 floor effect is resolved at 2 digits:
+  - E8e core6 greedy 0.469 and E8g abacus 0.484 are high, but **TTS adds nothing** (maj@16 = greedy; oracle@16 ≤ +0.016), i.e. the samples are near-deterministic.
+  - Weak models have a large oracle gap: E8a 0.094 → oracle@16 0.406; E8d R4 0.125 → oracle@16 0.641. But **majority vote does not recover it**: maj@16 is at or below greedy+0.05 everywhere. Adaptive sampling gives no gain anywhere.
+- [E own] **Verifier-free TTS (maj@k) at toy scale returns ≈0 gain per extra compute** on addition: best Δacc/Δcompute is maj@4 E8b R3, +0.063 at 4×, which is about 1 sd.
+  The oracle gap (up to +0.52 at 16×) is real and is only reachable with a verifier, which supports INFERENCE_SPEC's tool-verifier policy (for arithmetic, an exact calculator check). [I] maj@k fails because the error modes are diverse, not concentrated.
+- 3 digits (length generalisation): everything collapses except E8e core6 (0.188) and E8g abacus oracle@16 0.31. Engram variants E8c/E8d are at floor (≤0.047), consistent with the R69 interference finding. Digit-gated Engram (E8k/E8l) was not in this TTS set; queue it.
+- Loop R4 vs R1 (E8b, E8d, 2 digits): greedy +0.016/+0.109 and oracle@16 +0.39/+0.45. Looping raises sample diversity/coverage more than greedy accuracy.
+
+**Training-cost reference [E external]**: Llama 3.1 8B used 1.46M H100-h for ~15T tokens (6ND 7.2e23). See TARGET_ANALYSIS §8: FLOP-only multiplier for a 2T-token C4 is ≈6.7×; quality is unknown.

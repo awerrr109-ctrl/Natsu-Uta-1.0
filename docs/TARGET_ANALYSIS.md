@@ -110,3 +110,16 @@ ratio against frontier models' size and remains [I]/unknown.
 | reasoning depth via loops | R47 recipe | n.s. at toy scale | [E own, scoped] |
 - **Unknown** (cannot be measured in this sandbox): any absolute benchmark parity with frontier models. All own evidence is ≤0.8M parameters.
   Every row marked "toy" needs the 50M ladder (runbook) before it informs the 9B claim.
+
+## 8. Training-cost axis: external reference points (added 2026-10-08)
+| reference | tokens | reported compute | 6ND FLOP | implied | level |
+|---|---|---|---|---|---|
+| Llama 3.1 8B | ~15T | 1.46M H100-h (model card, via secondary summary) | 7.2e23 | 1.4e14 FLOP/s/GPU ≈ 14% of dense bf16 peak | [E external] hours; [I] the low MFU suggests the hours include non-pretraining overhead or the 6ND accounting differs |
+| Llama 3 8B (original) | 15T | 7.7M H100-h cumulative is for the *family* card, not 8B alone | – | – | [E external]; must not be used as the 8B number |
+| Natsu-9B C4, Chinchilla-style 180B tokens | 1.8e11 | – | ≤9.7e21 (total-param 6ND, an upper bound; C4 is MoE, so active FLOP is lower) | ≈6.8k H100-h at 40% MFU | [H] projection |
+| Natsu-9B C4, 2T tokens | 2e12 | – | ≤1.1e23 | ≈76k H100-h at 40% MFU | [H] projection |
+| sandbox L10a (10M) | 3.07M | 4,821 s CPU | 1.45e14 | 3.0e10 FLOP/s | [E own] |
+
+- Training-cost multiplier vs Llama 3.1 8B, **on FLOP only**: 2T-token C4 ≈ 7.2e23 / 1.1e23 ≈ **6.7×** (≥, because of MoE active-param savings). The quality at that budget is **unknown**: no measurement beyond 10M exists.
+  Claims like "10,000×" on this axis would need ~7e19 FLOP, i.e. a ~1B-token run of a 9B model. No evidence supports frontier-like quality at that budget.
+- Data-efficiency levers measured so far that act at **iso-FLOP** are reported in §5 and §7, e.g. Engram −0.080 bpb at 0.8M. The transfer to 10M is being measured (L10a–e).

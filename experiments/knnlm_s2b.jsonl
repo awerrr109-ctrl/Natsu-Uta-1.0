@@ -1,0 +1,17 @@
+{"built": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000", "N": 3200000, "MB": 781.2}
+{"ckpt": "checkpoints/E4c_ts_hyb_moe_noloop.pt", "store": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000", "store_N": 3200000, "key_dim": 128, "quant": "fp16", "k": 16, "temp": 1.0, "bpb": {"0.5": 1.2792855496060431, "0.65": 1.2752112017817214, "0.8": 1.3017986554624594}}
+{"built": "data_cache/knn_E4j_moe_engram_noloop_3200000", "N": 3200000, "MB": 781.2}
+{"ckpt": "checkpoints/E4j_moe_engram_noloop.pt", "store": "data_cache/knn_E4j_moe_engram_noloop_3200000", "store_N": 3200000, "key_dim": 128, "quant": "fp16", "k": 16, "temp": 1.0, "bpb": {"0.5": 1.249378759104215, "0.65": 1.2499446106893288, "0.8": 1.282408439244185}}
+{"compressed": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000_jl64", "N": 3200000, "dim": 32, "bytes_per_token": 36, "vs_fp16": 258}
+{"ckpt": "checkpoints/E4c_ts_hyb_moe_noloop.pt", "store": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000_jl64", "store_N": 3200000, "key_dim": 32, "quant": "int8", "k": 16, "temp": 1.0, "bpb": {"0.25": 1.341644936045843, "0.5": 1.2911817328850992, "0.65": 1.2891102842638102}}
+{"compressed": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000_jl32", "N": 3200000, "dim": 32, "bytes_per_token": 36, "vs_fp16": 258}
+{"ckpt": "checkpoints/E4c_ts_hyb_moe_noloop.pt", "store": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000_jl32", "store_N": 3200000, "key_dim": 32, "quant": "int8", "k": 16, "temp": 1.0, "bpb": {"0.25": 1.341644936045843, "0.5": 1.2911817328850992, "0.65": 1.2891102842638102}}
+{"compressed": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000_jl16", "N": 3200000, "dim": 32, "bytes_per_token": 36, "vs_fp16": 258}
+{"ckpt": "checkpoints/E4c_ts_hyb_moe_noloop.pt", "store": "data_cache/knn_E4c_ts_hyb_moe_noloop_3200000_jl16", "store_N": 3200000, "key_dim": 32, "quant": "int8", "k": 16, "temp": 1.0, "bpb": {"0.25": 1.341644936045843, "0.5": 1.2911817328850992, "0.65": 1.2891102842638102}}
+{"compressed": "data_cache/knn_E4j_moe_engram_noloop_3200000_jl64", "N": 3200000, "dim": 32, "bytes_per_token": 36, "vs_fp16": 258}
+{"ckpt": "checkpoints/E4j_moe_engram_noloop.pt", "store": "data_cache/knn_E4j_moe_engram_noloop_3200000_jl64", "store_N": 3200000, "key_dim": 32, "quant": "int8", "k": 16, "temp": 1.0, "bpb": {"0.25": 1.2999006764253689, "0.5": 1.2528738012839646, "0.65": 1.2530389189606805}}
+{"compressed": "data_cache/knn_E4j_moe_engram_noloop_3200000_jl32", "N": 3200000, "dim": 32, "bytes_per_token": 36, "vs_fp16": 258}
+{"ckpt": "checkpoints/E4j_moe_engram_noloop.pt", "store": "data_cache/knn_E4j_moe_engram_noloop_3200000_jl32", "store_N": 3200000, "key_dim": 32, "quant": "int8", "k": 16, "temp": 1.0, "bpb": {"0.25": 1.2999006764253689, "0.5": 1.2528738012839646, "0.65": 1.2530389189606805}}
+{"compressed": "data_cache/knn_E4j_moe_engram_noloop_3200000_jl16", "N": 3200000, "dim": 32, "bytes_per_token": 36, "vs_fp16": 258}
+{"ckpt": "checkpoints/E4j_moe_engram_noloop.pt", "store": "data_cache/knn_E4j_moe_engram_noloop_3200000_jl16", "store_N": 3200000, "key_dim": 32, "quant": "int8", "k": 16, "temp": 1.0, "bpb": {"0.25": 1.2999006764253689, "0.5": 1.2528738012839646, "0.65": 1.2530389189606805}}
+{"built": "data_cache/knn_E4j_moe_engram_noloop_800000", "N": 800000, "MB": 195.3}

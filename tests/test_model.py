@@ -180,3 +180,18 @@ def test_moe_sparse_equals_dense():
     assert torch.allclose(y1, y2, atol=1e-10)
     g1 = torch.autograd.grad(y1.sum(), x)[0]; g2 = torch.autograd.grad(sp(x).sum(), x)[0]
     assert torch.allclose(g1, g2, atol=1e-10)
+
+def test_grad_ckpt_matches_shared_first_loops():
+    """F017 caveat: grad_ckpt with looped shared_first K/V must give the same loss and grads as no checkpointing."""
+    base = dict(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", n_loops=3, chunk=8,
+                loop_kv="shared_first", reinject=True)
+    torch.manual_seed(0); m1 = Natsu(NatsuConfig(**base)).double().train()
+    m2 = Natsu(NatsuConfig(**{**base, "grad_ckpt": True})).double().train(); m2.load_state_dict(m1.state_dict())
+    x = torch.randint(0, 260, (2, 17))
+    l1 = m1(x)["logits"].square().mean(); l2 = m2(x)["logits"].square().mean()
+    assert torch.allclose(l1, l2, atol=1e-10), (l1, l2)
+    g1 = torch.autograd.grad(l1, list(m1.parameters()), allow_unused=True)
+    g2 = torch.autograd.grad(l2, list(m2.parameters()), allow_unused=True)
+    for a, b in zip(g1, g2):
+        if a is None: assert b is None; continue
+        assert torch.allclose(a, b, atol=1e-9), (a - b).abs().max()
