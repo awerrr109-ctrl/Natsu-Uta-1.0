@@ -816,3 +816,6 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - [I] **G1 (editable Engram table as the knowledge-update channel) is not supported at a 2k-row table.** Its precondition, fact n-grams owning rare rows, needs a large table (R39: 320M rows).
   Deferred to the 50M+ ladder with a ≥1M-row table (≈64 MB at dm=32 fp16). The practical C4 update recipe for now is replay fine-tuning.
 - **E6Lj (v1 + lr ×20, ICL) s0**: seq EM 0.602 (transition at step [see table]). Weaker than lr ×5 (EM 1.0 / 0.97). s1 running; the picker gate decides.
+- **E6Lj final**: 2/2 transitions (steps 2000, 600). The picker gate passes, so v1_lr20 goes to 10M.
+  [E] ICL quality at lr ×20 is lower or slower than at ×5 on s0 (EM 0.60, late transition), so there is an **LM/ICL trade-off above ×5**. An L10e control (10M, lr ×5) was added so that 10M decides between ×20 and ×5 with both bpb and the ICL probe.
+  Rule deviation logged: one control run was added after seeing data; the gate itself was not changed.
