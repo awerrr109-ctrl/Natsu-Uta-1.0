@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-08T02:25Z",
+ "updated": "2026-10-08T08:40Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": "C4: 3:1 GDN:attn hybrid + fine-grained MoE (shared expert, aux-free) + Engram v1 path with table lr x5 (toy: -0.080 bpb vs no Engram, ICL emergence 600-1000 steps) + MTP; no trained loop; shared routers",
  "current_best_training_method": "NTP + DPT logit KD (w0.5,T1,skip15%) from larger teacher; Muon/AdamW; WSD (E5b 1.4063 toy)",
@@ -83,7 +83,9 @@
   "engram_addition_interference": "E8i v1 0.176, E8j paper 0.039 vs E8a 0.297: both hurt addition; digit mask E8k/E8l queued (s2p)",
   "N7_components": "noresid 2/2, randconv 2/2 at 400-600 steps; lr1 1000 steps -> identity-init not needed; E6Lh (v1+lr5) / E6Li (norm+dil) decide",
   "engram_digit_mask": "E8k 0.273, E8l (lr5) 0.285 vs E8a 0.297, E8i 0.176: mask removes addition interference; provisional C4 default",
-  "engram_lr_sweep": "x1 1.4262(3s) x5 1.3996(3s) x10 1.3941 x20 1.3816 (1s each); x50 running; x20 replication + x100 queued (s2r)"
+  "engram_lr_sweep": "x1 1.4262(3s) x5 1.3996(3s) x10 1.3941 x20 1.3816 (1s each); x50 running; x20 replication + x100 queued (s2r)",
+  "G1_editable_engram_E9": "toy: table-only edits fail (E9d 0.016, E9f 0.000; rows shared); full FT + replay best (EM .977, paraphrase .922, collateral +0.015). G1 needs >=1M-row table -> 50M ladder",
+  "loop_expert_paging": "LRU replay: 3-loop shared-router 1.42x misses for 3x compute; separate routers 1.88x worse"
  },
  "rejected_hypotheses": {
   "0": {
@@ -160,7 +162,8 @@
   "L1 scorer v2 (domain-aware); on-topic paper estimate 9505->8303",
   "35 sources read at L2/L3-partial",
   "toy wins are bpb, not capability (R31, R40)",
-  "F009 fixed: train_dist sampler coverage + resume"
+  "F009 fixed: train_dist sampler coverage + resume",
+  "10M stage at 820 MB peak (batch 2) on 985 MB sandbox; grad_ckpt available for non-looped configs"
  ],
  "corpus": {
   "papers": 42642,

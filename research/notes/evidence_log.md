@@ -799,3 +799,20 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - The capacity cliff is reproduced: cache 2 gives 0% hits for every model, because the reuse distance exceeds the cache (R63's LRU cliff).
 - [I] Under a RAM-bound budget (1 GB), the cheapest depth is "loop with shared routers": depth ×3 for I/O ×1.4. Expert-paging bandwidth, not FLOPs, is the binding cost on CPU+flash.
   Combined with the quality result (loops n.s. at toy scale), loops are currently a **deployment-time depth lever with low I/O cost**, still pending a quality win at ≥50M.
+
+### E9 with fixes (s2t) — memory editing at toy scale
+| variant | train EM | held-out phrasing EM | collateral bpb (base 1.4278) |
+|---|---|---|---|
+| E9a table-only, no replay | 0.258 | 0.031 | 2.908 |
+| E9b full FT, no replay | 0.977 | 0.828 | 5.942 |
+| E9c FFN-only, no replay | 0.977 | 0.664 | 7.883 |
+| E9d table-only + replay | 0.016 | 0.000 | 1.535 (+0.107) |
+| **E9e full FT + replay** | **0.977** | **0.922** | **1.442 (+0.015)** |
+| E9f table-only, row mask (208/2048 rows editable) | 0.000 | 0.000 | 1.431 (+0.003) |
+- [E own, 1 seed] **Full fine-tuning with 50% replay wins on every axis**: facts 0.977, paraphrase 0.922, collateral +0.015 bpb.
+- Table-only edits fail at this table size:
+  - With replay, the replay gradient overwrites the shared rows (0.016).
+  - With a row mask, collateral is ≈0, but only 10% of rows are editable and the fact n-grams hash into frequent rows (0.000).
+- [I] **G1 (editable Engram table as the knowledge-update channel) is not supported at a 2k-row table.** Its precondition, fact n-grams owning rare rows, needs a large table (R39: 320M rows).
+  Deferred to the 50M+ ladder with a ≥1M-row table (≈64 MB at dm=32 fp16). The practical C4 update recipe for now is replay fine-tuning.
+- **E6Lj (v1 + lr ×20, ICL) s0**: seq EM 0.602 (transition at step [see table]). Weaker than lr ×5 (EM 1.0 / 0.97). s1 running; the picker gate decides.
