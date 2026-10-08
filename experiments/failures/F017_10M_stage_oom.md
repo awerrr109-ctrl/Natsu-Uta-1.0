@@ -20,3 +20,6 @@
   (2) Decision rules with optional clauses get gamed by missing data. Make required evidence explicit.
 - **probe at batch 2 × accum 4** (3 steps, incl. eval): passes, **peak RSS 820 MB** at 619 tok/s, so ~85 min per 10M run. The margin to the 985 MB limit is small, so nothing else may run in the foreground during s2t (fg_guard enforces this).
   If any 10M run is killed, the next step is activation checkpointing of the core blocks (≈ −40% activation memory), not a smaller batch.
+- Note: `grad_ckpt=True` (per-block activation recomputation) already exists in model.py and was not enabled for L10. It is the documented 1 GB-RAM mode (principle 9).
+  Caveat found in code review: with loops + `loop_kv=shared_first`, the checkpoint branch skips setting `blk.mix.last_kv`, so it is safe only for non-looped configs (all L10 cells). To fix before any looped 10M+ run.
+  Planned measurement: peak RSS at batch 4 with grad_ckpt (mem_profile) once s2t is done; if it is below 600 MB, later stages use batch 4 + grad_ckpt (≈1.3× compute for 2× batch).
