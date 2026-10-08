@@ -732,3 +732,7 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   - the measurement that ignoring this one hyper-parameter turns Engram's ICL effect from "neutral" into "strongly positive", and its LM gain from −0.053 into −0.080;
   - and the method lesson (F013 checklist rule: optimiser config is part of the method).
 - **C4 recipe**: Engram v1 output path (best on LM) + table lr ×5. The paper path is optional. The 10M auto-pick should select v1_lr5 (3 seeds, ICL 2/2).
+- **E6Lh s1** final: seq EM 0.969 (transition at 1000). v1+lr5 is 2/2 ICL.
+- **H15.2 (FAL, E4pt)**: bpb 1.4020 vs E4pr 3-seed 1.3996 ± 0.0034 → +0.002, n.s. The pre-registered rule (≤ mean − 2 sd) fails → **FAL not adopted** at toy scale.
+  [I] At 512 slots × 1.6M tokens, every row is visited often (≈ 6k updates/row), so frequency imbalance is not the bottleneck. FAL may matter for 10⁶–10⁸ rows at 9B (R67's setting). Scoped.
+- **E6Li (v1 + norm + dilation + lr5, no residual, random init)** s0: transition at step 600. This is consistent with lr ×5 being the driver.

@@ -107,7 +107,8 @@
   "N5_delayed_memory": "E4u keeps 4% of Engram LM gain (1.4770 vs 1.4792/1.4262); varchain transitions equal across arms (F014). Rejected.",
   "H14.7_factorised_engram_table": "toy scale: E4v +0.025, E4w +0.016, E4x +0.031 bpb vs E4j; rows need full rank at 512 slots; scoped (may flip at 1e6+ rows)",
   "R47_per_loop_routers_toy": "E4y +0.003, E4y3 (LoRA) +0.006 vs E4g 3-seed 1.4665+-0.008 at R3; scoped to toy scale",
-  "N7_identity_init_memory_path": "withdrawn: E6Lh v1+lr5 2/2; effect = table lr x5 (paper setting); noresid/randconv 2/2 each"
+  "N7_identity_init_memory_path": "withdrawn: E6Lh v1+lr5 2/2; effect = table lr x5 (paper setting); noresid/randconv 2/2 each",
+  "H15.2_FAL_engram": "E4pt 1.4020 vs E4pr 1.3996+-0.0034 (n.s.); toy table not frequency-starved; scoped to toy scale"
  },
  "untested_hypotheses": [
   "H1.1 loops at iso-param improve k-hop reasoning (E1v2 running)",
