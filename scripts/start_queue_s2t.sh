@@ -3,6 +3,11 @@
 cd "$(dirname "$0")/.."
 while [ ! -f experiments/queue_s2j.log ] || pgrep -f "run_queue[.]sh" > /dev/null || pgrep -f "start_queue_s2[defghijlmnopqrs][.]sh" > /dev/null || pgrep -f "post_s2[.]sh" > /dev/null; do sleep 30; done
 C=experiments/configs
+( cd tests && MALLOC_ARENA_MAX=1 timeout 600 python3 -c "import test_model as t; t.test_moe_sparse_equals_dense(); print('ok moe sparse')" ) > experiments/test_s2t.log 2>&1
+grep -q "ok moe sparse" experiments/test_s2t.log || exit 1
+for o in "moe_sparse=false" "moe_sparse=true" "moe_sparse=true batch=2" "moe_sparse=true chunk=64"; do
+  MALLOC_ARENA_MAX=1 timeout 600 python3 scripts/mem_profile.py $C/L10a_C4_10M.json $o >> experiments/mem_profile_s2t.jsonl 2>&1
+done
 ( cd src && MALLOC_ARENA_MAX=1 timeout 900 python3 -m natsu.train --config ../$C/L10a_C4_10M.json --set train.steps=3 train.save=false train.eval_every=1000 name=probe_l10a ) > experiments/probe_s2t.log 2>&1
 grep -q FINAL experiments/probe_s2t.log || { echo "PROBE FAILED" >> experiments/probe_s2t.log; exit 1; }
 rm -rf experiments/results/probe_l10a*

@@ -168,3 +168,15 @@ def test_engram_skip_digits_cache():
     m = Natsu(NatsuConfig(d_model=64, n_heads=2, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8,
                           engram_slots=257, engram_heads=2, engram_skip_digits=True)).double().eval()
     _check_cache_model(m, torch.tensor([list(b"ab12+34=46;xy9z") + list(b"0123")]))
+
+def test_moe_sparse_equals_dense():
+    from natsu.model import MoE
+    torch.manual_seed(0)
+    c = NatsuConfig(d_model=32, moe_experts=6, moe_topk=2, moe_shared=1, moe_expert_mult=0.5)
+    dense = MoE(c).double(); c2 = NatsuConfig(**{**c.to_dict(), "moe_sparse": True}); sp = MoE(c2).double()
+    sp.load_state_dict(dense.state_dict())
+    x = torch.randn(3, 11, 32, dtype=torch.double, requires_grad=True)
+    y1 = dense(x); y2 = sp(x)
+    assert torch.allclose(y1, y2, atol=1e-10)
+    g1 = torch.autograd.grad(y1.sum(), x)[0]; g2 = torch.autograd.grad(sp(x).sum(), x)[0]
+    assert torch.allclose(g1, g2, atol=1e-10)

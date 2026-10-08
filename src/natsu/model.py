@@ -61,6 +61,7 @@ class NatsuConfig:
     moe_shared: int = 1              # always-on shared experts (DeepSeekMoE)
     moe_expert_mult: float = 0.0     # expert hidden = moe_expert_mult*d_model (0 -> ffn_mult/topk+shared)
     moe_loop_bias: bool = True       # per-loop router bias -> encourages routing divergence across loops
+    moe_sparse: bool = False         # F017: token-dispatch MoE (only routed+shared experts computed); False = dense masked einsum (legacy)
     moe_loop_router: bool = False    # R47 (LOOM): fully separate router weights per loop (vs bias only)
     loop_res_scale: float = 0.0      # R47: >0 scales each loop's residual update by loop_res_scale/sqrt(r+1) (bounds variance growth)
     engram_slots: int = 0            # >0: Engram-style hashed n-gram memory (arXiv:2601.07372) after prelude
@@ -258,6 +259,7 @@ class MoE(nn.Module):
         if self.lora:
             self.lA = nn.Parameter(torch.randn(n_loops, D, r) / math.sqrt(D))
             self.lB = nn.Parameter(torch.zeros(n_loops, r, D))
+        self.sparse = c.moe_sparse
         self.register_buffer("bal_bias", torch.zeros(E))
         self.register_buffer("load", torch.zeros(E))
         self.last_routes = None
@@ -280,14 +282,40 @@ class MoE(nn.Module):
             with torch.no_grad():
                 self.load.mul_(0.0).add_(torch.bincount(idx.flatten(), minlength=self.E).float())
         self.last_routes = idx.detach()
-        h = torch.einsum("td,edh->teh", xf, self.w_up)
-        a, b = h.chunk(2, -1)
-        h = F.silu(a) * b * gate[..., None]
-        y = torch.einsum("teh,ehd->td", h, self.w_down)
+        if self.sparse:
+            y = self._sparse_forward(xf, idx, w)
+        else:
+            h = torch.einsum("td,edh->teh", xf, self.w_up)
+            a, b = h.chunk(2, -1)
+            h = F.silu(a) * b * gate[..., None]
+            y = torch.einsum("teh,ehd->td", h, self.w_down)
         if self.lora:
             lp = min(loop, self.lA.shape[0] - 1)
             y = y + (xf @ self.lA[lp]) @ self.lB[lp]
         return y.view(B, L, D)
+
+    def _expert(self, e, xs):
+        a, b = (xs @ self.w_up[e]).chunk(2, -1)
+        return (F.silu(a) * b) @ self.w_down[e]
+
+    def _sparse_forward(self, xf, idx, w):
+        """Token-dispatch MoE (F017): compute only the k routed + shared experts per token. Mathematically identical to the dense
+        masked einsum (same weights, same gate values); memory/FLOPs scale with k+ns instead of E+ns."""
+        y = torch.zeros_like(xf)
+        for s_ in range(self.ns):
+            y = y + self._expert(self.E + s_, xf)
+        flat_e = idx.reshape(-1); flat_w = w.reshape(-1)
+        tok = torch.arange(xf.shape[0], device=xf.device).repeat_interleave(idx.shape[1])
+        order = torch.argsort(flat_e, stable=True)
+        counts = torch.bincount(flat_e, minlength=self.E).tolist()
+        start = 0
+        for e, n_e in enumerate(counts):
+            if n_e == 0:
+                continue
+            sel = order[start:start + n_e]; start += n_e
+            t_ = tok[sel]
+            y = y.index_add(0, t_, self._expert(e, xf[t_]) * flat_w[sel, None])
+        return y
 
     @torch.no_grad()
     def update_balance(self, rate=1e-3):

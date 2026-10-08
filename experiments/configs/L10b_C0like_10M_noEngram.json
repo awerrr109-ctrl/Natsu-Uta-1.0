@@ -20,7 +20,8 @@
   "engram_slots": 0,
   "engram_heads": 2,
   "engram_dim": 32,
-  "vocab_size": 4096
+  "vocab_size": 4096,
+  "moe_sparse": true
  },
  "train": {
   "seq": 256,

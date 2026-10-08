@@ -785,3 +785,17 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   - (i) **replay mix**: 50% facts + 50% TinyStories;
   - (ii) **row-restricted edit**: update only the rows whose n-grams are absent from a frequency-filtered set of general text. This is R39's overlay idea and it needs a row mask.
   E9d (table-only + replay), E9e (full FT + replay) and E9f (table-only, row mask = rows not hit by the top-N frequent n-grams) are queued.
+
+### 1 GB axis — LRU expert-cache replay on own routing traces (route_diag, decode order, 2 MoE blocks × 8 experts = 16 total)
+| model | loops | accesses/token | misses/token @ cache 4 | @ 8 | @ 12 | hit @ 4 |
+|---|---|---|---|---|---|---|
+| E4c (no loop) | 1 | 4 | 3.32 | 2.54 | 1.40 | 0.17 |
+| E4g (loop, shared router) | 3 | 12 | **4.72** | **3.38** | 1.88 | 0.61 |
+| E4l (loop + self-distill) | 3 | 12 | 4.69 | 3.26 | 1.78 | 0.61 |
+| E4y3 (loop + per-loop LoRA) | 3 | 12 | 4.80 | 3.28 | 1.79 | 0.60 |
+| E4y (loop + **separate routers**) | 3 | 12 | **8.88** | 4.92 | 2.00 | 0.26 |
+- [E own, computed] A 3-loop core does 3× the expert compute of the non-looped model but causes only **1.42× the expert misses at cache 4 (1.33× at cache 8)**.
+  Routing collapse is what makes this work: separate per-loop routers (E4y) cost **1.88× more misses** than shared routers at cache 4. This confirms the INFERENCE_SPEC v0.3 prediction.
+- The capacity cliff is reproduced: cache 2 gives 0% hits for every model, because the reuse distance exceeds the cache (R63's LRU cliff).
+- [I] Under a RAM-bound budget (1 GB), the cheapest depth is "loop with shared routers": depth ×3 for I/O ×1.4. Expert-paging bandwidth, not FLOPs, is the binding cost on CPU+flash.
+  Combined with the quality result (loops n.s. at toy scale), loops are currently a **deployment-time depth lever with low I/O cost**, still pending a quality win at ≥50M.
