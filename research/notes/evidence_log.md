@@ -608,7 +608,7 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 | v1, full experts (E6Ld) | 0/1 | – | – |
 | **Engram paper path (E6Le)** | **3/3** | **600, 600, 400** | **0.93 / 0.97 / 0.19** |
 - [E own] All 3 paper-path seeds solve the task with EM 1.000 and long20 EM 1.000. Their steps-to-transition (400–600) are below the fastest of the 9 other runs (800).
-  At step 400, all 3 paper seeds are lower than all 9 other runs (rank test: the 3 lowest out of 12; P = 1/C(12,3) = 0.0045 under exchangeability).
+  At step 400, all 3 paper seeds are lower than all 6 E6La/E6Lb runs (rank test: the 3 lowest out of 9; P = 1/C(9,3) = 0.012 [corrected: an earlier 1/C(12,3)=0.0045 counted runs whose step-400 loss was not checked] under exchangeability).
   The Fisher test on the transition count alone (3/3 vs 3/9) is weaker (p = 0.09), but the loss-trajectory ordering is the sharper statistic and was looked at after the fact → **labelled post-hoc**.
 - [I] The faithful output path (zero-init dilated conv + RMSNorm + internal residual, lr ×5) **accelerates in-context retrieval formation ≥1.5–5×**, while v1 had no effect.
   This reconciles our data with R17 (Engram improves VT/NIAH). The earlier negative signal was an implementation artefact plus seed bimodality (F013 + F014).

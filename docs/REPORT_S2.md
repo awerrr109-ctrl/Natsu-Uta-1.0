@@ -15,7 +15,7 @@ Evidence tags: [E] measured or cited, [I] inferred, [H] hypothesis. Read IDs ref
 | Seed spread at toy scale is 0.003–0.014 bpb; single-seed deltas < 0.02 are not claims | F008 |
 | Unique depth ≫ looped depth on addition at iso-FLOP (0.484 vs 0.285 acc) | E8e vs E8b (1 seed, effect ≫ noise) |
 | Abacus digit positions help non-looped addition (+0.13 acc) | E8g vs E8a |
-| **Paper-faithful Engram path speeds in-context-retrieval emergence**: varchain 3/3 transitions at steps 400–600 vs 1/3 (v1) and 1/3 (no Engram); step-400 loss lowest 3 of 12 (post-hoc rank P = 0.0045) | E6Le ×3 vs E6La/E6Lb ×3, F013 |
+| **Paper-faithful Engram path speeds in-context-retrieval emergence**: varchain 3/3 transitions at steps 400–600 vs 1/3 (v1) and 1/3 (no Engram); step-400 loss lowest 3 of 9 (post-hoc rank P = 0.012) | E6Le ×3 vs E6La/E6Lb ×3, F013 |
 | Loop routing collapse: same-token expert Jaccard across loops 0.55–0.88 vs chance 0.14 | route_diag on 4 looped checkpoints |
 | kNN-LM retrieval: −0.13 bpb at 1 tok/param, −0.22 at 4 tok/param (redundant corpus, 39% 16-gram overlap); partly additive with Engram (best 1.249) | knnlm, post_s2 |
 | Loop self-speculation is exact; self-distillation raises draft acceptance 0.64 → 0.91 | bench E4g vs E4l |
