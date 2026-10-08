@@ -762,3 +762,11 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   [E own] The gain is still growing at ×20 (−0.045 vs ×1). ×20 crosses the pre-registered change threshold (< 1.393), but 1-seed entries are ineligible by rule, so replication is queued (s2r).
   [I] The table is update-starved far beyond the paper's ×5. At base lr 3e-3, ×20 means 6e-2 Adam lr on table rows. Consistent with R67 (50× in production recommenders).
   It suggests the effective lr scales with (tokens per row)^-1, so at 9B, with ~10⁸ rows and 10¹² tokens (~10⁴ hits/row), the optimum may differ. **The rule is to measure at 50M, not extrapolate** (runbook cell F).
+
+### P16 reads
+- **[R69] Nikankin et al., "Arithmetic Without Algorithms: LMs Solve Math with a Bag of Heuristics" (arXiv:2410.21272, ICLR 2025)** — L2. [E] In Llama3-8B, arithmetic runs on ~200 sparse MLP neurons per layer in layers 16–32. Each is a key-value heuristic keyed on operand patterns (e.g. "operand ≡ 8 mod 10").
+  A few attention heads move operands to the last position. The heuristics emerge gradually and stay imperfect (no robust algorithm).
+  → [I] It explains E8i/E8j mechanistically. A lookup memory keyed on *local token n-grams* supplies exactly this kind of operand-pattern heuristic, cheaper and earlier than MLP neurons, which locks the model into the heuristic regime.
+  In our toy addition, models with a positional fix (Abacus, E8g) can learn a carry algorithm. The n-gram table competes with that.
+  It also predicts that the digit mask helps *algorithmic* generalisation most, so E8k/E8l should be tested on 6-digit OOD (d6). E8k/E8l d6 EM is 0.0, like everything else at this budget, so this cannot be tested here.
+  For C4, the digit gate is consistent with R69, and number tokenisation (single digits + Abacus positions) should be paired with it.
