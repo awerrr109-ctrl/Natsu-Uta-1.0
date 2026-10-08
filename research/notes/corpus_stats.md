@@ -109,3 +109,9 @@ Honesty note: harvested(L0) != read. Levels: L0 harvested, L1 auto-scored, L2 ab
 - 2026: 11286
 - 2027: 42
 - 2029: 1
+
+## 2026-10-08 (after harvest_s2d, P16)
+- raw harvested: papers **49,665** (arXiv 8,872 / OpenAlex 17,424 / crossref 23,369), repos **16,424**
+- strictly LM-on-topic titles: **19,174**; loose ML titles 32,683; L1 relevance > 0.5: 8,551
+- read L2/L3: **71** (reads table, synced R56–R69, R17b)
+- P16 queries reached crossref only (arXiv 429 back-off, OpenAlex daily budget) → re-run next session (F016)
