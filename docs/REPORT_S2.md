@@ -1,4 +1,4 @@
-# Session 2 Report (consolidated; updated 2026-10-07 08:10 UTC; queue still running)
+# Session 2 Report (consolidated; updated 2026-10-08 08:50 UTC; 10M stage running)
 
 Scope: CPU sandbox (2 cores, 985 MB RAM). Toy models of ~0.8M parameters on TinyStories bytes, plus synthetic probes (addition, variable chains).
 Evidence tags: [E] measured or cited, [I] inferred, [H] hypothesis. Read IDs refer to `research/notes/evidence_log.md`, failure IDs to `experiments/failures/`.
@@ -80,6 +80,27 @@ Evidence tags: [E] measured or cited, [I] inferred, [H] hypothesis. Read IDs ref
   - E6Lg: lr ×1 on varchain
   - E6Lf: no internal residual / random conv init
 - Rule: adopt the configuration that keeps LM within +0.003 of v1 and ICL ≥ 2/2.
+
+
+## 11. Late session-2 results (2026-10-07/08)
+**Established (≥3 seeds or computed with a test)**
+- **Engram table lr is the dominant Engram lever.**
+  - LM bpb (v1 path): ×1 1.4262 (3 seeds), ×5 1.3996 (3), ×20 **1.3859 ± 0.0038 (3)**; ×50 1.3801 and ×100 1.3895 (1 seed each).
+  - Engram gain vs no Engram grows from −0.053 to **−0.093 bpb**.
+  - ICL: Engram arms at lr ×5 transition **11/11**, vs 4/10 for all lr ×1 runs (one-sided Fisher p = 0.0039, post-hoc pooled). At lr ×20 they transition 2/2, but s0 reaches only EM 0.60.
+  - The F013 output-path details (zero-init, internal residual, norm, dilation) are secondary (N7 withdrawn).
+- **Looped MoE under paging**: LRU replay on own traces. 3 loops with shared routers cost 1.42× the expert misses for 3× the compute; separate routers cost 1.88× more.
+
+**Single-seed, directional**
+- Digit-gated Engram removes the addition interference (0.273 / 0.285 vs 0.297; ungated 0.176).
+- FAL (frequency-adaptive lr) is n.s. at toy scale.
+- Memory editing: full FT + 50% replay beats table-only edits (paraphrase 0.922, collateral +0.015 bpb). Table-only edits fail because 2k rows are shared, so G1 needs a ≥1M-row table.
+
+**Process failures recorded**: F015 (TTS floor), F016 (corpus inflated by crossref: 49,665 raw / 19,174 on-topic / 71 read), F017 (10M OOM, picker loophole).
+Three statistics were typed before computing and were wrong; corrected in the log, and the rule is now in RESEARCH_PLAN.
+
+**C4 v0.4 recipe**: hybrid GDN:attn 3:1 + fine-grained MoE (shared routers) + Engram v1 with table lr ×5–×20 (10M decides) + digit gate + MTP.
+Retrieval and tools at inference (R68); loops optional as a deployment-time depth lever.
 
 ## 10. Pending (in queue order)
 1. s2l (running): tests, E4v/E4w/E4x (H14.7), E4s2 (F011 rerun), E8i (Engram interference control), E4y/E4y2 (R47 recipe).
