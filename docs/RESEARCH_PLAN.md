@@ -70,3 +70,7 @@ Before any novelty claim, run targeted title/abstract queries over the existing 
 ### Checklist rule (F013, session 2)
 Before reporting a negative result on a published component, diff the implementation against the paper's **equations, init, and optimiser config**
 (lr multipliers, wd, zero-init). Record the diff table in the F-file. A negative result on an unfaithful implementation is labelled "vX-only".
+
+### Checklist rule (session 2, statistics)
+Never type a p-value or effect size before computing it in a tool call. Three numbers in this session (two Fisher p-values, one FLOP estimate) were typed first and were wrong.
+Every statistic in the evidence log must come from a command whose output is visible in the session.
