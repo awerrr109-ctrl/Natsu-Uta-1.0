@@ -740,3 +740,25 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   All lr ×1 runs (E6La 1/3, E6Lb 1/3, E6Lc 1/2, E6Ld 0/1, E6Lg 1/1) are 4/10.
   [E own] One-sided Fisher, 11/11 vs 4/10: **p ≈ 0.0039** (post-hoc pooling, labelled as such; earlier inline figures 0.0006 and 0.0010 were typed before computing and are wrong).
   This is **the most robust result of session 2: an un-starved token-indexed memory makes in-context retrieval emerge reliably and early.**
+
+### Digit-gated Engram (E8k/E8l) and table-lr sweep (s2p/s2q)
+| run (addition, full experts + Engram) | EM | answer bpb |
+|---|---|---|
+| E8a no Engram | 0.297 | – |
+| E8i Engram v1 | 0.176 | 1.613 |
+| E8j Engram paper path | 0.039 | 1.743 |
+| **E8k v1 + digit mask** | **0.273** | 1.490 |
+| **E8l v1 + lr ×5 + digit mask** | **0.285** | **1.083** |
+- [E own, 1 seed] Masking the Engram branch at digit positions removes the interference: EM 0.273/0.285 vs 0.297 without Engram. Pre-registered threshold ≥ 0.27 → met.
+  [I] This is a hand-written domain gate; the learned gate did not close in 800 steps (E8i). Adopted provisionally for C4 ("no Engram on digit tokens", decode-consistent) and re-checked at 50M.
+- **Table-lr sweep (LM, v1)**:
+  | multiplier | bpb | seeds |
+  |---|---|---|
+  | ×1 | 1.4262 | 3 |
+  | ×5 | 1.3996 | 3 |
+  | ×10 | 1.3941 | 1 |
+  | **×20** | **1.3816** | 1 |
+  | ×50 | running | – |
+  [E own] The gain is still growing at ×20 (−0.045 vs ×1). ×20 crosses the pre-registered change threshold (< 1.393), but 1-seed entries are ineligible by rule, so replication is queued (s2r).
+  [I] The table is update-starved far beyond the paper's ×5. At base lr 3e-3, ×20 means 6e-2 Adam lr on table rows. Consistent with R67 (50× in production recommenders).
+  It suggests the effective lr scales with (tokens per row)^-1, so at 9B, with ~10⁸ rows and 10¹² tokens (~10⁴ hits/row), the optimum may differ. **The rule is to measure at 50M, not extrapolate** (runbook cell F).

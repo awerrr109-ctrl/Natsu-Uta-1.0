@@ -23,10 +23,14 @@ cands = {"v1_lr1": ("E4j_moe_engram_noloop", dict(engram_paper=False), 1.0, None
          "paper_lr5": ("E4pp_moe_engrampaper_noloop", dict(engram_paper=True), 5.0, "E6Le_varchain_moe_engrampaper"),
          "v1_lr10": ("E4pu_engramv1_lr10", dict(engram_paper=False), 10.0, None),
          "v1_lr20": ("E4pu_engramv1_lr20", dict(engram_paper=False), 20.0, None),
-         "v1_lr50": ("E4pu_engramv1_lr50", dict(engram_paper=False), 50.0, None)}
+         "v1_lr50": ("E4pu_engramv1_lr50", dict(engram_paper=False), 50.0, None),
+         "v1_lr100": ("E4pu_engramv1_lr100", dict(engram_paper=False), 100.0, None)}
 rows = []
 for k, (run, m, lr, icl) in cands.items():
-    v = bpb(run); t, n = trans(icl) if icl else (None, None)
+    v = bpb(run) if k != "v1_lr10" else bpb(run)   # note: glob prefix E4pu_engramv1_lr10 would also match lr100 -> exact names below
+    if k.startswith("v1_lr") and k not in ("v1_lr1", "v1_lr5"):
+        v = [x for d, x in zip(sorted(glob.glob(f"{R}/{run}*/final.json")), v) if os.path.basename(os.path.dirname(d)) in (run, run + "_s1", run + "_s2")]
+    t, n = trans(icl) if icl else (None, None)
     elig = len(v) >= 2 or k == "v1_lr1"
     if icl and n: elig = elig and t >= min(2, n)
     rows.append(dict(name=k, bpb=st.mean(v) if v else None, n=len(v), icl=f"{t}/{n}" if icl else None, eligible=elig and bool(v), model=m, lr=lr))

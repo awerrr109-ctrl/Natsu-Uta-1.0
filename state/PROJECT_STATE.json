@@ -81,7 +81,9 @@
   "E4y2_resscale_lti": "R3 n.s. (-0.002) but best R1 (-0.05) and R6 (-0.02): depth-robustness, adopt only if loops used",
   "engram_table_lr": "ESTABLISHED: E4pr v1+lr5 3 seeds 1.3996+-0.0034 vs E4j 1.4262 (-0.027, t~12); total Engram gain -0.080. Paper path on LM: lr1 1.4274, lr2.5 1.4245, lr5 1.4336 (never reaches v1+lr5)",
   "engram_addition_interference": "E8i v1 0.176, E8j paper 0.039 vs E8a 0.297: both hurt addition; digit mask E8k/E8l queued (s2p)",
-  "N7_components": "noresid 2/2, randconv 2/2 at 400-600 steps; lr1 1000 steps -> identity-init not needed; E6Lh (v1+lr5) / E6Li (norm+dil) decide"
+  "N7_components": "noresid 2/2, randconv 2/2 at 400-600 steps; lr1 1000 steps -> identity-init not needed; E6Lh (v1+lr5) / E6Li (norm+dil) decide",
+  "engram_digit_mask": "E8k 0.273, E8l (lr5) 0.285 vs E8a 0.297, E8i 0.176: mask removes addition interference; provisional C4 default",
+  "engram_lr_sweep": "x1 1.4262(3s) x5 1.3996(3s) x10 1.3941 x20 1.3816 (1s each); x50 running; x20 replication + x100 queued (s2r)"
  },
  "rejected_hypotheses": {
   "0": {
