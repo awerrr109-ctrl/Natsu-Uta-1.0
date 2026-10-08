@@ -821,3 +821,11 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   Rule deviation logged: one control run was added after seeing data; the gate itself was not changed.
 - Refutation search (2026-10-08) for "high lr on sparse embedding rows harms ICL/generalisation": no directly relevant result in the top 10 (only compression and sparse-attention papers).
   [I] The LM/ICL trade-off above ×5 (E6Lj s0) looks unstudied. It is logged as an open question (OQ-lr-ICL) for the 10M L10a-vs-L10e comparison.
+
+### Pre-registration for the 10M stage (written 2026-10-08 09:25 UTC, before any L10 result)
+2×2 {MoE, dense} × {Engram, none} at ~10.14M params iso (±0.3%), ~3M BPE-4k tokens, 1 seed each. Seed sd at 10M is unknown; the 0.8M sd (0.0016–0.008) is used ×1.5 → **threshold 0.010 bpb**.
+- R1: Engram helps with MoE iff L10a < L10b − 0.010.
+- R2: Engram helps dense iff L10d < L10c − 0.010. If R1 holds but R2 does not, R40's dense null result is reproduced and Engram's value is MoE-specific.
+- R3: MoE beats dense iff L10b < L10c − 0.010.
+- R4: table lr at 10M: ×20 is kept iff L10a ≤ L10e − 0.005; otherwise ×5 (more ICL-robust, E6Lj) is the default.
+- Toy-to-10M transfer check: the Engram gain shrinks from 0.8M to 10M if (L10b − L10a) < 0.5 × 0.093. A shrinking gain is the expected direction (R17 allocation law → ~0.004 at 9B).
