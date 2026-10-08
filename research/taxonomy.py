@@ -403,3 +403,27 @@ TAXONOMY["P15_knowledge_channel"] = {
     },
 }
 GITHUB_QUERIES += ["retrieval pretraining retro", "datastore scaling", "knowledge editing", "tool integrated reasoning", "agentic search rl"]
+
+# ---- Step H (session 2, after F013/F014/E8i): problems derived from own anomalies ----
+TAXONOMY["P16_s2_engram_dynamics"] = {
+    "problem": "A token-indexed memory is update-starved (table lr x20 still improving), changes ICL emergence timing, and interferes with algorithmic spans. What is known about each?",
+    "hypotheses": {
+        "H16.1_sparse_row_lr": {
+            "claim": "Sparse embedding rows need per-row lr far above dense params; optimum scales with update frequency.",
+            "support": ["sparse embedding learning rate scaling frequency", "adagrad sparse features embedding rows convergence", "row-wise adaptive learning rate embedding table",
+                        "hash embedding training dynamics learning rate", "muP embedding learning rate multiplier"],
+            "refute": ["large embedding learning rate overfitting rare features", "embedding learning rate instability language model"],
+        },
+        "H16.2_emergence_timing_levers": {
+            "claim": "In-context-learning emergence time is controllable by architecture/optimiser choices, not only data.",
+            "support": ["induction head emergence time accelerate", "in-context learning phase transition timing architecture", "abrupt learning plateau shortening optimizer"],
+            "refute": ["in-context learning emergence independent of architecture", "induction head formation data distribution only"],
+        },
+        "H16.3_domain_gated_memory": {
+            "claim": "Lookup memories must be gated off on algorithmic spans (numbers, code) to avoid shortcut interference.",
+            "support": ["n-gram shortcut arithmetic language model interference", "memorization interferes with algorithmic generalization", "token-type gating memory module"],
+            "refute": ["memory layers improve arithmetic", "n-gram embeddings help code models"],
+        },
+    },
+}
+GITHUB_QUERIES += ["sparse embedding optimizer", "engram memory", "hash embedding language model", "induction head emergence"]
