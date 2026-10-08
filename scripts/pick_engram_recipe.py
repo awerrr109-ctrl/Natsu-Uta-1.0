@@ -20,7 +20,10 @@ cands = {"v1_lr1": ("E4j_moe_engram_noloop", dict(engram_paper=False), 1.0, None
          "v1_lr5": ("E4pr_moe_engramv1_lr5", dict(engram_paper=False), 5.0, "E6Lh_v1_lr5"),
          "paper_lr1": ("E4pq_moe_engrampaper_lr1", dict(engram_paper=True), 1.0, "E6Lg_engrampaper_lr1"),
          "paper_lr2.5": ("E4ps_moe_engrampaper_lr2p5", dict(engram_paper=True), 2.5, None),
-         "paper_lr5": ("E4pp_moe_engrampaper_noloop", dict(engram_paper=True), 5.0, "E6Le_varchain_moe_engrampaper")}
+         "paper_lr5": ("E4pp_moe_engrampaper_noloop", dict(engram_paper=True), 5.0, "E6Le_varchain_moe_engrampaper"),
+         "v1_lr10": ("E4pu_engramv1_lr10", dict(engram_paper=False), 10.0, None),
+         "v1_lr20": ("E4pu_engramv1_lr20", dict(engram_paper=False), 20.0, None),
+         "v1_lr50": ("E4pu_engramv1_lr50", dict(engram_paper=False), 50.0, None)}
 rows = []
 for k, (run, m, lr, icl) in cands.items():
     v = bpb(run); t, n = trans(icl) if icl else (None, None)
