@@ -829,3 +829,7 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - R3: MoE beats dense iff L10b < L10c − 0.010.
 - R4: table lr at 10M: ×20 is kept iff L10a ≤ L10e − 0.005; otherwise ×5 (more ICL-robust, E6Lj) is the default.
 - Toy-to-10M transfer check: the Engram gain shrinks from 0.8M to 10M if (L10b − L10a) < 0.5 × 0.093. A shrinking gain is the expected direction (R17 allocation law → ~0.004 at 9B).
+
+### 10M stage results (as they arrive)
+- **L10a** (C4: hybrid GDN×3+attn, MoE 8×top2+shared, Engram v1 4096 slots, table lr ×20; 10.14M params; BPE-4k TinyStories; 1500 steps × 2×4 × 256 = 3.07M tokens): **val bpb 0.8156**.
+  It ran without OOM at batch 2 × accum 4 (F017 fix verified).
