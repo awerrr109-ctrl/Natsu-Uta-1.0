@@ -1,6 +1,6 @@
 {
  "session": 2,
- "updated": "2026-10-08T08:40Z",
+ "updated": "2026-10-08T09:05Z",
  "current_objective": "Validate at toy scale the core thesis: at iso-PARAMETER, loops (+MoE +memory) beat dense; establish learnable reasoning/recall probes; build full pipeline.",
  "current_best_architecture": "C4: 3:1 GDN:attn hybrid + fine-grained MoE (shared expert, aux-free) + Engram v1 path with table lr x5 (toy: -0.080 bpb vs no Engram, ICL emergence 600-1000 steps) + MTP; no trained loop; shared routers",
  "current_best_training_method": "NTP + DPT logit KD (w0.5,T1,skip15%) from larger teacher; Muon/AdamW; WSD (E5b 1.4063 toy)",
@@ -85,7 +85,8 @@
   "engram_digit_mask": "E8k 0.273, E8l (lr5) 0.285 vs E8a 0.297, E8i 0.176: mask removes addition interference; provisional C4 default",
   "engram_lr_sweep": "x1 1.4262(3s) x5 1.3996(3s) x10 1.3941 x20 1.3816 (1s each); x50 running; x20 replication + x100 queued (s2r)",
   "G1_editable_engram_E9": "toy: table-only edits fail (E9d 0.016, E9f 0.000; rows shared); full FT + replay best (EM .977, paraphrase .922, collateral +0.015). G1 needs >=1M-row table -> 50M ladder",
-  "loop_expert_paging": "LRU replay: 3-loop shared-router 1.42x misses for 3x compute; separate routers 1.88x worse"
+  "loop_expert_paging": "LRU replay: 3-loop shared-router 1.42x misses for 3x compute; separate routers 1.88x worse",
+  "E6Lj_lr20_icl": "2/2 transitions (2000, 600), EM 0.60 / 1.00 -> gate passed; ICL slower on one seed"
  },
  "rejected_hypotheses": {
   "0": {
@@ -146,7 +147,7 @@
   "RLVR negative results at small scale"
  ],
  "next_experiments": [
-  "QUEUE: s2o [E6Lh_s0 running, E6Lh_s1, E4pt FAL, E6Li x2] -> s2p [digit-mask test, E8k, E8l] -> s2i [pick_engram_recipe, 10M 2x2] -> s2j [E9] -> post_s2b [TTS 2/3d, kNN, JL, G1c, LRU replay]",
+  "QUEUE (2026-10-08 09:00): s2t [L10a C4 lr20 running ~85min, L10b, L10c, L10d; then G1c kNN targets (~2-3h) + G1c ctrl/knn] -> s2u [L10e C4 lr5]. Analysis rules: R40 2x2 (Engram helps at 10M for MoE and dense?), lr20 vs lr5 at 10M, G1c gain>=0.029",
   "analysis after each: pre-registered rules in evidence_log (H14.1 E6L*, R36 E8g/h, H13.7 E8e/f/E4t, R33 2x2 E6d/E8c/d, N2 AUC, H14.7 E4v-x, F011 E4s2, R40 L10a-d, R39 E9)",
   "X1 (1B stage, needs GPU): C4 vs fewer-experts/larger-active at iso-stored (R42)",
   "50M+ stages: GPU required; downstream evals at >=50M before committing the 1.6B Engram table"
