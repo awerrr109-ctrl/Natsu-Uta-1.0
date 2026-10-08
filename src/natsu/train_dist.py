@@ -104,6 +104,7 @@ def main():
     ap.add_argument("--resume", default=""); ap.add_argument("--cpu", action="store_true"); ap.add_argument("--bf16", action="store_true")
     ap.add_argument("--override", default="{}", help="json dict of model overrides (e.g. small test sizes)")
     ap.add_argument("--engram_delay", default="", help="'start,end' fractions: linear ramp of the Engram branch (N5/H14.1)")
+    ap.add_argument("--engram_lr_mult", type=float, default=5.0, help="Engram table lr multiplier (F013: x5 = -0.027 bpb at toy scale, 3 seeds)")
     ap.add_argument("--mtp_w", type=float, default=0.3, help="weight of the MTP auxiliary loss when the model has MTP heads")
     a = ap.parse_args()
     rank, world, dev = setup(a.cpu)
@@ -116,7 +117,7 @@ def main():
         model.load_state_dict(ck["state_dict"]); start = json.load(open(os.path.join(a.resume, "meta.json")))["step"]
     model, mode = wrap(model, world, dev, a.cpu)
     core = model.module if hasattr(model, "module") else model
-    opts = build_optim(core, a.optim, a.lr)
+    opts = build_optim(core, a.optim, a.lr, engram_lr_mult=a.engram_lr_mult)
     if a.resume:
         for o, s in zip(opts, torch.load(os.path.join(a.resume, f"optim_rank{rank}.pt"), map_location=dev)):
             o.load_state_dict(s)

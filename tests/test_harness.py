@@ -75,3 +75,13 @@ def test_region_loader_alignment():
         assert x.min() >= start and y.max() < start + T + 1
         assert ((x[:, 0] - start) % seq == 0).all()
         assert (kv[..., 0] == y).all()          # row t of the cache belongs to target y_t
+
+def test_build_optim_engram_group():
+    from natsu.model import Natsu, NatsuConfig
+    from natsu.optim import build_optim
+    m = Natsu(NatsuConfig(d_model=32, n_heads=1, n_kv_heads=1, head_dim=32, pattern="ga", chunk=8, engram_slots=31, engram_heads=1))
+    g = build_optim(m, "adamw", 1e-3, 0.1, engram_lr_mult=5.0)[1].param_groups
+    assert len(g) == 2 and abs(g[1]["lr"] - 5e-3) < 1e-12 and g[1]["weight_decay"] == 0.0 and len(g[1]["params"]) == 1
+    g = build_optim(m, "muon", 1e-3, 0.1, engram_lr_mult=5.0, adam_lr=3e-3)[1].param_groups
+    assert abs(g[0]["lr"] - 3e-3) < 1e-12 and abs(g[1]["lr"] - 1.5e-2) < 1e-12
+    assert len(build_optim(m, "adamw", 1e-3)[1].param_groups) == 1        # default unchanged

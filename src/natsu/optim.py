@@ -52,16 +52,24 @@ class Muon(torch.optim.Optimizer):
                 p.add_(o, alpha=-g["lr"] * scale)
 
 
-def build_optim(model, kind="adamw", lr=3e-3, wd=0.1, betas=(0.9, 0.95)):
-    matrix, other = [], []
+def build_optim(model, kind="adamw", lr=3e-3, wd=0.1, betas=(0.9, 0.95), engram_lr_mult=1.0, adam_lr=None):
+    """engram_lr_mult: Engram table/basis rows get their own Adam group at lr*mult, no wd (R17 setting; F013 says this is the key lever).
+    adam_lr: lr of the non-matrix Adam group (defaults to lr). Group order inside opts[-1]: [other, (engram table)]."""
+    matrix, other, table = [], [], []
     for n, p in model.named_parameters():
         if not p.requires_grad:
             continue
+        if engram_lr_mult != 1.0 and n.startswith("engram.") and ("table" in n or "basis" in n):
+            table.append(p); continue
         if p.ndim >= 2 and "embed" not in n and "values" not in n and "engram.table" not in n and "engram.basis" not in n and "vip_table" not in n and "loop_emb" not in n and "loop_bias" not in n and n != "inj.weight" and "lti_" not in n:
             matrix.append(p)
         else:
             other.append(p)
-    adam_other = torch.optim.AdamW([{"params": other, "weight_decay": 0.0}], lr=lr, betas=betas)
+    al = adam_lr if adam_lr is not None else lr
+    groups = [{"params": other, "weight_decay": 0.0, "lr": al}]
+    if table:
+        groups.append({"params": table, "weight_decay": 0.0, "lr": al * engram_lr_mult})
+    adam_other = torch.optim.AdamW(groups, lr=al, betas=betas)
     if kind == "adamw":
         return [torch.optim.AdamW([{"params": matrix, "weight_decay": wd}], lr=lr, betas=betas), adam_other]
     if kind == "muon":
