@@ -219,6 +219,10 @@ class MixLoader:
     def get(self):
         return self.l[self.rng.choice(len(self.l), p=self.w)].get()
 
+    def fixed_eval(self, n_batches, seed=999, **over):
+        """eval on the first (primary) part only: E9 replay mixes keep the facts eval, incl. held-out phrasing overrides."""
+        return self.l[0].fixed_eval(n_batches, seed=seed, **over)
+
 
 class RegionLoader:
     """G1c: random seq-aligned windows from a contiguous region [start, start+tokens) of a memmap, returning per-position cached

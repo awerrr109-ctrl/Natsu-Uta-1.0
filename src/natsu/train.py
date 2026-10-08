@@ -138,6 +138,18 @@ def train(cfg):
     if tr_only:
         for n_, p_ in model.named_parameters():
             p_.requires_grad_(any(k in n_ for k in tr_only))
+    rm = tc.get("engram_row_mask")   # E9f (R39 overlay): only rows rarely hit by general text may change; {"data":..., "tokens":N, "max_hits":k}
+    if rm and model.engram is not None:
+        import numpy as _np
+        g = _np.memmap(os.path.join(ROOT, rm["data"]), dtype=_np.uint16, mode="r")[: rm.get("tokens", 2_000_000)]
+        hits = torch.zeros(model.engram.table.weight.shape[0])
+        for s0 in range(0, len(g), 65536):
+            idx_, _ = model.engram.addresses(torch.from_numpy(g[s0:s0 + 65536].astype(_np.int64))[None])
+            hits += torch.bincount(idx_.flatten(), minlength=hits.numel()).float()
+        thr = torch.quantile(hits, rm["quantile"]) if "quantile" in rm else rm.get("max_hits", 0)
+        row_ok = (hits <= thr).float()[:, None]
+        model.engram.table.weight.register_hook(lambda gr: gr * row_ok)
+        print(json.dumps({"engram_row_mask": {"editable_rows": int(row_ok.sum()), "of": int(row_ok.numel())}}), flush=True)
     if mc.engram_vip and dc.get("vip"):
         v = json.load(open(os.path.join(ROOT, dc["vip"])))
         model.engram.load_vip({int(k): x for k, x in v.items()})

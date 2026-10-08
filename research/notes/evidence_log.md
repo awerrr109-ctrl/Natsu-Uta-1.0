@@ -770,3 +770,18 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
   In our toy addition, models with a positional fix (Abacus, E8g) can learn a carry algorithm. The n-gram table competes with that.
   It also predicts that the digit mask helps *algorithmic* generalisation most, so E8k/E8l should be tested on 6-digit OOD (d6). E8k/E8l d6 EM is 0.0, like everything else at this budget, so this cannot be tested here.
   For C4, the digit gate is consistent with R69, and number tokenisation (single digits + Abacus positions) should be paired with it.
+
+### E9 memory-editing probe (s2j) — 64 invented facts written into trained E4j, 300 steps, lr 1e-2, facts-only data
+| variant | trained params | train-phrasing EM | **held-out phrasing EM** | collateral TinyStories bpb (base E4j 1.4278) |
+|---|---|---|---|---|
+| E9a table-only | Engram table | 0.258 | 0.031 | **2.908 (+1.48)** |
+| E9b full fine-tune | all | **0.977** | **0.828** | 5.942 (+4.51) |
+| E9c FFN/MoE-only | ffn, moe | 0.977 | 0.664 | 7.883 (+6.45) |
+- [E own, 1 seed] The pre-registered prediction holds in direction: (a) has the least collateral damage but the worst paraphrase transfer, and (b) has the best paraphrase transfer.
+  R39's failure mode is reproduced: table-only facts fire on trained phrasings only (0.258 → 0.031 held-out).
+- **But all three destroy the LM** (+1.5 to +6.5 bpb), because the edit data contained no replay of the original distribution and the lr was high. This is a design flaw of the probe, not a property of the methods.
+  R39 reports KL 0.013 because it trains rows that are *only* addressed by the fact n-grams. Our table-only run updates every row touched by the fact texts, including common n-grams ("The", " of ").
+- [I] Two fixes, both cheap:
+  - (i) **replay mix**: 50% facts + 50% TinyStories;
+  - (ii) **row-restricted edit**: update only the rows whose n-grams are absent from a frequency-filtered set of general text. This is R39's overlay idea and it needs a row mask.
+  E9d (table-only + replay), E9e (full FT + replay) and E9f (table-only, row mask = rows not hit by the top-N frequent n-grams) are queued.
