@@ -738,5 +738,5 @@ researcher at the stated level (abstract/summary/README = L2; full text sections
 - **E6Li (v1 + norm + dilation + lr5, no residual, random init)** s0: transition at step 600. This is consistent with lr ×5 being the driver.
 - **E6Li (v1 + norm + dilation + lr ×5)** 2/2 (600, 400). **Pooled across all lr ×5 Engram arms: 11/11 transitions** (E6Le 3, E6Lf 4, E6Lh 2, E6Li 2).
   All lr ×1 runs (E6La 1/3, E6Lb 1/3, E6Lc 1/2, E6Ld 0/1, E6Lg 1/1) are 4/10.
-  [E own] One-sided Fisher, 11/11 vs 4/10: **p ≈ 0.0010** (post-hoc pooling, labelled as such; an earlier inline figure of 0.0006 was mis-computed and is replaced here).
+  [E own] One-sided Fisher, 11/11 vs 4/10: **p ≈ 0.0039** (post-hoc pooling, labelled as such; earlier inline figures 0.0006 and 0.0010 were typed before computing and are wrong).
   This is **the most robust result of session 2: an un-starved token-indexed memory makes in-context retrieval emerge reliably and early.**
