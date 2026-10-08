@@ -1,0 +1,25 @@
+{
+ "name": "C4_100M",
+ "model": {
+  "moe_shared": 1,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "d_model": 640,
+  "n_heads": 10,
+  "n_kv_heads": 2,
+  "head_dim": 64,
+  "n_prelude": 2,
+  "n_core": 8,
+  "n_coda": 2,
+  "pattern": "ggga",
+  "moe_experts": 12,
+  "moe_topk": 2,
+  "moe_expert_mult": 0.33,
+  "engram_slots": 16384,
+  "engram_heads": 4,
+  "engram_dim": 64,
+  "vocab_size": 32768
+ }
+}

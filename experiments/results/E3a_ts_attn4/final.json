@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E3a_ts_attn4",
+  "params": 755328,
+  "params_nonembed": 722048,
+  "flops_per_token_fwd": 1638400.0
+ },
+ "train_flops": 8053063680000.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 284.5330135822296,
+ "peak_rss_mb": 654.59765625,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 1.0804912249247234,
+    "ppl": 2.946126406392936,
+    "bpb": 1.55881933192294
+   },
+   "fwd_flops_per_token": 1638400.0
+  }
+ }
+}

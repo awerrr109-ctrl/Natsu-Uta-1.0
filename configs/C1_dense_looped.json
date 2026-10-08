@@ -1,0 +1,21 @@
+{
+ "name": "C1_dense_looped",
+ "model": {
+  "vocab_size": 131072,
+  "max_seq": 262144,
+  "tie_embeddings": false,
+  "rope_theta": 1000000.0,
+  "chunk": 64,
+  "d_model": 4096,
+  "n_heads": 32,
+  "n_kv_heads": 8,
+  "head_dim": 128,
+  "ffn_mult": 3.0,
+  "n_prelude": 4,
+  "n_core": 24,
+  "n_coda": 4,
+  "n_loops": 2,
+  "pattern": "ggga",
+  "reinject": true
+ }
+}

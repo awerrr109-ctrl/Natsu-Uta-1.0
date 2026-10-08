@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E5b_distill_E4z_to_moe_engram",
+  "params": 825480,
+  "params_nonembed": 792200,
+  "flops_per_token_fwd": 1582080.0
+ },
+ "train_flops": 7776239616000.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 770.4643335342407,
+ "peak_rss_mb": 739.4765625,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.9747654547293981,
+    "ppl": 2.6505454651683165,
+    "bpb": 1.406289287567978
+   },
+   "fwd_flops_per_token": 1582080.0
+  }
+ }
+}

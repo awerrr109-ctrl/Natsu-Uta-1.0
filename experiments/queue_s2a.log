@@ -1,0 +1,20 @@
+skip B1_bpe_moe_noloop
+skip B2_bpe_moe_engram
+=== B3_bpe_loop3fixed_moe Tue Oct  6 00:34:48 UTC 2026
+scripts/run_queue.sh: line 13: 14651 Killed                  python3 -m natsu.train --config "$cfg" > "$RES/$n.stdout" 2>&1
+FAILED B3_bpe_loop3fixed_moe
+{"name": "B3_bpe_loop3fixed_moe", "params": 1312184, "params_nonembed": 787896, "flops_per_token_fwd": 3488768.0}
+=== E4k_loop3fixed_moe_engram Tue Oct  6 00:35:49 UTC 2026
+scripts/run_queue.sh: line 13: 14873 Killed                  python3 -m natsu.train --config "$cfg" > "$RES/$n.stdout" 2>&1
+FAILED E4k_loop3fixed_moe_engram
+{"name": "E4k_loop3fixed_moe_engram", "params": 825912, "params_nonembed": 792632, "flops_per_token_fwd": 2514944.0}
+=== E5a_distill_E4z_to_moe Tue Oct  6 00:39:07 UTC 2026
+264, "rss_mb": 414.21875, "peak_rss_mb": 620.56640625, "train_flops": 4297715613696.0, "loops": 3, "eval": {"loss": 3.493522047996521, "ppl": 32.901624978537605, "bpb": 1.2723315411306482}}
+=== E4k_loop3fixed_moe_engram Tue Oct  6 00:34:48 UTC 2026
+scripts/run_queue.sh: line 13: 14644 Killed                  python3 -m natsu.train --config "$cfg" > "$RES/$n.stdout" 2>&1
+FAILED E4k_loop3fixed_moe_engram
+=== E5a_distill_E4z_to_moe Tue Oct  6 00:36:18 UTC 2026
+scripts/run_queue.sh: line 13: 14890 Killed                  python3 -m natsu.train --config "$cfg" > "$RES/$n.stdout" 2>&1
+FAILED E5a_distill_E4z_to_moe
+{"name": "E5a_distill_E4z_to_moe", "params": 820744, "params_nonembed": 787464, "flops_per_token_fwd": 1491968.0}
+=== E5b_distill_E4z_to_moe_engram Tue Oct  6 00:38:18 UTC 2026

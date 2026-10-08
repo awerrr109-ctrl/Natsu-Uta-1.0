@@ -1,0 +1,4 @@
+{"compressed": "/tmp/tmppjco9yr2/c32", "N": 2000, "dim": 32, "bytes_per_token": 36, "vs_fp16": 66}
+{"compressed": "/tmp/tmppjco9yr2/c16", "N": 2000, "dim": 16, "bytes_per_token": 20, "vs_fp16": 66}
+ok knn compress
+ok region

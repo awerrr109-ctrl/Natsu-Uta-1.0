@@ -1,0 +1,29 @@
+{
+ "name": "C3_natsu_loopmoe_mem",
+ "model": {
+  "vocab_size": 131072,
+  "max_seq": 262144,
+  "tie_embeddings": false,
+  "rope_theta": 1000000.0,
+  "chunk": 64,
+  "d_model": 3072,
+  "n_heads": 24,
+  "n_kv_heads": 4,
+  "head_dim": 128,
+  "ffn_mult": 3.0,
+  "n_prelude": 2,
+  "n_core": 12,
+  "n_coda": 2,
+  "n_loops": 3,
+  "pattern": "ggga",
+  "moe_experts": 48,
+  "moe_topk": 6,
+  "moe_shared": 2,
+  "moe_expert_mult": 0.375,
+  "pkm_keys": 512,
+  "pkm_topk": 32,
+  "depth_gate": true,
+  "reinject": true,
+  "mtp": 1
+ }
+}

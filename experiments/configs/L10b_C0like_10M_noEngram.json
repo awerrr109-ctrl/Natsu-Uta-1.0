@@ -1,0 +1,54 @@
+{
+ "name": "L10b_C0like_10M_noEngram",
+ "model": {
+  "moe_shared": 1,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "d_model": 320,
+  "n_heads": 5,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "n_prelude": 1,
+  "n_core": 4,
+  "n_coda": 1,
+  "pattern": "ggga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_expert_mult": 0.3938,
+  "engram_slots": 0,
+  "engram_heads": 2,
+  "engram_dim": 32,
+  "vocab_size": 4096,
+  "moe_sparse": true
+ },
+ "train": {
+  "seq": 256,
+  "batch": 2,
+  "steps": 1500,
+  "lr": 0.002,
+  "warmup": 100,
+  "eval_every": 500,
+  "log_every": 100,
+  "threads": 2,
+  "eval_batches": 32,
+  "save": true,
+  "accum": 4,
+  "eval_batch": 2
+ },
+ "data": {
+  "kind": "memmap",
+  "train": "data_cache/ts_train_bpe4k.bin",
+  "valid": "data_cache/ts_valid_bpe4k.bin",
+  "bytes_per_token": 3.9613
+ },
+ "note": "10M ladder stage (principle #18): C4 (MoE+Engram) vs no-Engram at ~iso total params, BPE-4k TinyStories, ~3M tokens. CPU-feasible, ~1.5-2h each. moe_expert_mult for the no-Engram variant must be re-tuned by size_candidates in a queue gap (pre-run sizing step). | F017: batch 8 OOM-killed at step 1 on 985 MB; batch 2 x accum 4 (batch 4 also OOM: activations 729 MB peak, mem_profile) (same effective batch/tokens).",
+ "sizing": {
+  "matched_to": {
+   "ref": "L10a_C4_10M.json",
+   "ref_params": 10143346,
+   "params": 10124338
+  }
+ }
+}

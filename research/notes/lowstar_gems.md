@@ -1,0 +1,402 @@
+# Low-star relevant repos (<=10 stars, relevance>=0.6) — principle #4
+
+- mellmichaelhall74/Website-Painter-Full-Version ★0 pushed 2026-10-06 — Website Painter is a free full-version web design software for Windows that allows users to create and modify websites easily without progra
+- dispatchlabs-ai/agent-wiki ★2 pushed 2026-10-06 — Self-hosted Git-backed Markdown knowledge base for people and AI agents, with MCP/WebMCP editing and citations to original conversations.
+- MaryMe88/google-docs-editor-backend ★2 pushed 2026-10-06 — A backend service for editing Russian-language texts based on a structured knowledge base: grammar, style, logic, composition, storytelling,
+- 14THEGOAT/snes-gpt ★0 pushed 2026-10-05 — 🤖 Run a minimal GPT transformer in 65816 assembly on a Super Nintendo, generating names with efficient fixed-point math and hardware multipl
+- lprogers/mandarin-playgroup ★0 pushed 2026-10-05 — A fast-growing community platform for 160+ Bay Area families, helping kids hear and use Mandarin naturally through play and connection. Feat
+- nikfot/skill-contracts-protocol ★0 pushed 2026-10-05 — Declarative skill contracts for LLM agents, define what tools to use, what evidence to collect, and when to finalize.
+- oolongbench/oolongbench.github.io ★0 pushed 2026-10-05 — A challenging aggregation benchmark for long-context models
+- daejunnom/RoveZero ★0 pushed 2026-10-05 — A research chess engine for reusable computation and adaptive inference.
+- BrendanJamesLynskey/Circuits_01_Mathematical_Framework ★0 pushed 2026-10-05 — A Mathematical Framework for Transformer Circuits (Elhage et al., 2021) — residual stream, QK/OV circuits, composition, induction heads
+- BrendanJamesLynskey/Arch_04_Diffusion_LMs ★0 pushed 2026-10-05 — Diffusion language models: SEDD score-based discrete diffusion, LLaDA masking, mask-prediction schedules, parallel decoding trade-offs vs au
+- BrendanJamesLynskey/Arch_03_Long_Context ★0 pushed 2026-10-05 — Long-context LLMs: RoPE, position interpolation, NTK-aware scaling, YaRN, ALiBi, sliding window attention, StreamingLLM sink tokens, ring at
+- MD-ANIKS/generative-ai-rag ★0 pushed 2026-10-05 — Learning Generative AI and Retrieval-Augmented Generation (RAG) with LangChain, Mistral AI, document loaders, embeddings, vector databases, 
+- avnlp/grpo ★6 pushed 2026-10-05 — Group Relative Policy Optimization (GRPO) implementations - NanoAhaMoment, GRPO:Zero, Simple GRPO, and GRPO from Scratch - spanning vLLM + D
+- avnlp/rag-model-training ★9 pushed 2026-10-05 — Training code for advanced RAG techniques - Adaptive-RAG, Corrective RAG, RQ-RAG, Self-RAG, Agentic RAG, and ReZero. Reproduces paper method
+- avnlp/biothink ★7 pushed 2026-10-05 — Self-Reflective Question Answering for Biomedical Reasoning. GRPO fine-tuning via QLoRA & Unsloth with rewards for correctness, relevance, g
+- Intn21/LitterBox ★0 pushed 2026-10-05 — A research sandbox for implementing, swapping, and benchmarking long-context LLM token mixers
+- karimulislambd/agentic-research-assistant ★0 pushed 2026-10-05 — An LLM agent that answers questions across your research papers with citations — and scores its own answers for faithfulness & relevance. RA
+- Oniichan187/newsdesk-mcp ★0 pushed 2026-10-05 — Self-hosted MCP server for a Raspberry Pi that gives a ChatGPT Scheduled Task long-term news memory and a reliable Discord publishing pipeli
+- kimjooyoon/meta-ontology-go ★4 pushed 2026-10-05 — Gooo: an experimental metaprogramming language connecting intent, typed program construction, small local models, and execution evidence
+- pjordanandrsn/experts4bit-qlora ★3 pushed 2026-10-05 — Train and serve MoE models that do not fit in VRAM: fused 4-bit experts, QLoRA, CPU/NVMe offload, and fast inference on consumer NVIDIA GPUs
+- nbaburov/fvg-zone-detection ★0 pushed 2026-10-05 — Detects Fair Value Gap (FVG) zones on stock candles with confidence scores: five architectures (XGBoost, LSTM, CNN-LSTM, Transformer, xLSTM)
+- ariefinariean/ComfyUI-Luci-LoRA-Loader ★0 pushed 2026-10-05 — 👻 Luci LoRA Loader — stack LoRAs with separate MODEL/CLIP strengths, trigger words, folder browsing and missing-file warnings.
+- genesary/Ragondin ★1 pushed 2026-10-05 — Cloud-native Rust platform to build, serve and rigorously evaluate Retrieval-Augmented Generation pipelines.
+- yanyongyu/AF-Adapter ★2 pushed 2026-10-05 — AF-Adapter (Attention-FFN Adapter): Enhanced Continual Pretraining
+- Adirom0901/tiny-gpt-from-scratch ★0 pushed 2026-10-05 — Build a small character-level GPT end-to-end in pure NumPy, starting from tokenization and array basics and ending with multi-head self-atte
+- watercrossing/tools ★0 pushed 2026-10-05 — Assorted useful tools, almost entirely generated using LLMs
+- marker2601/trainium-simulator ★4 pushed 2026-10-05 — Predict AWS Trainium val_bpb before spending chip hours: a calibrated simulator + GPU proxy from the Trainium Frontier challenge
+- karan-nanda/Extending-DNALongBench ★0 pushed 2026-10-05 — Audit of DNALongBench's eQTL task: long-context DNA models do not use the allele
+- assassinaj602/edgepulse ★0 pushed 2026-10-05 — 🔬 Runtime observability framework for on-device AI — trace memory, latency, thermal state and battery draw during inference
+- Diogo-Serra/local-llm-env ★0 pushed 2026-10-05 — Reproducible environment for running open-weight language models locally, combining llama.cpp (inference) and opencode (agent harness) behin
+- VTSTech/AgentKthx ★5 pushed 2026-10-05 — ⚛️ AgentKthx - minimal, modular, python stdlib, agentic framework for tool calling AI agents. Runs locally with Ollama, BitNet, TurboQuant, 
+- reallyraisedrough/rrr-cloud-runner ★0 pushed 2026-10-05 — Public free GitHub Actions runner for RRR. No tokens. Schedule pack stays private.
+- camronwood/neural-junkie ★5 pushed 2026-10-05 — Multi-agent orchestration for teams and individuals — local-first AI, custom experts, Slack integration, and collaboration with human approv
+- bkisonka/llmhost ★0 pushed 2026-10-05 — Local neural-net host on vanilla llama.cpp: learning memory planner, multi-model LRU router, speculative decoding (draft + MTP), MoE experts
+- Metrale/metrale-inference ★3 pushed 2026-10-05 — Carbon-friendly Pure Rust Inference Engine
+- szibis/mlx-flash ★10 pushed 2026-10-05 — Run AI models too large for your Mac's memory — at near-full speed. Intelligent expert caching, speculative execution, and 15+ research tech
+- 1bit-MONSTER/engine ★3 pushed 2026-10-05 — 1bit engine: local LLM inference for AMD Ryzen AI (Strix Halo) inside Lemonade. HRX with our Loom kernels on the Radeon iGPU, plus the XDNA 
+- trestoncuzzort/dawnr ★4 pushed 2026-10-05 — An assistant built to be trusted by proof, not by sounding right: a small language model trained from random weights on one machine, running
+- bryjudy/nfl-market-ratings ★0 pushed 2026-10-05 — Market-anchored state-space rating model for NFL point spreads, benchmarked against the closing line and Kalshi (working paper + rating code
+- tarioch/bql-lora ★2 pushed 2026-10-05 — Training data generator and dataset for fine-tuning LLMs on the Beancount Query Language (BQL), validated against beanquery
+- DiegoZaluski/co-sh ★0 pushed 2026-10-05 — Rust AI agent for the terminal with coding tools and computer use.
+- threeoneonetwo/metric-finance-app ★0 pushed 2026-10-05 — An agentic equity-research platform combining LLM orchestration, retrieval-augmented generation, financial-data pipelines, and document inte
+- BaseModelAI/base-context ★0 pushed 2026-10-05 — Synerise base-context: durable context for long-running coding and research agents.
+- gianlucamazza/floppylm ★0 pushed 2026-10-05 — Goal: a language model that fits on a real 3.5" floppy. 1 474 560 bytes is empty FAT12 geometry, not a packed model. Sub-bit core codes vs s
+- random1st/dflash-swift ★0 pushed 2026-10-05 — DFlash 2 block-diffusion speculative decoding for MLX on Apple Silicon, in Swift
+- Auxin-io/Azure-Employee-Pretraining ★0 pushed 2026-10-05 — Train a small language model from scratch on employee documents with Azure ML, serve it on a managed endpoint and expose it through a Foundr
+- Praecise/praecise-engine ★0 pushed 2026-10-05 — Praecise Inference — a high-throughput LLM inference engine (patched llama.cpp fork + Rust bindings) with DFlash/MTP speculative decoding an
+- Mathugo/seq2cause ★5 pushed 2026-10-05 — seq2cause: Turns any discrete sequence of events into a causal graph using autoregressive models (LLaMA, GPT, RNN, Mamba). 
+- reloading01/threat-intelligence-dataset ★4 pushed 2026-10-05 — Source-grounded, fact-checked instruction-tuning dataset for cyber threat intelligence: 12k examples across 42 CTI categories, built from MI
+- CAPP-Financials/enterprise-rag-pipeline ★0 pushed 2026-10-05 — Production-grade Retrieval-Augmented Generation pipeline with semantic chunking, hybrid retrieval, and RAGAS evaluation for enterprise knowl
+- ravitejapioneerblaze-code/ai-test-case-generator ★1 pushed 2026-10-05 — Open-source test automation tool that uses AI to automatically generate and run tests for any website — no coding required.
+- FlorianMartins/lineage-mlops ★0 pushed 2026-10-05 — A secured MLOps lifecycle for small language models: versioned data, poisoning checks, pinned base models, evaluation gates, signed releases
+- ashfulcra/fulcra-tools ★10 pushed 2026-10-05 —  Long-running AI agents coordinating over their human's own Fulcra account — shared bus, cross-model reviews, session continuity, load balan
+- yeixio/toskar-core ★0 pushed 2026-10-05 — Run local AI across all your computers: one OpenAI-compatible API, automatic model placement, nothing leaves your machines.
+- LindsayRidgeway/llm-symposium ★0 pushed 2026-10-05 — Four AI architectures sharing one repository, one agenda and a standing obligation to criticise each other — plus public tools you can use (
+- matol-16/HCDLM ★0 pushed 2026-10-05 — Code base for the *Hierarchical Continuous Diffusion Language Models* by M. Ollu and N. Komodakis
+- kingrocfella/image-to-text-app ★1 pushed 2026-10-05 — A FastAPI-based REST API service that provides OCR (Optical Character Recognition) for images, RAG (Retrieval-Augmented Generation) for PDF 
+- luftwaffe66/ai-memory-system ★0 pushed 2026-10-05 — Memory system spec for AI agents: structured /memory folder with indexed, timestamped, and enforceable Markdown logs for decisions, changes,
+- shehrozashoaib/LLM_Crystal_CIF ★0 pushed 2026-10-05 — LLM-driven CIF generation (Qwen2.5-7B + LoRA): controlled composition / rank / curriculum / GRPO experiments for materials-science crystal s
+- derekrparris/DynaMoE ★4 pushed 2026-10-05 — Dynamic, SSD-streamed Mixture-of-Experts LLM inference on Apple Silicon.
+- geisten/geistlib ★3 pushed 2026-10-05 — Tiny dependency-free C23 inference engine for small LLMs — ternary BitNet, CPU-first, runs on a Raspberry Pi
+- EvolvingAgentsLabs/lora-kernel ★4 pushed 2026-10-05 — The LoRA is not the textbook — it is the specialist who knows how to use the library. Small Gemma 4 LoRA experts navigate an editable markdo
+- Faydrarich809/open-model-room-harness ★0 pushed 2026-10-05 — Connect multiple AI models to Discord for text, vision, image generation, and audio tasks with model escalation and secure tool access.
+- Unitflexmed1821/FlashKDA ★0 pushed 2026-10-05 — Accelerate Kimi Delta Attention computations with high-performance CUTLASS kernels designed for NVIDIA SM90 architectures and beyond.
+- layerplague867/lora-training-skill ★2 pushed 2026-10-05 — Automate LoRA model training with a guided pipeline for curation, tagging, and validation compatible with Claude Code and other agentic work
+- Gross-barium938/RAPO ★0 pushed 2026-10-05 — Improve LLM agent exploration and reasoning through retrieval-augmented policy optimization and hybrid-policy rollout.
+- Algernonlxi795/DMJ-Dataset-Builder ★1 pushed 2026-10-05 — Automate the preparation, validation, and merging of high-quality instruction-tuning datasets for Large Language Models.
+- dorthyaccommodating234/pdf-chatgpt ★1 pushed 2026-10-05 — Chat with PDF documents using Retrieval-Augmented Generation to get precise answers from your files with page citations.
+- Nesbesss/os3-router ★10 pushed 2026-10-05 — Use your Codex (ChatGPT) or Claude Code subscription as the LLM for rabbit OS3: tool calling, workers, computer use, dashboard, watchdog
+- ethellight565/nanogpt-seis ★0 pushed 2026-10-05 — Train a transformer model for earthquake science using a complete, step-by-step pipeline from data collection to inference on multi-GPU hard
+- karagos01/xternary-eval ★0 pushed 2026-10-05 — Independent evaluation of X-Ternary (2-bit LLM quantization): bit accounting, bandwidth ceiling, determinism, and a measured ternary KV cach
+- benoitpetit/mira ★6 pushed 2026-10-05 — Long-term memory system for LLMs with optimal context budget allocation, approximation guarantees, and temporal coherence. 100% local, deter
+- impressionable-pyrrhotite668/adaptive-multistage-rag-system ★0 pushed 2026-10-05 — Optimize long-document question answering with a multi-stage RAG pipeline featuring query-aware routing, cross-encoder re-ranking, and conte
+- wesleycamphoraceous336/FlowNSFW ★1 pushed 2026-10-05 — Detect NSFW video content using optical flow and Mamba SSM for high-accuracy temporal motion analysis.
+- cyracomfortteam-del/tessera ★1 pushed 2026-10-05 — Distill large language models into small, efficient students using a custom stack featuring GPU kernels, sharded training, and high-performa
+- bakunyoav-a11y/gemma4-12b-vllm-sm120 ★1 pushed 2026-10-05 — Serve an abliterated Gemma-4-12B at high speeds on Blackwell GPUs without NVLink using vLLM, FP8 quantization, and MTP speculative decoding.
+- dxisy-1/f1-physics-engine ★0 pushed 2026-10-05 — Generate F1 racing videos from text prompts and starting frames using fine-tuned Stable Video Diffusion and telemetry data.
+- Yisau7070/llama-cpp-mtp-turboquant-sm120-blackwell-windows ★1 pushed 2026-10-05 — Run llama.cpp with Multi-Token Prediction and TurboQuant on Windows using native sm_120 Blackwell support for RTX 50-series GPUs.
+- Meggypistillate161/llama-cpp-windows-manager ★3 pushed 2026-10-05 — Install, configure, and run local GGUF models on Windows with this desktop dashboard for llama.cpp, featuring runtime management and local A
+- adventurermanilla817/DiffusionOPD ★0 pushed 2026-10-05 — Distill multiple task-specialized teachers into a single unified student model for efficient on-policy alignment in diffusion models.
+- SirBastion2/Multi-LoRA-LLM-Kernel ★0 pushed 2026-10-05 — 
+- narsinghlaga124/ARIS-in-AI-Offer ★6 pushed 2026-10-05 — Streamline your AI research and campus recruiting tasks with the ARIS agent framework to secure job offers.
+- mostospens/can-i-finetune-this ★2 pushed 2026-10-05 — Estimate VRAM requirements and generate fine-tuning recipes for LLMs on consumer GPUs to prevent out-of-memory errors.
+- satishryali/AI ★0 pushed 2026-10-05 — A hands-on AI Agents repository containing projects and experiments with LLMs, agentic workflows, tool use, RAG, memory, planning, and multi
+- syntactic-orleanism949/logal-rag ★1 pushed 2026-10-05 — Build a local intelligent customer service system that uses Retrieval Augmented Generation to answer user questions from uploaded documents.
+- aphroditeformal93/vllm-awq4-qwen ★3 pushed 2026-10-05 — Run Qwen 3.6-27B AWQ-INT4 models with DFlash speculative decoding on AMD Strix Halo hardware using vLLM for high-throughput inference.
+- laylazaes-beep/qwen3.6-speculative-decoding-rtx3090 ★0 pushed 2026-10-05 — Benchmark speculative decoding performance for Qwen3.6-35B-A3B on an RTX 3090 GPU using llama.cpp to evaluate model throughput and structura
+- princeca4746/DirectorSkill ★0 pushed 2026-10-05 — Generate Makoto Shinkai style manga sequences and video prompts for AI tools with this Claude Skill. Use professional character tracking and
+- dhoemenk97-star/AlphaDiana ★1 pushed 2026-10-05 — Benchmark LLM reasoning agents with reproducible system-level evaluation, sandboxed code execution, tool use, and full trajectory logging
+- GreatOlu/llm-hallucination-research ★0 pushed 2026-10-05 — evaluating prompting and retrieval-augmented generation techniques for reducing LLM hallucinations.
+- ThiraSoft/golem ★1 pushed 2026-10-05 — Inference engines for Gemma, Qwen and Pocket TTS in pure Go. No cgo, no Python. One static binary, CPU or Vulkan.
+- straphangerappetizingness603/ClaudeCode-Python ★1 pushed 2026-10-05 — Build a Python Claude Code agent runtime with tool use, memory, MCP, hooks, and session persistence
+- Thibault7410/cuLA ★0 pushed 2026-10-05 — Accelerate linear attention with CUDA kernels for GLA, KDA, GDN, and Lightning Attention on NVIDIA Hopper and Blackwell GPUs
+- Nathaliageorgian293/aionrs ★1 pushed 2026-10-05 — Build a Rust CLI agent that uses LLMs to run tools, edit files, search, and complete tasks end to end.
+- 27tr7437/Neural_Memory_Operating_system ★2 pushed 2026-10-05 — Predict large language model inference with memory prefetching and speculative decoding for faster reasoning on low VRAM hardware
+- desmondgregarious958/QuantumLeap---Llama.cpp-TurboQuant ★2 pushed 2026-10-05 — Run LLMs on any hardware with llama.cpp, TurboQuant KV compression, and ExpertFlow MoE tuning for faster local inference
+- Whiteflagnorthplatte622/polarquant-kv ★2 pushed 2026-10-05 — Compress LLM KV cache with PolarQuant K+V quantization for 73-99% VRAM savings on consumer GPUs with zero token loss
+- BayazidHabibSiddikee/Sword-CLI ★2 pushed 2026-10-05 — need many characters different thinking different knowledge base, scrapping, different tools for automation, as I already have freellm-busin
+- japanbittersweetwitchdoctor671/turboquant ★0 pushed 2026-10-05 — Compress and estimate vector dot products in Zig with TurboQuant, a SIMD-optimized implementation of Google's near-optimal vector quantizati
+- Reneltwoway336/HypercubeHopfield ★1 pushed 2026-10-05 — Build a sparse Hopfield network on a hypercube graph for fast local-attention retrieval with lower update cost and high capacity
+- Preservative-bowels37/Super-ai-agent ★1 pushed 2026-10-05 — Build an AI agent platform with Spring Boot, Spring AI, and Vue for chat, RAG search, tool use, and document processing
+- mianham9042/claude-orchestra ★0 pushed 2026-10-05 — Run multiple Claude Code instances in parallel from one interface for local AI coding workflow management
+- palatalised-chancellorsville108/turboquant-pytorch ★1 pushed 2026-10-05 — Accelerate LLM KV cache compression with a PyTorch TurboQuant implementation for efficient, high-quality vector quantization.
+- vanessaunliterary62/turboquant ★0 pushed 2026-10-05 — Compress LLM KV cache by 5–7x with near-zero accuracy loss for longer context and lower GPU use
+- Steppecorkwoodtree378/clearshot ★0 pushed 2026-10-05 — Stream structured screenshot intelligence into AI coding tools for faster, clearer visual context
+- Collinstudied660/mcp-hub ★2 pushed 2026-10-05 — Build and use production-ready MCP servers for Claude, Cursor, Windsurf, and more with one-line install and ready-to-run tools
+- reissuerenewal84/moe-compress ★0 pushed 2026-10-05 — Automate MoE model compression runs: prune, quantize, benchmark, and publish Hugging Face weights from one JSON config
+- eriknovak/SLM4IE ★0 pushed 2026-10-05 — Small language models (SLMs) for zero-shot information extraction across European languages, with emphasis on Slovenian
+- ithadam61-boop/LongCat-Flash-Prover ★1 pushed 2026-10-05 — Build LongCat-Flash-Prover for fast theorem proving and formal reasoning with LongCat models
+- colton255/core58-w2a8-msvc ★1 pushed 2026-10-05 — Run BitNet 1.58-bit and ternary LLMs on Windows with CPU and GPU inference, chat tools, and release-ready builds
+- Saundersonmainstreamed100/flash-moe ★0 pushed 2026-10-05 — Run a 397B MoE model on a MacBook with C/Metal inference, 4.4+ tok/s, and tool calling
+- Incensecedarthreepointswitch884/MoDA ★0 pushed 2026-10-05 — Accelerate attention with Mixture-of-Depths Attention (MoDA) for efficient transformer scaling across model depth
+- gonzaloaquiferous551/ccma-edge-architecture ★1 pushed 2026-10-05 — Build edge context management for CCMA with deterministic memory, lower attention cost, and better long-horizon LLM recall
+- Kemb6163/dataforge ★0 pushed 2026-10-05 — Generate reproducible synthetic datasets to fine-tune LLMs for reliable tool use with diverse and structurally correct examples.
+- eastythenob8-svg/graph-memory ★1 pushed 2026-10-05 — Manage and compress long conversation histories into structured knowledge graphs to improve context retention across sessions.
+- aneessaheba/DATA-266-Lab-1 ★0 pushed 2026-10-05 — Three machine learning models built from scratch for DATA266 Lab 1: a GPT style language model that generates text from the TinyStories data
+- gbh3247872997-del/cuba-memorys ★0 pushed 2026-10-05 — Provide AI agents with long-term memory using a neuroscience-based knowledge graph and Model Context Protocol for improved coding assistance
+- driellecristine/BERT-Contrastive-LoRA ★1 pushed 2026-10-05 — Enhance BERT fine-tuning for intent classification using supervised contrastive learning, LoRA, and layer-wise learning rate decay for bette
+- Moatasemmofadal/ssd ★1 pushed 2026-10-05 — Accelerate LLM inference by running speculative decoding in parallel, improving speed without sacrificing exactness or output quality.
+- GMorpheus/Agent-Jobs ★0 pushed 2026-10-05 — Recruit AI agents compatible with sovereign infrastructure for human capital workflows at G42 with enterprise-ready integration and clear sp
+- alfofire2/dwarfstar-red-lite ★1 pushed 2026-10-05 — Run Qwen3-Next 80B and Qwen3-Coder on a 24 GB Mac: a DwarfStar-inspired local LLM runtime in native Metal, with expert streaming from the SS
+- pluginepitaphe-cmd/DWARF ★1 pushed 2026-10-05 — Combine sparse and full attention to reduce memory use while maintaining global context in transformer models with DWARF's hybrid architectu
+- navaefren21/klippbok ★0 pushed 2026-10-05 — Organize and prepare video datasets for efficient LoRA training with streamlined scanning, filtering, captioning, validation, and training w
+- iqiipo-dev/PS-HK19_MindForge_MindForge ★2 pushed 2026-10-05 — Provide context-based, accurate answers to syllabus questions using AI powered by Retrieval-Augmented Generation for effective student learn
+- FatmaAMR/Asset-Sentinel ★1 pushed 2026-10-05 — An Adaptive Industrial Predictive Maintenance System leveraging Microservices and Layered Architecture. Features real-time RUL forecasting u
+- latemailok-arch/replm ★0 pushed 2026-10-05 — 🧠 Enable long-context recursive language models by wrapping OpenAI clients into a persistent REPL for scalable prompt processing.
+- siliconworkshop/VS3L ★1 pushed 2026-10-05 — 🔬 Enable calibration transfer in vibrational spectroscopy using self-supervised learning to reduce labeled samples and correct instrument di
+- QYJ7270/LocalNest.tv ★0 pushed 2026-10-05 — 🎨 Enhance your Jellyfin media server with a clean, modern CSS theme featuring glassmorphism, smooth transitions, and custom backgrounds.
+- Misaya0/MCP-Agent-Template ★0 pushed 2026-10-05 — 🤖 Build multi-agent, retrieval-augmented AI workflows with ready-to-use components for document serving, Q/A bots, and agent orchestration.
+- We-Amp/cyclone-cache ★0 pushed 2026-10-05 — High-performance C++23 disk + RAM cache with zero-copy mmap reads, a lock-free read path, and multi-process sharing of one cache file. Apach
+- aserrato7n/academic_paper_generation ★0 pushed 2026-10-05 — 📄 Generate academic papers automatically using AI, integrating literature search and Retrieval-Augmented Generation for efficient report cre
+- practical-inference/vllm-ampere-extended ★0 pushed 2026-10-05 — vLLM extended for Ampere (SM80): sparse attention serving stack - GLM sparse MLA, Qwen QSA, DeepSeek fp8_ds_mla + local fixes
+- 3ilix/MemBrain ★1 pushed 2026-10-05 — 🧠 Enhance AI interactions with MemBrain, a solution for long-term memory and context management in agentic AI systems, offering personalized
+- kamalrss88/FlashMLA ★3 pushed 2026-10-05 — 🚀 Accelerate attention mechanisms with FlashMLA, featuring optimized kernels for DeepSeek models, enhancing performance through sparse and d
+- aymanelrody/FlashMLA ★1 pushed 2026-10-05 — ⚡ Optimize attention mechanisms with FlashMLA, a library of advanced sparse and dense kernels for DeepSeek models, improving performance and
+- armandlance/gambit ★0 pushed 2026-10-05 — LLM chess coach that explains positions without hallucinating: Stockfish as ground-truth verifier, automatic fact-checking with python-chess
+- FeathBow/invar ★3 pushed 2026-10-05 — When a new kernel changes your model's numbers, Invar decides whether the evidence supports the replacement for a declared use, with a confi
+- drae1712/Agentic-RAG-Anime-Recommender-System ★2 pushed 2026-10-05 — 🎬 Discover your next favorite anime with this advanced Retrieval-Augmented Generation system, offering precise recommendations and enriched 
+- jawad-zaheer123/Nano-RAG-CPP ★1 pushed 2026-10-05 — 🚀 Build high-performance AI applications with this C++ engine for Retrieval Augmented Generation (RAG) and efficient memory management.
+- thesiddguy/GenAI ★0 pushed 2026-10-05 — 📄 Enhance your document insights with GenAI, a Retrieval-Augmented Generation API that answers questions from your uploaded files seamlessly
+- xolayugh/Qwen-Image-Edit-2509-LoRAs-Fast-Lazy-Load ★0 pushed 2026-10-05 — 🎨 Enhance images effortlessly with Qwen-Image-Edit-2509 using lazy-loaded LoRA adapters for swift edits like photo-to-anime and more.
+- rafalimanananomeniavoedmjohana-bit/AKORI ★0 pushed 2026-10-05 — précisément pour éradiquer ce défaut que l'architecture RAG (Retrieval-Augmented Generation) a été mise en place. En contraignant le LLM à n
+- kiritype/AtelierX ★0 pushed 2026-10-05 — Portable desktop workspace for role-play chatbot authoring, LLM-assisted editing, character images, and LoRA workflows.
+- Jugurthakebaili1/vLLM-Kunlun ★0 pushed 2026-10-05 — 🛠 Enhance vLLM performance on Kunlun XPU with this hardware plugin, offering seamless integration for popular AI models and optimized execut
+- BBC-Esq/Torch-CUDA-Compatibility-Checker ★5 pushed 2026-10-05 — Check compatibility between torch, cuda, flash attention 2, and related libraries.
+- yassineelfakiri/agentpg ★0 pushed 2026-10-05 — 🤖 Build stateful AI agents with PostgreSQL persistence and support for long-context operations using AgentPG, powered by Anthropic's Claude.
+- re133/sparse-memory-lm ★0 pushed 2026-10-05 — A 21M-parameter LM with a 16.8M-row product-key memory: as good as a 114M dense model and runs with the table on an SSD. Triton kernels for 
+- leitoooatr/PythonVectorDB ★2 pushed 2026-10-05 — 🗄️ Manage and search large vector datasets efficiently with this pure Python vector database featuring Int8 quantization and lazy deletion.
+- kjgdgch65g/nl-rag-qdrant-legal ★6 pushed 2026-10-05 — 📄 Explore Retrieval-Augmented Generation for legal document Q&A, leveraging QDrant and Ollama AI models with C# and .NET 9.0.
+- MadGoatHaz/crucible-llm ★0 pushed 2026-10-05 — Terminal-based LLM inference benchmarking suite — speed, concurrency, reasoning, long-context, structured output, and energy profiling for O
+- portraitxo/Stable-Audio-3-UI-LoRA-Training-for-MAC ★3 pushed 2026-10-05 — Local Gradio UI for Stable Audio 3 on Apple Silicon (MLX) — generate audio and train LoRAs, no terminal needed. Now blends up to 4 LoRAs at 
+- ktochechen/liquid-s4 ★0 pushed 2026-10-05 — 🌊 Develop innovative liquid structural state-space models for accurate estimation of health metrics like SpO2, heart rate, and speech recogn
+- Soumadeep03052001/Kimi-Linear ★0 pushed 2026-10-05 — 🚀 Explore Kimi Linear, an efficient attention architecture designed for expressive performance in natural language processing tasks.
+- crusoecloud/crusoe-developer-hub ★2 pushed 2026-10-05 — The Crusoe Developer Hub is the technical home for developers building AI applications and infrastructure on Crusoe Cloud. We publish three 
+- mathrulestheworld/tinylm ★0 pushed 2026-10-05 — A small language model built from scratch, one component per week, for Generative AI from First Principles
+- skchaudhary2005/smart-factory-rag ★0 pushed 2026-10-05 — Smart Factory RAG is an AI-powered industrial assistant that combines Retrieval-Augmented Generation (RAG) with machine learning to provide 
+- vesslina/mikrotik-harness ★1 pushed 2026-10-05 — MikroTik Harness - AI Agents A tool designed to configure MikroTik hardware using the LLM Agent, add your OpenAI compatible API keys or use 
+- PDewangan/neo4j-agentframework ★0 pushed 2026-10-05 — 📊 Transform documents into a smart knowledge base using Neo4j and Azure AI for efficient, intelligent searching and answer generation.
+- ian-cowley/Glacier.Inference ★1 pushed 2026-10-05 — High-performance pure C# .NET 10 LLM & MoE inference engine. Bare-metal NVIDIA SASS, Direct3D 12 Wave32 compute, AVX-512 SIMD, zero-copy GGU
+- master-merlin/mrln-arcane-tuner ★5 pushed 2026-10-05 — Dataset tool and Diffusion model LoRA trainer
+- dorkagent/market-toolkit ★0 pushed 2026-10-05 — Free, no-key market data toolkit: static scripts that gather public market data and compute honest correlations. No AI, no tokens, no API ke
+- kingcheng12/kimi-k3-from-scratch-kda-attention-residuals-and-stable-latentmoe ★0 pushed 2026-10-05 — Build every architectural innovation from the Kimi K3 technical report in numpy at toy scale: Kimi Delta Attention with lower-bounded decay 
+- roberto729a/OllamaRAG ★7 pushed 2026-10-05 — 🤖 Build a smart AI assistant that learns from any website using a Retrieval-Augmented Generation framework with local models powered by Olla
+- ericrwade/pagouro ★0 pushed 2026-10-05 — Pagouro: a small language model, trained from scratch on a fully licensed corpus, that lives on a USB stick and needs nothing from outside. 
+- AcruxCore/AcruxCore ★9 pushed 2026-10-05 — Open-source LLMOps platform with prompt management, an OpenAI-compatible AI gateway, OpenTelemetry tracing, a versioned tool catalog, and LL
+- Umarfarook1/rag-document-qa ★1 pushed 2026-10-05 — In-development retrieval-augmented document Q&A. Protocol seams for vector store, embedder and answer generator, plus a retrieval eval harne
+- BugraAkdemir/memo ★7 pushed 2026-10-05 — Local-first AI assistant with real memory, agent tool use, and proactive habits — built with Go + Flutter. Runs fully offline via llama.cpp,
+- reliquadotai/reliquary ★4 pushed 2026-10-05 — Decentralized GRPO on Bittensor SN81: verified frontier rollouts, validator-authoritative training, and public evidence.
+- jacobmentalconstruct/_HomeAGENT ★0 pushed 2026-10-05 — A small, private chat server for local language models. Runs Ollama or llama.cpp on your own PC and serves a browser chat to every device on
+- abho7/llm-inference-webgpu ★0 pushed 2026-10-05 — A transformer inference engine written from scratch: safetensors, BPE, KV cache, quantization and WebGPU kernels, with every correctness cla
+- beeracs/Llama ★0 pushed 2026-10-05 — Run Llama models in your web browser using JavaScript and WebAssembly. Explore light and dark modes easily. 🌐🐱👤
+- MRROBOT401/DyT-NoNorm-LLMs-REWILD ★2 pushed 2026-10-05 — Replacing LayerNorm with Dynamic Tanh (DyT) in DistilGPT2 + LoRA, evaluated on RE-WILD, Alpaca, and ShareGPT.
+- youngaileaderslinz/HA-RAGent ★2 pushed 2026-10-05 — A Home Assistant integration providing a Retrieval-Augmented Generation (RAG) AI agent with configurable backends.
+- utkukose/rl-alignment-veltech-NB-lecture ★0 pushed 2026-10-05 — Five-day value-added course on Reinforcement Learning and Language Model Alignment at Vel Tech, with interactive lecture pages, browser labs
+- Yuzhou0210/Multimodal-Process-Reward-Model-R-PRM-for-Geometric-Reasoning ★0 pushed 2026-10-05 — Multimodal R-PRM: Process-Reward Verification for Geometric Reasoning and Test-Time Compute Scaling
+- ashutosh-mulc/direct-preference-optimization-dpo-from-scratch ★0 pushed 2026-10-05 — Implement Direct Preference Optimization end-to-end: log-prob utilities, a policy model, Bradley–Terry preferences, the DPO loss and gradien
+- broshenn/wafer-defect-vlm ★0 pushed 2026-10-05 — Wafer bin map defect classification with Qwen3.5-9B + ms-swift: QLoRA SFT, GRPO post-training, a frozen benchmark and the full evaluation ar
+- KuldeepThakkar/-Optimising-Large-Language-Models-LLMs-for-Edge-Devices-using-Quantization ★0 pushed 2026-10-05 — 
+- gagan3012/PolyDeDupe ★2 pushed 2026-10-05 — PolyDeDupe: Multi-Lingual Data Deduplication
+- JinHo-von-Choi/SooTool ★4 pushed 2026-10-05 — SooTool — Precision Calc MCP: Decimal-only deterministic calculation server for LLM tool use
+- gHashTag/trinity ★10 pushed 2026-10-05 — The Trinity ternary compute stack — tri CLI · BitNet LLM · VSA · GF16
+- mbuyiselon39/HyenaX2 ★0 pushed 2026-10-05 — HyenaX is an AI-powered soccer prediction platform developed by Vertex Stream Group. The site utilizes machine learning and statistical mode
+- io9991/Modeling-and-control-of-human-postural-stability. ★4 pushed 2026-10-05 — University project for dynamical system course. Modeling and control of human postural stability : a state space approach via inverted pendu
+- zyberg2091/trm-halting-targets ★0 pushed 2026-10-05 — Three halting objectives in a Tiny Recursive Model reimplementation: 15 logged runs on 4-digit addition, with threshold and supervision-step
+- FreeBSE-Osaka/mp_cod ★0 pushed 2026-10-05 — Multiple Personality CoD (Chain of Discussion): evidence-grounded discussion among independent expert personas on local LLMs.
+- devYRPauli/turboquant-m1pro-evaluation ★2 pushed 2026-10-05 — Independent TurboQuant evaluation on a 16 GB M1 Pro across MLX and llama.cpp, with long-context tests and implementation fixes.
+- ezinne-okereke-data/pubmedqa-rag ★0 pushed 2026-10-05 — Retrieval-augmented QA over PubMedQA with a local Llama model, evaluated on expert-labeled questions
+- CJX0712/ssmforge ★0 pushed 2026-10-05 — SSMForge · Structured State Space Models (S4/S4D) toolkit — S4DFuse flagship solves the adding problem to ~1e-11 MSE at T=1000 (LSTM 0.168).
+- sirxsniper/llama-cpp-turboquant ★1 pushed 2026-10-05 — Long-context LLM inference on one GPU: a 4.25-bit KV cache and a retuned CUDA attention path that hold a full 262144-token context on a sing
+- V-Sekai-fire/interactor-editscore-lora-qwen3vl-4b ★0 pushed 2026-10-05 — EditScore reward-model role on Qwen3-VL-4B: MLX for Mac mini; LoRA training path for 3090. See RFD 2161.
+- sajeedmehrab/op-hrg ★6 pushed 2026-10-05 — Official code for OP-HRG (ECCV 2026): reasoning-guided part-level visual grounding via reinforcement learning.
+- EgorCOStylev/rubq-answer-form-check ★0 pushed 2026-10-05 — Pre-registered check on RuBQ 2.0: does answer-form variation (case, prepositions) distort exact-match labels and self-consistency for a 7B L
+- bfogels/infergrade-runner ★2 pushed 2026-10-05 — Open-source runner for reproducible local LLM benchmarks across models, quants, runtimes, and consumer hardware.
+- mehul24d/attnbench-research ★0 pushed 2026-10-05 — Do sparse attention kernels' speedups survive to end-to-end latency at matched accuracy? A measured answer, and the failure patterns found g
+- blairq/genesis-vllm-patches ★2 pushed 2026-10-05 — Runtime patches for vLLM 0.29.0: a 27B hybrid-GDN model at 256K context on 2x RTX 3090 — integer attention kernels, W4A8 Marlin, DFlash2 spe
+- chripara/img-engine ★0 pushed 2026-10-05 — Local-first SDXL image generation engine with automatic quality evaluation (CLIP, hands, face, tiling, IQA) and a benchmark harness. Control
+- oshinmiranda26/clinical-note-classifier ★0 pushed 2026-10-05 — Benchmarking TF-IDF, fine-tuned Bio_ClinicalBERT, and a LoRA-tuned LLM for clinical note classification
+- DanceNitra/ramr ★0 pushed 2026-10-05 — RAMR — Retrieval-Augmented Memory Reliability: a contamination-resistant synthetic benchmark for agentic-RAG / memory systems (findings + me
+- voorhs/linear-attention-public ★0 pushed 2026-10-05 — 
+- junhown3/FlashAttention-Triton ★0 pushed 2026-10-05 — 
+- Binwakil/LesionSpeak ★0 pushed 2026-10-05 — Grounded brain-MRI lesion report generation with a fine-tuned vision-language model (LLaVA-1.5-7B + LoRA).
+- Tasty-Kiwi/KiwiLM ★0 pushed 2026-10-05 — KiwiLM is a small PyTorch research project for comparing causal language-model architectures.
+- OAndrei314/long-context-cost-lab ★0 pushed 2026-10-05 — Long-context inference and KV-cache cost estimator for frontier model serving research
+- jethrolanda/wp-rag-plugin ★0 pushed 2026-10-05 — (Vibe Coded) A simple WordPress plugin called "Simple RAG Search" that implements Retrieval-Augmented Generation for site content, using loc
+- jnandanavanam-byte/oracle-rag-comparison-lab ★0 pushed 2026-10-05 — Enterprise Retrieval-Augmented Generation (RAG) evaluation framework for Oracle ERP documentation, comparing chunking strategies, embedding 
+- sayantanroy-2915/neural-mini-learn-cpp ★0 pushed 2026-10-05 — A neural network framework built from scratch in C++, including custom Matrix/Vector operations, forward propagation, backpropagation, activ
+- getishe/legal_brief_companion ★1 pushed 2026-10-05 — (Retrieval-Augmented-Generation) powered by LLM (Large language model) using legal case template assistant using LangChain. The assistant an
+- janavishal9027/hr-policy-assistant ★0 pushed 2026-10-05 — A Retrieval Augmented Generation Based project. Help for the HR Related policy agreements and queries can able to chat with an Agentic AI ch
+- mohua222/researchmind-rag-assistant ★0 pushed 2026-10-05 — An LLM-powered research assistant that uses Retrieval-Augmented Generation (RAG), semantic embeddings, and FAISS vector search to answer que
+- antonpstahl/llm-assisted-xai-explanations ★0 pushed 2026-10-05 — Comparing XAI methods (EBM shape functions vs. post-hoc SHAP on XGBoost) and handover formats (JSON, PNG, tool-use) for LLM-generated natura
+- AdwaiyP/autollm-lab ★0 pushed 2026-10-05 — Automotive LLM fine-tuning pipeline with synthetic data generation, LoRA, evaluation, and model serving.
+- tonythetiger168/helioslm ★1 pushed 2026-10-05 — Pure-PyTorch DeepSeek-V3/K3-style LLM stack where every serving optimization ships with a bit-exactness oracle: disk-tier expert streaming, 
+- fato-nofun/Private-Coach ★0 pushed 2026-10-05 — Get Private Coach — a health program for Windows with a free download. Create personalized exercise plans, track calories burned, and manage
+- gerardrecinto/gemma-karpenter-eks ★0 pushed 2026-10-05 — Gemma serving and LoRA fine-tuning on EKS with Karpenter, Graviton (arm64) and GPU node pools, vLLM and KEDA
+- rui08984-dot/zhrp-gemma4-26b-8g-tuning ★0 pushed 2026-10-05 — Chinese-calibrated Gemma-4-26B RP on 8GB - three-tier ubatch recipe (64K/118K/128K), NO_PINNED, measured PP/TG
+- rui08984-dot/kat-coder-35b-8g-tuning ★0 pushed 2026-10-05 — KAT-Coder-V2.5-Dev 35B on 8GB - depth curves to 124K (PP 850), thinking governance flags, multi-round tool-loop fix, agentic bench
+- rui08984-dot/qwen3.6-35b-8g-tuning ★0 pushed 2026-10-05 — Qwen3.6-35B-A3B on 8GB - baseline production config and measured depth curves (turbo4 KV)
+- rui08984-dot/ornith-1.5-35b-8g-tuning ★0 pushed 2026-10-05 — Ornith-1.5-35B-A3B on RTX 4060 8GB - measured depth curves (PP/TG to 118K) + turbo4 KV production config + tool-loop fix
+- rui08984-dot/ornith-9b-kvmem-8g-tuning ★0 pushed 2026-10-05 — Ornith-1.5-9B-MTP + KVMem on 8GB - KV-in-RAM long context 128K@42.7 tok/s, 210K@36.6, production config and limits
+- rui08984-dot/bonsai2-27b-8g-tuning ★0 pushed 2026-10-05 — Ternary-Bonsai-2-27B (PTQ1_0 QAT) on 8GB - PrismML b10709 A/B (+15% PP/+24% TG), quality gate, production config
+- Sallos725/NMOS ★4 pushed 2026-10-05 — Long-term memory for PocketRisu / RisuAI role-play — a local sidecar that remembers what scrolled out of context, with history and provenanc
+- jmuhire13/mamacare-qa ★0 pushed 2026-10-05 — A domain-specific question-answering assistant for maternal and newborn health, built on real questions from expectant mothers in Uganda (MO
+- mikaelyemane/ml-math-code ★0 pushed 2026-10-05 — Find the one-character Adam bug, build FlashAttention from the online-softmax recurrence, size a 70B model's KV cache three ways. Tested Num
+- Violinet-tech/comfy-duplicate-model-roots ★0 pushed 2026-10-05 — Agent skill: why ComfyUI is slow to start and a model/LoRA browser shows far fewer files than exist or no previews (duplicate model roots).
+- queelius/rlm ★0 pushed 2026-10-05 — A small, request-preserving Recursive Language Model runtime for the OpenAI Responses API
+- Violinet-tech/violet-comfyui-pack ★0 pushed 2026-10-05 — ComfyUI custom nodes: LoRA loader, model and LoRA browser with duplicate finder, typed model loaders, text encoder, image tools
+- Maxim-Mazurok/llm-context-benchmark ★0 pushed 2026-10-05 — Benchmark usable long-context limits, throughput, and memory behavior for local LLMs on Apple Silicon.
+- EmirMuhammetARAN/cell-aging-rejuvenation ★0 pushed 2026-10-05 — Deep learning pipeline for simulating MSC cellular senescence and rejuvenation using CycleGAN and Latent Diffusion Models with LoRA fine-tun
+- Daniele-Cangi/CryoFlux ★6 pushed 2026-10-05 — Measure and audit intelligence gained per joule spent. Proof-of-Learning prototype.
+- 5hreyZ/Enterprise-Agentic-RAG-Engine ★0 pushed 2026-10-05 — Autonomous enterprise Agentic RAG engine with hybrid search (BM25 + Qdrant), ColBERT reranking, multi-hop reasoning, and vLLM INT4 AWQ servi
+- anirudhlath/alfred ★2 pushed 2026-10-05 — Local-first multi-agent voice assistant — dual-process architecture (local Ollama SLM fast path + Claude agentic tool-use loop), LLM-generat
+- AlterHoodie/poor_mans_mamba ★0 pushed 2026-10-05 — Multi-GPU Inference Engine for State Space Models
+- liulang5945-netizen/Seed ★3 pushed 2026-10-05 — Byte-level predictive-coding kernel that learns online from local prediction errors: no backpropagation, no attention matrix, no optimizer. 
+- oshinmiranda26/NeuroRisk-Clinical-Risk-Intelligence ★0 pushed 2026-10-05 — NeuroRisk: retrieval-augmented generation over synthetic mental health EHR data, combining structured records and clinical notes, comparing 
+- phantomic12/inference-research ★0 pushed 2026-10-05 — Structured knowledge base for LLM inference: accelerators, FLOP classes, engines, quantization, interconnect, benchmarks
+- MeKaustubh07/metal-inference-engine ★0 pushed 2026-10-05 — LLM inference engine for Qwen3.5-2B on an 8 GB M2 MacBook Air, written from first principles in Python with hand-written Metal decode kernel
+- stancsz/subroute ★7 pushed 2026-10-05 — Route the AI subscriptions you already have to the coding tools you already use.
+- zcho/nanoGPT ★0 pushed 2026-10-05 — 
+- rahaman-aryan/llm-layer-wise-analysis ★0 pushed 2026-10-05 — Layer-wise analysis of representations in a small language model
+- nonaghazizadeh/system12-reasoning ★1 pushed 2026-10-05 — Official code and reproducibility artifacts for Reasoning on a Spectrum (COLM 2026)
+- cloudwallker/llm-agents-survey ★0 pushed 2026-10-05 — A guided review of retrieval-augmented generation, agent memory, tool use and efficient inference. | 检索增强生成、智能体记忆、工具使用与高效推理文献选读，含方法公式与主题论文解读
+- pennant-dev/pennant ★9 pushed 2026-10-05 — Pennant for macOS: one open-source AI agent that does the work on your Mac, on a schedule, with any model. It asks before it publishes, send
+- pratikbhatta-07/AI-Powered-Code-Analysis-Assistant ★0 pushed 2026-10-05 — Developed a multi-language GenAI-powered code assistant using Python and Llama 3.1 that performs code explanation, complexity analysis, auto
+- tekvisions/finetune-index ★0 pushed 2026-10-05 — A living index of LLM fine-tuning & post-training tooling — frameworks, PEFT/LoRA, RLHF/DPO — ranked by momentum.
+- nanoodlecom/nanoodle ★5 pushed 2026-10-05 — Visual AI workflow editor in your browser — wire text, image, video, and audio models into node graphs and shareable apps. No backend, no an
+- karthik-7777777/RAG_project ★0 pushed 2026-10-05 — A modular Retrieval-Augmented Generation (RAG) system built with Python & LangChain that processes PDF documents, generates semantic embeddi
+- sklsp/Apollo ★1 pushed 2026-10-05 — Apollo - a unified local AI workspace: RAG document Q&A, ComfyUI image generation, dataset building with AI captioning, hardware-aware LoRA 
+- athal7/attention ★0 pushed 2026-10-05 — Prioritized multi-source triage dashboard (calendar, reminders, GitHub, Linear) with fzf hotkeys
+- alexthegoodman/yumon-pet ★0 pushed 2026-10-05 — Mixture of Experts (MoE) model for Yumon, the AI companion Trained on You. Runs on iGPU. (Rust, Burn)
+- addiinnocent/opencode-token-guard ★0 pushed 2026-10-05 — OpenCode plugin: guards against token burn in long agent sessions — rations un-batched bash calls, throttles premature verification runs, nu
+- goelavi04/biogpt-discharge-summary ★0 pushed 2026-10-05 — LoRA fine-tuned BioGPT that drafts the Brief Hospital Course of a discharge summary — training pipeline, evaluation, model card, and a local
+- ctkrug/rigfit ★0 pushed 2026-10-05 — The best local LLM your GPU can run, with the exact quantization, refreshed weekly.
+- ismail17062002-tech/Choosing-the-Right-IELTS-Preparation-Course ★0 pushed 2026-10-05 — Choosing the right IELTS course means matching it to your goal: target band score, Academic vs General Training track, and learning style (s
+- Iron-avatar/tiny-gpt-from-scratch ★0 pushed 2026-10-05 — Build a small character-level GPT end-to-end in pure NumPy, starting from tokenization and array basics and ending with multi-head self-atte
+- Say43/GPT-light ★0 pushed 2026-10-05 — GPT language model built and trained from scratch in plain PyTorch (97M params; RoPE, SwiGLU, RMSNorm, QK-norm, Muon optimizer) - pretrained
+- jointsome0-lgtm/sagents ★0 pushed 2026-10-05 — Story agents: language models that live in a small world as its characters. An early prototype.
+- Qristoetle/llm-safety-guardrail ★0 pushed 2026-10-05 — Team LLM safety guardrail project: FastAPI, vLLM, Qwen and LoRA.
+- saravanan-a-r/EchoMeBetter ★1 pushed 2026-10-05 — A small encoder-decoder style model trained from scratch. Vocabulary and pre-training are designed as a shared foundation for multiple futur
+- VedantSingh05/tiny-gpt-from-scratch ★0 pushed 2026-10-05 — Build a small character-level GPT end-to-end in pure NumPy, starting from tokenization and array basics and ending with multi-head self-atte
+- Darpan-Maurya/SLM ★0 pushed 2026-10-05 — Small Language Model From Scratch
+- Yoodaddy0311/artibot ★3 pushed 2026-10-05 — Autonomous Agent OS for Claude Code — 28 agents, 114 skills, 72 commands. Dual-process cognition, lifelong learning, parallel agent teams, p
+- CiprianFlorin-Ifrim/ternary-transformer-lab ★0 pushed 2026-10-05 — Notebooks testing different aspects of ternary transformers inpired by BitNet and compared to F32 weights.
+- nahshonmokua/LoRaWAN-IndoorPathLossModeling-ML ★2 pushed 2026-10-05 — Comprehensive Indoor Path Loss Modeling and Prediction Using Machine Learning
+- sebastien-doyez2812/OpenML-core ★0 pushed 2026-10-05 — An open-source Python library for computer vision. Unifying classical and SOTA architectures (U-Net, TransUNet, SAM 2, Vision Transformers) 
+- syahvan/need-more-vram ★0 pushed 2026-10-05 — Size your GPUs before they size your bill. Estimate VRAM, throughput, replicas and AWS/GCP cost for serving or fine-tuning any Hugging Face 
+- Abdulsinsn/Scaler-2-Music-Theory-Engine ★0 pushed 2026-10-05 — Scaler 2 Music Theory Tool 2026: Direct DAW Integration for Windows 10 and 11
+- leeyunseokarchive/fituna ★1 pushed 2026-10-05 — Stop guessing your llama.cpp config. Give it a target tok/s and a quality budget, and it measures quantization levels and GPU offload on you
+- saulrichardson/pitch-prediction-app ★0 pushed 2026-10-05 — Serverless MLB next-pitch prediction cockpit using real game data, AWS, and the pitchpredict-xlstm model.
+- Ishan-debugg/Fine-Tuning-LoRA ★0 pushed 2026-10-05 — SFT successfully taught the model perfect JSON structure and schema adherence. Function name accuracy regression identified as the target fo
+- jatinder14/hookpost ★0 pushed 2026-10-05 — Open-source social media scheduler with an MCP server for AI agents. Free Buffer, Hootsuite and Postiz alternative: X, LinkedIn, YouTube, Bl
+- outcaster-2/New-Star-Tennis ★0 pushed 2026-10-05 — Get New Star Tennis — a sports game for Windows with free download. Guide your player from novice to ATP champion by managing training, happ
+- minidupabasara2024-ship-it/py-trio-workflow ★0 pushed 2026-10-05 — 🚀 Master PyTRIO SDK 2026: AI Coding Agents for Remote LLM Training & Inference
+- veen-systems/llm-distillery ★0 pushed 2026-10-05 — Knowledge distillation from large language models into specialized semantic filters
+- DEVANSHU-KALI/Hybrid_RAG-Combining-keyword-and-semantic-search ★0 pushed 2026-10-05 — An end-to-end Retrieval-Augmented Generation pipeline implementing hybrid retrieval through dense and sparse search, Cross-Encoder reranking
+- LouisHwa/Local_RAG_Agent ★0 pushed 2026-10-05 — A fully local Retrieval-Augmented Generation (RAG) application powered by Ollama and Streamlit. This application allows you to upload PDF do
+- Elite588/Model-Optimizer ★10 pushed 2026-10-05 — A unified library of SOTA model optimization techniques like quantization, pruning, distillation, speculative decoding, etc. It compresses d
+- samirresque/neural-networks-from-scratch-forward-and-backward ★0 pushed 2026-10-05 — Implement a complete neural network stack from scratch in NumPy: finite-difference gradient checks, dense and activation layers, loss, seque
+- MikDurr/Protein_Mutation_Impact ★0 pushed 2026-10-05 — predict whether the mutation is likely deleterious vs tolerated using protein language model embeddings + a small ML classifier.
+- lalithdabilpuram01/enterprise_rag-with-GCP ★1 pushed 2026-10-05 — An enterprise-focused Retrieval-Augmented Generation (RAG) app demonstrating document ingestion, vector embedding storage, and LLM-powered i
+- tourlida/ai-assisted-support-ops ★0 pushed 2026-10-05 — Production-style full-stack AI support platform demonstrating LLM integration, tool calling, RAG, agent orchestration, human-in-the-loop wor
+- genaforvena/tiny-fleet ★1 pushed 2026-10-05 — Fleet of tiny specialist LLMs: one shared 360M base, one LoRA adapter per specialty, embedding-centroid router with abstain path. Numbers + 
+- thekaveh/NNx ★2 pushed 2026-10-05 — Lightweight PyTorch toolkit for training, fine-tuning, and exporting modern neural nets. FFN, GNN, decoder-only LM, diffusion, JEPA, MoE, PE
+- baruashoumyadip-blip/pyro-kernel-benchmark ★0 pushed 2026-10-05 — An $O(N)$ linear-time contraction operator leveraging Banach Fixed-Point Contraction Mapping to solve Transformer memory bottlenecks and opt
+- mlsftwrs/sebeni ★1 pushed 2026-10-05 — Self-aware morphotactic generation for extremely low-resource Manding languages
+- JonathanRReed/JR-AutoRAG ★0 pushed 2026-10-05 — Local-first RAG (Retrieval-Augmented Generation) workbench: Bun and React console over a FastAPI backend, with document ingestion, Ollama an
+- dereksantos/cortex ★3 pushed 2026-10-05 — A agent harness that learns over time, manages its own context and is optimized for small language models.
+- Sahil170595/quantfit ★1 pushed 2026-10-05 — Quantize an LLM and check it still refuses what it should — a GPU-aware quantization CLI that measures the safety drift of the quantization 
+- skazhutin/WeftLM ★0 pushed 2026-10-05 — Experimental context-parallel inference for long-context LLMs on Apple Silicon
+- Sahil170595/Chimeraforge ★2 pushed 2026-10-05 — PyPI capacity-planning CLI for LLM deployment.  pip install chimeraforge.
+- GenerativeAiWithMariams/Rag_With_Page_Citation ★0 pushed 2026-10-05 — DocuRAG is a production-grade, portfolio-quality AI Document RAG (Retrieval-Augmented Generation) System built with FastAPI, FAISS Vector St
+- Mineshponthen1/slm-benchmark-lab ★0 pushed 2026-10-05 — Benchmarking small language models on a CPU-only laptop, plus a FastAPI assistant serving the winner
+- SimpleTuner-io/KohakuFA-CuTe ★0 pushed 2026-10-05 — Kohaku Flash Attention kernels written in CuTe DSL for SM89, SM90 and SM120
+- Ps23102004/llm-ladder ★0 pushed 2026-10-05 — Cascading confidence-gated router across tiered local LLMs — escalates to a bigger model only when self-consistency voting drops below thres
+- heroes-lang/heroes ★1 pushed 2026-10-05 — A small compiled language. It reads like Python and has all the power of C. No braces, no semicolons. No interpreter, no virtual machine. No
+- flintlock435/MiniGPT-AI-Model ★0 pushed 2026-10-05 — MiniGPT is a small GPT-style language model built from scratch with PyTorch. It features a custom transformer architecture, Byte-Level BPE t
+- dodododddo/mcsparse ★0 pushed 2026-10-05 — MC-Sparse: Deconstructing and Closing the Dense–Sparse Attention Gap in Diffusion Transformers.
+- techiekamal21/rag-simulator ★0 pushed 2026-10-05 — The RAG Pipeline Interactive Simulator is a zero-dependency, single-file web application that provides an immersive, step-by-step learning e
+- Quixyl-eng/exvram-lab ★0 pushed 2026-10-05 — Compute-for-memory research lab for running larger LLMs on memory-constrained consumer GPUs.
+- KashyapPatel2232/neural-networks-from-scratch-forward-and-backward ★0 pushed 2026-10-05 — Implement a complete neural network stack from scratch in NumPy: finite-difference gradient checks, dense and activation layers, loss, seque
+- jacklore123/ai-student ★0 pushed 2026-10-05 — AI学生 · 教育预测引擎 v3 雏形：把 6–18 岁（4380 天）的认知成长做成可模拟、可规划、可观测、可记录的 Windows 桌面程序
+- KnoweExp/flash-attention-version-selector ★0 pushed 2026-10-05 — 
+- priyaraut222/pdf-rag-chatbot ★1 pushed 2026-10-05 — AI-powered multi-PDF document assistant that combines Retrieval-Augmented Generation, semantic search, and LLMs to deliver grounded answers,
+- cornelcroi/llm-search-grammar ★0 pushed 2026-10-05 — Natural language movie search with one small LLM call: the search grammar pattern. The model reads, code decides. Python, no dependencies, w
+- ritesh-kant/workspaceGPT ★0 pushed 2026-10-05 — Workspace GPT is a Retrieval-Augmented Generation (RAG) system powered by the AI model, designed to streamline knowledge retrieval within or
+- M1chlCZ/local-coding-assistant ★0 pushed 2026-10-05 — CUDA coding assistant for 16 GB NVIDIA GPUs, with reproducible model compression and local evaluation.
+- Shadowell/HyperTrade ★4 pushed 2026-10-05 — 基于通用自主进化内核 (ARC) 的生产级受治理量化交易研究 Agent Runtime，具备 MCTS 搜索、红蓝博弈、归因反思与模拟盘自动上线孵化能力。
+- rubenbalbastre/sft-tool-calling ★0 pushed 2026-10-05 — Finetune a 2B LLM for supply chain tool calling using supervised finetuning and on-policy distillation from larger models.
+- rudyherbas/aa2_2026_tp1_nlp-rag ★0 pushed 2026-10-05 — Diseñar, implementar y evaluar un sistema de **Retrieval-Augmented Generation (RAG)** en español sobre un corpus elegido por el grupo, anali
+- kmmbvnr/rank ★0 pushed 2026-10-05 — A readable array language — the power of APL's model with words instead of glyphs, small enough to write on a phone.
+- HarisMajeed05/legal-ai-chatbot ★0 pushed 2026-10-05 — A Legal AI Assistant built with React, FastAPI, and MongoDB, using a Retrieval Augmented Generation pipeline through LangChain and FAISS, po
+- LinGrayy/MSSA-code ★0 pushed 2026-10-05 — Datasets & Code for the ECCV 2026 paper  "Memory-Supported Synergistic Adaptation for Training-Free Test-Time Medical Image Segmentation".
+- keppy/thomas ★0 pushed 2026-10-05 — thomas.train() — a training harness. Case→reward→train: take a Case set and a score function, get a baseline card (gonogo), run a training l
+- santhosh220z/SIGN_SPEAK-The-Silent-Communicator ★0 pushed 2026-10-05 — Real-time sign language recognition with MediaPipe hand/face/pose landmarks and a two-stream (appearance + motion) 1D-CNN + Transformer with
+- api-evangelist/compresr ★0 pushed 2026-10-05 — Compresr — independent third-party profile of a public API surface, by API Evangelist. Compresr is an LLM context-compression API. You send 
+- harsh2308-agr/AI-ML ★0 pushed 2026-10-05 — A central repository showcasing production-ready Generative AI projects alongside a structured Machine Learning study log. This space bridge
+- ParsiaJoon/nanogpt-from-scratch ★0 pushed 2026-10-05 — 
+- luckydhepe/Multi-Agent-Customer-Support-System- ★0 pushed 2026-10-05 —  Developed a multi-agent customer support system using LangGraph and LangChain to automate ticket resolution and reduce manual support overh
+- api-evangelist/polycode-co-uk ★0 pushed 2026-10-05 — Polycode Limited is a UK information-technology consultancy (Companies House 10172940, Leeds, incorporated 2016) that operates marginalia, a
+- mzizi-dev/mzizi ★0 pushed 2026-10-05 — Mzizi — a Rust framework for the agentic web. A language, compiler and runtime designed for machine authorship: syntax tuned for small open-
+- rubabijad/Tuwaiq-Generative-Eng-AI-LLM-Bootcamp ★0 pushed 2026-10-05 — Hands-on labs and projects from the Tuwaiq Generative AI Applications Engineering with LLMs Bootcamp, covering NLP, Hugging Face, LoRA/QLoRA
+- ODINN-SciML/Huginn.jl ★3 pushed 2026-10-05 — Fast and flexible glacier ice flow models
+- DecodEPFL/SSM ★2 pushed 2026-10-05 — Pytorch implementation of robust State Space Models (SSM)  with Parallel Scan support.
+- samrishtt/SAM-AI ★1 pushed 2026-10-05 — Sovereign Frontier AI Lab architecture. System 2 RLVR reasoning, DeepSeek-R1 GRPO self-training, deterministic AST sandboxes, and native Win
+- TrueFurina/AGI-Distiller ★7 pushed 2026-10-05 — A living knowledge distillation system that self-evolves by reading technical content. Self-improving skill/knowledge pipeline for AI agents
+- lindermanlab/switching-linear-attention ★3 pushed 2026-10-05 — Official Repository for Switching Linear Attention, COLM 2026
+- installmentdebthydrastiscanadensis1541/awqat ★0 pushed 2026-10-05 — Track daily prayer times and adhan alerts in a lightweight Rust panel for Omarchy.
+- zephyrhasib/clinical-slm-consistency ★0 pushed 2026-10-05 — Supplementary material and analysis outputs for "Quantization Effects on Stochastic Consistency in Clinical Note Generation Using Small Lang
+- Carlinaphocine1904/MedusaDLLS-5-Manager ★0 pushed 2026-10-05 — Enable DLSS 5 in games with MedusaDLLS5, an app leveraging NVIDIA neural rendering for superior image quality and performance.
+- electricapp/sme-gemm ★0 pushed 2026-10-05 — Streaming-mode SME GEMM kernels for Apple M4+: f16/bf16/f32/f64, i8/i16 and 4-bit weights, fused epilogues, flash attention.
+- Juniperusnutrientartery2964/long-horizon-cpu-llm ★0 pushed 2026-10-05 — Run persistent KV-reuse experiments and evaluate long-context answers with a CPU-only LLM inference tool featuring chat, dashboards, and rep
+- Netb2469/vdn-minimax-h3 ★0 pushed 2026-10-05 — Accelerate video generation with hybrid-attention linear and softmax branches, achieving near-lossless quality and up to 10x faster inferenc
+- cellfree-polygamy3184/glm-5.3-flash-2x-rtx-pro-6000-blackwell ★0 pushed 2026-10-05 — Deploy GLM-5.3 Flash with DFlash2 speculative decoding on dual RTX PRO 6000 Blackwell 96GB GPUs, enabling one-million-token context and 16-i
+- sxmimhd/knowledgeforge ★1 pushed 2026-10-05 — An enterprise-grade Retrieval-Augmented Generation (RAG) platform built with FastAPI, React, Qdrant, PostgreSQL, and local/cloud LLMs. Desig
+- Beatau9610/ComfyUI_sol-attn_Blackwell ★1 pushed 2026-10-05 — Accelerate MiniMax H3 video generation on RTX 5090 with Sol-Attn sparse attention, delivering up to 2x faster FlexAttention kernels.
+- saraswathiv-creator/Vision-Mamba_Fuzzy-Inference-for-Wound-Assessment ★0 pushed 2026-10-05 — 
+- Robertoherrera0/QA-retrieval-pipeline ★0 pushed 2026-10-05 — Retrieval-augmented extractive question answering pipeline.
+- nordineqarafi/Three-tank-control-matlab-simulink ★0 pushed 2026-10-05 — MATLAB/Simulink state-space modelling and control of a three-tank system, with pole-placement state feedback, integral action, static compen
+- piyushgargog/DocuLens ★2 pushed 2026-10-05 — A Retrieval-Augmented Generation (RAG) tool that answers questions about any PDF you upload, grounded strictly in the document's content wit
+- KothaVivekanandhaReddy/llm-fundamentals ★0 pushed 2026-10-05 — Hands-on implementations and experiments covering LLM fundamentals, fine-tuning, quantization, and modern LLM engineering.
+- Marwan280/mini-arabic-gpt ★0 pushed 2026-10-05 — A small GPT language model built from scratch and trained on Arabic text.
+- jlcarrascof/support-agent-rag ★0 pushed 2026-10-05 — AI-powered customer support agent built with TypeScript and Node.js. Uses RAG with PostgreSQL and pgvector, tool-calling to resolve real cas
+- bmcclintock/langevinSSM ★4 pushed 2026-10-05 — Langevin diffusion state-space models
+- xnetsc/webpytorch ★0 pushed 2026-10-05 — A PyTorch-compatible ML SDK that runs in the browser — train and run CNNs, Transformers, and LLMs on WebGPU/WebGL via Pyodide, with a torch-
+- Red-Weasel/machx-inference-engine ★4 pushed 2026-10-05 — C++/SYCL local LLM inference for Intel Arc GPUs, with XMX kernels, quantized models, multi-GPU execution and GLM-5.3-Flash support.
+- tenzin-selden/SCRATNET-Handwritten-Word-Recognition ★0 pushed 2026-10-05 — SCRATNET: Sparse Contextual Residual Attention Network for Offline Handwritten Word Recognition
+- bishalranjit0606/LangSmith_Projects ★0 pushed 2026-10-05 — Practice projects for LangSmith, the tool used to trace and evaluate LLM applications. The repo moves from a simple model call and a two-ste
+- dfed25/mlx-gptq ★0 pushed 2026-10-05 — GPTQ quantization for MLX language models on Apple Silicon, packed into MLX's own format
+- teacher57/qwen3-14b-tau-train ★0 pushed 2026-10-05 — Improving Qwen3-14B on τ-bench / τ³ retail: GRPO (a failed run and its eval collapse), distillation from Qwen3-32B, lookup-and-confirmation 
+- tfan2437/flash-attention-lab ★0 pushed 2026-10-05 — FlashAttention-2 prefill and split-KV decode kernels written from scratch in CUDA and Triton, profiled on H100 and integrated into PyTorch a
+- Jaiadithya71/Linear_Attention_Experimentation ★0 pushed 2026-10-05 — 
+- MatthewLacerda2/TinyRefinementModel ★2 pushed 2026-10-05 — Latent Reasoning Model
+- naomili0924/looped-dit-video ★0 pushed 2026-10-05 — Looped Diffusion Transformer extended to text-to-video on the FLUX 3 Action layout (from scratch, WebVid)
+- Amal-David/mlx-porting-skill ★5 pushed 2026-10-05 — MLX Porting Toolkit — an agent-guided, evidence-gated pipeline (scaffold → convert → parity → benchmark) plus a portable skill for porting P
+- boddetijayanth22/Enterprise-Knowledge-Assistant ★2 pushed 2026-10-05 — Production-inspired Retrieval-Augmented Generation (RAG) application for intelligent document search using FastAPI, Streamlit, Qdrant, Sente
+- yjl745148-creator/evolutionary-model-merge ★0 pushed 2026-10-05 — Evolutionary (CMA-ES) merging of two same-architecture LLMs, with safety (ASR) and dialogue evaluation. For AI-safety research.
+- dheiver2/visao-clinica ★0 pushed 2026-10-05 — Triagem clínica por visão computacional (webcam + MediaPipe) com LLM local BitNet b1.58 — app desktop offline
+- christopherrobertbrooks-tech/legacy-gpu-llm-notes ★0 pushed 2026-10-05 — Measured llama.cpp and quantization results on Tesla V100 (sm_70), Pascal GTX 1070, and RTX 4070 - hardware most projects don't test on
+- ShaikhWarsi/HumanEval ★0 pushed 2026-10-05 — A cognitive skills testing platform with interactive games for memory, reaction time, typing, and aim training. Built with Next.js and TypeS
+- sumukh-bhat-04/PDF-Q-A-Assistant ★0 pushed 2026-10-05 — A Retrieval-Augmented Generation (RAG) application for asking questions and retrieving answers from PDF documents using LLMs.  Save it.
+- Szhenger/see-lm ★1 pushed 2026-10-05 — This is my small language model.
+- SharadhNaidu/synapse-sr ★1 pushed 2026-10-05 — SYNAPSE-SR: Sentinel-2 super-resolution from 10 m to 2 m resolution. Physics-consistent deep learning with per-pixel trust maps and calibrat
+- luisroayerdi/MLIR-FlashAttention ★1 pushed 2026-10-05 — This projects aims to develop a language and hardware agnostic MLIR compiler pipeline implementation of the different optimizations of the F
+- junfennie162-sketch/fandou-t-mac ★1 pushed 2026-10-05 — T-MAC LUT low-bit LLM inference ported to HarmonyOS — BitNet-b1.58-3B @2.44bpw runs 22.00 tok/s on a retail arm64 phone (vs 15.94 desktop Q4
+- Jaiadithya71/linear-attention-benchmark ★0 pushed 2026-10-05 — Honest, measured benchmarks of softmax, SDPA, local-window and linear attention on a T4 GPU
+- pierre427/mlx2 ★2 pushed 2026-10-05 — EXPERIMENTAL — research-grade MLX inference runtime for Apple Silicon (capability-routed serving, APCv2 prefix cache, speculative decoding).
+- UgoLomoio/scHFBiMamba ★0 pushed 2026-10-05 — scHFBiMamba: a Bidirectional-Mamba model for decoding heart failure subtypes from single-cell data
+- alan-turing-institute/model-merging ★0 pushed 2026-10-05 — 
+- tenzin-selden/scratnet-handwriting-recognition ★0 pushed 2026-10-05 — SCRATNET: Sparse Contextual Residual Attention Network for Handwritten Word Recognition
+- ranjithrajv/awesome-cpu-first-ai ★5 pushed 2026-10-05 — Curated, evidence-backed list of runtimes, formats & tools for running AI inference on CPU — start with CPU, justify the GPU.
+- Manishthakur99/nanogpt ★0 pushed 2026-10-05 — 
+- ilan4ever/Dflash-Console ★3 pushed 2026-10-05 — Local Windows control panel for llama-server and DFlash speculative-decoding engines.
+- mlavergn/zignanogpt ★0 pushed 2026-10-05 — Zig port of Andrej Karpathy's NanoChat / NanoGPT Python implementation.
+- baolinhnguyen013a-dotcom/Taiwan-Polling-Project ★1 pushed 2026-10-05 — Dynamic Bayesian State-Space Model for Taiwan Presidential Polling Aggregation (2012–2024)
+- Native-Neo/SmaulBRAIN ★1 pushed 2026-10-05 — SmaulBRAIN Means A Smaul (Small) Byte-level Recurrent Adaptive Intelligent Network. A continually learning, sparse, dynamically growing neur
+- Cocallian/SOPAIDict ★0 pushed 2026-10-05 — A Retrieval Augmented Generative based system for SOP retrival for stakeholders in companies or businesses, based off of SAHPRA's guideline 
+- TiandaSun/KG_GRPO ★0 pushed 2026-10-05 — EMNLP 2026 Main: GRPO training collapse and interface feedback in knowledge-graph tool use.
+- thepono1/openreach ★0 pushed 2026-10-05 — Open-source, cross-OS computer-use tool for any LLM harness
+- omkarmusle510-web/MAMBA-AI ★0 pushed 2026-10-05 — The user tells Mamba what they want to accomplish. Mamba understands the context, decides what needs to happen, chooses the appropriate AI m
+- invaliddayta/llama.cpp-opt ★0 pushed 2026-10-05 — llama.cpp fork tuned for speculative decoding on sm_86: int8 small-batch GEMM, fused q4 KV attention, GPU tool grammar, DFlash2
+- invaliddayta/llm-opt ★0 pushed 2026-10-05 — Making a 27B model decode fast on one RTX 3090: kernels, benchmarks and measurements for llama.cpp speculative decoding
+- aujurd22/flymemory ★3 pushed 2026-10-05 — Long-term memory layer for personal AI agents: chunked semantic+lexical recall, time decay, semantic dedup, model-driven supersede. Drosophi
+- commonsense-ai/coop ★5 pushed 2026-10-05 — A small language model pretrained by volunteers — pseudo-gradients arrive as Hugging Face PRs, a stateless GitHub Actions cron aggregates th
+- Aasxd/Financial-News-RAG ★0 pushed 2026-10-05 — Retrieval-augmented generation for financial news summarisation, cutting unsupported claims by 82%.
+- Tenjiixx/gguf-peek ★0 pushed 2026-10-05 — look inside a .gguf model without loading it — quant mix, bpw, gqa layout, kv cache vram. stdlib only.
+- rahulboby/ChatVeritas ★0 pushed 2026-10-05 — Built an advanced Retrieval-Augmented Generation (RAG) system utililzing text datasets chunked dynamically. Engineered a dual-stage retrieva
+- majax7714/Hobbes ★3 pushed 2026-10-05 — Multilingual context derivation and agent enforcement engine. Built to limit model degration over long tasks and provide accurate, honest, a
+- Gadugcc/State-Space-Model ★0 pushed 2026-10-05 — Repositório focado para  guardar o código usado para a construção do seminário 
+- FLX-OSS/FluxServe ★7 pushed 2026-10-05 — A Flexible and High-Performance Inference Serving Engine for Open Diffusion Language Models
+- Thomas-Nguyen12/Mini-Intern ★0 pushed 2026-10-05 — A small language model project that will be used as the basis of AI agents in other projects.
+- itsmeduncan/civic-slm ★0 pushed 2026-10-05 — A domain-specialized small language model for U.S. local government — cities, counties, townships across all 50 states. Open weights, open d
+- geetatawniya/company-policy-rag-assistant ★0 pushed 2026-10-05 — A Retrieval-Augmented Generation (RAG) assistant that answers company policy questions using PDF documents, embeddings, vector similarity se
+- mojolearn/mojolearn ★4 pushed 2026-10-05 — GPU machine learning in Mojo that supports bitwise identical inference and training on Apple Metal, NVIDIA CUDA and AMD HIP.
+- EvaxHe/Awesome-LLM-Agent-Experience-Lifecycle ★2 pushed 2026-10-05 — The Experience Lifecycle of lifelong, self-evolving & memory-augmented LLM agents — acquisition, representation, retrieval, consolidation, a
+- yogesharya061/pyspark-dbt-analytics ★0 pushed 2026-10-05 — Retail analytics pipeline: PySpark validation and deduplication, Parquet handoff, dbt models on DuckDB, data quality tests and GitHub Action
+- Krasner/tf-flash-attention-2 ★0 pushed 2026-10-05 — TF wrapper for Flash Attention 2
+- jamesgreen-c/coordinate-rbsmc ★0 pushed 2026-10-05 — Rao–Blackwellised sequential Monte Carlo for high-dimensional state-space models with single-coordinate observations with said coordinates v
+- lazarevtill/strix-halo-llm ★1 pushed 2026-10-05 — Measured llama.cpp Vulkan tuning for AMD Strix Halo (Ryzen AI MAX+ 395 / gfx1151), plus an eval harness with a catalogue of 13 bugs that eac
+- rasyosef/train-dspark-draft-models ★4 pushed 2026-10-05 — Code to train and evaluate DSpark draft models for speculative decoding using the speculators library and vllm
+- mayflower/boldt-posttrain-autoresearch ★0 pushed 2026-10-05 — German-first post-training AutoResearch loop for boldt-dc-1b-german-it-16k-dpo: branch → specialist → merge → eval → promote, stdlib-first a
+- Daliush/shardbound ★0 pushed 2026-10-05 — Fully invented TCG used as a testbed for AI engineering: an MCP coach agent, a RAG + LoRA rules Arbiter, MCTS and LLM opponents, and a rigor

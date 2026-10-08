@@ -1,0 +1,5 @@
+=== E4j_moe_engram_noloop Mon Oct  5 23:02:34 UTC 2026
+FINAL {"1": {"main": {"loss": 0.9896731277306875, "ppl": 2.6903549261874895, "bpb": 1.4277965134781325}, "fwd_flops_per_token": 1582080.0}}
+=== E4g_loop3_moe_fixedR_noinj Mon Oct  5 23:11:06 UTC 2026
+FINAL {"1": {"main": {"loss": 1.1744130750497181, "ppl": 3.2362429545817353, "bpb": 1.6943199193293865}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0292966465155284, "ppl": 2.799096387973809, "bpb": 1.4849611675315932}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.010206401348114, "ppl": 2.7461677692552064, "bpb": 1.45741976549921}, "fwd_flops_per_token": 2572288.0}
+=== E4h_loop3_moe_unif_idinj Mon Oct  5 23:26:28 UTC 2026

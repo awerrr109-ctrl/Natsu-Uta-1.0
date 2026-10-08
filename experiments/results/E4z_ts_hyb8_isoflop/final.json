@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "E4z_ts_hyb8_isoflop",
+  "params": 1616272,
+  "params_nonembed": 1582992,
+  "flops_per_token_fwd": 3607552.0
+ },
+ "train_flops": 17731839590400.0,
+ "tokens": 1638400,
+ "scored_tokens": 1638400,
+ "wall_s": 948.8981969356537,
+ "peak_rss_mb": 791.5234375,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.9977352470159531,
+    "ppl": 2.7121325574948,
+    "bpb": 1.4394276929900405
+   },
+   "fwd_flops_per_token": 3607552.0
+  }
+ }
+}

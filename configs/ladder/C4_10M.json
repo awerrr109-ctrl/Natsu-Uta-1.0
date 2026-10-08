@@ -1,0 +1,25 @@
+{
+ "name": "C4_10M",
+ "model": {
+  "moe_shared": 1,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "d_model": 320,
+  "n_heads": 5,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "n_prelude": 1,
+  "n_core": 4,
+  "n_coda": 1,
+  "pattern": "ggga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_expert_mult": 0.33,
+  "engram_slots": 4096,
+  "engram_heads": 2,
+  "engram_dim": 32,
+  "vocab_size": 4096
+ }
+}

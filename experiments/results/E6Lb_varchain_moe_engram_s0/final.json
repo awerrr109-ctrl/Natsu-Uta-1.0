@@ -1,0 +1,31 @@
+{
+ "info": {
+  "name": "E6Lb_varchain_moe_engram_s0",
+  "params": 825480,
+  "params_nonembed": 792200,
+  "flops_per_token_fwd": 1573888.0
+ },
+ "train_flops": 36987627110400.0,
+ "tokens": 7833600,
+ "scored_tokens": 998400,
+ "wall_s": 30013.194031238556,
+ "peak_rss_mb": 592.390625,
+ "steps_to": {},
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 0.8905833684481107,
+    "ppl": 2.4365506435362176,
+    "bpb": 1.2848402091582778,
+    "acc": 0.0
+   },
+   "long20": {
+    "loss": 0.8982865810394287,
+    "ppl": 2.4553923889466045,
+    "bpb": 1.2959535957626858,
+    "acc": 0.0
+   },
+   "fwd_flops_per_token": 1573888.0
+  }
+ }
+}

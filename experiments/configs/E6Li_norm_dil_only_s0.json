@@ -1,0 +1,55 @@
+{
+ "name": "E6Li_norm_dil_only_s0",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1,
+  "pattern": "ga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_shared": 1,
+  "moe_expert_mult": 0.17,
+  "engram_slots": 512,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "engram_heads": 2,
+  "engram_dim": 32,
+  "engram_paper": true,
+  "engram_ablate": "noresid,randconv"
+ },
+ "train": {
+  "seq": 112,
+  "batch": 32,
+  "steps": 2400,
+  "lr": 0.003,
+  "warmup": 60,
+  "eval_every": 800,
+  "log_every": 200,
+  "threads": 2,
+  "eval_batches": 4,
+  "save": false,
+  "seed": 0,
+  "engram_lr_mult": 5.0
+ },
+ "data": {
+  "kind": "synthetic",
+  "task": "varchain",
+  "kw": {
+   "n_vars": 8,
+   "n_steps": 12
+  }
+ },
+ "extra_eval": {
+  "long20": {
+   "n_steps": 20
+  }
+ },
+ "note": "N7: paper path minus residual minus zero-init = v1 + RMSNorm + dilation 3 (+lr5). With E6Lh (v1+lr5) isolates norm/dilation vs lr."
+}

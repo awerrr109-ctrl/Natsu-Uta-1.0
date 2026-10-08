@@ -1,0 +1,49 @@
+=== B3_bpe_loop3fixed_moe Tue Oct  6 00:44:42 UTC 2026
+FINAL {"1": {"main": {"loss": 3.3508989214897156, "ppl": 28.528366882963983, "bpb": 1.2203885735878093}, "fwd_flops_per_token": 2441216.0}, "2": {"main": {"loss": 3.158623218536377, "ppl": 23.538166698610663, "bpb": 1.1503622683006003}, "fwd_flops_per_token": 2964992.0}, "3": {"main": {"loss": 3.1278433998425803, "ppl": 22.824702668913954, "bpb": 1.139152339290174}, "fwd_flops_per_token": 3488768.
+=== E4k_loop3fixed_moe_engram Tue Oct  6 00:53:45 UTC 2026
+FINAL {"1": {"main": {"loss": 1.1239900787671406, "ppl": 3.0771076428113973, "bpb": 1.6215749126457493}, "fwd_flops_per_token": 1582080.0}, "2": {"main": {"loss": 1.0114881197611492, "ppl": 2.749689839719456, "bpb": 1.4592688942975118}, "fwd_flops_per_token": 2048512.0}, "3": {"main": {"loss": 0.993099570274353, "ppl": 2.69958908388506, "bpb": 1.4327398251437697}, "fwd_flops_per_token": 2514944.0}
+=== E4p_loop3_moe_lookahead_gate Tue Oct  6 01:10:08 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0488559752702713, "ppl": 2.8543837638385368, "bpb": 1.5131793141291776}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0158066997925441, "ppl": 2.761590273345926, "bpb": 1.4654992882924875}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.012487346927325, "ppl": 2.752438777683883, "bpb": 1.4607104743748753}, "fwd_flops_per_token": 2572288.0
+=== E4m_loop3_moe_fixed_then_unif Tue Oct  6 01:29:51 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0545075635115306, "ppl": 2.87056123670237, "bpb": 1.521332832457989}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0189753025770187, "ppl": 2.7703545338729874, "bpb": 1.470070615816196}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.0256139387687047, "ppl": 2.7888070918858228, "bpb": 1.4796481433282072}, "fwd_flops_per_token": 2572288.0}
+=== E4o_loop3_moe_fixed_lti Tue Oct  6 01:44:31 UTC 2026
+scripts/run_queue.sh: line 13: 16327 Killed                  python3 -m natsu.train --config "$cfg" > "$RES/$n.stdout" 2>&1
+FAILED E4o_loop3_moe_fixed_lti
+{"step": 100, "loss": 1.532285451889038, "lr_f": 1.0, "gnorm": 0.8698285222053528, "tokens": 206848, "scored": 206848, "scored_tokens": 206848, "tok_s": 1071.2728609071341, "rss_mb": 276.10546875, "peak_rss_mb": 719.22265625, "train_flops": 1596217884672.0, "loops": 3}
+=== E4n_loop3_moe_poissonR Tue Oct  6 01:50:17 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0687641948461533, "ppl": 2.911778884253483, "bpb": 1.5419008037842312}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0452251732349396, "ppl": 2.84403885298537, "bpb": 1.507941174038355}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.041744738817215, "ppl": 2.8341575678332425, "bpb": 1.5029199685637644}, "fwd_flops_per_token": 2572288.0},
+=== E5a_distill_E4z_to_moe Tue Oct  6 02:05:56 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0065950105587642, "ppl": 2.7362681706861838, "bpb": 1.4522096299167029}, "fwd_flops_per_token": 1491968.0}}
+=== E5b_distill_E4z_to_moe_engram Tue Oct  6 02:19:15 UTC 2026
+FINAL {"1": {"main": {"loss": 0.9747654547293981, "ppl": 2.6505454651683165, "bpb": 1.406289287567978}, "fwd_flops_per_token": 1582080.0}}
+=== E8a_add_moe_noloop Tue Oct  6 02:32:14 UTC 2026
+FINAL {"1": {"main": {"loss": 0.6028121332416619, "ppl": 1.8272500527404618, "bpb": 0.8696740752154427, "acc": 0.296875}, "d6": {"loss": 5.319274329542492, "ppl": 204.23562044883238, "bpb": 7.6740906963589195, "acc": 0.0}, "fwd_flops_per_token": 1438720.0}}
+=== E8b_add_loop3fixed_moe Tue Oct  6 02:41:37 UTC 2026
+FINAL {"1": {"main": {"loss": 6.066961423591648, "ppl": 431.3679437002982, "bpb": 8.752775159080317, "acc": 0.09375}, "d6": {"loss": 9.89826438673097, "ppl": 19895.809024141392, "bpb": 14.280176944144607, "acc": 0.0}, "fwd_flops_per_token": 1438720.0}, "2": {"main": {"loss": 2.3888418975966927, "ppl": 10.900862315249107, "bpb": 3.4463703591305297, "acc": 0.26953125}, "d6": {"loss": 6.9115981816996
+=== E6a_varchain_moe_noloop Tue Oct  6 03:58:14 UTC 2026
+FINAL {"1": {"main": {"loss": 0.5415119666319627, "ppl": 1.7186033697224352, "bpb": 0.7812366288419624, "acc": 0.015625}, "long20": {"loss": 0.587150650365012, "ppl": 1.798855537819079, "bpb": 0.8470793315363325, "acc": 0.046875}, "fwd_flops_per_token": 1483776.0}}
+=== E6b_varchain_moe_engram Tue Oct  6 04:15:02 UTC 2026
+FINAL {"1": {"main": {"loss": 0.9168774714836707, "ppl": 2.501467279437177, "bpb": 1.3227745812123037, "acc": 0.0078125}, "long20": {"loss": 0.9308192559650966, "ppl": 2.5365864401688936, "bpb": 1.3428883245447996, "acc": 0.0}, "fwd_flops_per_token": 1573888.0}}
+=== E6c_varchain_loop3fixed_moe Tue Oct  6 04:31:06 UTC 2026
+FINAL {"1": {"main": {"loss": 1.8391304016113281, "ppl": 6.291065181536106, "bpb": 2.653304309952791, "acc": 0.0}, "long20": {"loss": 1.8119545323508126, "ppl": 6.122402178578295, "bpb": 2.614097818138798, "acc": 0.0}, "fwd_flops_per_token": 1483776.0}, "2": {"main": {"loss": 0.9574181850139911, "ppl": 2.6049622533250405, "bpb": 1.381262467576597, "acc": 0.015625}, "long20": {"loss": 0.98110779694
+=== E4c_ts_hyb_moe_noloop_s1 Tue Oct  6 05:27:47 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0213303963343303, "ppl": 2.7768866674155275, "bpb": 1.4734682979006979}, "fwd_flops_per_token": 1491968.0}}
+=== E4j_moe_engram_noloop_s1 Tue Oct  6 05:34:49 UTC 2026
+FINAL {"1": {"main": {"loss": 0.9874587009350458, "ppl": 2.6844039236107573, "bpb": 1.4246017709216487}, "fwd_flops_per_token": 1582080.0}}
+=== E4g_loop3_moe_fixedR_noinj_s1 Tue Oct  6 05:41:53 UTC 2026
+FINAL {"1": {"main": {"loss": 1.153315355380376, "ppl": 3.168680817509427, "bpb": 1.6638823437883612}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0382580955823262, "ppl": 2.824293078493544, "bpb": 1.4978898056594414}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.0182968080043793, "ppl": 2.768475500886394, "bpb": 1.469091755060979}, "fwd_flops_per_token": 2572288.0},
+=== E4i_loop3_moe_fixedR_idinj Tue Oct  6 05:55:57 UTC 2026
+FINAL {"1": {"main": {"loss": 2.136948506037394, "ppl": 8.473541177802911, "bpb": 3.0829650122952277}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.1182617644468944, "ppl": 3.059531392241682, "bpb": 1.6133107019832766}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.0288299868504207, "ppl": 2.7977904673247385, "bpb": 1.4842879199469594}, "fwd_flops_per_token": 2572288.0
+=== E4e2_loop3fixed_moe_sharedkv Tue Oct  6 06:10:21 UTC 2026
+FINAL {"1": {"main": {"loss": 1.190327872832616, "ppl": 3.288159128710525, "bpb": 1.717280119167524}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0331669350465138, "ppl": 2.809950689712072, "bpb": 1.4905448136020554}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.0133653084437053, "ppl": 2.7548563741299095, "bpb": 1.4619771051006485}, "fwd_flops_per_token": 2572288.0}
+=== E4l_loop3fixed_moe_selfdistill Tue Oct  6 07:01:37 UTC 2026
+scripts/run_queue.sh: line 13: 20210 Killed                  python3 -m natsu.train --config "$cfg" > "$RES/$n.stdout" 2>&1
+FAILED E4l_loop3fixed_moe_selfdistill
+{"step": 700, "loss": 1.053689956665039, "lr_f": 0.38762756430420553, "gnorm": 0.39178910851478577, "tokens": 1435648, "scored": 1435648, "scored_tokens": 1435648, "tok_s": 1058.6990004081013, "rss_mb": 274.125, "peak_rss_mb": 841.828125, "train_flops": 11078700367872.0, "loops": 3}
+=== E4c_ts_hyb_moe_noloop_s2 Tue Oct  6 07:28:53 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0239188075065613, "ppl": 2.7840837023139864, "bpb": 1.4772025858626572}, "fwd_flops_per_token": 1491968.0}}
+=== E4j_moe_engram_noloop_s2 Tue Oct  6 07:37:13 UTC 2026
+FINAL {"1": {"main": {"loss": 0.988477865854899, "ppl": 2.6871411685354896, "bpb": 1.426072115097369}, "fwd_flops_per_token": 1582080.0}}
+=== E4g_loop3_moe_fixedR_noinj_s2 Tue Oct  6 07:45:56 UTC 2026
+FINAL {"1": {"main": {"loss": 1.171472042798996, "ppl": 3.226739042188042, "bpb": 1.690076906686175}, "fwd_flops_per_token": 1491968.0}, "2": {"main": {"loss": 1.0406882266203563, "ppl": 2.831164827006979, "bpb": 1.5013957436567178}, "fwd_flops_per_token": 2032128.0}, "3": {"main": {"loss": 1.0211017578840256, "ppl": 2.7762518369273126, "bpb": 1.4731384423422866}, "fwd_flops_per_token": 2572288.0}
+QUEUE_DONE

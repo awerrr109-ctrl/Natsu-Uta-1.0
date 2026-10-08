@@ -1,0 +1,246 @@
+[paper] H1.1_recurrent_depth_sharing support 'universal transformer recurrent depth': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing support 'looped transformer reasoning': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing support 'recurrent depth latent reasoning test-time compute': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing support 'parameter sharing transformer layers': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing support 'relaxed recursive transformers layer-wise LoRA': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing support 'ALBERT cross-layer parameter sharing': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing support 'mixture of recursions adaptive token depth': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing refute  'parameter sharing transformer performance degradation': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing refute  'looped transformer length generalization failure': arxiv=0 openalex=0 crossref=100
+[paper] H1.1_recurrent_depth_sharing refute  'weight tying layers scaling law limitations': arxiv=0 openalex=0 crossref=100
+[paper] H1.2_low_rank_tensor support 'low-rank pretraining language model': arxiv=0 openalex=0 crossref=100
+[paper] H1.2_low_rank_tensor support 'tensor train decomposition transformer': arxiv=0 openalex=0 crossref=100
+[paper] H1.2_low_rank_tensor support 'GaLore gradient low-rank projection': arxiv=0 openalex=0 crossref=100
+[paper] H1.2_low_rank_tensor support 'monarch matrices structured': arxiv=0 openalex=0 crossref=100
+[paper] H1.2_low_rank_tensor support 'kronecker factorized layers language model': arxiv=0 openalex=0 crossref=100
+[paper] H1.2_low_rank_tensor refute  'low-rank pretraining fails to match full rank': arxiv=0 openalex=0 crossref=100
+[paper] H1.2_low_rank_tensor refute  'structured matrices language model quality gap': arxiv=0 openalex=0 crossref=100
+[paper] H1.3_sparse_moe support 'fine-grained mixture of experts scaling law': arxiv=0 openalex=0 crossref=100
+[paper] H1.3_sparse_moe support 'shared experts DeepSeekMoE': arxiv=0 openalex=0 crossref=95
+[paper] H1.3_sparse_moe support 'mixture of experts parameter efficient upcycling': arxiv=0 openalex=0 crossref=100
+[paper] H1.3_sparse_moe support 'expert merging compression MoE': arxiv=0 openalex=0 crossref=100
+[paper] H1.3_sparse_moe support 'mixture of a million experts product key': arxiv=0 openalex=0 crossref=100
+[paper] H1.3_sparse_moe refute  'mixture of experts dense comparison same total parameters': arxiv=0 openalex=0 crossref=100
+[paper] H1.3_sparse_moe refute  'MoE training instability router collapse': arxiv=0 openalex=0 crossref=89
+[paper] H1.3_sparse_moe refute  'MoE reasoning underperforms dense': arxiv=0 openalex=0 crossref=100
+[paper] H1.4_memory_layers support 'product key memory layers scale': arxiv=0 openalex=0 crossref=100
+[paper] H1.4_memory_layers support 'memory layers at scale': arxiv=0 openalex=0 crossref=100
+[paper] H1.4_memory_layers support 'large memory layers language model knowledge': arxiv=0 openalex=0 crossref=100
+[paper] H1.4_memory_layers support 'ultra sparse memory network': arxiv=0 openalex=0 crossref=100
+[paper] H1.4_memory_layers refute  'product key memory underutilization': arxiv=0 openalex=0 crossref=100
+[paper] H1.4_memory_layers refute  'memory layer training difficulty': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths support 'mixture of depths dynamically allocating compute': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths support 'early exit language model': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths support 'adaptive computation time transformer': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths support 'token skipping layer skip LLM': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths support 'CALM confident adaptive language modeling': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths refute  'mixture of depths autoregressive causality problem': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths refute  'early exit degrades quality calibration': arxiv=0 openalex=0 crossref=100
+[paper] H2.1_mixture_of_depths refute  'dynamic depth hardware inefficiency batching': arxiv=0 openalex=0 crossref=100
+[paper] H2.2_learned_budget support 'learned halting ponder net': arxiv=0 openalex=0 crossref=100
+[paper] H2.2_learned_budget support 'adaptive compute budget reasoning LLM': arxiv=0 openalex=0 crossref=100
+[paper] H2.2_learned_budget support 'difficulty-aware compute allocation reasoning': arxiv=0 openalex=0 crossref=100
+[paper] H2.2_learned_budget refute  'ponder cost instability halting collapse': arxiv=0 openalex=0 crossref=100
+[paper] H2.2_learned_budget refute  'overthinking reasoning models': arxiv=0 openalex=0 crossref=100
+[paper] H2.3_activation_sparsity support 'activation sparsity LLM relu': arxiv=0 openalex=0 crossref=100
+[paper] H2.3_activation_sparsity support 'deja vu contextual sparsity': arxiv=0 openalex=0 crossref=100
+[paper] H2.3_activation_sparsity support 'powerinfer sparse activation': arxiv=0 openalex=0 crossref=100
+[paper] H2.3_activation_sparsity support 'squared relu primer': arxiv=0 openalex=0 crossref=100
+[paper] H2.3_activation_sparsity refute  'activation sparsity quality loss swiglu': arxiv=0 openalex=0 crossref=100
+[paper] H2.3_activation_sparsity refute  'contextual sparsity predictor overhead': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention support 'hybrid mamba attention language model': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention support 'jamba hybrid': arxiv=0 openalex=0 crossref=99
+[paper] H3.1_hybrid_ssm_attention support 'samba hybrid state space': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention support 'zamba shared attention': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention support 'griffin gated linear recurrence local attention': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention support 'hymba hybrid heads': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention support 'mamba-2 state space duality': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention refute  'state space models recall limitation': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention refute  'repeat after me transformers better than state space copying': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention refute  'mamba in-context learning weakness': arxiv=0 openalex=0 crossref=100
+[paper] H3.1_hybrid_ssm_attention refute  'linear attention associative recall gap': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'gated delta networks': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'DeltaNet parallelizing linear transformers delta rule': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'gated linear attention hardware efficient': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'RWKV-7 goose': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'RWKV eagle finch': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'retentive network': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'HGRN2 hierarchically gated': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'xLSTM': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear support 'longhorn state space online learning': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear refute  'linear attention fails long context retrieval': arxiv=0 openalex=0 crossref=100
+[paper] H3.2_gated_delta_linear refute  'linear RNN state size capacity limit': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention support 'native sparse attention': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention support 'mixture of block attention': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention support 'sliding window attention global tokens': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention support 'multi-head latent attention': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention support 'differential transformer': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention support 'landmark attention': arxiv=0 openalex=0 crossref=90
+[paper] H3.3_sparse_attention support 'quest query aware sparsity kv': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention refute  'sparse attention long context quality degradation': arxiv=0 openalex=0 crossref=100
+[paper] H3.3_sparse_attention refute  'sliding window attention fails needle': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers support 'learning to learn at test time RNN expressive hidden states': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers support 'titans learning to memorize at test time': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers support 'test-time training long context': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers support 'fast weight programmers linear transformers': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers support 'atlas memory test time': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers support 'lattice memory': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers refute  'test-time training layer throughput overhead': arxiv=0 openalex=0 crossref=100
+[paper] H3.4_test_time_training_layers refute  'fast weights instability': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning support 'coconut chain of continuous thought': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning support 'latent reasoning language model': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning support 'pause tokens': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning support 'implicit chain of thought': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning support 'hierarchical reasoning model': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning support 'tiny recursive model reasoning': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning refute  'continuous thought fails scaling': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning refute  'pause tokens no improvement': arxiv=0 openalex=0 crossref=100
+[paper] H4.1_latent_reasoning refute  'latent reasoning interpretability failure': arxiv=0 openalex=0 crossref=100
+  ! HTTP Error 429: Too Many Requests -> retry in 65s
+[paper] H4.2_verifier_search support 'scaling test-time compute optimally': arxiv=0 openalex=0 crossref=100
+[paper] H4.2_verifier_search support 'process reward model step verification': arxiv=0 openalex=0 crossref=100
+[paper] H4.2_verifier_search support 'best-of-n verifier small model': arxiv=0 openalex=0 crossref=100
+[paper] H4.2_verifier_search support 'monte carlo tree search LLM reasoning': arxiv=0 openalex=0 crossref=100
+[paper] H4.2_verifier_search support 'self-consistency': arxiv=100 openalex=0 crossref=100
+[paper] H4.2_verifier_search support 'generative verifier': arxiv=100 openalex=0 crossref=100
+[paper] H4.2_verifier_search refute  'reward model overoptimization best of n': arxiv=12 openalex=0 crossref=100
+[paper] H4.2_verifier_search refute  'self-consistency diminishing returns': arxiv=18 openalex=0 crossref=100
+[paper] H4.2_verifier_search refute  'process reward model failure': arxiv=100 openalex=0 crossref=100
+[paper] H4.3_speculative_decoding support 'speculative decoding': arxiv=100 openalex=0 crossref=100
+[paper] H4.3_speculative_decoding support 'medusa multiple decoding heads': arxiv=7 openalex=0 crossref=100
+[paper] H4.3_speculative_decoding support 'EAGLE speculative sampling feature': arxiv=2 openalex=0 crossref=100
+[paper] H4.3_speculative_decoding support 'self speculative decoding layer skip': arxiv=12 openalex=0 crossref=100
+[paper] H4.3_speculative_decoding support 'multi-token prediction': arxiv=100 openalex=0 crossref=100
+[paper] H4.3_speculative_decoding refute  'speculative decoding batch throughput limitation': arxiv=20 openalex=0 crossref=100
+[paper] H4.3_speculative_decoding refute  'multi-token prediction small model hurts': arxiv=0 openalex=0 crossref=100
+[paper] H5.1_quality_filtering support 'fineweb-edu classifier filtering': arxiv=3 openalex=0 crossref=79
+[paper] H5.1_quality_filtering support 'DCLM datacomp language model': arxiv=1 openalex=0 crossref=100
+[paper] H5.1_quality_filtering support 'data selection influence functions LLM': arxiv=26 openalex=0 crossref=100
+[paper] H5.1_quality_filtering support 'semantic deduplication': arxiv=100 openalex=0 crossref=100
+[paper] H5.1_quality_filtering support 'perplexity based data pruning': arxiv=14 openalex=0 crossref=100
+[paper] H5.1_quality_filtering refute  'data filtering reduces diversity': arxiv=100 openalex=0 crossref=100
+[paper] H5.1_quality_filtering refute  'quality filter bias benchmark contamination': arxiv=1 openalex=0 crossref=100
+[paper] H5.2_synthetic_data support 'textbooks are all you need phi': arxiv=0 openalex=0 crossref=100
+[paper] H5.2_synthetic_data support 'synthetic data pretraining rephrasing web': arxiv=4 openalex=0 crossref=100
+[paper] H5.2_synthetic_data support 'tinystories small language model': arxiv=20 openalex=0 crossref=100
+[paper] H5.2_synthetic_data support 'cosmopedia': arxiv=6 openalex=0 crossref=1
+[paper] H5.2_synthetic_data support 'synthetic continued pretraining': arxiv=100 openalex=0 crossref=100
+[paper] H5.2_synthetic_data refute  'model collapse recursive synthetic data': arxiv=33 openalex=0 crossref=100
+[paper] H5.2_synthetic_data refute  'synthetic data diversity limits': arxiv=100 openalex=0 crossref=100
+[paper] H5.3_distillation support 'knowledge distillation pretraining language model': arxiv=100 openalex=0 crossref=100
+[paper] H5.3_distillation support 'minitron pruning distillation': arxiv=6 openalex=0 crossref=100
+[paper] H5.3_distillation support 'reasoning distillation small model': arxiv=100 openalex=0 crossref=100
+[paper] H5.3_distillation support 'on-policy distillation': arxiv=100 openalex=0 crossref=100
+[paper] H5.3_distillation support 'gemma distillation pretraining': arxiv=3 openalex=0 crossref=100
+[paper] H5.3_distillation refute  'distillation scaling laws capacity gap': arxiv=3 openalex=0 crossref=100
+[paper] H5.3_distillation refute  'small models struggle learn from strong reasoners': arxiv=8 openalex=0 crossref=100
+[paper] H5.4_curriculum_mixture support 'data mixing laws': arxiv=100 openalex=0 crossref=100
+[paper] H5.4_curriculum_mixture support 'doremi domain reweighting': arxiv=2 openalex=0 crossref=100
+[paper] H5.4_curriculum_mixture support 'curriculum learning language model pretraining': arxiv=96 openalex=0 crossref=100
+[paper] H5.4_curriculum_mixture support 'annealing high quality data': arxiv=83 openalex=0 crossref=100
+[paper] H5.4_curriculum_mixture refute  'curriculum learning no benefit language model': arxiv=55 openalex=0 crossref=100
+[paper] H6.1_optimizers support 'muon optimizer scalable': arxiv=28 openalex=0 crossref=100
+[paper] H6.1_optimizers support 'SOAP shampoo adam': arxiv=5 openalex=0 crossref=100
+[paper] H6.1_optimizers support 'sophia second order optimizer': arxiv=9 openalex=0 crossref=87
+[paper] H6.1_optimizers support 'schedule free optimizer': arxiv=100 openalex=0 crossref=100
+[paper] H6.1_optimizers support 'lion optimizer': arxiv=100 openalex=0 crossref=100
+[paper] H6.1_optimizers refute  'optimizer benchmark fair comparison language model': arxiv=29 openalex=0 crossref=100
+[paper] H6.1_optimizers refute  'new optimizers speedup diminishes scale': arxiv=1 openalex=0 crossref=100
+[paper] H6.2_memory_saving support '8-bit optimizers block-wise quantization': arxiv=5 openalex=0 crossref=100
+[paper] H6.2_memory_saving support 'reversible transformer memory': arxiv=100 openalex=0 crossref=100
+[paper] H6.2_memory_saving support 'activation checkpointing': arxiv=100 openalex=0 crossref=100
+[paper] H6.2_memory_saving support 'zero offload': arxiv=100 openalex=0 crossref=100
+[paper] H6.2_memory_saving support 'adafactor': arxiv=17 openalex=0 crossref=1
+[paper] H6.2_memory_saving support 'lomo full parameter fine-tuning low memory': arxiv=2 openalex=0 crossref=100
+[paper] H6.2_memory_saving support 'apollo sgd-like memory': arxiv=1 openalex=0 crossref=74
+[paper] H6.2_memory_saving refute  'low precision optimizer state instability': arxiv=12 openalex=0 crossref=100
+[paper] H6.3_quantized_training support 'bitnet 1.58 bit': arxiv=18 openalex=0 crossref=77
+[paper] H6.3_quantized_training support 'fp8 training LLM': arxiv=67 openalex=0 crossref=100
+[paper] H6.3_quantized_training support 'quantization aware training LLM': arxiv=100 openalex=0 crossref=100
+[paper] H6.3_quantized_training support 'scaling laws for precision': arxiv=0 openalex=0 crossref=100
+[paper] H6.3_quantized_training refute  'bitnet scaling gap small models': arxiv=1 openalex=0 crossref=77
+[paper] H6.3_quantized_training refute  'low bit training overtrained models degradation': arxiv=0 openalex=0 crossref=100
+[paper] H6.4_backprop_alternatives support 'forward gradient': arxiv=100 openalex=0 crossref=100
+[paper] H6.4_backprop_alternatives support 'zeroth order optimization LLM MeZO': arxiv=22 openalex=0 crossref=100
+[paper] H6.4_backprop_alternatives support 'local learning rules transformer': arxiv=100 openalex=0 crossref=100
+[paper] H6.4_backprop_alternatives support 'forward-forward algorithm': arxiv=100 openalex=0 crossref=100
+[paper] H6.4_backprop_alternatives refute  'forward gradient variance scaling': arxiv=34 openalex=0 crossref=100
+[paper] H6.4_backprop_alternatives refute  'zeroth order pretraining infeasible': arxiv=0 openalex=0 crossref=100
+[paper] H6.5_schedules_scaling support 'warmup stable decay schedule': arxiv=28 openalex=0 crossref=100
+[paper] H6.5_schedules_scaling support 'muP hyperparameter transfer': arxiv=12 openalex=0 crossref=100
+[paper] H6.5_schedules_scaling support 'compute optimal scaling chinchilla': arxiv=39 openalex=0 crossref=100
+[paper] H6.5_schedules_scaling support 'overtraining small models scaling': arxiv=6 openalex=0 crossref=100
+[paper] H6.5_schedules_scaling refute  'muP transfer failure': arxiv=0 openalex=0 crossref=100
+[paper] H6.5_schedules_scaling refute  'scaling law extrapolation error': arxiv=41 openalex=0 crossref=100
+[paper] H7.1_retrieval support 'RETRO retrieval enhanced transformer': arxiv=4 openalex=0 crossref=100
+[paper] H7.1_retrieval support 'retrieval augmented language model pretraining': arxiv=100 openalex=0 crossref=100
+[paper] H7.1_retrieval support 'kNN-LM': arxiv=15 openalex=0 crossref=56
+[paper] H7.1_retrieval support 'memorizing transformers': arxiv=100 openalex=0 crossref=100
+[paper] H7.1_retrieval refute  'retrieval augmentation hurts reasoning distraction': arxiv=0 openalex=0 crossref=100
+[paper] H7.1_retrieval refute  'RETRO benefits leakage': arxiv=0 openalex=0 crossref=100
+[paper] H7.2_tools support 'toolformer': arxiv=6 openalex=0 crossref=3
+[paper] H7.2_tools support 'program aided language models': arxiv=100 openalex=0 crossref=100
+[paper] H7.2_tools support 'tool integrated reasoning math': arxiv=100 openalex=0 crossref=100
+[paper] H7.2_tools support 'code interpreter reasoning small model': arxiv=100 openalex=0 crossref=100
+[paper] H7.2_tools refute  'tool use small models failure': arxiv=98 openalex=0 crossref=100
+[paper] H7.3_continual support 'continual pretraining LLM forgetting': arxiv=42 openalex=0 crossref=100
+[paper] H7.3_continual support 'replay continual learning language model': arxiv=100 openalex=0 crossref=100
+[paper] H7.3_continual support 'model merging continual': arxiv=100 openalex=0 crossref=100
+[paper] H7.3_continual refute  'catastrophic forgetting continual pretraining': arxiv=100 openalex=0 crossref=100
+[paper] H8.1_rl_verifiable support 'group relative policy optimization': arxiv=100 openalex=0 crossref=100
+[paper] H8.1_rl_verifiable support 'reinforcement learning verifiable rewards reasoning': arxiv=100 openalex=0 crossref=100
+[paper] H8.1_rl_verifiable support 'DPO direct preference optimization': arxiv=100 openalex=0 crossref=100
+[paper] H8.1_rl_verifiable support 'self-play fine-tuning': arxiv=100 openalex=0 crossref=100
+[paper] H8.1_rl_verifiable support 'STaR self-taught reasoner': arxiv=18 openalex=0 crossref=66
+[paper] H8.1_rl_verifiable refute  'does reinforcement learning really incentivize reasoning beyond base model': arxiv=1 openalex=0 crossref=100
+[paper] H8.1_rl_verifiable refute  'spurious rewards RLVR': arxiv=21 openalex=0 crossref=100
+[paper] H8.1_rl_verifiable refute  'RL small models limited': arxiv=100 openalex=0 crossref=95
+[paper] H9.1_quant_kv support 'GPTQ': arxiv=100 openalex=0 crossref=5
+[paper] H9.1_quant_kv support 'AWQ activation aware quantization': arxiv=11 openalex=0 crossref=100
+[paper] H9.1_quant_kv support 'KV cache quantization': arxiv=100 openalex=0 crossref=100
+[paper] H9.1_quant_kv support 'KV cache compression eviction': arxiv=100 openalex=0 crossref=100
+[paper] H9.1_quant_kv support 'QuIP incoherence': arxiv=4 openalex=0 crossref=100
+[paper] H9.1_quant_kv support 'AQLM additive quantization': arxiv=1 openalex=0 crossref=100
+[paper] H9.1_quant_kv refute  'quantization hurts reasoning long chain': arxiv=0 openalex=0 crossref=100
+[paper] H9.1_quant_kv refute  'KV eviction failure': arxiv=42 openalex=0 crossref=100
+[paper] H10.1_cross support 'predictive coding neural network language': arxiv=100 openalex=0 crossref=100
+[paper] H10.1_cross support 'hopfield networks is all you need': arxiv=2 openalex=0 crossref=100
+[paper] H10.1_cross support 'deep equilibrium models': arxiv=100 openalex=0 crossref=100
+[paper] H10.1_cross support 'neural ODE language model': arxiv=40 openalex=0 crossref=100
+[paper] H10.1_cross support 'complementary learning systems hippocampus model': arxiv=13 openalex=0 crossref=100
+[paper] H10.1_cross support 'hypernetwork generate weights transformer': arxiv=27 openalex=0 crossref=100
+[paper] H10.1_cross support 'multigrid neural network training': arxiv=60 openalex=0 crossref=100
+[paper] H10.1_cross support 'energy based language model': arxiv=100 openalex=0 crossref=100
+[paper] H10.1_cross support 'diffusion language model': arxiv=100 openalex=0 crossref=100
+[paper] H10.1_cross support 'byte latent transformer patches': arxiv=3 openalex=0 crossref=100
+[paper] H10.1_cross refute  'deep equilibrium model instability': arxiv=29 openalex=0 crossref=100
+[paper] H10.1_cross refute  'diffusion language model gap autoregressive': arxiv=100 openalex=0 crossref=100
+[paper] H11.1_looped_moe_routing_divergence support 'looped mixture of experts routing divergence': arxiv=1 openalex=0 crossref=100
+[paper] H11.1_looped_moe_routing_divergence support 'sparse layers looped language models': arxiv=11 openalex=0 crossref=100
+[paper] H11.1_looped_moe_routing_divergence support 'recursive mixture of experts shared layers': arxiv=4 openalex=0 crossref=100
+[paper] H11.1_looped_moe_routing_divergence support 'MoEUT mixture of experts universal transformer': arxiv=1 openalex=0 crossref=100
+[paper] H11.1_looped_moe_routing_divergence support 'sparse universal transformer': arxiv=100 openalex=0 crossref=100
+[paper] H11.1_looped_moe_routing_divergence refute  'looped MoE expert collapse across iterations': arxiv=2 openalex=0 crossref=100
+[paper] H11.1_looped_moe_routing_divergence refute  'universal transformer MoE instability': arxiv=2 openalex=0 crossref=100
+[paper] H11.2_loop_capacity_exponent support 'iso-depth scaling laws looped language models': arxiv=1 openalex=0 crossref=100
+[paper] H11.2_loop_capacity_exponent support 'hyper-connections residual streams': arxiv=24 openalex=0 crossref=100
+[paper] H11.2_loop_capacity_exponent support 'input injection recurrent depth transformer': arxiv=4 openalex=0 crossref=100
+[paper] H11.2_loop_capacity_exponent support 'per-iteration LoRA recursive transformer': arxiv=1 openalex=0 crossref=100
+[paper] H11.2_loop_capacity_exponent refute  'truncated backpropagation through depth looped transformer degrades': arxiv=0 openalex=0 crossref=100
+[paper] H11.3_hybrid_role_dissociation support 'attention recalls recurrence controls hybrid': arxiv=6 openalex=0 crossref=100
+[paper] H11.3_hybrid_role_dissociation support 'hybrid model which layers need attention': arxiv=18 openalex=0 crossref=100
+[paper] H11.3_hybrid_role_dissociation support 'KV cache sharing across layers': arxiv=100 openalex=0 crossref=100
+[paper] H11.3_hybrid_role_dissociation refute  'hybrid linear attention needle in haystack failure': arxiv=0 openalex=0 crossref=100
+[paper] H11.4_self_spec_loops support 'self speculative decoding looped transformer': arxiv=2 openalex=0 crossref=100
+[paper] H11.4_self_spec_loops support 'early exit self distillation draft': arxiv=1 openalex=0 crossref=100
+[paper] H11.4_self_spec_loops support 'layerskip early exit speculative': arxiv=2 openalex=0 crossref=100
+[paper] H11.4_self_spec_loops refute  'early exit draft low acceptance rate': arxiv=1 openalex=0 crossref=100
+[paper] H11.5_layer_loop_vs_block_loop support 'layer-wise looping transformer local refinement': arxiv=1 openalex=0 crossref=100
+[paper] H11.5_layer_loop_vs_block_loop support 'Loopie looped MoE': arxiv=2 openalex=0 crossref=100
+[paper] H11.5_layer_loop_vs_block_loop support 'Ouro looped language model entropy regularized exit': arxiv=0 openalex=0 crossref=100
+[paper] H11.5_layer_loop_vs_block_loop refute  'looped transformer training instability residual scaling': arxiv=2 openalex=0 crossref=100
+[paper] H11.6_kv_sharing_across_loops support 'cross-layer KV cache sharing': arxiv=64 openalex=0 crossref=100
+[paper] H11.6_kv_sharing_across_loops support 'KV cache reuse recurrent depth': arxiv=6 openalex=0 crossref=100
+[paper] H11.6_kv_sharing_across_loops support 'you only cache once YOCO': arxiv=2 openalex=0 crossref=100
+[paper] H11.6_kv_sharing_across_loops refute  'cross layer kv sharing quality degradation': arxiv=16 openalex=0 crossref=100
+TOTAL papers 32381 repos 14205

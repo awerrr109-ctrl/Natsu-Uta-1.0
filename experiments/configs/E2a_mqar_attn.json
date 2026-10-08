@@ -1,0 +1,35 @@
+{
+ "name": "E2a_mqar_attn",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "pattern": "a",
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1
+ },
+ "train": {
+  "seq": 192,
+  "batch": 32,
+  "steps": 800,
+  "lr": 0.002,
+  "warmup": 100,
+  "eval_every": 400,
+  "log_every": 100,
+  "threads": 2,
+  "eval_batches": 4,
+  "save": false
+ },
+ "data": {
+  "kind": "synthetic",
+  "task": "mqar",
+  "kw": {
+   "n_pairs": 24,
+   "n_q": 8
+  }
+ },
+ "extra_eval": {}
+}

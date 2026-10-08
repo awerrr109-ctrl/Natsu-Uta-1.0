@@ -1,0 +1,68 @@
+{
+ "name": "E9d_facts_edit_engram_replay",
+ "model": {
+  "d_model": 128,
+  "n_heads": 2,
+  "n_kv_heads": 1,
+  "head_dim": 64,
+  "chunk": 32,
+  "n_prelude": 1,
+  "n_core": 2,
+  "n_coda": 1,
+  "pattern": "ga",
+  "moe_experts": 8,
+  "moe_topk": 2,
+  "moe_shared": 1,
+  "moe_expert_mult": 0.17,
+  "engram_slots": 512,
+  "engram_orders": [
+   2,
+   3
+  ],
+  "engram_heads": 2,
+  "engram_dim": 32
+ },
+ "train": {
+  "seq": 64,
+  "batch": 32,
+  "steps": 300,
+  "lr": 0.01,
+  "warmup": 10,
+  "eval_every": 100,
+  "log_every": 50,
+  "threads": 2,
+  "eval_batches": 4,
+  "save": true,
+  "init_from": "checkpoints/E4j_moe_engram_noloop.pt",
+  "train_only": [
+   "engram.table"
+  ]
+ },
+ "data": {
+  "kind": "mix",
+  "weights": [
+   0.5,
+   0.5
+  ],
+  "parts": [
+   {
+    "kind": "synthetic",
+    "task": "facts",
+    "kw": {
+     "n_facts": 64
+    }
+   },
+   {
+    "kind": "memmap",
+    "train": "data_cache/ts_train.bin",
+    "valid": "data_cache/ts_valid.bin"
+   }
+  ]
+ },
+ "extra_eval": {
+  "heldout_phrasing": {
+   "split": "test"
+  }
+ },
+ "note": "E9 fix (i): table-only + 50% TinyStories replay"
+}

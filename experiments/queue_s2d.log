@@ -1,0 +1,7 @@
+=== E4q_loop3_moe_engram_lookahead_memgate Tue Oct  6 08:03:24 UTC 2026
+FINAL {"1": {"main": {"loss": 1.02159616847833, "ppl": 2.7776247846199213, "bpb": 1.4738517260548525}, "fwd_flops_per_token": 1582080.0}, "2": {"main": {"loss": 0.9903807093699774, "ppl": 2.6922592455877012, "bpb": 1.42881733800016}, "fwd_flops_per_token": 2048512.0}, "3": {"main": {"loss": 0.9862584670384725, "ppl": 2.681183943780563, "bpb": 1.4228701994311554}, "fwd_flops_per_token": 2514944.0},
+=== E4r_loop3_moe_engram_lookahead_nomemgate Tue Oct  6 08:23:32 UTC 2026
+FINAL {"1": {"main": {"loss": 1.0169143676757812, "ppl": 2.764650892960466, "bpb": 1.4670973152545856}, "fwd_flops_per_token": 1582080.0}, "2": {"main": {"loss": 0.988450825214386, "ppl": 2.687068507499548, "bpb": 1.4260331036993983}, "fwd_flops_per_token": 2048512.0}, "3": {"main": {"loss": 0.9858329842487971, "ppl": 2.6800433888169906, "bpb": 1.4222563575205072}, "fwd_flops_per_token": 2514944.0
+=== E4s_moe_engramv2_vip Tue Oct  6 08:43:10 UTC 2026
+FINAL {"1": {"main": {"loss": 0.9937791476647059, "ppl": 2.7014242871003886, "bpb": 1.4337202480747322}, "fwd_flops_per_token": 1582080.0}}
+QUEUE_DONE

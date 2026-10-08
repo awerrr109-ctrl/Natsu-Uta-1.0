@@ -1,0 +1,23 @@
+{
+ "info": {
+  "name": "B2_bpe_moe_engram",
+  "params": 1316488,
+  "params_nonembed": 792200,
+  "flops_per_token_fwd": 2531328.0
+ },
+ "train_flops": 6220991692800.0,
+ "tokens": 819200,
+ "scored_tokens": 819200,
+ "wall_s": 295.3586745262146,
+ "peak_rss_mb": 536.97265625,
+ "by_loops": {
+  "1": {
+   "main": {
+    "loss": 3.1060296098391214,
+    "ppl": 22.33220059565689,
+    "bpb": 1.131207814346094
+   },
+   "fwd_flops_per_token": 2531328.0
+  }
+ }
+}
